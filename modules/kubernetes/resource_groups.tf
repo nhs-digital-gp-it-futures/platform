@@ -6,6 +6,7 @@ resource "azurerm_resource_group" "aks" {
   location = "${var.region}"
 
   tags = {
-    environment = "${var.environment}"
+    environment = "var.environment"
   }
 }
+

@@ -1,8 +1,8 @@
 /*
-    Place all resource groups for Azure SQL in this file.
+    Place all resource groups for Azure Storage Accounts in this file.
 */
-resource "azurerm_resource_group" "sa" {
-  name     = "${var.project}-sql-${var.environment}"
+resource "azurerm_resource_group" "storage" {
+  name     = "${var.project}-sa-${var.environment}"
   location = "${var.region}"
 
   tags = {

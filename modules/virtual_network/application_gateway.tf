@@ -1,3 +1,7 @@
+/*
+    Configuration for the NSG
+*/
+
 resource "azurerm_application_gateway" "AppGate" {
     name                    = "${var.project}-vnet-${var.environment}"
     location                = "${var.region}"
@@ -12,17 +16,12 @@ resource "azurerm_application_gateway" "AppGate" {
     
     gateway_ip_configuration {
     name                    = "my-gateway-ip-configuration"
-    subnet_id               = "${azurerm_subnet.frontend.id}"
+    subnet_id               = "${azurerm_subnet.gateway.id}"
     }
-
+ 
     frontend_port {
     name                    = "${local.frontend_port_name}"
     port                    = 80
-    }
-
-    backend_address_pool {
-    name                 = "${local.frontend_ip_configuration_name}"
-    public_ip_address_id = "${azurerm_public_ip.test.id}"
     }
 
     backend_http_settings {

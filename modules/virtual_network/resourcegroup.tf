@@ -1,3 +1,9 @@
+# Azure Provider
+
+provider "azurerm" {
+  version = "1.32.1"
+}
+
 /*
     Place all resource groups for VNets in this file.
 */

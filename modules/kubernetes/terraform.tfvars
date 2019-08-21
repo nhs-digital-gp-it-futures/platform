@@ -1,0 +1,7 @@
+environment = "dev"
+project = "gpitfuture"
+tenant = "0939ec4a-27eb-49f3-809d-0d3ccb760f23"
+region = "uksouth"
+app_id = "7bec6319-e5b2-4067-b0b8-c4c9e57c5f7f"
+service_principal_object_id = "7bec6319-e5b2-4067-b0b8-c4c9e57c5f7f"
+password = "BW42fv*84ekQ?TxTqq+lQKnf?/edSh+U"

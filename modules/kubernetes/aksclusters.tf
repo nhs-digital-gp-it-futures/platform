@@ -3,15 +3,23 @@
 */
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "${var.project}-aks-${var.environment}"
-  location            = "${azurerm_resource_group.aks.location}"
   resource_group_name = "${azurerm_resource_group.aks.name}"
+  location            = "${var.region}"
   dns_prefix          = "${var.project}aks${var.environment}"
 
   /*
     You can only have 100 agents (VMs) per pool, its incredibly unlikely you will need more than one pool.
   */
   agent_pool_profile {
-    name            = "default"
+    name            = "gpit1"
+    count           = 1
+    vm_size         = "Standard_D2_v3"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
+  }
+
+  agent_pool_profile {
+    name            = "gpit2"
     count           = 1
     vm_size         = "Standard_D2_v3"
     os_type         = "Linux"
@@ -19,8 +27,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   service_principal {
-    client_id     = "${var.app_id}"
-    client_secret = "${var.password}"
+    client_id     = "7bec6319-e5b2-4067-b0b8-c4c9e57c5f7f"
+    client_secret = "BW42fv*84ekQ?TxTqq+lQKnf?/edSh+U"
   }
 
   tags = {

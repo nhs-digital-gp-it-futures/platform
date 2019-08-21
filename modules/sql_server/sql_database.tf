@@ -1,13 +1,11 @@
 /*
-    Place all vnets in this file.
+    Place all SQL Databases in this file.
 */
-resource "azurerm_virtual_network" "vnet" {
-  name                = "${var.project}-vnet-${var.environment}"
-  location            = "${var.region}"
-  address_space       = ["10.10.0.0/16"]
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
 
-  tags = {
-    environment = "${var.environment}"
-  }
+resource "azurerm_sql_database" "sql" {
+  name = "${var.project}-db-${var.environment}"
+  resource_group_name = "${azurerm_resource_group.sql.name}"
+  location = "${var.region}"
+  server_name = "${azurerm_sql_server.sql.name}"
+  collation = "SQL_Latin1_General_CP1_CI_AS"
 }

@@ -24,12 +24,12 @@ variable "app_id" {
   description = "The service principal app id; this is its name"
 }
 
-variable "password" {
-  type        = "string"
-  description = "The service principal password"
-}
-
 variable "service_principal_object_id" {
   type        = "string"
   description = "The service principal object id"
+}
+
+variable "password" {
+  type        = "string"
+  description = "SPN password"
 }
