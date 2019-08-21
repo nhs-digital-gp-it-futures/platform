@@ -13,7 +13,7 @@ enable_https_traffic_only   = "true"
 }
 
 
-resource "azurerm_storage_account" "storage" {
+resource "azurerm_storage_account" "SQL" {
   name                      = "${var.project}sasql${var.environment}"
   location                  = "${var.region}"
   resource_group_name       = "${azurerm_resource_group.storage.name}"
