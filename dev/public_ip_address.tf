@@ -9,4 +9,7 @@ resource "azurerm_public_ip" "Pip" {
     environment = "${var.environment}"
     
   }
+
+
+
 }

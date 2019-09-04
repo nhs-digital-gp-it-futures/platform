@@ -33,3 +33,8 @@ variable "password" {
   type        = "string"
   description = "SPN password"
 }
+
+variable "log_analytics_workspace_id" {
+  type        = "string"
+  description = "Log analytics workspace ID"
+}

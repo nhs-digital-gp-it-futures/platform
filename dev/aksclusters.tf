@@ -21,11 +21,23 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   service_principal {
-    client_id     = ""
-    client_secret = ""
+    client_id     = "cd7c98b2-31ca-4e02-9100-981697324ac5"
+    client_secret = "werDcOTD/bvfl6zS=NzCIQX3jkGx5+4["
   }
 
   tags = {
     Environment = "${var.environment}"
   }
+
+ /*
+   
+addon_profile {
+      oms_agent {
+        enabled                    = true
+        log_analytics_workspace_id = "${var.log_analytics_workspace_id}"
+      }
+    }
+
+  */
+
 }

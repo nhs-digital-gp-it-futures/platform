@@ -11,10 +11,10 @@ resource "azurerm_sql_database" "sql" {
 
   threat_detection_policy {
     state = "Enabled"
-    retention_days = "90"
-    storage_endpoint = "https://gpitfutresadev.blob.core.windows.net/sqlauditlogs"
-    storage_account_access_key = "gq7aSMEQBcZx3c87FNQ4rTIKH92N0MTMelJO3yNytmaQPlI25ay3/13WU8X9LMvh1PeONq92BCiHmqyT1RBu9Q=="
+    retention_days = "35"
+    storage_endpoint = "https://gpitfutresasqldev.blob.core.windows.net/"
+    storage_account_access_key = "yRYQETLQ0xN35FOvsOgV0M8EF0zANpyq0CDy/yUcLBbFrU/M23KWU7gttFmJCHyj+XQE/KgBkauZuzevJ9NIxQ=="
 
   }
-  
+
 }
