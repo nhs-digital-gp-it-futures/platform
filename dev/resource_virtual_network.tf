@@ -39,6 +39,13 @@ resource "azurerm_subnet" "aks" {
   address_prefix                        = "10.100.2.0/24"
 }
 
+resource "azurerm_subnet" "demo01" {
+  name                                  = "${var.project}-aks-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "10.100.3.0/24"
+}
+
 resource "azurerm_network_security_group" "bastion" {
   name                                  = "${var.project}-bastion-${var.environment}"
   location                              = "${var.region}"
