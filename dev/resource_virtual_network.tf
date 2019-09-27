@@ -39,6 +39,27 @@ resource "azurerm_subnet" "aks" {
   address_prefix                        = "10.100.2.0/24"
 }
 
+resource "azurerm_subnet" "demo1" {
+  name                                  = "${var.project}-demo01-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "10.100.3.0/24"
+}
+
+resource "azurerm_subnet" "demo2" {
+  name                                  = "${var.project}-demo02-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "10.100.4.0/24"
+}
+
+resource "azurerm_subnet" "demo3" {
+  name                                  = "${var.project}-demo03-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "10.100.5.0/24"
+}
+
 resource "azurerm_network_security_group" "bastion" {
   name                                  = "${var.project}-bastion-${var.environment}"
   location                              = "${var.region}"
@@ -66,6 +87,33 @@ resource "azurerm_network_security_group" "aks" {
   }
 }
 
+resource "azurerm_network_security_group" "demo01" {
+  name                                  = "${var.project}-demo01-${var.environment}"
+  location                              = "${var.region}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  tags = {
+    environment                         = "${var.environment}"
+  }
+}
+
+resource "azurerm_network_security_group" "demo02" {
+  name                                  = "${var.project}-demo02-${var.environment}"
+  location                              = "${var.region}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  tags                                  = {
+    environment                         = "${var.environment}"
+  }
+}
+
+resource "azurerm_network_security_group" "demo03" {
+  name                                  = "${var.project}-demo03-${var.environment}"
+  location                              = "${var.region}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  tags                                  = {
+    environment                         = "${var.environment}"
+  }
+}
+
 resource "azurerm_subnet_network_security_group_association" "bastion" {
   subnet_id                             = "${azurerm_subnet.bastion.id}"
   network_security_group_id             = "${azurerm_network_security_group.bastion.id}"
@@ -79,6 +127,21 @@ resource "azurerm_subnet_network_security_group_association" "gateway" {
 resource "azurerm_subnet_network_security_group_association" "aks" {
   subnet_id                             = "${azurerm_subnet.aks.id}"
   network_security_group_id             = "${azurerm_network_security_group.aks.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "demo01" {
+  subnet_id                             = "${azurerm_subnet.demo1.id}"
+  network_security_group_id             = "${azurerm_network_security_group.demo01.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "demo02" {
+  subnet_id                             = "${azurerm_subnet.demo2.id}"
+  network_security_group_id             = "${azurerm_network_security_group.demo02.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "demo03" {
+  subnet_id                             = "${azurerm_subnet.demo3.id}"
+  network_security_group_id             = "${azurerm_network_security_group.demo03.id}"
 }
 
 resource "azurerm_public_ip" "Pip" {
