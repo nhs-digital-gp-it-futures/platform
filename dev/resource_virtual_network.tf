@@ -39,13 +39,18 @@ resource "azurerm_subnet" "aks" {
   address_prefix                        = "10.100.2.0/24"
 }
 
+<<<<<<< HEAD
 resource "azurerm_subnet" "demo1" {
+=======
+resource "azurerm_subnet" "demo01" {
+>>>>>>> 3a60d329bd207007eb0de47f7e29af62442f92ef
   name                                  = "${var.project}-demo01-${var.environment}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
   virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
   address_prefix                        = "10.100.3.0/24"
 }
 
+<<<<<<< HEAD
 resource "azurerm_subnet" "demo2" {
   name                                  = "${var.project}-demo02-${var.environment}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
@@ -60,6 +65,8 @@ resource "azurerm_subnet" "demo3" {
   address_prefix                        = "10.100.5.0/24"
 }
 
+=======
+>>>>>>> 3a60d329bd207007eb0de47f7e29af62442f92ef
 resource "azurerm_network_security_group" "bastion" {
   name                                  = "${var.project}-bastion-${var.environment}"
   location                              = "${var.region}"
