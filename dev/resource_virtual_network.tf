@@ -40,7 +40,7 @@ resource "azurerm_subnet" "aks" {
 }
 
 resource "azurerm_subnet" "demo01" {
-  name                                  = "${var.project}-aks-${var.environment}"
+  name                                  = "${var.project}-demo01-${var.environment}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
   virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
   address_prefix                        = "10.100.3.0/24"
