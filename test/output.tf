@@ -39,3 +39,5 @@ output "blob_primary_access_key_sql" {
 output "blob_primary_endpoint" {	  
     value                   = "${azurerm_storage_account.sql.primary_blob_endpoint}"	
     }
+
+#output values for key vault

@@ -1,3 +1,8 @@
 environment                         = "dev"
 project                             = "gpitfuture"
 region                              = "uksouth"
+ip_addsp                            = "10.100.0.0/21"
+sub_aks                             = "10.100.0.0/24"
+sub_bastion                         = "10.100.1.0/24"
+sub_gateway                         = "10.100.2.0/29"
+sub_splunk                          = "10.100.3.0/24"

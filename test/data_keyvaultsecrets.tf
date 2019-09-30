@@ -29,7 +29,7 @@ data "azurerm_key_vault_secret" "kv-secret" {
 }
 
 data "azurerm_key_vault_secret" "kv-buser" {
-  name = "gpitdevbastionadminuser"
+  name = "gpitdevbastionadminusername"
   vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
 }
 
@@ -39,7 +39,7 @@ data "azurerm_key_vault_secret" "kv-bpass" {
 }
 
 data "azurerm_key_vault_secret" "kv-sqluser" {
-  name = "gpitdevsqladminuser"
+  name = "gpitdevsqladminusername"
   vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
 }
 
