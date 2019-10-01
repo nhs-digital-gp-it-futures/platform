@@ -29,7 +29,7 @@ output "workspace_id" {
 #output values for storage account
 
 output "blob_password_result" {	  
-    value                   = "${azurerm_storage_account.storage.primary_access_key}"
+    value                   = "${azurerm_storage_account.data.primary_access_key}"
     }
 
 output "blob_primary_access_key_sql" {	  
@@ -40,4 +40,4 @@ output "blob_primary_endpoint" {
     value                   = "${azurerm_storage_account.sql.primary_blob_endpoint}"	
     }
 
-#output values for key vault
+#output values for Key Vault

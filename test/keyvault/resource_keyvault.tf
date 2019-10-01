@@ -31,9 +31,9 @@ resource "azurerm_key_vault" "keyvault" {
 resource "azurerm_key_vault_access_policy" "access1" {
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
   tenant_id                         = "50f6071f-bbfe-401a-8803-673748e629e2"
-  object_id                          = "4828a1db-617b-452b-a0fb-cee443cab420"
+  object_id                         = "4828a1db-617b-452b-a0fb-cee443cab420"
 
-key_permissions                  = [
+key_permissions                     = [
 
                                       "backup",
                                       "create",
@@ -70,9 +70,10 @@ secret_permissions                  = [
 resource "azurerm_key_vault_access_policy" "access2" {
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
   tenant_id                         = "50f6071f-bbfe-401a-8803-673748e629e2"
-  object_id                          = "e0719998-022b-4bee-a339-f24b67b38dca"
+  object_id                         = "e0719998-022b-4bee-a339-f24b67b38dca"
+  application_id                    = "cd7c98b2-31ca-4e02-9100-981697324ac5"
 
-  key_permissions                  = [
+  key_permissions                   = [
 
                                       "backup",
                                       "create",
@@ -108,7 +109,7 @@ secret_permissions                  = [
 }
 
 resource "azurerm_key_vault_secret" "kv-tenant" {
-  name                              = "gpitdevtenantid"
+  name                              = "gpittesttenantid"
   value                             = "50f6071f-bbfe-401a-8803-673748e629e2"
   content_type                      = "GP IT Future Buying Catalogue Tenant ID"
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
@@ -118,7 +119,7 @@ resource "azurerm_key_vault_secret" "kv-tenant" {
 }
 
 resource "azurerm_key_vault_secret" "kv-subscription" {
-  name                              = "gpitdevsubscriptionid"
+  name                              = "gpittestsubscriptionid"
   value                             = "7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec"
   content_type                      = "GP IT Future Buying Catalogue Subscription ID"
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
@@ -128,7 +129,7 @@ resource "azurerm_key_vault_secret" "kv-subscription" {
 }
 
 resource "azurerm_key_vault_secret" "kv-spn" {
-  name                              = "gpitdevserviceprincipalnameid"
+  name                              = "gpittestserviceprincipalnameid"
   value                             = "NHSAPP-BuyingCatalogue"
   content_type                      = "GP IT Future Buying Catalogue Service Principal"
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
@@ -138,7 +139,7 @@ resource "azurerm_key_vault_secret" "kv-spn" {
 }
 
 resource "azurerm_key_vault_secret" "kv-appid" {
-  name                              = "gpitdevapplicationid"
+  name                              = "gpittestapplicationid"
   value                             = "cd7c98b2-31ca-4e02-9100-981697324ac5"
   content_type                      = "GP IT Future Buying Catalogue Application ID"
   key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
@@ -148,81 +149,81 @@ resource "azurerm_key_vault_secret" "kv-appid" {
 }
 
 resource "azurerm_key_vault_secret" "kv-objectid" {
-  name                  = "gpitdevobjectid"
-  value                 = "e0719998-022b-4bee-a339-f24b67b38dca"
-  content_type          = "GP IT Future Buying Catalogue Object ID"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestobjectid"
+  value                             = "e0719998-022b-4bee-a339-f24b67b38dca"
+  content_type                      = "GP IT Future Buying Catalogue Object ID"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-secret" {
-  name                  = "gpitdevclientsecretkeyid"
-  value                 = "werDcOTD/bvfl6zS=NzCIQX3jkGx5+4["
-  content_type          = "GP IT Future Buying Catalogue Service Prinicpal Secret"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestclientsecretkeyid"
+  value                             = "werDcOTD/bvfl6zS=NzCIQX3jkGx5+4["
+  content_type                      = "GP IT Future Buying Catalogue Service Prinicpal Secret"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-buser" {
-  name                  = "gpitdevbastionadminusername"
-  value                 = "gpitfurebastionadmin"
-  content_type          = "GP IT Future Buying Catalogue bastion host username"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestbastionadminusername"
+  value                             = "gpitfurebastionadmin"
+  content_type                      = "GP IT Future Buying Catalogue bastion host username"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-bpass" {
-  name                  = "gpitdevbastionadminpassword"
-  value                 = "Wmbivefdzxjkahclsgnrwytopq3508/a"
-  content_type          = "GP IT Future Buying Catalogue bastion host password"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestbastionadminpassword"
+  value                             = "Wmbivefdzxjkahclsgnrwytopq3508/a"
+  content_type                      = "GP IT Future Buying Catalogue bastion host password"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-sqluser" {
-  name                  = "gpitdevsqladminusername"
-  value                 = "gpitfutureadmin"
-  content_type          = "GP IT Future Buying Catalogue bastion host password"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestsqladminusername"
+  value                             = "gpitfutureadmin"
+  content_type                      = "GP IT Future Buying Catalogue bastion host password"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-sqlpass" {
-  name                  = "gpitdevsqladminpassword"
-  value                 = "Apguvltjcsamqyobnrxwfehdzk3750pk"
-  content_type          = "GP IT Future Buying Catalogue bastion host password"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestsqladminpassword"
+  value                             = "Apguvltjcsamqyobnrxwfehdzk3750pk"
+  content_type                      = "GP IT Future Buying Catalogue bastion host password"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-sppass" {
-  name                  = "gpitdevsharepointpassword"
-  value                 = "Apguvltjcsamqyobnrxwfehdzk3750pk"
-  content_type          = "GP IT Future Buying Catalogue SharePoint Online password"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestsharepointpassword"
+  value                             = "Apguvltjcsamqyobnrxwfehdzk3750pk"
+  content_type                      = "GP IT Future Buying Catalogue SharePoint Online password"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }
 
 resource "azurerm_key_vault_secret" "kv-spuser" {
-  name                  = "gpitdevsharepointusername"
-  value                 = "buying.catalogue@nhs.net"
-  content_type          = "GP IT Future Buying Catalogue SharePoint Online user"
-  key_vault_id          = "${azurerm_key_vault.keyvault.id}"
-  tags                  = {
-    environment         = "${var.environment}"
+  name                              = "gpittestsharepointusername"
+  value                             = "buying.catalogue@nhs.net"
+  content_type                      = "GP IT Future Buying Catalogue SharePoint Online user"
+  key_vault_id                      = "${azurerm_key_vault.keyvault.id}"
+  tags                              = {
+    environment                     = "${var.environment}"
   }
 }

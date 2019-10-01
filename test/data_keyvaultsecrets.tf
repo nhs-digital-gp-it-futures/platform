@@ -1,49 +1,49 @@
 data "azurerm_key_vault_secret" "kv-tenant" {
-  name = "gpitdevtenantid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittesttenantid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-subscription" {
-  name = "gpitdevsubscriptionid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestsubscriptionid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-spn" {
-  name = "gpitdevserviceprincipalnameid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestserviceprincipalnameid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-appid" {
-  name = "gpitdevapplicationid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestapplicationid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-objectid" {
-  name = "gpitdevobjectid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestobjectid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-secret" {
-  name = "gpitdevclientsecretkeyid"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestclientsecretkeyid"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-buser" {
-  name = "gpitdevbastionadminusername"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestbastionadminusername"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-bpass" {
-  name = "gpitdevbastionadminpassword"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestbastionadminpassword"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-sqluser" {
-  name = "gpitdevsqladminusername"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestsqladminusername"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }
 
 data "azurerm_key_vault_secret" "kv-sqlpass" {
-  name = "gpitdevsqladminpassword"
-  vault_uri = "https://gpitfuture-kv-dev.vault.azure.net/"
+  name                    = "gpittestsqladminpassword"
+  key_vault_id            = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-kv-test/providers/Microsoft.KeyVault/vaults/gpitfuture-kv-test"
 }

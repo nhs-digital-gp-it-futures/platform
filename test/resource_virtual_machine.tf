@@ -24,22 +24,23 @@ resource "azurerm_virtual_machine" "vm" {
   location                            = "${var.region}"
   resource_group_name                 = "${azurerm_resource_group.virtual_machine.name}"
   network_interface_ids               = ["${azurerm_network_interface.vm.id}"]
-  vm_size                             = "Standard_D2_v3"
+  vm_size                             = "${var.vm_size}"
 
   storage_image_reference {
-    publisher                         = "Canonical"
-    offer                             = "UbuntuServer"
-    sku                               = "18.04-LTS"
-    version                           = "latest"
+    publisher                         = "${var.vm_publisher}"
+    offer                             = "${var.vm_offer}"
+    sku                               = "${var.vm_sku}"
+    version                           = "${var.vm_version}"
   }
   storage_os_disk {
     name                              = "myosdisk1"
     caching                           = "ReadWrite"
     create_option                     = "FromImage"
     managed_disk_type                 = "Standard_LRS"
+    disk_size_gb                      = "30"
   }
   os_profile {
-    computer_name                     = "gpitfuturebastion"
+    computer_name                     = "${var.project}bastion"
     admin_username                    = "${data.azurerm_key_vault_secret.kv-buser.value}"
     admin_password                    = "${data.azurerm_key_vault_secret.kv-bpass.value}"
   }

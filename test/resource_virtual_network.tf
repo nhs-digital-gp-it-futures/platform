@@ -133,9 +133,9 @@ resource "azurerm_application_gateway" "AppGate" {
     resource_group_name                 = "${azurerm_virtual_network.vnet.name}"
 
     sku {
-    name                                = "WAF_Medium"
-    tier                                = "WAF"
-    capacity                            = 2
+    name                                = "${var.waf_name}"
+    tier                                = "${var.waf_tier}"
+    capacity                            = "${var.waf_capacity}"
 
     }
     
