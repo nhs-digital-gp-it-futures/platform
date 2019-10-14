@@ -29,7 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   agent_pool_profile {
     name                  = "gpitdevpool1"
     count                 = 3
-    vm_size               = "Standard_D3_v2"
+    vm_size               = "${var.vm_size}"
     os_type               = "Linux"
     os_disk_size_gb       = 30
     vnet_subnet_id        = "${azurerm_subnet.aks.id}"
