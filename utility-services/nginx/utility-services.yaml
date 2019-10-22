@@ -20,7 +20,7 @@ spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-nginx
+      - name: gpitfuture-utility-nginx
         image: nhsd/buying-catalogue-nginx
         ports:
         - containerPort: 80
@@ -34,8 +34,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bc-lb-nginx
+  name: gpitfuture-deployment-nginx
 spec:
+  loadBalancerIP: 51.11.11.194:80
   type: LoadBalancer
   ports:
   - port: 80
