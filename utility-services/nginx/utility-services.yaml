@@ -20,8 +20,8 @@ spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: bc-private-beta-nginx
-        image: gpitf/catalogue-frontend-proxy
+      - name: gpitfuture-nginx
+        image: nhsd/buying-catalogue-nginx
         ports:
         - containerPort: 80
         resources:
@@ -40,4 +40,4 @@ spec:
   ports:
   - port: 80
   selector:
-    app: bc-pb-app-nginx
+    app: gpitfuture-utility-nginx
