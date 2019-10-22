@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: bc-private-beta-nginx
-        image: buyingcat01.azurecr.io/gpitf/catalogue-frontend-proxy:#{Build.BuildId}#
+        image: gpitf/catalogue-frontend-proxy
         ports:
         - containerPort: 80
         resources:
