@@ -30,10 +30,14 @@ spec:
           limits:
             cpu: 500m
             cpu: 1
----  
-  nginx:
-    build: ./nginx
-    image: gpitf/catalogue-frontend-proxy:private-beta
-    ports:
-      - "3001:80"
-    restart: always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bc-lb-nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: bc-pb-app-nginx
