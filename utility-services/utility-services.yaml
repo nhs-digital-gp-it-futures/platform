@@ -1,0 +1,39 @@
+  apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-deployment-nginx
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-utility-nginx
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-utility-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: bc-private-beta-nginx
+        image: buyingcat01.azurecr.io/gpitf/catalogue-frontend-proxy:#{Build.BuildId}#
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+            cpu: 1
+---  
+  nginx:
+    build: ./nginx
+    image: gpitf/catalogue-frontend-proxy:private-beta
+    ports:
+      - "3001:80"
+    restart: always
