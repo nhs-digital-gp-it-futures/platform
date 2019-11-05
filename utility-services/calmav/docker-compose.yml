@@ -3,8 +3,8 @@ version: '3.5'
 services:
 
   nhsd.marketing-page:
-    image: gpitfuture/buying-catalogue/calmav
-    container_name: gpitfuture_buying-catalogue_calmav
+    image: nhsd/buying-catalogue/calmav
+    container_name: nhsd_buying-catalogue_calmav
     build:
       context: .
       dockerfile: Dockerfile
