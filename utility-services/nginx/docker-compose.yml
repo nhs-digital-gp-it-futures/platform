@@ -2,8 +2,9 @@ version: '3.5'
 
 services:
 
-  image: nhsd/buying-catalogue/nginx
-  container_name: nhsd_buying-catalogue_nginx
-  build:
-    context: .
-    dockerfile: Dockerfile
+  nhsd.utilities:
+    image: nhsd/buying-catalogue/nginx
+    container_name: nhsd_buying-catalogue_nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
