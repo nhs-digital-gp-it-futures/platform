@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  nhsd.marketing-page:
+    image: gpitfuture/buying-catalogue/splunk
+    container_name: gpitfuture_buying-catalogue_splunk
+    build:
+      context: .
+      dockerfile: Dockerfile

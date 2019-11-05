@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  nhsd.marketing-page:
+    image: gpitfuture/buying-catalogue/nginx
+    container_name: gpitfuture_buying-catalogue_nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
