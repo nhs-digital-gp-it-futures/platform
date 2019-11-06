@@ -1,8 +1,10 @@
 version: '3.5'
 
 services:
-  image: nhsd/buying-catalogue/splunk
-  container_name: nhsd_buying-catalogue_splunk
-  build:
-    context: .
-    dockerfile: Dockerfile
+
+  nhsd.utilities:
+    image: splunk/splunk
+    container_name: nhsd_buying-catalogue_splunk
+    build:
+      context: .
+      dockerfile: Dockerfile
