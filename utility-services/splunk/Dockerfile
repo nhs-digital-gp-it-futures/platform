@@ -1,2 +1,2 @@
-FROM index.docker.io/splunk/splunk:latest
-FROM index.docker.io/splunk/universalforwarder:latest
+FROM docker.io/store/splunk/universalforwarder:7.3
+FROM docker.io/splunk/splunk:latest

@@ -40,13 +40,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     client_secret         = "${data.azurerm_key_vault_secret.kv-secret.value}"
   }
 
-  addon_profile {
-        oms_agent {
-        enabled                    = true
-        log_analytics_workspace_id = "${azurerm_log_analytics_workspace.workspace.id}"
-        }
-}
-
   network_profile {
         network_plugin = "azure"
         network_policy = "azure"
