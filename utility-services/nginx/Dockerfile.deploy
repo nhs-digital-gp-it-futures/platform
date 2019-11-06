@@ -1,2 +1,0 @@
-FROM index.docker.io/nginx:latest
-COPY nginx.conf.deploy /etc/nginx/nginx.conf

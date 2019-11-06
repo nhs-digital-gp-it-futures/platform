@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+
+  image: oznu/guacamole
+  container_name: nhsd_buying-catalogue_guacamole
+  build:
+    context: .
+    dockerfile: Dockerfile

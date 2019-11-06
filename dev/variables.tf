@@ -13,6 +13,11 @@ variable "region" {
   description           = "The region the deployment should happen in"
 }
 
+variable "region1" {
+  type                  = "string"
+  description           = "The region the deployment should happen in"
+}
+
 variable "ip_addsp" {
   type                  = "string"
   description           = "IP address space for the Azure VNET"
@@ -28,6 +33,11 @@ variable "sub_bastion" {
   description           = "Subnet for Bastion"
 }
 
+variable "sub_ehub" {
+  type                  = "string"
+  description           = "Subnet for eventhub"
+}
+
 variable "sub_gateway" {
   type                  = "string"
   description           = "Subnet for Gateway"
@@ -37,6 +47,9 @@ variable "sub_splunk" {
   type                  = "string"
   description           = "Subnet for splunk"
 }
+
+
+
 
 variable "vm_size" {
   type                  = "string"

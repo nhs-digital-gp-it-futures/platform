@@ -12,7 +12,7 @@ resource "azurerm_container_registry" "aks" {
   resource_group_name     = "${azurerm_resource_group.aks.name}"
   location                = "${var.region}"
   admin_enabled           = "true"
-  sku                     = "standard"
+  sku                     = "basic"
 
   tags = {
     environment           = "${var.environment}"
@@ -34,11 +34,27 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb       = 30
     vnet_subnet_id        = "${azurerm_subnet.aks.id}"
   }
-
+  
   service_principal {
     client_id             = "${data.azurerm_key_vault_secret.kv-appid.value}"
     client_secret         = "${data.azurerm_key_vault_secret.kv-secret.value}"
   }
+
+  addon_profile {
+        oms_agent {
+        enabled                    = true
+        log_analytics_workspace_id = "${azurerm_log_analytics_workspace.workspace.id}"
+        }
+}
+
+  network_profile {
+        network_plugin = "azure"
+        network_policy = "azure"
+        dns_service_ip = "10.111.0.10"
+        docker_bridge_cidr = "172.17.0.1/24"
+        service_cidr = "10.110.0.0/24"
+
+}
 
   tags = {
     environment           = "${var.environment}"
