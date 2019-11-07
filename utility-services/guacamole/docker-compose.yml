@@ -2,7 +2,7 @@ version: '2'
 
 services:
 
-  nhsd.marketing-page:
+  nhsd.utilities:
     image: nhsd/buying-catalogue/nginx
     container_name: nhsd_buying-catalogue_guacamole
     build:

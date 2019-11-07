@@ -109,9 +109,9 @@ spec:
             cpu: 500m
         env:
         - name: GUACD_HOSTNAME
-          value: ""
+          value: "10.100.5.4"
         - name: GUACD_PORT
-          value: ""    
+          value: "4822"    
         - name: MYSQL_DATABASE
           value: ""
         - name: MYSQL_USER
