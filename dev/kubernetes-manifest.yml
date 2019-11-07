@@ -107,6 +107,11 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+        env:
+        - name: GUACD_HOSTNAME
+          value: "10.100.5.4"
+        - name: GUACD_PORT
+          value: "4822"     
 ---  
 apiVersion: apps/v1
 kind: Deployment

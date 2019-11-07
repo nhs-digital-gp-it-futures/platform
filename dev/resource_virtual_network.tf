@@ -53,6 +53,14 @@ resource "azurerm_subnet" "splunk" {
   address_prefix                        = "${var.sub_splunk}"
   }
 
+
+resource "azurerm_subnet" "vm" {
+  name                                  = "${var.project}-vm-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "${var.sub_vm}"
+  }
+
 resource "azurerm_network_security_group" "gateway" {
   name                                  = "${var.project}-gateway-${var.environment}"
   location                              = "${var.region}"

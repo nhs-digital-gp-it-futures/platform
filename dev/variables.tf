@@ -48,7 +48,10 @@ variable "sub_splunk" {
   description           = "Subnet for splunk"
 }
 
-
+variable "sub_vm" {
+  type                  = "string"
+  description           = "Subnet for vm"
+}
 
 
 variable "vm_size" {
