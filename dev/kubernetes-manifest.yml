@@ -202,7 +202,6 @@ kind: Service
 metadata:
   name: bc-lb-nginx
 spec:
-  loadBalancerIP: 51.104.249.7
   type: LoadBalancer
   ports:
   - port: 80
