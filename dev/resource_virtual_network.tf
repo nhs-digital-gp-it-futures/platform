@@ -98,9 +98,17 @@ resource "azurerm_public_ip" "Pip" {
   tags                                  = {
     environment                         = "${var.environment}"
   }
+}
 
-
-
+resource "azurerm_public_ip" "Pip1" {
+  name                                  = "${var.project}-pip-${var.environment}1"
+  location                              = "${var.region}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  allocation_method                     = "Static"
+  sku                                   = "Standard"
+  tags                                  = {
+    environment                         = "${var.environment}"
+  }
 }
 
 locals {
