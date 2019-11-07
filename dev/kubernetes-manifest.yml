@@ -1,0 +1,230 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-api
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-api  
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-api
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-api
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-api
+        ports:
+        - containerPort: 5100
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:
+        - name: CACHE_HOST
+          value: "cache"
+        - name: ASPNETCORE_ENVIRONMENT 
+          value: "Development"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-frontend
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-frontend
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-frontend
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-frontend
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-frontend
+        ports:
+        - containerPort: 3001
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: ANTIVIRUS_PROVIDER_ENV
+          value: "CLAMAV"
+        - name: ANALYTICS_ENV
+          value: "DEVELOPMENT"                                   
+        - name: API_BASE_URL
+          value: "http://api:5100"
+        - name: CACHE_HOST
+          value: "cache"              
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-nginx
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-nginx  
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-nginx
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue/nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-cache
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-cache  
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-cache
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-cache
+        image: index.docker.io/redis:latest
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-clamav
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-clamav  
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-clamav
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-clamav
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue/calmav
+        ports:
+        - containerPort: 3310
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: MAX_SCAN_SIZE
+          value: "1024M"
+        - name: MAX_FILE_SIZE
+          value: "1024M"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  ports:
+  - port: 5100
+  selector:
+    app: gpitfuture-bc-app-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports:
+  - port: 3001
+  selector:
+    app: gpitfuture-bc-app-frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bc-lb-nginx
+spec:
+  loadBalancerIP: 51.11.35.21
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: gpitfuture-bc-app-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cache
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: gpitfuture-bc-app-cache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clamav
+spec:
+  ports:
+  - port: 3310
+  selector:
+    app: gpitfuture-bc-app-clamav
