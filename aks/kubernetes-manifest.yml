@@ -34,6 +34,12 @@ spec:
           value: "cache"
         - name: ASPNETCORE_ENVIRONMENT 
           value: "Development"
+        - name: DB_NAME
+          value: "gpitfuture-sqlpri-dev.database.windows.net"
+        - name: DB_USER
+          value: "gpitfutureadmin"
+        - name: DB_PASSWORD
+          value: "8rZ*S$Yxnv#Sc*@$92k@UjnAcqsKf7R8"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -200,8 +206,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bc-lb-nginx
+  name: nginx
 spec:
+  loadBalancerIP: 40.120.38.55
   type: LoadBalancer
   ports:
   - port: 80

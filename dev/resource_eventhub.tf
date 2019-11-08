@@ -1,12 +1,18 @@
-resource "azurerm_resource_group" "ehub" {
-    name                                    = "${var.project}-ehub-${var.environment}"
+resource "azurerm_resource_group" "ehubuks" {
+    name                                    = "${var.project}-ehubuks-${var.environment}"
     location                                = "${var.region}"
   
 }
 
-resource "azurerm_eventhub_namespace" "ehub" {
-    name                                    = "${var.project}-ens-${var.environment}"
-    resource_group_name                     = "${azurerm_resource_group.ehub.name}"
+resource "azurerm_resource_group" "ehubukw" {
+    name                                    = "${var.project}-ehubukw-${var.environment}"
+    location                                = "${var.region1}"
+  
+}
+
+resource "azurerm_eventhub_namespace" "ehubuks" {
+    name                                    = "${var.project}-ensuks-${var.environment}"
+    resource_group_name                     = "${azurerm_resource_group.ehubuks.name}"
     location                                = "${var.region}"
     sku                                     = "Standard"
     capacity                                = "2"
@@ -19,13 +25,36 @@ resource "azurerm_eventhub_namespace" "ehub" {
 
 }
 
+resource "azurerm_eventhub_namespace" "ehubukw" {
+    name                                    = "${var.project}-ensukw-${var.environment}"
+    resource_group_name                     = "${azurerm_resource_group.ehubukw.name}"
+    location                                = "${var.region1}"
+    sku                                     = "Standard"
+    capacity                                = "2"
+    kafka_enabled                           = "true"
+    tags                                    = {
 
-resource "azurerm_eventhub" "ehub" {
-  name                                      = "${var.project}-ehub-${var.environment}"
-  namespace_name                            = "${azurerm_eventhub_namespace.ehub.name}"
-  resource_group_name                       = "${azurerm_resource_group.ehub.name}"
+        environment                         = "dev"
+
+  }
+
+}
+
+
+resource "azurerm_eventhub" "ehubuks" {
+  name                                      = "${var.project}-ehubuks-${var.environment}"
+  namespace_name                            = "${azurerm_eventhub_namespace.ehubuks.name}"
+  resource_group_name                       = "${azurerm_resource_group.ehubuks.name}"
   partition_count                           = "2"
   message_retention                         = "1"
 
+}
+
+resource "azurerm_eventhub" "ehubukw" {
+  name                                      = "${var.project}-ehubukw-${var.environment}"
+  namespace_name                            = "${azurerm_eventhub_namespace.ehubukw.name}"
+  resource_group_name                       = "${azurerm_resource_group.ehubukw.name}"
+  partition_count                           = "2"
+  message_retention                         = "1"
 
 }
