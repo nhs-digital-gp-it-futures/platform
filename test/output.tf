@@ -32,12 +32,20 @@ output "blob_password_result" {
     value                   = "${azurerm_storage_account.data.primary_access_key}"
     }
 
-output "blob_primary_access_key_sql" {	  
-    value                   = "${azurerm_storage_account.sql.primary_access_key}"
+output "blob_primary_access_key_sql_uks" {	  
+    value                   = "${azurerm_storage_account.sqluks.primary_access_key}"
     }
 
-output "blob_primary_endpoint" {	  
-    value                   = "${azurerm_storage_account.sql.primary_blob_endpoint}"	
+output "blob_primary_endpoint_uks" {	  
+    value                   = "${azurerm_storage_account.sqluks.primary_blob_endpoint}"	
+    }
+
+    output "blob_primary_access_key_sql_ukw" {	  
+    value                   = "${azurerm_storage_account.sqlukw.primary_access_key}"
+    }
+
+output "blob_primary_endpoint_ukw" {	  
+    value                   = "${azurerm_storage_account.sqlukw.primary_blob_endpoint}"	
     }
 
 #output values for Key Vault

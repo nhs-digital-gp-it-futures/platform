@@ -18,6 +18,13 @@ resource "azurerm_virtual_network" "vnet" {
   }
 }
 
+resource "azurerm_subnet" "aks" {
+  name                                  = "${var.project}-aks-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "${var.sub_aks}"
+  }
+
 resource "azurerm_subnet" "bastion" {
   name                                  = "${var.project}-bastion-${var.environment}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
@@ -25,11 +32,11 @@ resource "azurerm_subnet" "bastion" {
   address_prefix                        = "${var.sub_bastion}"
 }
 
-resource "azurerm_subnet" "aks" {
-  name                                  = "${var.project}-aks-${var.environment}"
+resource "azurerm_subnet" "ehub" {
+  name                                  = "${var.project}-ehub-${var.environment}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
   virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
-  address_prefix                        = "${var.sub_aks}"
+  address_prefix                        = "${var.sub_ehub}"
   }
 
 resource "azurerm_subnet" "gateway" {
@@ -44,6 +51,14 @@ resource "azurerm_subnet" "splunk" {
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
   virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
   address_prefix                        = "${var.sub_splunk}"
+  }
+
+
+resource "azurerm_subnet" "vm" {
+  name                                  = "${var.project}-vm-${var.environment}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  virtual_network_name                  = "${azurerm_virtual_network.vnet.name}"
+  address_prefix                        = "${var.sub_vm}"
   }
 
 resource "azurerm_network_security_group" "gateway" {
@@ -82,38 +97,26 @@ resource "azurerm_network_security_group" "splunk" {
   }
 }
 
-resource "azurerm_subnet_network_security_group_association" "aks" {
-  subnet_id                             = "${azurerm_subnet.aks.id}"
-  network_security_group_id             = "${azurerm_network_security_group.aks.id}"
-}
-
-resource "azurerm_subnet_network_security_group_association" "bastion" {
-  subnet_id                             = "${azurerm_subnet.bastion.id}"
-  network_security_group_id             = "${azurerm_network_security_group.bastion.id}"
-}
-
-resource "azurerm_subnet_network_security_group_association" "gateway" {
-  subnet_id                             = "${azurerm_subnet.gateway.id}"
-  network_security_group_id             = "${azurerm_network_security_group.gateway.id}"
-}
-
-resource "azurerm_subnet_network_security_group_association" "splunk" {
-  subnet_id                             = "${azurerm_subnet.splunk.id}"
-  network_security_group_id             = "${azurerm_network_security_group.splunk.id}"
-}
-
 resource "azurerm_public_ip" "Pip" {
   name                                  = "${var.project}-pip-${var.environment}"
   location                              = "${var.region}"
   resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
-  allocation_method                     = "Dynamic"
-  sku                                   = "Basic"
+  allocation_method                     = "Static"
+  sku                                   = "Standard"
   tags                                  = {
     environment                         = "${var.environment}"
   }
+}
 
-
-
+resource "azurerm_public_ip" "Pip1" {
+  name                                  = "${var.project}-pip-${var.environment}1"
+  location                              = "${var.region}"
+  resource_group_name                   = "${azurerm_virtual_network.vnet.name}"
+  allocation_method                     = "Static"
+  sku                                   = "Standard"
+  tags                                  = {
+    environment                         = "${var.environment}"
+  }
 }
 
 locals {
@@ -162,8 +165,8 @@ resource "azurerm_application_gateway" "AppGate" {
     name                                = "${local.http_setting_name}"
     cookie_based_affinity               = "Disabled"
     path                                = "/path/"
-    port                                = 443
-    protocol                            = "Https"
+    port                                = 80
+    protocol                            = "Http"
     request_timeout                     = 1
     }
 
