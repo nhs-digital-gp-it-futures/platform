@@ -90,7 +90,7 @@ spec:
   replicas: 1
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 1   
       maxUnavailable: 1
   minReadySeconds: 5
   selector:
@@ -105,7 +105,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfuture-bc-beta-publicbrowse
-        image: gpitfutureaksdev.azurecr.io/nhsd/nhsd/buying-catalogue-publicbrowse
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
         ports:
         - containerPort: 3000
         resources:
