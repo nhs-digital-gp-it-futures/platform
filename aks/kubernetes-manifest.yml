@@ -35,11 +35,11 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT 
           value: "Development"
         - name: DB_NAME
-          value: "gpitfuture-sqlpri-dev.database.windows.net"
+          value: ""
         - name: DB_USER
-          value: "gpitfutureadmin"
+          value: ""
         - name: DB_PASSWORD
-          value: "8rZ*S$Yxnv#Sc*@$92k@UjnAcqsKf7R8"
+          value: ""
 ---
 apiVersion: apps/v1
 kind: Deployment
