@@ -36,8 +36,6 @@ spec:
           value: "Development"
         - name: DB_NAME
           value: ""
-        - name: ConnectionStrings:BuyingCatalogue
-          value: ""
         - name: DB_USER
           value: ""
         - name: DB_PASSWORD
