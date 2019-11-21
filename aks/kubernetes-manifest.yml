@@ -244,6 +244,8 @@ spec:
   - port: 3000
   selector:
     app: gpitfuture-bc-app-publicbrowse
+      script: npm
+      args: start
 ---
 apiVersion: v1
 kind: Service
