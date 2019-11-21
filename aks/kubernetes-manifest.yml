@@ -34,12 +34,6 @@ spec:
           value: "cache"
         - name: ASPNETCORE_ENVIRONMENT 
           value: "Development"
-        - name: DB_NAME
-          value: ""
-        - name: DB_USER
-          value: ""
-        - name: DB_PASSWORD
-          value: ""
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -78,7 +72,7 @@ spec:
         - name: ANALYTICS_ENV
           value: "DEVELOPMENT"                                   
         - name: API_BASE_URL
-          value: "http://api:5100"
+          value: ""
         - name: CACHE_HOST
           value: "cache"              
 ---
@@ -244,8 +238,6 @@ spec:
   - port: 3000
   selector:
     app: gpitfuture-bc-app-publicbrowse
-      script: npm
-      args: start
 ---
 apiVersion: v1
 kind: Service
