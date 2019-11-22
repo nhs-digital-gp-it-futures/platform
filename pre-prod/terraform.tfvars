@@ -1,4 +1,4 @@
-environment                         = "preprod"
+environment                         = "pprod"
 project                             = "gpitfuture"
 region                              = "uksouth"
 region1                             = "ukwest"
