@@ -27,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   node_resource_group     = "${var.project}-akspool-${var.environment}"
 
   agent_pool_profile {
-    name                  = "gpitdevpool1"
+    name                  = "devpool1"
     count                 = 3
     vm_size               = "${var.vm_size}"
     os_type               = "Linux"
