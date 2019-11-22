@@ -34,6 +34,12 @@ spec:
           value: "cache"
         - name: ASPNETCORE_ENVIRONMENT 
           value: "Development"
+        - name: DB_NAME
+          value: ""
+        - name: DB_USER
+          value: ""
+        - name: DB_PASSWORD
+          value: ""
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -100,6 +106,8 @@ spec:
       containers:
       - name: gpitfuture-bc-beta-publicbrowse
         image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
+        command: ["/bin/sh"]
+        args: ["-c", "npm run start"]
         ports:
         - containerPort: 3000
         resources:
