@@ -118,6 +118,7 @@ spec:
         env:
         - name: API_HOST      
           value: ""
+
 ---  
 apiVersion: apps/v1
 kind: Deployment
@@ -216,9 +217,15 @@ spec:
             cpu: 500m
         env:
         - name: MAX_SCAN_SIZE
-          value: "1024M"
+          value: ""
         - name: MAX_FILE_SIZE
-          value: "1024M"
+          value: ""
+        - name: BASE_URL
+          value: ""
+        - name: API_BASE_URL
+          value: ""
+        - name: API_HOST
+          value: ""
 ---
 apiVersion: v1
 kind: Service
