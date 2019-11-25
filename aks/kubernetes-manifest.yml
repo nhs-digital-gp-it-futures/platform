@@ -114,7 +114,10 @@ spec:
           requests:
             cpu: 250m
           limits:
-            cpu: 500m            
+            cpu: 500m
+        env:
+          name: API_HOST      
+          value: ""
 ---  
 apiVersion: apps/v1
 kind: Deployment
