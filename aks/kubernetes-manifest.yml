@@ -44,7 +44,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-frontend
+  name: gpitfuture-bc-deployment-marketingpage
 spec:
   replicas: 1
   strategy:
@@ -54,16 +54,16 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-frontend
+      app: gpitfuture-bc-app-marketingpage
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-frontend
+        app: gpitfuture-bc-app-marketingpage
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-frontend
+      - name: gpitfuture-bc-beta-marketingpage
         image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-frontend
         ports:
         - containerPort: 3001
@@ -71,16 +71,7 @@ spec:
           requests:
             cpu: 250m
           limits:
-            cpu: 500m
-        env:
-        - name: ANTIVIRUS_PROVIDER_ENV
-          value: ""
-        - name: ANALYTICS_ENV
-          value: ""                                   
-        - name: API_BASE_URL
-          value: ""
-        - name: CACHE_HOST
-          value: ""              
+            cpu: 500m          
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -115,19 +106,15 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-        env:
-        - name: ANTIVIRUS_PROVIDER_ENV
-          value: ""
-        - name: ANALYTICS_ENV
-          value: ""                                   
+        env:                               
         - name: API_BASE_URL
-          value: ""
+          value: "http://api:5100"
         - name: CACHE_HOST
-          value: ""     
+          value: "Development"     
         - name: API_HOST   
-          value: ""
+          value: "api.buyingcatalogue:5100"
         - name: BASE_URL   
-          value: ""
+          value: "http://devpb.buyingcatalogue.digital.nhs.uk"
 ---  
 apiVersion: apps/v1
 kind: Deployment
@@ -249,12 +236,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: marketingpage
 spec:
   ports:
   - port: 3001
   selector:
-    app: gpitfuture-bc-app-frontend
+    app: gpitfuture-bc-app-marketingpage
 ---
 apiVersion: v1
 kind: Service
