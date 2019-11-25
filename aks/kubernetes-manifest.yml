@@ -74,13 +74,13 @@ spec:
             cpu: 500m
         env:
         - name: ANTIVIRUS_PROVIDER_ENV
-          value: "CLAMAV"
+          value: ""
         - name: ANALYTICS_ENV
-          value: "DEVELOPMENT"                                   
+          value: ""                                   
         - name: API_BASE_URL
           value: ""
         - name: CACHE_HOST
-          value: "cache"              
+          value: ""              
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -109,7 +109,7 @@ spec:
         command: ["/bin/sh"]
         args: ["-c", "npm run start"]
         ports:
-        - containerPort: 3000
+        - containerPort: 3010
         resources:
           requests:
             cpu: 250m
@@ -118,7 +118,14 @@ spec:
         env:
         - name: API_HOST      
           value: ""
-
+        - name: API_BASE_URL     
+          value: ""
+        - name: API_HOST   
+          value: ""
+        - name: BASE_URL   
+          value: ""
+        - name: ConnectionStrings:BuyingCatalogue   
+          value: ""
 ---  
 apiVersion: apps/v1
 kind: Deployment
@@ -253,7 +260,7 @@ metadata:
   name: publicbrowse
 spec:
   ports:
-  - port: 3000
+  - port: 3010
   selector:
     app: gpitfuture-bc-app-publicbrowse
 ---
