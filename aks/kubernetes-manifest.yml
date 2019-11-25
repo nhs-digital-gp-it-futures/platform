@@ -116,10 +116,14 @@ spec:
           limits:
             cpu: 500m
         env:
-        - name: API_HOST      
+        - name: ANTIVIRUS_PROVIDER_ENV
           value: ""
-        - name: API_BASE_URL     
+        - name: ANALYTICS_ENV
+          value: ""                                   
+        - name: API_BASE_URL
           value: ""
+        - name: CACHE_HOST
+          value: ""     
         - name: API_HOST   
           value: ""
         - name: BASE_URL   
