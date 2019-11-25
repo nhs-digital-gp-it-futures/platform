@@ -116,7 +116,7 @@ spec:
           limits:
             cpu: 500m
         env:
-          name: API_HOST      
+        - name: API_HOST      
           value: ""
 ---  
 apiVersion: apps/v1
