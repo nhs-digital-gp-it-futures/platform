@@ -31,9 +31,9 @@ spec:
             cpu: 1
         env:
         - name: CACHE_HOST
-          value: "cache"
+          value: ""
         - name: ASPNETCORE_ENVIRONMENT 
-          value: "Development"
+          value: ""
         - name: DB_NAME
           value: ""
         - name: DB_USER
@@ -123,8 +123,6 @@ spec:
         - name: API_HOST   
           value: ""
         - name: BASE_URL   
-          value: ""
-        - name: ConnectionStrings:BuyingCatalogue   
           value: ""
 ---  
 apiVersion: apps/v1
