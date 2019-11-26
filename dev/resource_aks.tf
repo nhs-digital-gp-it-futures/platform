@@ -49,7 +49,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   agent_pool_profile {
     name            = "devpool1"
-    count           = 1
+    count           = 2
     vm_size         = var.vm_size
     os_type         = "Linux"
     os_disk_size_gb = 30
@@ -67,6 +67,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip     = "10.110.0.111"
     docker_bridge_cidr = "172.17.0.1/24"
     service_cidr       = "10.110.0.0/24"
+    load_balancer_sku  = "standard"
+  }
+
+  role_based_access_control {
+    enabled            = "true"
   }
 
   tags = {
