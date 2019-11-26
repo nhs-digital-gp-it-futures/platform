@@ -4,6 +4,7 @@ resource "azurerm_resource_group" "virtual_machine" {
 
   tags = {
     environment = var.environment
+    
   }
 }
 
@@ -27,28 +28,31 @@ resource "azurerm_virtual_machine" "vm" {
   vm_size               = var.vm_size
 
   storage_image_reference {
-    publisher = var.vm_publisher
-    offer     = var.vm_offer
-    sku       = var.vm_sku
-    version   = var.vm_version
+    publisher                       = var.vm_publisher
+    offer                           = var.vm_offer
+    sku                             = var.vm_sku
+    version                         = var.vm_version
   }
+
   storage_os_disk {
-    name              = "gpitosdisk1"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-    disk_size_gb      = "30"
+    name                            = "gpitosdisk1"
+    caching                         = "ReadWrite"
+    create_option                   = "FromImage"
+    managed_disk_type               = "Standard_LRS"
+    disk_size_gb                    = "30"
   }
+
   os_profile {
-    computer_name  = "${var.project}bastion"
-    admin_username = data.azurerm_key_vault_secret.kv-buser.value
-    admin_password = data.azurerm_key_vault_secret.kv-bpass.value
+    computer_name                   = "${var.project}bastion"
+    admin_username                  = data.azurerm_key_vault_secret.kv-buser.value
+    admin_password                  = data.azurerm_key_vault_secret.kv-bpass.value
   }
+
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  tags = {
-    environment = var.environment
+
+  tags                              = {
+    environment                     = var.environment
   }
 }
-

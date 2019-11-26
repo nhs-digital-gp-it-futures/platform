@@ -49,3 +49,10 @@ output "blob_primary_endpoint_ukw" {
 }
 
 #output values for Key Vault
+
+#Timestamp
+
+output "timestamp" {
+  value = formatdate("YYYYMMDDhhmmss", timestamp())
+  description = "Date and time Azure Resource was created"
+}
