@@ -1,13 +1,11 @@
 resource "azurerm_resource_group" "ehubuks" {
     name                                    = "${var.project}-ehubuks-${var.environment}"
     location                                = "${var.region}"
-  
 }
 
 resource "azurerm_resource_group" "ehubukw" {
     name                                    = "${var.project}-ehubukw-${var.environment}"
     location                                = "${var.region1}"
-  
 }
 
 resource "azurerm_eventhub_namespace" "ehubuks" {
@@ -22,7 +20,6 @@ resource "azurerm_eventhub_namespace" "ehubuks" {
         environment                         = "dev"
 
   }
-
 }
 
 resource "azurerm_eventhub_namespace" "ehubukw" {
@@ -39,7 +36,6 @@ resource "azurerm_eventhub_namespace" "ehubukw" {
   }
 
 }
-
 
 resource "azurerm_eventhub" "ehubuks" {
   name                                      = "${var.project}-ehubuks-${var.environment}"

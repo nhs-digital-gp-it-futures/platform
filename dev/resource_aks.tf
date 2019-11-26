@@ -1,18 +1,25 @@
 resource "azurerm_resource_group" "aks" {
   name                    = "${var.project}-aks-${var.environment}"
   location                = "${var.region}"
-
-  tags = {
+  tags                    = {
     environment           = "${var.environment}"
   }
 }
 
-resource "azurerm_container_registry" "aks" {
-  name                    = "${var.project}aks${var.environment}"
-  resource_group_name     = "${azurerm_resource_group.aks.name}"
+resource "azurerm_resource_group" "acr" {
+  name                    = "${var.project}-acr-${var.environment}"
+  location                = "${var.region}"
+  tags                    = {
+    environment           = "${var.environment}"
+  }
+}
+
+resource "azurerm_container_registry" "acr" {
+  name                    = "${var.project}acr${var.environment}"
+  resource_group_name     = "${azurerm_resource_group.acr.name}"
   location                = "${var.region}"
   admin_enabled           = "true"
-  sku                     = "basic"
+  sku                     = "standard"
 
   tags = {
     environment           = "${var.environment}"
@@ -41,11 +48,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-        network_plugin = "azure"
-        network_policy = "azure"
-        dns_service_ip = "10.110.0.111"
-        docker_bridge_cidr = "172.17.0.1/24"
-        service_cidr = "10.110.0.0/24"
+        network_plugin      = "azure"
+        network_policy      = "azure"
+        dns_service_ip      = "10.110.0.111"
+        docker_bridge_cidr  = "172.17.0.1/24"
+        service_cidr        = "10.110.0.0/24"
 
 }
 
