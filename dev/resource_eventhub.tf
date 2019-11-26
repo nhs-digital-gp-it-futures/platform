@@ -1,56 +1,64 @@
 resource "azurerm_resource_group" "ehubuks" {
-    name                                    = "${var.project}-ehubuks-${var.environment}"
-    location                                = "${var.region}"
+  name     = "${var.project}-ehubuks-${var.environment}"
+  location = var.region
 }
 
 resource "azurerm_resource_group" "ehubukw" {
-    name                                    = "${var.project}-ehubukw-${var.environment}"
-    location                                = "${var.region1}"
+  name     = "${var.project}-ehubukw-${var.environment}"
+  location = var.region1
 }
 
 resource "azurerm_eventhub_namespace" "ehubuks" {
-    name                                    = "${var.project}-ensuks-${var.environment}"
-    resource_group_name                     = "${azurerm_resource_group.ehubuks.name}"
-    location                                = "${var.region}"
-    sku                                     = "Standard"
-    capacity                                = "2"
-    kafka_enabled                           = "true"
-    tags                                    = {
-
-        environment                         = "dev"
-
+  name                = "${var.project}-ensuks-${var.environment}"
+  resource_group_name = azurerm_resource_group.ehubuks.name
+  location            = var.region
+  sku                 = "Standard"
+  capacity            = "2"
+  kafka_enabled       = "true"
+  tags = {
+    environment = "dev"
   }
 }
 
 resource "azurerm_eventhub_namespace" "ehubukw" {
-    name                                    = "${var.project}-ensukw-${var.environment}"
-    resource_group_name                     = "${azurerm_resource_group.ehubukw.name}"
-    location                                = "${var.region1}"
-    sku                                     = "Standard"
-    capacity                                = "2"
-    kafka_enabled                           = "true"
-    tags                                    = {
-
-        environment                         = "dev"
-
+  name                = "${var.project}-ensukw-${var.environment}"
+  resource_group_name = azurerm_resource_group.ehubukw.name
+  location            = var.region1
+  sku                 = "Standard"
+  capacity            = "2"
+  kafka_enabled       = "true"
+  tags = {
+    environment = "dev"
   }
+}
 
+resource "azurerm_management_lock" "ehubuks" {
+  name       = "CanNotDelete"
+  scope      = azurerm_resource_group.ehubuks.id
+  lock_level = "CanNotDelete"
+  notes      = "Azure Lock for Dev Azure Eventhub"
+}
+
+resource "azurerm_management_lock" "ehubukw" {
+  name       = "CanNotDelete"
+  scope      = azurerm_resource_group.ehubukw.id
+  lock_level = "CanNotDelete"
+  notes      = "Azure Lock for Dev Azure Eventhub"
 }
 
 resource "azurerm_eventhub" "ehubuks" {
-  name                                      = "${var.project}-ehubuks-${var.environment}"
-  namespace_name                            = "${azurerm_eventhub_namespace.ehubuks.name}"
-  resource_group_name                       = "${azurerm_resource_group.ehubuks.name}"
-  partition_count                           = "2"
-  message_retention                         = "1"
-
+  name                = "${var.project}-ehubuks-${var.environment}"
+  namespace_name      = azurerm_eventhub_namespace.ehubuks.name
+  resource_group_name = azurerm_resource_group.ehubuks.name
+  partition_count     = "2"
+  message_retention   = "1"
 }
 
 resource "azurerm_eventhub" "ehubukw" {
-  name                                      = "${var.project}-ehubukw-${var.environment}"
-  namespace_name                            = "${azurerm_eventhub_namespace.ehubukw.name}"
-  resource_group_name                       = "${azurerm_resource_group.ehubukw.name}"
-  partition_count                           = "2"
-  message_retention                         = "1"
-
+  name                = "${var.project}-ehubukw-${var.environment}"
+  namespace_name      = azurerm_eventhub_namespace.ehubukw.name
+  resource_group_name = azurerm_resource_group.ehubukw.name
+  partition_count     = "2"
+  message_retention   = "1"
 }
+
