@@ -6,26 +6,12 @@ resource "azurerm_resource_group" "aks" {
   }
 }
 
-resource "azurerm_management_lock" "aks" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.aks.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Kubernetes"
-}
-
 resource "azurerm_resource_group" "acr" {
   name     = "${var.project}-acr-${var.environment}"
   location = var.region
   tags = {
     environment = var.environment
   }
-}
-
-resource "azurerm_management_lock" "acr" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.acr.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Container Registry"
 }
 
 resource "azurerm_container_registry" "acr" {

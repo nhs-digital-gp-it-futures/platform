@@ -7,13 +7,6 @@ resource "azurerm_resource_group" "virtual_machine" {
   }
 }
 
-resource "azurerm_management_lock" "virtual_machine" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.virtual_machine.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Virtual Machine"
-}
-
 resource "azurerm_network_interface" "vm" {
   name                = "${var.project}-nic-${var.environment}"
   location            = var.region

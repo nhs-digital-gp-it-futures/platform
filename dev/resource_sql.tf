@@ -7,20 +7,6 @@ resource "azurerm_resource_group" "bc-sql-pri" {
   }
 }
 
-resource "azurerm_management_lock" "bc-sql-pri" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.bc-sql-pri.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev SQL Server"
-}
-
-resource "azurerm_management_lock" "bc-sql-sec" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.bc-sql-sec.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev SQL Server"
-}
-
 resource "azurerm_resource_group" "bc-sql-sec" {
   name     = "${var.project}-sql-sec-${var.environment}"
   location = var.region1

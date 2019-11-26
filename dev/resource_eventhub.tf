@@ -32,20 +32,6 @@ resource "azurerm_eventhub_namespace" "ehubukw" {
   }
 }
 
-resource "azurerm_management_lock" "ehubuks" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.ehubuks.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Eventhub"
-}
-
-resource "azurerm_management_lock" "ehubukw" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.ehubukw.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Eventhub"
-}
-
 resource "azurerm_eventhub" "ehubuks" {
   name                = "${var.project}-ehubuks-${var.environment}"
   namespace_name      = azurerm_eventhub_namespace.ehubuks.name

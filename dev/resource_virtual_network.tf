@@ -7,13 +7,6 @@ resource "azurerm_resource_group" "virtual_network" {
   }
 }
 
-resource "azurerm_management_lock" "virtual_network" {
-  name       = "CanNotDelete"
-  scope      = azurerm_resource_group.virtual_network.id
-  lock_level = "CanNotDelete"
-  notes      = "Azure Lock for Dev Azure Virtual Network"
-}
-
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.project}-vnet-${var.environment}"
   location            = var.region
