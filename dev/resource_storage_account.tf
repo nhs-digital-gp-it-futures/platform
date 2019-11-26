@@ -6,6 +6,13 @@ resource "azurerm_resource_group" "storage" {
   }
 }
 
+resource "azurerm_management_lock" "aks" {
+  name = "CanNotDelete"
+  scope = "${azurerm_resource_group.storage.id}"
+  lock_level = "CanNotDelete"
+  notes = "Azure Lock for Dev Storage Account"
+}
+
 resource "azurerm_storage_account" "data" {
   name                      = "${var.project}sa${var.environment}"
   location                  = "${var.region}"
