@@ -28,7 +28,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   agent_pool_profile {
     name                  = "testpool"
-    count                 = 3
+    count                 = 1
     vm_size               = "${var.vm_size}"
     os_type               = "Linux"
     os_disk_size_gb       = 30
