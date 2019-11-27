@@ -29,17 +29,19 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_kubernetes_cluster" "aks" {
   name                    = "${var.project}-aks-${var.environment}"
   resource_group_name     = azurerm_resource_group.aks.name
+  kubernetes_version      = var.aksversion
   location                = var.region
   dns_prefix              = "${var.project}aksdns${var.environment}"
   node_resource_group     = "${var.project}-akspool-${var.environment}"
 
-  agent_pool_profile {
-    name                  = "prodpool1"
-    count                 = 3
+  default_node_pool {
+    name                  = "pprodpool1"
+    node_count            = 3
     vm_size               = var.vm_size
-    os_type               = "Linux"
     os_disk_size_gb       = 30
     vnet_subnet_id        = azurerm_subnet.aks.id
+    type                  = "AvailabilitySet"
+    max_pods              = 30
   }
 
   service_principal {
@@ -52,9 +54,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_policy        = "azure"
     dns_service_ip        = "10.110.33.111"
     docker_bridge_cidr    = "172.17.33.1/24"
-    service_cidr          = "10.100.33.33/24"
+    service_cidr          = "10.110.33.0/24"
     load_balancer_sku     = "standard"
   }
+
+  enable_pod_security_policy = "true"
 
   role_based_access_control {
     enabled               = "true"

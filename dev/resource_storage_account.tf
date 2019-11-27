@@ -40,7 +40,7 @@ resource "azurerm_storage_account" "sqlukw" {
 }
 
 resource "azurerm_storage_container" "data" {
-  name                              = "$web"
+  name                              = "data"
   storage_account_name              = azurerm_storage_account.data.name
   container_access_type             = "container"
 }

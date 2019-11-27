@@ -1,3 +1,8 @@
+variable "aksversion" {
+  type                  = string
+  description           = "The version of Kubernetes to deploy"
+}
+
 variable "environment" {
   type        = string
   description = "The name of the environment"
@@ -132,4 +137,3 @@ variable "waf_capacity" {
   type        = string
   description = "he Capacity of the SKU to use for this Application Gateway - which must be between 1 and 10"
 }
-

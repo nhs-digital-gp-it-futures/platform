@@ -14,7 +14,6 @@ resource "azurerm_eventhub_namespace" "ehubuks" {
   location              = var.region
   sku                   = "Standard"
   capacity              = "2"
-  kafka_enabled         = "true"
   tags = {
     environment = "${var.environment}"
   }
@@ -26,7 +25,6 @@ resource "azurerm_eventhub_namespace" "ehubukw" {
   location              = var.region1
   sku                   = "Standard"
   capacity              = "2"
-  kafka_enabled         = "true"
   tags = {
     environment         = "${var.environment}"
   }
