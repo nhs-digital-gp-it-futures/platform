@@ -106,15 +106,11 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-        env:                               
-        - name: API_BASE_URL
-          value: "http://api:5100"
-        - name: CACHE_HOST
-          value: "Development"     
-        - name: API_HOST   
-          value: "api.buyingcatalogue:5100"
-        - name: BASE_URL   
-          value: "http://dev.buyingcatalogue.digital.nhs.uk"
+        env:                                
+        - name: BASE_URL
+          value: "http://gpitfuturedev.uksouth.cloudapp.azure.com"
+        - name: API_HOST
+          value: "http://api.buyingcatalogue:5100/api/v1"
 ---  
 apiVersion: apps/v1
 kind: Deployment
@@ -211,17 +207,6 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-        env:
-        - name: MAX_SCAN_SIZE
-          value: ""
-        - name: MAX_FILE_SIZE
-          value: ""
-        - name: BASE_URL
-          value: ""
-        - name: API_BASE_URL
-          value: ""
-        - name: API_HOST
-          value: ""
 ---
 apiVersion: v1
 kind: Service
@@ -258,7 +243,6 @@ kind: Service
 metadata:
   name: nginx
 spec:
-  loadBalancerIP: 51.104.248.31
   type: LoadBalancer
   ports:
   - port: 80
