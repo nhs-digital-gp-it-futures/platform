@@ -258,7 +258,7 @@ kind: Service
 metadata:
   name: nginx
 spec:
-  loadBalancerIP: 51.11.7.103
+  loadBalancerIP: 51.104.248.31
   type: LoadBalancer
   ports:
   - port: 80
