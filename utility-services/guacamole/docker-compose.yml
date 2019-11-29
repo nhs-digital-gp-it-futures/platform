@@ -3,7 +3,7 @@ version: '2'
 services:
 
   nhsd.utilities:
-    image: nhsd/buying-catalogue/nginx
+    image: nhsd/buying-catalogue/guacamole
     container_name: nhsd_buying-catalogue_guacamole
     build:
       context: .

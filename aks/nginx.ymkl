@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfuture-bc-deployment-nginx
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfuture-bc-app-nginx  
+  template:
+    metadata:
+      labels:
+        app: gpitfuture-bc-app-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfuture-bc-beta-nginx
+        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue/nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: gpitfuture-bc-app-nginxs

@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   nhsd.utilities:
-    image: splunk/splunk
+    image: nhsd/buying-catalogue/splunk
     container_name: nhsd_buying-catalogue_splunk
     build:
       context: .
