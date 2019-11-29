@@ -69,7 +69,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   enable_pod_security_policy = "false"
   
   role_based_access_control {
-    enabled = "false"
+    enabled = "true"
   }
 
   tags = {
