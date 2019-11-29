@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-api
-        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-api
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue-api
         ports:
         - containerPort: 5100
         resources:
@@ -64,7 +64,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-marketingpage
-        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-frontend
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue-frontend
         ports:
         - containerPort: 3001
         resources:
@@ -96,7 +96,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
         command: ["/bin/sh"]
         args: ["-c", "npm run start"]
         ports:
@@ -135,7 +135,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-nginx
-        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue/nginx
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/nginx
         ports:
         - containerPort: 80
         resources:
@@ -199,7 +199,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-clamav
-        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue/calmav
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/calmav
         ports:
         - containerPort: 3310
         resources:
