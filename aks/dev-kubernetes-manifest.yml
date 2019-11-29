@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-api
+  name: gpitfutures-bc-deployment-api
 spec:
   replicas: 1
   strategy:
@@ -11,17 +11,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-api  
+      app: gpitfutures-bc-app-api  
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-api
+        app: gpitfutures-bc-app-api
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-api
-        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-api
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-api
         ports:
         - containerPort: 5100
         resources:
@@ -44,7 +44,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-marketingpage
+  name: gpitfutures-bc-deployment-marketingpage
 spec:
   replicas: 1
   strategy:
@@ -54,17 +54,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-marketingpage
+      app: gpitfutures-bc-app-marketingpage
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-marketingpage
+        app: gpitfutures-bc-app-marketingpage
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-marketingpage
-        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-frontend
+      - name: gpitfutures-bc-beta-marketingpage
+        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-frontend
         ports:
         - containerPort: 3001
         resources:
@@ -76,7 +76,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-publicbrowse
+  name: gpitfutures-bc-deployment-publicbrowse
 spec:
   replicas: 1
   strategy:
@@ -86,17 +86,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-publicbrowse
+      app: gpitfutures-bc-app-publicbrowse
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-publicbrowse
+        app: gpitfutures-bc-app-publicbrowse
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-publicbrowse
-        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
+      - name: gpitfutures-bc-beta-publicbrowse
+        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue-publicbrowse
         command: ["/bin/sh"]
         args: ["-c", "npm run start"]
         ports:
@@ -108,14 +108,14 @@ spec:
             cpu: 500m
         env:                                
         - name: BASE_URL
-          value: "http://gpitfuturedev.uksouth.cloudapp.azure.com"
+          value: "http://gpitfuturesdev.uksouth.cloudapp.azure.com"
         - name: API_HOST
           value: "http://api.buyingcatalogue:5100/api/v1"
 ---  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-nginx
+  name: gpitfutures-bc-deployment-nginx
 spec:
   replicas: 1
   strategy:
@@ -125,17 +125,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-nginx  
+      app: gpitfutures-bc-app-nginx  
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-nginx
+        app: gpitfutures-bc-app-nginx
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-nginx
-        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue/nginx
+      - name: gpitfutures-bc-beta-nginx
+        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue/nginx
         ports:
         - containerPort: 80
         resources:
@@ -147,7 +147,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-cache
+  name: gpitfutures-bc-deployment-cache
 spec:
   replicas: 1
   strategy:
@@ -157,16 +157,16 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-cache  
+      app: gpitfutures-bc-app-cache  
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-cache
+        app: gpitfutures-bc-app-cache
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-cache
+      - name: gpitfutures-bc-beta-cache
         image: index.docker.io/redis:latest
         ports:
         - containerPort: 6379
@@ -179,7 +179,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfuture-bc-deployment-clamav
+  name: gpitfutures-bc-deployment-clamav
 spec:
   replicas: 1
   strategy:
@@ -189,17 +189,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfuture-bc-app-clamav  
+      app: gpitfutures-bc-app-clamav  
   template:
     metadata:
       labels:
-        app: gpitfuture-bc-app-clamav
+        app: gpitfutures-bc-app-clamav
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfuture-bc-beta-clamav
-        image: gpitfutureaksdev.azurecr.io/nhsd/buying-catalogue/calmav
+      - name: gpitfutures-bc-beta-clamav
+        image: gpitfuturesaksdev.azurecr.io/nhsd/buying-catalogue/calmav
         ports:
         - containerPort: 3310
         resources:
@@ -216,7 +216,7 @@ spec:
   ports:
   - port: 5100
   selector:
-    app: gpitfuture-bc-app-api
+    app: gpitfutures-bc-app-api
 ---
 apiVersion: v1
 kind: Service
@@ -226,7 +226,7 @@ spec:
   ports:
   - port: 3001
   selector:
-    app: gpitfuture-bc-app-marketingpage
+    app: gpitfutures-bc-app-marketingpage
 ---
 apiVersion: v1
 kind: Service
@@ -236,7 +236,7 @@ spec:
   ports:
   - port: 3000
   selector:
-    app: gpitfuture-bc-app-publicbrowse
+    app: gpitfutures-bc-app-publicbrowse
 ---
 apiVersion: v1
 kind: Service
@@ -247,7 +247,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: gpitfuture-bc-app-nginx
+    app: gpitfutures-bc-app-nginx
 ---
 apiVersion: v1
 kind: Service
@@ -257,7 +257,7 @@ spec:
   ports:
   - port: 6379
   selector:
-    app: gpitfuture-bc-app-cache
+    app: gpitfutures-bc-app-cache
 ---
 apiVersion: v1
 kind: Service
@@ -267,4 +267,4 @@ spec:
   ports:
   - port: 3310
   selector:
-    app: gpitfuture-bc-app-clamav
+    app: gpitfutures-bc-app-clamav
