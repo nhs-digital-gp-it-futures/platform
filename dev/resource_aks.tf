@@ -58,10 +58,18 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku     = "Standard"
   }
 
-  enable_pod_security_policy = "true"
+    addon_profile {
+
+    kube_dashboard {
+      enabled             = true
+    }
+
+  }
+
+  enable_pod_security_policy = "false"
   
   role_based_access_control {
-    enabled               = "true"
+    enabled = "false"
   }
 
   tags = {
