@@ -64,7 +64,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-marketingpage
-        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue-marketingpage
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/marketingpage
         ports:
         - containerPort: 3001
         resources:
