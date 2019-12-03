@@ -1,6 +1,6 @@
 aksversion                          = "1.14.8"
 environment                         = "dev"
-project                             = "gpitfuture"
+project                             = "gpitfutures"
 region                              = "uksouth"
 region1                             = "ukwest"
 ip_addsp                            = "10.100.0.0/20"

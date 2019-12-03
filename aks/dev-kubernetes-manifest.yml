@@ -21,25 +21,14 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-api
-        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue-api
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/api
         ports:
-        - containerPort: 5100
+        - containerPort: 80
         resources:
           requests:
             cpu: 500m
           limits:
             cpu: 1
-        env:
-        - name: CACHE_HOST
-          value: ""
-        - name: ASPNETCORE_ENVIRONMENT 
-          value: ""
-        - name: DB_NAME
-          value: ""
-        - name: DB_USER
-          value: ""
-        - name: DB_PASSWORD
-          value: ""
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -107,10 +96,8 @@ spec:
           limits:
             cpu: 500m
         env:                                
-        - name: BASE_URL
-          value: "http://gpitfuturesdev.uksouth.cloudapp.azure.com"
         - name: API_HOST
-          value: "http://api.buyingcatalogue:5100/api/v1"
+          value: "http://api:5100/api/v1"
 ---  
 apiVersion: apps/v1
 kind: Deployment
@@ -215,6 +202,9 @@ metadata:
 spec:
   ports:
   - port: 5100
+    targetPort: 80
+    protocol: TCP
+    name: http
   selector:
     app: gpitfutures-bc-app-api
 ---
@@ -243,7 +233,6 @@ kind: Service
 metadata:
   name: nginx
 spec:
-  loadBalancerIP: 51.132.50.57
   type: LoadBalancer
   ports:
   - port: 80
