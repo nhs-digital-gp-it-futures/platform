@@ -30,8 +30,40 @@ spec:
           limits:
             cpu: 1
         env:                                
-          Name:ConnectionStrings__BuyingCatalogue
-          Value:   
+          - name: ConnectionStrings__BuyingCatalogue
+            value: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-marketingpage
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-marketingpage
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-marketingpage
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-marketingpage
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/marketingpage
+        ports:
+        - containerPort: 3001
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m          
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -100,6 +132,70 @@ spec:
           requests:
             cpu: 250m
           limits:
+            cpu: 500m        
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-cache
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-cache  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-cache
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-cache
+        image: index.docker.io/redis:latest
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-clamav
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-clamav  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-clamav
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-clamav
+        image: gpitfuturesacrdev.azurecr.io/nhsd/buying-catalogue/calmav
+        ports:
+        - containerPort: 3310
+        resources:
+          requests:
+            cpu: 250m
+          limits:
             cpu: 500m
 ---
 apiVersion: v1
@@ -118,6 +214,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: marketingpage
+spec:
+  ports:
+  - port: 3001
+  selector:
+    app: gpitfutures-bc-app-marketingpage
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: publicbrowse
 spec:
   ports:
@@ -130,8 +236,29 @@ kind: Service
 metadata:
   name: nginx
 spec:
+  loadBalancerIP: 51.132.50.57
   type: LoadBalancer
   ports:
   - port: 80
   selector:
     app: gpitfutures-bc-app-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cache
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: gpitfutures-bc-app-cache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clamav
+spec:
+  ports:
+  - port: 3310
+  selector:
+    app: gpitfutures-bc-app-clamav
