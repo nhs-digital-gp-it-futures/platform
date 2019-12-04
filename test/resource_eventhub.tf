@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "ehubuks" {
-  name     = "${var.project}-ehubuks-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-ehub-uks"
   location = var.region
 }
 
 resource "azurerm_resource_group" "ehubukw" {
-  name     = "${var.project}-ehubukw-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-ehub-ukw"
   location = var.region1
 }
 
@@ -45,4 +45,3 @@ resource "azurerm_eventhub" "ehubukw" {
   partition_count     = "2"
   message_retention   = "1"
 }
-

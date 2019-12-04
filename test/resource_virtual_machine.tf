@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "virtual_machine" {
-  name     = "${var.project}-vm-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-vm"
   location = "${var.region}"
   tags = {
     environment = "${var.environment}"

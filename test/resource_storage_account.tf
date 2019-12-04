@@ -1,10 +1,12 @@
 resource "azurerm_resource_group" "storage" {
-  name     = "${var.project}-sa-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-sa"
   location = var.region
   tags = {
     environment = var.environment
   }
 }
+
+
 
 resource "azurerm_storage_account" "data" {
   name                              = "${var.project}sa${var.environment}"
@@ -56,4 +58,3 @@ resource "azurerm_storage_container" "sqlukw" {
   storage_account_name  = azurerm_storage_account.sqlukw.name
   container_access_type = "private"
 }
-

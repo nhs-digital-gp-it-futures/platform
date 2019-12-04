@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "bc-sql-pri" {
-  name     = "${var.project}-sql-pri-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-sql-pri"
   location = var.region
   tags = {
     environment = var.environment
@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "bc-sql-pri" {
 }
 
 resource "azurerm_resource_group" "bc-sql-sec" {
-  name     = "${var.project}-sql-sec-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg--sql-sec"
   location = var.region1
   tags = {
     environment = var.environment
@@ -87,4 +87,3 @@ resource "azurerm_sql_failover_group" "bc-sql" {
     grace_minutes = 30
   }
 }
-

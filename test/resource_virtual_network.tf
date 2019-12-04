@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "virtual_network" {
-  name     = "${var.project}-vnet-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-vnet"
   location = var.region
   tags = {
     environment = var.environment
@@ -170,4 +170,3 @@ resource "azurerm_application_gateway" "AppGate" {
     backend_http_settings_name = local.http_setting_name
   }
 }
-

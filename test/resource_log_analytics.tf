@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "log_analytics" {
-  name     = "${var.project}-loganalytics-${var.environment}"
+  name     = "${var.project}-${var.environment}-rg-lana"
   location = var.region
   tags = {
     environment = var.environment
@@ -16,4 +16,3 @@ resource "azurerm_log_analytics_workspace" "workspace" {
     environment = var.environment
   }
 }
-

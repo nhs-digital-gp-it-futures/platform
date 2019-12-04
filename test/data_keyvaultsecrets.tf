@@ -50,4 +50,3 @@ data "azurerm_key_vault_secret" "kv-sqlpass" {
   name         = "gpittestsqladminpassword"
   key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-kv-test/providers/Microsoft.KeyVault/vaults/gpitfutures-kv-test"
 }
-
