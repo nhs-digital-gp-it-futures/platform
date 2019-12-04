@@ -1,0 +1,180 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-api
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-api  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-api
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturesacrpprod.azurecr.io/nhsd/buying-catalogue/api
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:                                
+          - name: ConnectionStrings__BuyingCatalogue
+            value: ""        
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-publicbrowse
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1   
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-publicbrowse
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-publicbrowse
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-publicbrowse
+        image: gpitfuturesacrpprod.azurecr.io/nhsd/buying-catalogue-publicbrowse
+        command: ["/bin/sh"]
+        args: ["-c", "npm run start"]
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:                                
+        - name: API_HOST
+          value: "http://api:5100/api/v1"
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-nginx
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-nginx  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-nginx
+        image: gpitfuturesacrpprod.azurecr.io/nhsd/buying-catalogue/nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m        
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-clamav
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-clamav  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-clamav
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-clamav
+        image: gpitfuturesacrpprod.azurecr.io/nhsd/buying-catalogue/calmav
+        ports:
+        - containerPort: 3310
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  ports:
+  - port: 5100
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: gpitfutures-bc-app-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: publicbrowse
+spec:
+  ports:
+  - port: 3000
+  selector:
+    app: gpitfutures-bc-app-publicbrowse
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  loadBalancerIP: 51.132.50.57
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: gpitfutures-bc-app-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clamav
+spec:
+  ports:
+  - port: 3310
+  selector:
+    app: gpitfutures-bc-app-clamav
