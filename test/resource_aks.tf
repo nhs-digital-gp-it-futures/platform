@@ -31,7 +31,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version            = "${var.aksversion}"
   location                      = "${var.region}"
   dns_prefix                    = "${var.project}${var.environment}aksdns"
-  node_resource_group           = "${var.project}-${var.environment}-rg-akspool"
+  node_resource_group           = "${var.project}-${var.environment}-rg-aks-pool"
 
   default_node_pool {
     name                        = "testpool1"

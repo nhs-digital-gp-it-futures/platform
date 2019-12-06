@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "virtual_machine" {
 }
 
 resource "azurerm_network_interface" "vm" {
-  name                = "${var.project}-${var.environment}-nic"
+  name                = "${var.project}-${var.environment}-${var.vm}-nic"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.virtual_machine.name}"
 
@@ -19,7 +19,7 @@ resource "azurerm_network_interface" "vm" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                  = "${var.project}-${var.environment}-bastion"
+  name                  = "${var.project}-${var.environment}-${var.vm}-bastion"
   location              = "${var.region}"
   resource_group_name   = "${azurerm_resource_group.virtual_machine.name}"
   network_interface_ids = ["${azurerm_network_interface.vm.id}"]
