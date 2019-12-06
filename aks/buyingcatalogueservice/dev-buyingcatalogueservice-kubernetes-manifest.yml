@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-publicbrowse
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1   
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-publicbrowse
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-publicbrowse
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-publicbrowse
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+        command: ["/bin/sh"]
+        args: ["-c", "npm run start"]
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:                                
+        - name: API_HOST
+          value: "http://api:5100/api/v1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+name: api
+spec:
+ports:
+- port: 5100
+targetPort: 80
+protocol: TCP
+name: http
+selector:
+app: gpitfutures-bc-app-api
