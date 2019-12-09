@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "bc-sql-pri" {
-  name                              = "${var.project}-sql-pri-${var.environment}"
+  name                              = "${var.project}-${var.environment}-rg-sql-pri"
   location                          = "${var.region}"
   tags                              = {
     environment                     = "${var.environment}"
@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "bc-sql-pri" {
 }
 
 resource "azurerm_resource_group" "bc-sql-sec" {
-  name                              = "${var.project}-sql-sec-${var.environment}"
+  name                              = "${var.project}-${var.environment}-rg-sql-sec"
   location                          = "${var.region1}"
   tags                              = {
     environment                     = "${var.environment}"
@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "bc-sql-sec" {
 }
 
 resource "azurerm_sql_server" "bc-sql-pri" {
-  name                              = "${var.project}-sqlpri-${var.environment}"
+  name                              = "${var.project}-${var.environment}-sql-pri"
   resource_group_name               = "${azurerm_resource_group.bc-sql-pri.name}"
   location                          = "${var.region}"
   version                           = "${var.sql_version}"
@@ -24,7 +24,7 @@ resource "azurerm_sql_server" "bc-sql-pri" {
 }
 
 resource "azurerm_sql_server" "bc-sql-sec" {
-  name                              = "${var.project}-sqlsec-${var.environment}"
+  name                              = "${var.project}-${var.environment}-sql-sec"
   resource_group_name               = "${azurerm_resource_group.bc-sql-sec.name}"
   location                          = "${var.region1}"
   version                           = "${var.sql_version}"
@@ -40,28 +40,12 @@ resource "azurerm_sql_firewall_rule" "bc-sql-pri" {
   end_ip_address                    = "0.0.0.0"
 }
 
-resource "azurerm_sql_firewall_rule" "bc-sql1-pri" {
-  name                              = "${var.project}bcteam"
-  resource_group_name               = "${azurerm_resource_group.bc-sql-pri.name}"
-  server_name                       = "${azurerm_sql_server.bc-sql-pri.name}"
-  start_ip_address                  = "194.101.83.23"
-  end_ip_address                    = "194.101.83.23"
-}
-
 resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
   name                              = "azure_services"
   resource_group_name               = "${azurerm_resource_group.bc-sql-sec.name}"
   server_name                       = "${azurerm_sql_server.bc-sql-sec.name}"
   start_ip_address                  = "0.0.0.0"
   end_ip_address                    = "0.0.0.0"
-}
-
-resource "azurerm_sql_firewall_rule" "bc-sql1-sec" {
-  name                              = "${var.project}bcteam"
-  resource_group_name               = "${azurerm_resource_group.bc-sql-sec.name}"
-  server_name                       = "${azurerm_sql_server.bc-sql-sec.name}"
-  start_ip_address                  = "194.101.83.23"
-  end_ip_address                    = "194.101.83.23"
 }
 
 resource "azurerm_sql_database" "bc-sql" {
@@ -75,10 +59,10 @@ resource "azurerm_sql_database" "bc-sql" {
 }
 
 resource "azurerm_sql_failover_group" "bc-sql" {
-  name                              = "${var.project}-sqlfo-${var.environment}"
+  name                              = "${var.project}-${var.environment}-sql-fog"
   resource_group_name               = "${azurerm_resource_group.bc-sql-pri.name}"
   server_name                       = "${azurerm_sql_server.bc-sql-pri.name}"
-  databases                         = [azurerm_sql_database.bc-sql.id]
+  databases                         = ["${azurerm_sql_database.bc-sql.id}"]
   partner_servers {
     id                              = "${azurerm_sql_server.bc-sql-sec.id}"
   }

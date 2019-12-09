@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "storage" {
-  name                              = "${var.project}-sa-${var.environment}"
+  name                              = "${var.project}-${var.environment}-rg-sa"
   location                          = "${var.region}"
   tags                              = {
     environment                     = "${var.environment}"
@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "storage" {
 }
 
 resource "azurerm_storage_account" "data" {
-  name                              = "${var.project}sa${var.environment}"
+  name                              = "${var.project}${var.environment}sa"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.storage.name}"
   account_tier                      = "${var.sa_tier}"
@@ -18,7 +18,7 @@ resource "azurerm_storage_account" "data" {
 }
 
 resource "azurerm_storage_account" "sqluks" {
-  name                              = "${var.project}sasqluks${var.environment}"
+  name                              = "${var.project}${var.environment}sasqluks"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.storage.name}"
   account_tier                      = "${var.sa_tier}"
@@ -29,7 +29,7 @@ resource "azurerm_storage_account" "sqluks" {
 }
 
 resource "azurerm_storage_account" "sqlukw" {
-  name                              = "${var.project}sasqlukw${var.environment}"
+  name                              = "${var.project}${var.environment}sasqlukw"
   location                          = "${var.region1}"
   resource_group_name               = "${azurerm_resource_group.storage.name}"
   account_tier                      = "${var.sa_tier}"
@@ -40,19 +40,19 @@ resource "azurerm_storage_account" "sqlukw" {
 }
 
 resource "azurerm_storage_container" "data" {
-  name                              = "$web"
-  storage_account_name              = "${azurerm_storage_account.data.name}"
-  container_access_type             = "container"
+  name                  = "$web"
+  storage_account_name  = "${azurerm_storage_account.data.name}"
+  container_access_type = "blob"
 }
 
 resource "azurerm_storage_container" "sqluks" {
-  name                              = "sqlauditlogs"
-  storage_account_name              = "${azurerm_storage_account.sqluks.name}"
-  container_access_type             = "private"
+  name                  = "sqlauditlogs"
+  storage_account_name  = "${azurerm_storage_account.sqluks.name}"
+  container_access_type = "private"
 }
 
 resource "azurerm_storage_container" "sqlukw" {
-  name                              = "sqlauditlogs"
-  storage_account_name              = "${azurerm_storage_account.sqlukw.name}"
-  container_access_type             = "private"
+  name                  = "sqlauditlogs"
+  storage_account_name  = "${azurerm_storage_account.sqlukw.name}"
+  container_access_type = "private"
 }
