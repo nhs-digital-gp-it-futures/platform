@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "vnet" {
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                              = "${var.project}-vnet-${var.environment}"
+  name                              = "${var.project}-${var.environment}-vnet"
   location                          = "${var.region}"
   address_space                     = ["${var.ip_addsp}"]
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
@@ -17,49 +17,49 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "aks" {
-  name                              = "${var.project}-aks-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-aks"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_aks}"
 }
 
 resource "azurerm_subnet" "bastion" {
-  name                              = "${var.project}-bastion-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-bastion"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_bastion}"
 }
 
 resource "azurerm_subnet" "ehub" {
-  name                              = "${var.project}-ehub-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-ehub"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_ehub}"
 }
 
 resource "azurerm_subnet" "gateway" {
-  name                              = "${var.project}-gateway-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-gateway"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_gateway}"
 }
 
 resource "azurerm_subnet" "splunk" {
-  name                              = "${var.project}-splunk-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-splunk"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_splunk}"
 }
 
 resource "azurerm_subnet" "vm" {
-  name                              = "${var.project}-vm-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.sub}-vm"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   virtual_network_name              = "${azurerm_virtual_network.vnet.name}"
   address_prefix                    = "${var.sub_vm}"
 }
 
 resource "azurerm_network_security_group" "gateway" {
-  name                              = "${var.project}-gateway-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.nsg}-gateway"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   tags                              = {
@@ -68,7 +68,7 @@ resource "azurerm_network_security_group" "gateway" {
 }
 
 resource "azurerm_network_security_group" "aks" {
-  name                              = "${var.project}-aks-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.nsg}-aks"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   tags                              = {
@@ -77,7 +77,7 @@ resource "azurerm_network_security_group" "aks" {
 }
 
 resource "azurerm_network_security_group" "bastion" {
-  name                              = "${var.project}-bastion-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.nsg}-bastion"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   tags                              = {
@@ -86,12 +86,41 @@ resource "azurerm_network_security_group" "bastion" {
 }
 
 resource "azurerm_network_security_group" "splunk" {
-  name                              = "${var.project}-splunk-${var.environment}"
+  name                              = "${var.project}-${var.environment}-${var.nsg}-splunk"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.vnet.name}"
   tags                              = {
     environment                     = "${var.environment}"
   }
+}
+
+resource "azurerm_network_security_group" "vm" {
+  name                              = "${var.project}-${var.environment}-${var.nsg}-vm"
+  location                          = "${var.region}"
+  resource_group_name               = "${azurerm_resource_group.vnet.name}"
+  tags                              = {
+    environment                     = "${var.environment}"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "aks" {
+  subnet_id                         =   "${azurerm_subnet.aks.id}"
+  network_security_group_id         =   "${azurerm_network_security_group.aks.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "bastion" {
+  subnet_id                         =   "${azurerm_subnet.bastion.id}"
+  network_security_group_id         =   "${azurerm_network_security_group.bastion.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "splunk" {
+  subnet_id                         =   "${azurerm_subnet.splunk.id}"
+  network_security_group_id         =   "${azurerm_network_security_group.splunk.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "vm" {
+  subnet_id                         =   "${azurerm_subnet.vm.id}"
+  network_security_group_id         =   "${azurerm_network_security_group.vm.id}"
 }
 
 resource "azurerm_network_security_rule" "public_access" {
@@ -100,7 +129,7 @@ resource "azurerm_network_security_rule" "public_access" {
   access                            = "Allow"
   protocol                          = "TCP"
   priority                          = 100
-  source_address_prefixes           = ["62.6.52.0/25", "62.6.52.128/25", "62.172.169.0/25", "85.115.52.0/24", "85.115.53.0/24", "85.115.54.0/24", "91.232.153.0/24", "193.84.224.16 - 193.84.224.254", "193.84.225.16 - 193.84.225.254", "194.176.105.0/24"]
+  source_address_prefixes           = ["62.6.52.0/25", "62.6.52.128/25", "62.172.169.0/25", "85.115.52.0/24", "85.115.53.0/24", "85.115.54.0/24", "91.232.153.0/24", "193.84.224.0/24", "193.84.225.0", "194.176.105.0/24"]
   source_port_range                 = "80"
   destination_address_prefix        = "*"
   destination_port_range            = "*"

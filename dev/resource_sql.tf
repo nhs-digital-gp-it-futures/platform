@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "bc-sql-pri" {
 }
 
 resource "azurerm_resource_group" "bc-sql-sec" {
-  name                              = "${var.project}-${var.environment}-rg--sql-sec"
+  name                              = "${var.project}-${var.environment}-rg-sql-sec"
   location                          = "${var.region1}"
   tags                              = {
     environment                     = "${var.environment}"
