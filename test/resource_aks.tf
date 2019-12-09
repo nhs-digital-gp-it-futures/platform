@@ -31,7 +31,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version            = "${var.aksversion}"
   location                      = "${var.region}"
   dns_prefix                    = "${var.project}${var.environment}aksdns"
-  node_resource_group           = "${var.project}-${var.environment}-rg-aks-pool"
+  node_resource_group           = "${var.project}-${var.environment}-rg-akspool"
 
   default_node_pool {
     name                        = "testpool1"
@@ -51,21 +51,21 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
+    load_balancer_sku           = "basic"
     network_plugin              = "azure"
     network_policy              = "azure"
-    dns_service_ip              = "10.110.0.111"
+    dns_service_ip              = "10.110.17.111"
     docker_bridge_cidr          = "172.17.0.1/24"
-    service_cidr                = "10.110.0.0/24"
+    service_cidr                = "10.110.17.0/24"
   }
 
   addon_profile {
-
     kube_dashboard {
       enabled                   = "true"
     }
   }
 
-  enable_pod_security_policy    = "true"
+  enable_pod_security_policy    = "false"
   
   role_based_access_control {
     enabled                     = "true"

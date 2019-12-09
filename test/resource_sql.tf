@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "bc-sql-pri" {
 }
 
 resource "azurerm_resource_group" "bc-sql-sec" {
-  name                              = "${var.project}-${var.environment}-rg--sql-sec"
+  name                              = "${var.project}-${var.environment}-rg-sql-sec"
   location                          = "${var.region1}"
   tags                              = {
     environment                     = "${var.environment}"
@@ -49,7 +49,7 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
 }
 
 resource "azurerm_sql_database" "bc-sql" {
-  name                              = "${var.project}-db-${var.environment}"
+  name                              = "${var.project}-${var.environment}-db"
   resource_group_name               = "${azurerm_resource_group.bc-sql-pri.name}"
   location                          = "${var.region}"
   server_name                       = "${azurerm_sql_server.bc-sql-pri.name}"
