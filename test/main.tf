@@ -2,7 +2,7 @@
 #Storage account name: gpitfuturesatf within the GP IT Futures Buying Catalogue subscription
 
 terraform {
-  required_version = ">= 0.12"
+  required_version = "0.12.17"
 }
 
 provider "azurerm" {
