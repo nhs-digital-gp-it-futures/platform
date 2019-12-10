@@ -24,7 +24,7 @@ spec:
       - name: gpitfutures-bc-beta-api
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
         ports:
-        - containerPort: 80
+        - containerPort: 5100
         resources:
           requests:
             cpu: 500m
