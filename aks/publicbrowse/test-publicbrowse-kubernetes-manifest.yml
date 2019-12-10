@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gpitfutures-bc-deployment-publicbrowse
+  namespace: buyingcatalogue-test-ns
 spec:
   replicas: 1
   strategy:
@@ -21,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue-publicbrowse
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
         command: ["/bin/sh"]
         args: ["-c", "npm run start"]
         ports:
@@ -39,6 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: publicbrowse
+  namespace: buyingcatalogue-test-ns
 spec:
   ports:
   - port: 3000
