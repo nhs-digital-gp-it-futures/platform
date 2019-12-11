@@ -39,17 +39,6 @@ resource "azurerm_storage_account" "sqlukw" {
   enable_https_traffic_only         = "true"
 }
 
-resource "azurerm_storage_account" "terraform" {
-  name                              = "${var.project}satf"
-  location                          = "${var.region1}"
-  resource_group_name               = "${azurerm_resource_group.storage.name}"
-  account_tier                      = "${var.sa_tier}"
-  account_replication_type          = "${var.sa_rep_type}"
-  account_kind                      = "${var.sa_kind}"
-  enable_advanced_threat_protection = "true"
-  enable_https_traffic_only         = "true"
-}
-
 resource "azurerm_storage_container" "data" {
   name                  = "$web"
   storage_account_name  = "${azurerm_storage_account.data.name}"
@@ -65,11 +54,5 @@ resource "azurerm_storage_container" "sqluks" {
 resource "azurerm_storage_container" "sqlukw" {
   name                  = "sqlauditlogs"
   storage_account_name  = "${azurerm_storage_account.sqlukw.name}"
-  container_access_type = "private"
-}
-
-resource "azurerm_storage_container" "terraform" {
-  name                  = "tfstate"
-  storage_account_name  = "${azurerm_storage_account.terraform.name}"
   container_access_type = "private"
 }
