@@ -1,10 +1,6 @@
 #The Terraform tfstate file is currently being stored in an Azure storage container.
 #Storage account name: gpitfuturesatf within the GP IT Futures Buying Catalogue subscription
 
-terraform {
-  required_version = "0.12.17"
-}
-
 provider "azurerm" {
   version = "=1.37.0"
 }
