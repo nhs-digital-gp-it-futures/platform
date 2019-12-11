@@ -1,49 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-publicbrowse
+  name: gpitfutures-bc-deployment-api
+  namespace: buyingcatalogue-test-ns
 spec:
   replicas: 1
   strategy:
     rollingUpdate:
-      maxSurge: 1   
+      maxSurge: 1
       maxUnavailable: 1
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-publicbrowse
+      app: gpitfutures-bc-app-api  
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-publicbrowse
+        app: gpitfutures-bc-app-api
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-      - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
-        command: ["/bin/sh"]
-        args: ["-c", "npm run start"]
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/api
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         resources:
           requests:
-            cpu: 250m
-          limits:
             cpu: 500m
+          limits:
+            cpu: 1
         env:                                
-        - name: API_HOST
-          value: "http://api:5100/api/v1"
+          - name: ConnectionStrings__BuyingCatalogue
+            value: ""    
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: api
-spec:
-  ports:
-  - port: 5100
-    targetPort: 80
-    protocol: TCP
-    name: http
-  selector:
-    app: gpitfutures-bc-app-api
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: api
+    namespace: buyingcatalogue-test-ns
+  spec:
+    ports:
+    - port: 5100
+      targetPort: 80
+      protocol: TCP
+      name: http
+    selector:
+      app: gpitfutures-bc-app-api
