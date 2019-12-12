@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gpitfutures-bc-deployment-publicbrowse
-  namespace: buyingcatalogue-dev-ns
+  namespace: buyingcatalogue-test-ns
 spec:
   replicas: 1
   strategy:
@@ -22,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
         command: ["/bin/sh"]
         args: ["-c", "npm run start"]
         ports:
@@ -36,17 +36,17 @@ spec:
         - name: API_HOST
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: API_HOST
         - name: BLOBSTORE_HOST
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: BLOBSTORE_HOST
         - name: ConnectionStrings__BuyingCatalogue
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: ConnectionStrings__BuyingCatalogue
 ---
 apiVersion: v1
