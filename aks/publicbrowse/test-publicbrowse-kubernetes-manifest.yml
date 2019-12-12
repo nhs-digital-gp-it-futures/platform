@@ -39,15 +39,15 @@ spec:
               name: devpipelinevariables
               key: API_HOST
         - name: BLOBSTORE_HOST
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
         - name: ConnectionStrings__BuyingCatalogue
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: ConnectionStrings__BuyingCatalogue
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ConnectionStrings__BuyingCatalogue
 ---
 apiVersion: v1
 kind: Service
