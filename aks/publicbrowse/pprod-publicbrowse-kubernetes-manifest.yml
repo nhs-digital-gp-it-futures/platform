@@ -34,7 +34,11 @@ spec:
             cpu: 500m
         env:                                
         - name: API_HOST
-          value: "http://api:5100/api/v1"
+          value: ""
+        - name: BLOBSTORE_HOST
+          value: ""
+        - name: ConnectionStrings__BuyingCatalogue
+          value: ""
 ---
 apiVersion: v1
 kind: Service
@@ -45,4 +49,4 @@ spec:
   ports:
   - port: 3000
   selector:
-    app: gpitfutures-bc-app-publicbrowses
+    app: gpitfutures-bc-app-publicbrowse
