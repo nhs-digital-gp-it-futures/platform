@@ -34,11 +34,20 @@ spec:
             cpu: 500m
         env:                                
         - name: API_HOST
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: API_HOST
         - name: BLOBSTORE_HOST
-          value: ""
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: BLOBSTORE_HOST
         - name: ConnectionStrings__BuyingCatalogue
-          value: ""
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: ConnectionStrings__BuyingCatalogue
 ---
 apiVersion: v1
 kind: Service
