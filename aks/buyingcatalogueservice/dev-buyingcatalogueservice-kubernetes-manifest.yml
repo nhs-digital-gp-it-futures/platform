@@ -30,9 +30,13 @@ spec:
             cpu: 500m
           limits:
             cpu: 1
-        env:                                
-          - name: ConnectionStrings__BuyingCatalogue
-            value: ""    
+      env:                 
+      - name: ConnectionStrings__BuyingCatalogue
+      valueFrom:
+        secretKeyRef:
+          name: devpipelinevariables
+          key: ConnectionStrings__BuyingCatalogue                
+ 
 ---
   apiVersion: v1
   kind: Service
