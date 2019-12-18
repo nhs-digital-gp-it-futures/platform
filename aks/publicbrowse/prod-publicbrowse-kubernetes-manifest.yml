@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gpitfutures-bc-deployment-publicbrowse
-  namespace: buyingcatalogue-prod-ns
+  namespace: buyingcatalogue-prod-pb
 spec:
   replicas: 1
   strategy:
@@ -34,17 +34,54 @@ spec:
             cpu: 500m
         env:                                
         - name: API_HOST
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: API_HOST
         - name: BLOBSTORE_HOST
-          value: ""
-        - name: ConnectionStrings__BuyingCatalogue
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: BLOBSTORE_HOST
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-nginx
+  namespace: buyingcatalogue-prod-pb
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-nginx  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-nginx
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: publicbrowse
-  namespace: buyingcatalogue-prod-ns
+  namespace: buyingcatalogue-prod-pb
 spec:
   ports:
   - port: 3000

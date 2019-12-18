@@ -8,3 +8,6 @@ aks/pipeline-secrets/dev-pipeline-variables.yml
 aks/pipeline-secrets/pprod-pipeline-variables.yml
 aks/pipeline-secrets/prod-pipeline-variables.yml
 aks/pipeline-secrets/test-pipeline-variables.yml
+aks/.DS_Store
+.DS_Store
+dev/.DS_Store
