@@ -34,7 +34,15 @@ spec:
             cpu: 500m
         env:                                
         - name: API_HOST
-          value: "http://api:5100"
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: API_HOST
+        - name: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
 ---  
 apiVersion: apps/v1
 kind: Deployment
