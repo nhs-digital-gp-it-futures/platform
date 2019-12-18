@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gpitfutures-bc-deployment-nginx
-  namespace: buyingcatalogue-mp-ns
+  namespace: buyingcatalogue-dev-pb
 spec:
   replicas: 1
   strategy:
@@ -22,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-nginx
-        image: gpitfuturesmpacr.azurecr.io/nhsd/buying-catalogue/nginx
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/nginx
         ports:
         - containerPort: 80
         resources:
@@ -30,3 +30,60 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-nginx
+  namespace: buyingcatalogue-dev-pb
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-nginx  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-nginx
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-nginx
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: buyingcatalogue-dev-mp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: gpitfutures-bc-app-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: buyingcatalogue-dev-pb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: gpitfutures-bc-app-nginx
