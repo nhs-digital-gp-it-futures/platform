@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gpitfutures-bc-deployment-api
-  namespace: buyingcatalogue-pprod-ns
 spec:
   replicas: 1
   strategy:
@@ -41,7 +40,6 @@ spec:
   kind: Service
   metadata:
     name: api
-    namespace: buyingcatalogue-pprod-ns
   spec:
     ports:
     - port: 5100
