@@ -1,0 +1,10 @@
+
+backup_deploy/prod-kubernetes-manifest.yml
+backup_deploy/dev-kubernetes-manifest.yml
+backup_deploy/test-kubernetes-manifest.yml
+backup_deploy/pprod-kubernetes-manifest.yml
+dev/.DS_Store
+aks/pipeline-secrets/dev-pipeline-variables.yml
+aks/pipeline-secrets/pprod-pipeline-variables.yml
+aks/pipeline-secrets/prod-pipeline-variables.yml
+aks/pipeline-secrets/test-pipeline-variables.yml
