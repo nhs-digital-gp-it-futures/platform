@@ -21,7 +21,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-api
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+        image: gpitfuturespprodacr.azurecr.io/nhsd/buying-catalogue/api
         ports:
         - containerPort: 80
         resources:
@@ -33,18 +33,5 @@ spec:
         - name: ConnectionStrings__BuyingCatalogue
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: pprodpipelinevariables
               key: ConnectionStrings__BuyingCatalogue
----
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: api
-  spec:
-    ports:
-    - port: 5100
-      targetPort: 80
-      protocol: TCP
-      name: http
-    selector:
-      app: gpitfutures-bc-app-api
