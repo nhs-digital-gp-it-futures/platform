@@ -11,8 +11,8 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "gpitfutures-rg-sa"
-    storage_account_name = "gpitfuturessatf"
+    resource_group_name  = "gpitfuture-prod-sa-tf"
+    storage_account_name = "gpitfutureprodsatf"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
   }
