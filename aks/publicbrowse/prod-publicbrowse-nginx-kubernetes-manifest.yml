@@ -22,7 +22,7 @@ spec:
       - name: regcred
       containers:
       - name: gpitfutures-bc-beta-nginx
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/nginx
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/nginx/pb
         ports:
         - containerPort: 80
         resources:
