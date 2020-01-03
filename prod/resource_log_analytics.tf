@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "log_analytics" {
 }
 
 resource "azurerm_log_analytics_workspace" "workspace" {
-  name                = "${var.project}-${var.environment}-workspaces"
+  name                = "${var.project}-${var.environment}-workspaces1"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.log_analytics.name}"
   sku                 = "PerGB2018"
