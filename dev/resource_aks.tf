@@ -51,7 +51,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-    load_balancer_sku           = "basic"
+    load_balancer_sku           = "standard"
     network_plugin              = "azure"
     network_policy              = "azure"
     dns_service_ip              = "10.110.0.111"
