@@ -37,6 +37,20 @@ spec:
               name: devpipelinevariables
               key: ConnectionStrings__BuyingCatalogue
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: buyingcatalogue-dev-mp
+spec:
+  ports:
+  - port: 5100
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: gpitfutures-bc-app-api
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,3 +89,17 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: ConnectionStrings__BuyingCatalogue
+---
+  apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: buyingcatalogue-dev-pb
+spec:
+  ports:
+  - port: 5100
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: gpitfutures-bc-app-api
