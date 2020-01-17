@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  nhsd.utilities:
+    image: nhsd/buying-catalogue/azdevops/buildagent
+    container_name: nhsd_buying-catalogue_devops_build_agent
+    build:
+      context: .
+      dockerfile: Dockerfile
