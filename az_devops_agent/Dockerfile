@@ -19,14 +19,6 @@ RUN apt-get update \
 
 WORKDIR /azp
 
-# Install Terraform
-RUN curl -O https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip \
-  && unzip terraform_0.11.7_linux_amd64.zip -d /usr/local/bin/ \
-  && export PATH="$PATH:/usr/local/bin"
-
-# Insntall NPM Package
-RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
-
 COPY ./start.sh .
 RUN chmod +x start.sh
 
