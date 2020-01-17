@@ -2,51 +2,71 @@
 #Key vault Terraform will be stored in the AzureDevOps repo.
 
 data "azurerm_key_vault_secret" "kv-tenant" {
-  name         = "gpitdevtenantid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_tenant
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-subscription" {
-  name         = "gpitdevsubscriptionid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_subscription
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-spn" {
-  name         = "gpitdevserviceprincipalnameid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_spn_name
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-appid" {
-  name         = "gpitdevapplicationid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_spn_app_id
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-objectid" {
-  name         = "gpitdevobjectid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_spn_object_id
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-secret" {
-  name         = "gpitdevclientsecretkeyid"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_spn_secret
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-buser" {
-  name         = "gpitdevbastionadminusername"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_badmin_user
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-bpass" {
-  name         = "gpitdevbastionadminpassword"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_badmin_pass
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-sqluser" {
-  name         = "gpitdevsqladminusername"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_sql_user
+  key_vault_id = var.kv_id
 }
 
 data "azurerm_key_vault_secret" "kv-sqlpass" {
-  name         = "gpitdevsqladminpassword"
-  key_vault_id = "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-kv/providers/Microsoft.KeyVault/vaults/gpitfutures-dev-kv"
+  name         = var.kv_sql_pass
+  key_vault_id = var.kv_id
+}
+
+data "azurerm_key_vault_secret" "kv-sp-user" {
+  name         = var.kv_sp_user
+  key_vault_id = var.kv_id
+}
+
+data "azurerm_key_vault_secret" "kv-sp-pass" {
+  name         = var.kv_sp_pass
+  key_vault_id = var.kv_id
+}
+
+data "azurerm_key_vault_secret" "kv-devops-user" {
+  name         = var.kv_devops_user
+  key_vault_id = var.kv_id
+}
+
+data "azurerm_key_vault_secret" "kv-devops-pass" {
+  name         = var.kv_devops_pass
+  key_vault_id = var.kv_id
 }
