@@ -11,3 +11,10 @@ metadata:
   labels:
     app: buyingcatalogue-prod-mp
   name: buyingcatalogue-prod-mp
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-devopsbuildagent
+  name: buyingcatalogue-devopsbuildagent
