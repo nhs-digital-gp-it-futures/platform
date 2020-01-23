@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  nhsd.utilities:
+    image: nhsd/buying-catalogue/vsts-agent
+    container_name: nhsd_buying-catalogue_vsts-agent
+    build:
+      context: .
+      dockerfile: Dockerfile
