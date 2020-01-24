@@ -28,3 +28,6 @@ RUN sudo apt-get install {the .NET Core package}
 # Set env variables
 ENV VSTS_AGENT='$(hostname)-agent'
 ENV VSTS_WORK='/var/vsts/$VSTS_AGENT'
+ENV VSTS_Account=''
+ENV VSTS_Token=''
+ENV VSTS_Pool=''
