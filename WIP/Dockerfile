@@ -13,6 +13,9 @@ RUN sudo apt-get install -y powershell
 # Insntall NPM Package
 RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
 
+# Insntall .Net
+RUN sudo apt-get install dotnet-sdk-3.1
+
 # Set env variables
 ENV VSTS_AGENT='$(hostname)-agent'
 ENV VSTS_WORK='/var/vsts/$VSTS_AGENT'
