@@ -13,8 +13,18 @@ RUN sudo apt-get install -y powershell
 # Insntall NPM Package
 RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
 
+# Insntall .Net sdk
+RUN sudo apt-get install -y gpg
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o microsoft.asc.gpg
+RUN sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/prod.list
+RUN sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+RUN sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+RUN sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+RUN sudo apt-get install -y apt-transport-https
+RUN sudo apt-get update
+RUN sudo apt-get install {the .NET Core package}
+
 # Set env variables
 ENV VSTS_AGENT='$(hostname)-agent'
 ENV VSTS_WORK='/var/vsts/$VSTS_AGENT'
-
-CMD ["./start.sh"]
