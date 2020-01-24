@@ -23,10 +23,3 @@ RUN sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 RUN sudo apt-get install -y apt-transport-https
 RUN sudo apt-get update
 RUN sudo apt-get install dotnet-runtime-3.1
-
-# Set env variables
-ENV VSTS_AGENT='$(hostname)-agent'
-ENV VSTS_WORK='/var/vsts/$VSTS_AGENT'
-ENV VSTS_Account=''
-ENV VSTS_Token=''
-ENV VSTS_Pool=''
