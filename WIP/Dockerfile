@@ -1,11 +1,6 @@
 # Base Image
 FROM microsoft/vsts-agent:ubuntu-16.04-docker-18.06.1-ce-standard
 
-# Install Terraform
-RUN curl -O https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip \
-  && unzip terraform_0.11.7_linux_amd64.zip -d /usr/local/bin/ \
-  && export PATH="$PATH:/usr/local/bin"
-
 # Import the public repository GPG keys
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
