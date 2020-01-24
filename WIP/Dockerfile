@@ -1,5 +1,10 @@
 # Base Image
-FROM ubuntu-16.04-docker-17.12.0-ce-standard
+FROM microsoft/vsts-agent:ubuntu-16.04-docker-18.06.1-ce-standard
+
+# Update packages and install new ones
+RUN sudo apt-get update \
+  && sudo apt-get upgrade -y \
+  && sudo apt install apt-utils unzip -y
 
 # Install Terraform
 RUN curl -O https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip \
