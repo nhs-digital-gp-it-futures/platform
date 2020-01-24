@@ -22,7 +22,7 @@ RUN sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 RUN sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 RUN sudo apt-get install -y apt-transport-https
 RUN sudo apt-get update
-RUN sudo apt-get install {the .NET Core package}
+RUN sudo apt-get install dotnet-runtime-3.1
 
 # Set env variables
 ENV VSTS_AGENT='$(hostname)-agent'
