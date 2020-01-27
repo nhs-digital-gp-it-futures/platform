@@ -1,5 +1,5 @@
 # Base Image
-FROM microsoft/vsts-agent:ubuntu-latest
+FROM microsoft/vsts-agent:ubuntu-16.04-standard
 
 # Import the public repository GPG keys
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
