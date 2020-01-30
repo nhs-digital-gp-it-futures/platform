@@ -7,9 +7,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 # Register the Microsoft Ubuntu repository
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
 
-# Install PowerShell
-RUN sudo apt-get install -y powershell
-
 # Insntall NPM Package
 RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
 
@@ -25,5 +22,5 @@ RUN sudo apt-get update
 # Now, enable the "universe" repos
 RUN sudo add-apt-repository universe
  
-# Routine upgrade of package
-RUN sudo apt-get upgrade powershell
+# Install PowerShell
+RUN sudo apt-get install -y powershell
