@@ -7,6 +7,15 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 # Register the Microsoft Ubuntu repository
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
 
+# Install PowerShell
+RUN sudo apt-get install -y powershell
+
+# Insntall NPM Package
+RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
+
+# Download the GNU Privacy Guard (GnuPG or GPG) keys
+RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+ 
 # Register the GPG keys from the Microsoft repository
 RUN sudo dpkg -i packages-microsoft-prod.deb
  
@@ -15,15 +24,6 @@ RUN sudo apt-get update
  
 # Now, enable the "universe" repos
 RUN sudo add-apt-repository universe
-
-# Install PowerShell
-RUN sudo apt-get install -y powershell
-
+ 
 # Routine upgrade of package
 RUN sudo apt-get upgrade powershell
-
-# Insntall NPM Package
-RUN sudo npm install -g eslint @vue/cli @vue/eslint-config-standard
-
-# Download the GNU Privacy Guard (GnuPG or GPG) keys
-RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
