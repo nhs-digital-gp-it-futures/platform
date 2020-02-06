@@ -9,7 +9,7 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes && \
     mkdir agent && \
     touch /image/metadata.txt
 
-COPY scripts /scripts
+COPY . .
 
 RUN apt-get update && \
     apt-get install \
@@ -38,6 +38,6 @@ RUN /scripts/base/preparemetadata.sh && \
 
 WORKDIR /azp
 
-COPY ./start.sh .
+COPY . .
 
 CMD ["./start.sh"]
