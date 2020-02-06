@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-api
+  namespace: buyingcatalogue-test-mp
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-api  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-api
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/api
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:                                
+        - name: ConnectionStrings__BuyingCatalogue
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: ConnectionStrings__BuyingCatalogue
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-api
+  namespace: buyingcatalogue-test-pb
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-api  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-api
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/api
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:                                
+        - name: ConnectionStrings__BuyingCatalogue
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: ConnectionStrings__BuyingCatalogue
