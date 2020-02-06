@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: vstslinuxbuild
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: vstslinuxbuild
+        version: "0.1"
+    spec:
+      containers:
+      - name: vstslinuxbuild
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/vsts-agent
+        ports:
+        env:
+          - name: VSTS_ACCOUNT
+            valueFrom:
+              secretKeyRef:
+                name: gpitfuturesdevopsagents
+                key: VSTS_ACCOUNT
+          - name: VSTS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: gpitfuturesdevopsagents
+                key: VSTS_TOKEN
+          - name: VSTS_POOL
+            valueFrom:
+              secretKeyRef:
+                name: gpitfuturesdevopsagents
+                key: VSTS_POOL
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-volume
+      volumes:
+      - name: docker-volume
+        hostPath:
+          path: /var/run/docker.sock
