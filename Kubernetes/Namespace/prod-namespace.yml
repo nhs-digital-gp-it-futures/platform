@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-prod-pb
+  name: buyingcatalogue-prod-pb
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-prod-mp
+  name: buyingcatalogue-prod-mp
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-prod-devopsbuildagent
+  name: buyingcatalogue-prod-devopsbuildagent

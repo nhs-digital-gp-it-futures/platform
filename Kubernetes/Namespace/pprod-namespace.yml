@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-pprod-pb
+  name: buyingcatalogue-pprod-pb
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: buyingcatalogue-pprod-mp
+  name: buyingcatalogue-pprod-mp
