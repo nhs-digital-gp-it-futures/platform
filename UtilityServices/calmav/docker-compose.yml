@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  nhsd.utilities:
+    image: nhsd/buying-catalogue/calmav
+    container_name: nhsd_buying-catalogue_calmav
+    build:
+      context: .
+      dockerfile: Dockerfile
