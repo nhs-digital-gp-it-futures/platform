@@ -25,6 +25,12 @@ If the response looks similar to this you are good to go
 NAME             STATUS   ROLES    AGE    VERSION
 docker-desktop   Ready    master   1m     v1.14.3
 ```
+## WSL
+run the `WSL_Setup.sh` script located in the 'Setup' directory using bash as su
+
+```
+sudo bash ./Setup/WSL_Setup.sh
+```
 
 ## Mac 
 
