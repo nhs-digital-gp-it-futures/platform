@@ -35,6 +35,8 @@ spec:
           value: http://bapi.buyingcatalogue:5100
         - name: BLOBSTORE_HOST
           value: http://dapi.buyingcatalogue:5101
+        - name: NODE_ENV
+          value: production
 ---
 apiVersion: v1
 kind: Service
