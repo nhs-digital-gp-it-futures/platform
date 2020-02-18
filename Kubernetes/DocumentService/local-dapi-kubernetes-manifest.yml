@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-dapi
+  namespace: buyingcatalogue
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-deployment-dapi 
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-deployment-dapi
+    spec:
+      imagePullSecrets:
+      - name: regcred3
+      containers:
+      - name: gpitfutures-bc-beta-dapi
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:                                
+        - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
+          value: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://azurite.buyingcatalogue:10002/devstoreaccount1;
+        - name: AZUREBLOBSTORAGE__CONTAINERNAME
+          value: container-1
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: http://0.0.0.0:80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dapi
+  namespace: buyingcatalogue
+spec:
+  ports:
+  - port: 5101
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: gpitfutures-bc-deployment-dapi
+  type: LoadBalancer
