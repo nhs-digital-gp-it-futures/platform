@@ -8,7 +8,7 @@ To begin, make sure you have kubernetes running locally as per the [Kubernetes D
 
 Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
 
-To run the system, you need to create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/local/k8s-private-registry.md).
+To run the system, you need to create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
 
 You will also need a secret for the local instances of sql server - `kubectl create secret generic mssql --from-literal=SA_PASSWORD="<YOUR PASSWORD>" -n buyingcatalogue`
 
@@ -33,12 +33,18 @@ You may also wish to use the dashboard to view what is happening in Kubernetes (
 - Apply the dashboard yaml - `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml`
 - Run the proxy - `kubectl proxy`
 - Set up the access token:
+#### Powershell
 ```Powershell
 $TOKEN=((kubectl -n kube-system describe secret default | Select-String "token:") -split " +")[1]
 kubectl config set-credentials docker-desktop --token="${TOKEN}"
 ```
+#### Bash
+```bash
+TOKEN=`kubectl -n kube-system describe secret default | grep token: | awk '{print $2}'`
+kubectl config set-credentials docker-desktop --token=$TOKEN
+```
 - Browse to [http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
-- Click on Kubeconfig and select the “config” file under C:\Users<Username>.kube\config
+- Click on Kubeconfig and select the “config” file under `C:\Users<Username>.kube\config`
 
 ## Running Own Component
 
