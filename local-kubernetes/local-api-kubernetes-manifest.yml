@@ -19,7 +19,7 @@ spec:
         app: gpitfutures-bc-app-api
     spec:
       imagePullSecrets:
-      - name: regcred3
+      - name: regcredlocal
       containers:
       - name: gpitfutures-bc-beta-api
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api

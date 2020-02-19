@@ -19,7 +19,7 @@ spec:
         app: gpitfutures-bc-deployment-dapi
     spec:
       imagePullSecrets:
-      - name: regcred3
+      - name: regcredlocal
       containers:
       - name: gpitfutures-bc-beta-dapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi

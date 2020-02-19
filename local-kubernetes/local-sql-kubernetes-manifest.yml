@@ -77,7 +77,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
-        - name: regcred3
+        - name: regcredlocal
       containers:
       - name: mssql        
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db #mcr.microsoft.com/mssql/server:2019-latest

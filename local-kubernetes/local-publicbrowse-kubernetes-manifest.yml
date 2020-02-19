@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-marketingpage
+  name: gpitfutures-bc-deployment-publicbrowse
   namespace: buyingcatalogue
 spec:
   replicas: 1
@@ -12,38 +12,42 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-marketingpage
+      app: gpitfutures-bc-app-publicbrowse
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-marketingpage
+        app: gpitfutures-bc-app-publicbrowse
     spec:
       imagePullSecrets:
-      - name: regcred3
+      - name: regcredlocal
       containers:
-      - name: gpitfutures-bc-beta-marketingpage
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage:sdb
+      - name: gpitfutures-bc-beta-publicbrowse
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:sdb
         ports:
-        - containerPort: 3002
+        - containerPort: 3000
         resources:
           requests:
+            memory: 100Mi
             cpu: 250m
           limits:
-            cpu: 500m
+            cpu: 1000m
+            memory: 300Mi
         env:                                
         - name: API_HOST
           value: http://bapi.buyingcatalogue:5100
         - name: BLOBSTORE_HOST
           value: http://dapi.buyingcatalogue:5101
+        - name: NODE_ENV
+          value: production
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: marketingpage
+  name: publicbrowse
   namespace: buyingcatalogue
 spec:
   ports:
-  - port: 3002
+  - port: 3000
   selector:
-    app: gpitfutures-bc-app-marketingpage
+    app: gpitfutures-bc-app-publicbrowse
   type: LoadBalancer
