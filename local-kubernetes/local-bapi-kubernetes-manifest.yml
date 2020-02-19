@@ -28,11 +28,13 @@ spec:
         resources:
           requests:
             cpu: 500m
+            memory: 100Mi
           limits:
-            cpu: 1
+            cpu: 1000m
+            memory: 500Mi
         env:                                
         - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
-          value: Server=mssql-deployment.buyingcatalogue;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+          value: Server=mssql-deployment.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ASPNETCORE_URLS

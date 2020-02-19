@@ -1,53 +1,3 @@
-# apiVersion: apps/v1beta1
-# kind: Deployment
-# metadata:
-#   name: sqlserver
-#   labels:
-#     app: sqlserver
-# spec:
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         name: sqlserver
-#     spec:
-#       containers:
-#       - name: sqlserver
-#         image: microsoft/mssql-server-linux:latest
-#         ports:
-#         - containerPort: 1433
-#         env:
-#         - name: SA_PASSWORD
-#           value: "Testing1122"
-#         - name: ACCEPT_EULA
-#           value: "Y"
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: sqlserver-service
-# spec:
-#   ports:
-#   - name: sqlserver
-#     port: 1433
-#     targetPort: 1433
-#   selector:
-#     name: sqlserver
-#   type: LoadBalancer
-
-# kind: PersistentVolumeClaim
-# apiVersion: v1
-# metadata:
-#   name: mssql-data-claim
-#   namespace: buyingcatalogue
-# spec:
-#   accessModes:
-#   - ReadWriteOnce
-#   resources:
-#    requests:
-#     storage: 1Gi
-
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -55,7 +5,7 @@ metadata:
   namespace: buyingcatalogue
 spec:
   ports:
-  - port: 1433
+  - port: 1450
     targetPort: 1433
     protocol: TCP    
   selector:
@@ -99,10 +49,3 @@ spec:
           value: NHSD
         - name: DB_PASSWORD
           value: DisruptTheMarket1!
-        # volumeMounts:
-        # - name: mssql-persistent-storage
-        #   mountPath: /var/opt/mssql
-      # volumes:
-      # - name: mssql-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: mssql-data-claim
