@@ -31,7 +31,6 @@ Run `tear-down-environment{.sh|ps1}` to tear down the environment.
 
 You may also wish to use the dashboard to view what is happening in Kubernetes (instructions below from [collabnix.com](https://collabnix.com/kubernetes-dashboard-on-docker-desktop-for-windows-2-0-0-3-in-2-minutes/))
 - Apply the dashboard yaml - `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml`
-- Run the proxy - `kubectl proxy`
 - Set up the access token:
 #### Powershell
 ```Powershell
@@ -43,6 +42,7 @@ kubectl config set-credentials docker-desktop --token="${TOKEN}"
 TOKEN=`kubectl -n kube-system describe secret default | grep token: | awk '{print $2}'`
 kubectl config set-credentials docker-desktop --token=$TOKEN
 ```
+- Run the proxy - `kubectl proxy`
 - Browse to [http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 - Click on Kubeconfig and select the “config” file under `C:\Users<Username>.kube\config`
 
