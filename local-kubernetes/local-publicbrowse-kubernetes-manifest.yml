@@ -22,7 +22,7 @@ spec:
       - name: regcredlocal
       containers:
       - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:sdb
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
         ports:
         - containerPort: 3000
         resources:
