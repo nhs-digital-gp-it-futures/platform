@@ -10,7 +10,7 @@ Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
 
 To run the system, you need to create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
 
-You will also need a secret for the local instances of sql server - `kubectl create secret generic mssql --from-literal=SA_PASSWORD="<YOUR PASSWORD>" -n buyingcatalogue`
+You will also need a secret for the local instances of sql server - `kubectl create secret generic mssql --from-literal=SA_PASSWORD="<YOUR PASSWORD>" -n buyingcatalogue`. **Password must be 8 characters**.
 
 ## Launching / Tearing Down the Environment
 
