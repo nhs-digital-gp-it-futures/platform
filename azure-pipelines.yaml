@@ -51,7 +51,7 @@ steps:
     action: 'Build services'
     additionalImageTags: '$(Build.BuildNumber)'
     includeSourceTags: true
-  enabled: false
+    includeLatestTag: true
 
 - task: DockerCompose@0
   displayName: 'Build: Dev (PB)'
@@ -151,7 +151,6 @@ steps:
     additionalImageTags: '$(Build.BuildNumber)'
     includeSourceTags: true
     includeLatestTag: true
-  enabled: false
 
 - task: DockerCompose@0
   displayName: 'Push: Dev (PB)'
