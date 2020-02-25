@@ -10,20 +10,13 @@ Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
 
 To run the system, you need to create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
 
-You will also need a secret for the local instances of sql server - `kubectl create secret generic mssql --from-literal=SA_PASSWORD="<YOUR PASSWORD>" -n buyingcatalogue`. **Password must be 8 characters**.
+You will also need a secret for the local instances of sql server - `kubectl create secret generic mssql --from-literal=SA_PASSWORD="<YOUR PASSWORD>" -n buyingcatalogue`. **Password must be follow this [policy](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver15#password-complexity)**.
 
 ## Launching / Tearing Down the Environment
 
 Then, run `launch-environment{.sh|ps1}` to launch the environment.
-The script will start, available on localhost:
-- Document Service
-  - [DAPI](http://localhost:5101/swagger) on port 5101 
-  - Azurite on ports 10000 (blob),10001 (queue),10002 (table), with development user default (access with [Azure Storage Explorer](https://azure.microsoft.com/en-gb/features/storage-explorer/))
-- Buying Catalogue Service
-  - [BAPI](http://localhost:5100/swagger) on port
-  - SQL Server on port 1450 (log in localhost,1450 in [SSMS](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15))
-- [Marketing Pages](http://localhost:3002/supplier/solution/100000-001/preview) on port 3002
-- [Public Browse](http://localhost:3000/) on port 3000
+
+The script will start [all services available on these ports](#configuration-overview) on localhost
 
 Run `tear-down-environment{.sh|ps1}` to tear down the environment.
 
@@ -54,3 +47,17 @@ To run your own component in place:
 - comment out the component from the launch script;
 - replace the name of the component with `host.docker.internal` in any config where required in any other component;
 - launch the environment.
+
+## Configuration overview
+| Service     | Port              |
+| :-:         | :-:               |
+| BAPI        | 5100              |
+| BAPI-MSSQL  | 1450              |
+| DAPI        | 5101              |
+| AZURITE     | 10000,10001,10002 |
+| MP          | 3002              |
+| PB          | 3000              |
+<!---
+| ISAPI       | 5102              |
+| ISAPI-MSSQL | 1451              |
+-->
