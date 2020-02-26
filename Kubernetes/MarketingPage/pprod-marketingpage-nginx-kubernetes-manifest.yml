@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-nginx
+  name: gpitfutures-bc-app-nginx
   namespace: buyingcatalogue-pprod-mp
 spec:
   replicas: 1
@@ -12,17 +12,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-nginx  
+      app: gpitfutures-bc-app-nginx
   template:
     metadata:
       labels:
         app: gpitfutures-bc-app-nginx
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: pprodpipelinevariables
       containers:
-      - name: gpitfutures-bc-beta-nginx
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/nginx/mp
+      - name: gpitfutures-bc-app-nginx
+        image: gpitfuturespprodacr.azurecr.io/nhsd/buying-catalogue/nginx/mp
         ports:
         - containerPort: 80
         resources:
