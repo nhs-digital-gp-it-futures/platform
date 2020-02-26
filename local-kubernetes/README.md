@@ -36,7 +36,7 @@ TOKEN=`kubectl -n kube-system describe secret default | grep token: | awk '{prin
 kubectl config set-credentials docker-desktop --token=$TOKEN
 ```
 - Run the proxy - `kubectl proxy`
-- Browse to [http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
+- Browse to [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 - Click on Kubeconfig and select the “config” file under `C:\Users<Username>.kube\config`
 
 ## Working on a component locally
