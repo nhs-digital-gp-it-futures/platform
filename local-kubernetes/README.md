@@ -39,14 +39,13 @@ kubectl config set-credentials docker-desktop --token=$TOKEN
 - Browse to [http://:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 - Click on Kubeconfig and select the “config” file under `C:\Users<Username>.kube\config`
 
-## Running Own Component
+## Working on a component locally
 
 To run your own component in place:
 
-- tear down the environment;
-- comment out the component from the launch script;
-- replace the name of the component with `host.docker.internal` in any config where required in any other component;
-- launch the environment.
+- tear down the environment
+- go to directory of the component you want to work on
+- run launch-environment{.sh|ps1} from within that directory
 
 ## Configuration overview
 | Service     | Port              |
