@@ -56,9 +56,6 @@ steps:
     includeSourceTags: true
   enabled: false
 
-Kubernetes/AzureBuildAgent
-
-
 - task: DockerCompose@0
   displayName: 'Build: Dev (PB)'
   inputs:
