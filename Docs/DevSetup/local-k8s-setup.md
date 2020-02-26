@@ -73,3 +73,5 @@ run the `linux-vm-setup.sh` script located in the 'Scripts' directory using bash
 sudo bash ./Scripts/linux-vm-setup.sh
 ```
 
+# Starting the development environment
+To bring the system up in your local kubernetes cluster, have a look [here](../../local-kubernetes/README.md)
