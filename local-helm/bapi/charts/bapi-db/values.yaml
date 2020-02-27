@@ -1,0 +1,79 @@
+# Default values for bapi-db.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: 
+- name: regcredlocal
+nameOverride: "bapi-sql"
+fullnameOverride: "gpitfutures-bc-deployment-bapi-sql"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 1450
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 2048Mi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  configmap:
+  secrets:
+    - name: SA_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mssql
+          key: SA_PASSWORD
+  values:
+    - name: ACCEPT_EULA
+      value: "Y"
+    - name: MSSQL_PID
+      value: Developer
+    - name: DB_NAME
+      value: buyingcatalogue
+    - name: DB_USER
+      value: NHSD
+    - name: DB_PASSWORD
+      value: DisruptTheMarket1!
+
+livenessprobe:
+  initialDelaySeconds: 15
+  periodSeconds: 20
+readinessprobe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
