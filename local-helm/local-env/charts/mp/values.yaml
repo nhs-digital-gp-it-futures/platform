@@ -1,23 +1,21 @@
-# Default values for bapi.
+# Default values for mp.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: "bapi"
-fullnameOverride: "gpitfutures-bc-bapi"
-
-minReadySeconds: 5
+nameOverride: "marketing-pages"
+fullnameOverride: "gpitfutures-bc-mp"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -37,16 +35,18 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 5100
+  port: 3002
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  enabled: true
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
-    - host: chart-example.local
-      paths: []
+    - host: localhost
+      paths: 
+        - /supplier
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -54,32 +54,23 @@ ingress:
 
 resources: 
   requests:
+    memory: 100Mi
     cpu: 250m
-    memory: 50Mi
   limits:
     cpu: 1000m
-    memory: 500Mi
-  
+    memory: 300Mi
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
 
-updateStrategy:
-  rollingUpdate:
-    maxSurge: 1
-    maxUnavailable: 1
-
 env:
   configmap:
   secrets:
   values:
-    - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
-      value: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
-    - name: ASPNETCORE_ENVIRONMENT
-      value: Development
-    - name: ASPNETCORE_URLS
-      value: http://0.0.0.0:80
-    - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+    - name: API_HOST
+      value: http://gpitfutures-bc-bapi.buyingcatalogue:5100
+    - name: DOCUMENT_HOST
       value: http://gpitfutures-bc-dapi.buyingcatalogue:5101

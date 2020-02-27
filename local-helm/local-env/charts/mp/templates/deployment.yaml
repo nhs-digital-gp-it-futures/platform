@@ -1,27 +1,27 @@
-{{- $name := include "dapi.fullname" . -}}
+{{- $name := include "bapi.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dapi.fullname" . }}
+  name: {{ include "mp.fullname" . }}
   labels:
-    {{- include "dapi.labels" . | nindent 4 }}
+    {{- include "mp.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy: {{ toYaml .Values.updateStrategy | nindent 4 }}  
   selector:
     matchLabels:
-      {{- include "dapi.selectorLabels" . | nindent 6 }}
+      {{- include "mp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "dapi.selectorLabels" . | nindent 8 }}
+        {{- include "mp.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "dapi.serviceAccountName" . }}
+      serviceAccountName: {{ include "mp.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -32,16 +32,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 3002
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /health/live
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /health/ready
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health/live
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health/ready
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
