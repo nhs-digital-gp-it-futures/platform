@@ -11,7 +11,7 @@ image:
 imagePullSecrets: 
 - name: regcredlocal
 nameOverride: "bapi-sql"
-fullnameOverride: "gpitfutures-bc-deployment-bapi-sql"
+fullnameOverride: "gpitfutures-bc-bapi-sql"
 
 serviceAccount:
   # Specifies whether a service account should be created

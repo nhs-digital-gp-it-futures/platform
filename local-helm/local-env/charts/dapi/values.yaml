@@ -1,23 +1,21 @@
-# Default values for bapi.
+# Default values for dapi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: "bapi"
-fullnameOverride: "gpitfutures-bc-deployment-bapi"
-
-minReadySeconds: 5
+nameOverride: "dapi"
+fullnameOverride: "gpitfutures-bc-dapi"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -37,7 +35,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 5100
+  port: 5101
 
 ingress:
   enabled: false
@@ -52,13 +50,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: 
-  requests:
-    cpu: 250m
-    memory: 50Mi
-  limits:
-    cpu: 1000m
-    memory: 500Mi
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -83,12 +75,13 @@ updateStrategy:
 
 env:
   configmap:
+  secrets:
   values:
-    - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
-      value: Server=gpitfutures-bc-deployment-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+    - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
+      value: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+    - name: AZUREBLOBSTORAGE__CONTAINERNAME
+      value: container-1
     - name: ASPNETCORE_ENVIRONMENT
       value: Development
     - name: ASPNETCORE_URLS
       value: http://0.0.0.0:80
-    - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
-      value: http://dapi.buyingcatalogue:5101

@@ -1,48 +1,50 @@
-{{- $name := include "bapi-db.fullname" . -}}
+{{- $name := include "bapi.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "bapi-db.fullname" . }}
+  name: {{ $name }}
   labels:
-    {{- include "bapi-db.labels" . | nindent 4 }}
+    {{- include "bapi.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  {{- if .Values.updateStrategy }}
+  strategy: {{ toYaml .Values.updateStrategy | nindent 4 }}
+  {{- end }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
   selector:
     matchLabels:
-      {{- include "bapi-db.selectorLabels" . | nindent 6 }}
+      {{- include "bapi.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "bapi-db.selectorLabels" . | nindent 8 }}
+        {{- include "bapi.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "bapi-db.serviceAccountName" . }}
+      serviceAccountName: {{ include "bapi.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          #image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
-          image: "{{ .Values.image.repository }}:latest"
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"          
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: mssql
-              containerPort: {{ .Values.service.port }}
-          # livenessProbe:
-          #    tcpSocket:
-          #      port: mssql
-          #    initialDelaySeconds: {{ .Values.livenessprobe.initialDelaySeconds }}
-          #    periodSeconds: {{ .Values.livenessprobe.periodSeconds }}
-          # readinessProbe:
-          #    tcpSocket:
-          #      port: mssql
-          #    initialDelaySeconds: {{ .Values.readinessprobe.initialDelaySeconds }}
-          #    periodSeconds: {{ .Values.readinessprobe.periodSeconds }}
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -59,15 +61,6 @@ spec:
                   configMapKeyRef:
                     name: {{ $cfgname }}
                     key: {{ .key }}
-            {{- end -}}
-            {{- end }}
-            {{- if .Values.env.secrets -}}
-            {{- range .Values.env.secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:            
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key }}            
             {{- end -}}
             {{- end }}
       {{- with .Values.nodeSelector }}

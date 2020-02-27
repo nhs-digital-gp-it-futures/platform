@@ -1,0 +1,55 @@
+# Default values for file-loader.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: 
+- name: regcredlocal
+nameOverride: "file-loader"
+fullnameOverride: "gpitfutures-bc-file-loader"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: 
+  requests:
+    cpu: 250m
+    memory: 50Mi
+  limits:
+    cpu: 1000m
+    memory: 500Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  configmap:
+  secrets:
+  values:
+    - name: AZURE_STORAGE_CONNECTION_STRING
+      value: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
