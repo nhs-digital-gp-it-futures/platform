@@ -71,15 +71,13 @@ updateStrategy:
     maxSurge: 1
     maxUnavailable: 1
 
+serviceDependencies:  
+  dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+
+connectionString: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+  
 env:
   configmap:
   secrets:
-  values:
-    - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
-      value: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
-    - name: ASPNETCORE_ENVIRONMENT
-      value: Development
-    - name: ASPNETCORE_URLS
-      value: http://0.0.0.0:80
-    - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
-      value: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+  values:    
+

@@ -45,6 +45,18 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: NODE_ENV
+              value: production
+            {{- if .Values.serviceDependencies }}            
+            {{- if .Values.serviceDependencies.bapiUrl }}
+            - name: API_HOST
+              value: {{ .Values.serviceDependencies.bapiUrl | quote }}
+            {{- end }}
+            {{- if .Values.serviceDependencies.dapiUrl }}
+            - name: DOCUMENT_HOST
+              value: {{ .Values.serviceDependencies.dapiUrl | quote }}
+            {{- end }}
+            {{- end }}                        
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}

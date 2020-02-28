@@ -66,13 +66,11 @@ tolerations: []
 
 affinity: {}
 
+serviceDependencies:
+  bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
+  dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+
 env:
   configmap:
   secrets:
   values:
-    - name: API_HOST
-      value: http://gpitfutures-bc-bapi.buyingcatalogue:5100
-    - name: DOCUMENT_HOST
-      value: http://gpitfutures-bc-dapi.buyingcatalogue:5101
-    - name: NODE_ENV
-      value: production

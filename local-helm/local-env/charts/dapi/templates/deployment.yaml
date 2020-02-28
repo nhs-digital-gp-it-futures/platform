@@ -45,6 +45,14 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:80
+            - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
+              value: {{ .Values.azureBlobStorage.connectionString | quote }}
+            - name: AZUREBLOBSTORAGE__CONTAINERNAME
+              value:  {{ .Values.azureBlobStorage.containerName | quote }}
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}

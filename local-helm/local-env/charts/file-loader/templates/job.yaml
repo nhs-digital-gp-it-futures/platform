@@ -23,6 +23,8 @@ spec:
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
         env:
+          - name: AZURE_STORAGE_CONNECTION_STRING
+            value: {{ .Values.azureBlobStorage.connectionString }}
           {{- if .Values.env.values -}}
           {{- range .Values.env.values }}
             - name: {{ .name }}

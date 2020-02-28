@@ -73,15 +73,11 @@ updateStrategy:
     maxSurge: 1
     maxUnavailable: 1
 
+azureBlobStorage:
+  connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+  containerName: container-1
+
 env:
   configmap:
   secrets:
-  values:
-    - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
-      value: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
-    - name: AZUREBLOBSTORAGE__CONTAINERNAME
-      value: container-1
-    - name: ASPNETCORE_ENVIRONMENT
-      value: Development
-    - name: ASPNETCORE_URLS
-      value: http://0.0.0.0:80
+  values:    

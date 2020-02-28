@@ -1,0 +1,6 @@
+# mp:
+# {{ if eq mp.devLocation "dev" }}
+#   url: "docker.win.localhost"
+# {{ else }}
+#   url: "gpitfutures-bc-mp"
+# {{ end }}
