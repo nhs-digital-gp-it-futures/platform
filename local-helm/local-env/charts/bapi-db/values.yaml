@@ -51,25 +51,16 @@ tolerations: []
 
 affinity: {}
 
+saPassword: MyPassword1$
+
+dbName: buyingcatalogue
+dbUser: NHSD
+dbPassword: DisruptTheMarket1!
+
 env:
   configmap:
   secrets:
-    - name: SA_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: mssql
-          key: SA_PASSWORD
-  values:
-    - name: ACCEPT_EULA
-      value: "Y"
-    - name: MSSQL_PID
-      value: Developer
-    - name: DB_NAME
-      value: buyingcatalogue
-    - name: DB_USER
-      value: NHSD
-    - name: DB_PASSWORD
-      value: DisruptTheMarket1!
+  values:    
 
 livenessprobe:
   initialDelaySeconds: 15

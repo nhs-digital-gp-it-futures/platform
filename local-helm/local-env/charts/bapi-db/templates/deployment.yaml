@@ -45,30 +45,49 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            {{- if .Values.env.values -}}
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "bapi-db.fullname" . }}
+                  key: sa-password    
+            - name: ACCEPT_EULA
+              value: "Y"      
+            - name: MSSQL_PID
+              value: Developer  
+            - name: DB_NAME
+              value: {{ .Values.dbName | quote }}
+            - name: DB_USER
+              value: {{ .Values.dbUser | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "bapi-db.fullname" . }}
+                  key: db-password  
+            {{- if .Values.env.values }}
             {{- range .Values.env.values }}
-              - name: {{ .name }}
-                value: {{ .value | quote }}
-            {{- end -}}
-            {{- end -}}
-            {{- if .Values.env.configmap -}}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.env.configmap }}
             {{- range .Values.env.configmap }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ $cfgname }}
-                    key: {{ .key }}
-            {{- end -}}
+            - name: {{ .name }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $cfgname }}
+                  key: {{ .key }}
             {{- end }}
-            {{- if .Values.env.secrets -}}
+            {{- end }}
+            {{- if .Values.env.secrets }}
             {{- range .Values.env.secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:            
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key }}            
-            {{- end -}}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:            
+                  name: {{ .valueFrom.secretKeyRef.name }}
+                  key: {{ .valueFrom.secretKeyRef.key }}            
             {{- end }}
+            {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
