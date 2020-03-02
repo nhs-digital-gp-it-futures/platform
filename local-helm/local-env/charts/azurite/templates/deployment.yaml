@@ -29,13 +29,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: blob-port
-              containerPort: 10000
+              containerPort: {{ .Values.service.blobPort | default 10000 }}
               protocol: TCP
             - name: queue-port
-              containerPort: 10001
+              containerPort: {{ .Values.service.queuePort | default 10001 }}
               protocol: TCP
             - name: table-port
-              containerPort: 10002
+              containerPort: {{ .Values.service.tablePort | default 10002 }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

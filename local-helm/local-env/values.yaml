@@ -1,6 +1,117 @@
-# mp:
-# {{ if eq mp.devLocation "dev" }}
-#   url: "docker.win.localhost"
-# {{ else }}
-#   url: "gpitfutures-bc-mp"
-# {{ end }}
+azurite:
+  replicaCount: 1
+  image:
+    repository: mcr.microsoft.com/azure-storage/azurite  
+  nameOverride: "azurite"
+  fullnameOverride: "gpitfutures-bc-azurite"
+  service:
+    type: LoadBalancer
+
+dapi:
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "dapi"
+  fullnameOverride: "gpitfutures-bc-dapi"
+  service:
+    type: LoadBalancer
+    port: 5101
+  azureBlobStorage:
+    connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+    containerName: container-1
+
+bapi-db:
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "bapi-sql"
+  fullnameOverride: "gpitfutures-bc-bapi-sql"
+  service:
+    type: LoadBalancer
+    port: 1450
+  saPassword: MyPassword1$
+  dbName: buyingcatalogue
+  dbUser: NHSD
+  dbPassword: DisruptTheMarket1!
+
+bapi:  
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "bapi"
+  fullnameOverride: "gpitfutures-bc-bapi"
+  service:
+    type: LoadBalancer
+    port: 5100
+  serviceDependencies:  
+    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+  connectionString: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+
+file-loader:
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "file-loader"
+  fullnameOverride: "gpitfutures-bc-file-loader"
+  azureBlobStorage:
+    connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+
+mp:
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "marketing-pages"
+  fullnameOverride: "gpitfutures-bc-mp"
+  service:
+    type: LoadBalancer
+    port: 3002
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - host: localhost
+        paths: 
+          - /supplier
+  serviceDependencies:
+    bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
+    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+
+pb: 
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+    pullPolicy: IfNotPresent
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "public-browse"
+  fullnameOverride: "gpitfutures-bc-pb"
+  service:
+    type: LoadBalancer
+    port: 3000
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - host: localhost
+        paths: 
+          - /
+    tls: []
+  serviceDependencies:
+    bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
+    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
