@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: mcr.microsoft.com/azure-storage/azurite
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: "azurite"

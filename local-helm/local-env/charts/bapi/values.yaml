@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: 
 - name: regcredlocal

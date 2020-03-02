@@ -92,8 +92,7 @@ mp:
 pb: 
   replicaCount: 1
   image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
-    pullPolicy: IfNotPresent
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse    
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "public-browse"
