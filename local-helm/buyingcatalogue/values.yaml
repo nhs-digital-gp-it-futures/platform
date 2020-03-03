@@ -29,7 +29,7 @@ dapi:
     port: 5101
   azureBlobStorage:    
     connectionSecret: 
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: azure-blob-connection-string
     containerName: container-1
 
@@ -47,12 +47,12 @@ bapi-db:
     type: LoadBalancer
     port: 1450
   saPasswordSecret: 
-    name: "bc-local-env"
+    name: "bc-buyingcatalogue"
     key: sa-password    
   dbName: buyingcatalogue
   dbUser: NHSD
   dbPasswordSecret: 
-    name: "bc-local-env"
+    name: "bc-buyingcatalogue"
     key: db-password    
 
 bapi:  
@@ -70,10 +70,10 @@ bapi:
     port: 5100
   serviceDependencies:  
     dapiUrlConfig:
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: dapi-url          
   connectionStringSecret: 
-    name: "bc-local-env"
+    name: "bc-buyingcatalogue"
     key: bapi-db-connection-string  
 
 file-loader:
@@ -87,7 +87,7 @@ file-loader:
   fullnameOverride: "gpitfutures-bc-file-loader"
   azureBlobStorage:    
     connectionSecret: 
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: azure-blob-connection-string
     containerName: container-1
 
@@ -115,10 +115,10 @@ mp:
           - /supplier
   serviceDependencies:    
     dapiUrlConfig:
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: dapi-url  
     bapiUrlConfig:
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: bapi-url  
 
 pb: 
@@ -146,8 +146,8 @@ pb:
     tls: []
   serviceDependencies:
     dapiUrlConfig:
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: dapi-url  
     bapiUrlConfig:
-      name: "bc-local-env"
+      name: "bc-buyingcatalogue"
       key: bapi-url  

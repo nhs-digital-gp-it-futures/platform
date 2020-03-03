@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "local-env.name" -}}
+{{- define "buyingcatalogue.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "local-env.fullname" -}}
+{{- define "buyingcatalogue.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "local-env.chart" -}}
+{{- define "buyingcatalogue.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "local-env.labels" -}}
-helm.sh/chart: {{ include "local-env.chart" . }}
-{{ include "local-env.selectorLabels" . }}
+{{- define "buyingcatalogue.labels" -}}
+helm.sh/chart: {{ include "buyingcatalogue.chart" . }}
+{{ include "buyingcatalogue.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,17 +46,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "local-env.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "local-env.name" . }}
+{{- define "buyingcatalogue.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "buyingcatalogue.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "local-env.serviceAccountName" -}}
+{{- define "buyingcatalogue.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "local-env.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "buyingcatalogue.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}

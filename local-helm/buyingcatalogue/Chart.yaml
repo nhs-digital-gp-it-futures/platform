@@ -1,5 +1,5 @@
 apiVersion: v2
-name: local-env
+name: buyingcatalogue
 description: A Helm chart for Kubernetes
 icon: https://digital.nhs.uk/webfiles/1583237303085/images/nhs-digital-logo.svg
 # A chart can be either an 'application' or a 'library' chart.

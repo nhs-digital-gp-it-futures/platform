@@ -4,9 +4,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "local-env.fullname" . }}
+  name: {{ template "buyingcatalogue.fullname" . }}
   labels:     
-    {{- include "local-env.labels" . | nindent 4 }}
+    {{- include "buyingcatalogue.labels" . | nindent 4 }}
 data:
   dapi-url: {{ printf "http://%s:%d" $dapiUrl (.Values.dapi.service.port | int ) }}
   bapi-url: {{ printf "http://%s:%d" $bapiUrl (.Values.bapi.service.port | int ) }}

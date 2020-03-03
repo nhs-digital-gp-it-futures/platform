@@ -49,7 +49,7 @@ affinity: {}
 
 azureBlobStorage:    
   connectionSecret: 
-    name: "bc-local-env"
+    name: "bc-buyingcatalogue"
     key: azure-blob-connection-string
   containerName: container-1
 
