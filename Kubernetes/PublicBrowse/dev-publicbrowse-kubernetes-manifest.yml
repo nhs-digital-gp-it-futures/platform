@@ -22,8 +22,6 @@ spec:
       containers:
       - name: gpitfutures-bc-app-publicbrowse
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
-        command: ["/bin/sh"]
-        args: ["-c", "npm run start"]
         ports:
         - containerPort: 3000
         resources:
