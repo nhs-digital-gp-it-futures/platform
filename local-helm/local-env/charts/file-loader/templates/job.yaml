@@ -24,7 +24,10 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
         env:
           - name: AZURE_STORAGE_CONNECTION_STRING
-            value: {{ .Values.azureBlobStorage.connectionString }}
+            valueFrom:
+                secretKeyRef:            
+                  name: {{ .Values.azureBlobStorage.connectionSecret.name }}
+                  key: {{ .Values.azureBlobStorage.connectionSecret.key }} 
           {{- if .Values.env.values -}}
           {{- range .Values.env.values }}
             - name: {{ .name }}

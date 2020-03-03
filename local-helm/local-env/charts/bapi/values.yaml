@@ -71,11 +71,15 @@ updateStrategy:
     maxSurge: 1
     maxUnavailable: 1
 
-serviceDependencies:  
-  dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+serviceDependencies:    
+  dapiUrlConfig:
+    name: 
+    key:           
 
-connectionString: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
-  
+connectionStringSecret: 
+  name: 
+  key:   
+
 env:
   configmap:
   secrets:

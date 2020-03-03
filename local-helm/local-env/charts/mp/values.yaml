@@ -67,8 +67,12 @@ tolerations: []
 affinity: {}
 
 serviceDependencies:
-  bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
-  dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+  dapiUrlConfig:
+    name: 
+    key: 
+  bapiUrlConfig:
+    name: 
+    key: 
 
 env:
   configmap:

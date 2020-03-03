@@ -50,7 +50,10 @@ spec:
             - name: ASPNETCORE_URLS
               value: http://0.0.0.0:80
             - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
-              value: {{ .Values.azureBlobStorage.connectionString | quote }}
+              valueFrom:
+                  secretKeyRef:            
+                    name: {{ .Values.azureBlobStorage.connectionSecret.name }}
+                    key: {{ .Values.azureBlobStorage.connectionSecret.key }}
             - name: AZUREBLOBSTORAGE__CONTAINERNAME
               value:  {{ .Values.azureBlobStorage.containerName | quote }}
             {{- if .Values.env.values -}}

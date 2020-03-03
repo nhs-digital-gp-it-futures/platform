@@ -1,0 +1,13 @@
+{{- $azureblobUrl:=  printf "http://%s.%s" (include "azurite.fullname" . ) .Release.Namespace }}
+{{- $dapiUrl:= include "call-nested" (list . "dapi" "dapi.fullname") -}}
+{{- $bapiUrl:= include "call-nested" (list . "bapi" "bapi.fullname") -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "local-env.fullname" . }}
+  labels:     
+    {{- include "local-env.labels" . | nindent 4 }}
+data:
+  dapi-url: {{ printf "http://%s.%s:%d" $dapiUrl .Release.Namespace (.Values.dapi.service.port | int ) }}
+  bapi-url: {{ printf "http://%s.%s:%d" $bapiUrl .Release.Namespace (.Values.bapi.service.port | int ) }}

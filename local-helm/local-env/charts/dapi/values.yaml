@@ -70,7 +70,9 @@ updateStrategy:
     maxUnavailable: 1
 
 azureBlobStorage:
-  connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+  connectionSecret: 
+    name: 
+    key:
   containerName: container-1
 
 env:

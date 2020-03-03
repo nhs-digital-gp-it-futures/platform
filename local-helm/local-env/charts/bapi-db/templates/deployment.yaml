@@ -48,8 +48,8 @@ spec:
             - name: SA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "bapi-db.fullname" . }}
-                  key: sa-password    
+                  name: {{ .Values.saPasswordSecret.name }}
+                  key: {{ .Values.saPasswordSecret.key }}
             - name: ACCEPT_EULA
               value: "Y"      
             - name: MSSQL_PID
@@ -61,8 +61,8 @@ spec:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "bapi-db.fullname" . }}
-                  key: db-password  
+                  name: {{ .Values.dbPasswordSecret.name }}
+                  key: {{ .Values.dbPasswordSecret.key }}
             {{- if .Values.env.values }}
             {{- range .Values.env.values }}
             - name: {{ .name }}

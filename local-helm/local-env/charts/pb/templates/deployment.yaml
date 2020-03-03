@@ -48,14 +48,20 @@ spec:
             - name: NODE_ENV
               value: production
             {{- if .Values.serviceDependencies }}            
-            {{- if .Values.serviceDependencies.bapiUrl }}
-            - name: API_HOST
-              value: {{ .Values.serviceDependencies.bapiUrl | quote }}
-            {{- end }}
-            {{- if .Values.serviceDependencies.dapiUrl }}
+            {{- if .Values.serviceDependencies.bapiUrlConfig }}
+            - name: API_HOST              
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.bapiUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.bapiUrlConfig.key | quote }}
+            {{- end -}}
+            {{- if .Values.serviceDependencies.dapiUrlConfig }}
             - name: DOCUMENT_HOST
-              value: {{ .Values.serviceDependencies.dapiUrl | quote }}
-            {{- end }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.dapiUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.dapiUrlConfig.key | quote }}
+            {{- end -}}
             {{- end }}                        
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}

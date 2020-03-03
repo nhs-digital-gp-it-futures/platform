@@ -46,13 +46,19 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:            
             {{- if .Values.serviceDependencies }}            
-            {{- if .Values.serviceDependencies.bapiUrl }}
-            - name: API_HOST
-              value: {{ .Values.serviceDependencies.bapiUrl | quote }}
+            {{- if .Values.serviceDependencies.bapiUrlConfig }}
+            - name: API_HOST              
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.bapiUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.bapiUrlConfig.key | quote }}
             {{- end -}}
-            {{- if .Values.serviceDependencies.dapiUrl }}
+            {{- if .Values.serviceDependencies.dapiUrlConfig }}
             - name: DOCUMENT_HOST
-              value: {{ .Values.serviceDependencies.dapiUrl | quote }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.dapiUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.dapiUrlConfig.key | quote }}
             {{- end -}}
             {{- end }}                        
             {{- if .Values.env.values -}}

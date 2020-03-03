@@ -51,11 +51,15 @@ tolerations: []
 
 affinity: {}
 
-saPassword: MyPassword1$
+saPasswordSecret: 
+  name:
+  key:
 
 dbName: buyingcatalogue
 dbUser: NHSD
-dbPassword: DisruptTheMarket1!
+dbPasswordSecret: 
+  name:
+  key:
 
 env:
   configmap:

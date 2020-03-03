@@ -6,7 +6,9 @@ azurite:
   fullnameOverride: "gpitfutures-bc-azurite"
   service:
     type: LoadBalancer
-
+    blobPort: 10000  
+    queuePort: 10001
+    tablePort: 10002
 dapi:
   replicaCount: 1
   image:
@@ -18,8 +20,10 @@ dapi:
   service:
     type: LoadBalancer
     port: 5101
-  azureBlobStorage:
-    connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+  azureBlobStorage:    
+    connectionSecret: 
+      name: "bc-local-env"
+      key: azure-blob-connection-string
     containerName: container-1
 
 bapi-db:
@@ -33,10 +37,14 @@ bapi-db:
   service:
     type: LoadBalancer
     port: 1450
-  saPassword: MyPassword1$
+  saPasswordSecret: 
+    name: "bc-local-env"
+    key: sa-password    
   dbName: buyingcatalogue
   dbUser: NHSD
-  dbPassword: DisruptTheMarket1!
+  dbPasswordSecret: 
+    name: "bc-local-env"
+    key: db-password    
 
 bapi:  
   replicaCount: 1
@@ -50,8 +58,12 @@ bapi:
     type: LoadBalancer
     port: 5100
   serviceDependencies:  
-    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
-  connectionString: Server=gpitfutures-bc-bapi-sql.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+    dapiUrlConfig:
+      name: "bc-local-env"
+      key: dapi-url          
+  connectionStringSecret: 
+    name: "bc-local-env"
+    key: bapi-db-connection-string  
 
 file-loader:
   replicaCount: 1
@@ -61,8 +73,11 @@ file-loader:
   - name: regcredlocal
   nameOverride: "file-loader"
   fullnameOverride: "gpitfutures-bc-file-loader"
-  azureBlobStorage:
-    connectionString: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://gpitfutures-bc-azurite.buyingcatalogue:10002/devstoreaccount1;
+  azureBlobStorage:    
+    connectionSecret: 
+      name: "bc-local-env"
+      key: azure-blob-connection-string
+    containerName: container-1
 
 mp:
   replicaCount: 1
@@ -85,9 +100,13 @@ mp:
       - host: localhost
         paths: 
           - /supplier
-  serviceDependencies:
-    bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
-    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+  serviceDependencies:    
+    dapiUrlConfig:
+      name: "bc-local-env"
+      key: dapi-url  
+    bapiUrlConfig:
+      name: "bc-local-env"
+      key: bapi-url  
 
 pb: 
   replicaCount: 1
@@ -112,5 +131,9 @@ pb:
           - /
     tls: []
   serviceDependencies:
-    bapiUrl: http://gpitfutures-bc-bapi.buyingcatalogue:5100
-    dapiUrl: http://gpitfutures-bc-dapi.buyingcatalogue:5101
+    dapiUrlConfig:
+      name: "bc-local-env"
+      key: dapi-url  
+    bapiUrlConfig:
+      name: "bc-local-env"
+      key: bapi-url  
