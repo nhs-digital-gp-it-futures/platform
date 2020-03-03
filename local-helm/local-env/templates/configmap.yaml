@@ -1,6 +1,6 @@
 {{- $azureblobUrl:=  printf "http://%s.%s" (include "azurite.fullname" . ) .Release.Namespace }}
-{{- $dapiUrl:= include "call-nested" (list . "dapi" "dapi.fullname") -}}
-{{- $bapiUrl:= include "call-nested" (list . "bapi" "bapi.fullname") -}}
+{{- $dapiUrl:= ternary (include "call-nested" (list . "dapi" "dapi.fullname")) "localhost" .Values.dapi.enabled -}}
+{{- $bapiUrl:= ternary (include "call-nested" (list . "bapi" "bapi.fullname")) "localhost" .Values.bapi.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap

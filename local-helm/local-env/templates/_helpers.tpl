@@ -73,5 +73,7 @@ Create the name of the service account to use
 {{- range $subchart }}
 {{- $values = index $values . }}
 {{- end }}
+{{- if $values.enabled }}
 {{- include $template (dict "Chart" (dict "Name" (last $subchart)) "Values" $values "Release" $dot.Release "Capabilities" $dot.Capabilities) }}
+{{- end }}
 {{- end }}
