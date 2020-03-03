@@ -10,6 +10,7 @@ azurite:
     blobPort: 10000  
     queuePort: 10001
     tablePort: 10002
+    
 dapi:
   enabled: true
   replicaCount: 1
