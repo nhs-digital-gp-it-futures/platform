@@ -22,8 +22,6 @@ spec:
       containers:
       - name: gpitfutures-bc-app-marketingpage
         image: gpitfuturespprodacr.azurecr.io/nhsd/buying-catalogue/marketingpage
-        command: ["/bin/sh"]
-        args: ["-c", "npm run start"]
         ports:
         - containerPort: 3002
         resources:
