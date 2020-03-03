@@ -1,5 +1,8 @@
+localUri: "host.docker.internal"
+
 azurite:
   enabled: true
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: mcr.microsoft.com/azure-storage/azurite  
@@ -10,9 +13,10 @@ azurite:
     blobPort: 10000  
     queuePort: 10001
     tablePort: 10002
-    
+
 dapi:
   enabled: true
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
@@ -31,6 +35,7 @@ dapi:
 
 bapi-db:
   enabled: true
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
@@ -52,6 +57,7 @@ bapi-db:
 
 bapi:  
   enabled: true
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
