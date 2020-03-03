@@ -1,6 +1,6 @@
 {{- $azureblobUrl:=  printf "http://%s.%s" (include "azurite.fullname" . ) .Release.Namespace }}
-{{- $dapiUrl:= ternary (include "call-nested" (list . "dapi" "dapi.fullname")) "localhost" .Values.dapi.enabled -}}
-{{- $bapiUrl:= ternary (include "call-nested" (list . "bapi" "bapi.fullname")) "localhost" .Values.bapi.enabled -}}
+{{- $dapiUrl:= ternary (cat (include "call-nested" (list . "dapi" "dapi.fullname")) "." .Release.Namespace) "localhost" .Values.dapi.enabled -}}
+{{- $bapiUrl:= ternary (cat (include "call-nested" (list . "bapi" "bapi.fullname")) "." .Release.Namespace) "localhost" .Values.bapi.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap
@@ -9,5 +9,5 @@ metadata:
   labels:     
     {{- include "local-env.labels" . | nindent 4 }}
 data:
-  dapi-url: {{ printf "http://%s.%s:%d" $dapiUrl .Release.Namespace (.Values.dapi.service.port | int ) }}
-  bapi-url: {{ printf "http://%s.%s:%d" $bapiUrl .Release.Namespace (.Values.bapi.service.port | int ) }}
+  dapi-url: {{ printf "http://%s:%d" $dapiUrl (.Values.dapi.service.port | int ) }}
+  bapi-url: {{ printf "http://%s:%d" $bapiUrl (.Values.bapi.service.port | int ) }}

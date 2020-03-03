@@ -1,5 +1,5 @@
 azurite:
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: mcr.microsoft.com/azure-storage/azurite  
@@ -11,7 +11,7 @@ azurite:
     queuePort: 10001
     tablePort: 10002
 dapi:
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
@@ -29,7 +29,7 @@ dapi:
     containerName: container-1
 
 bapi-db:
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
@@ -50,7 +50,7 @@ bapi-db:
     key: db-password    
 
 bapi:  
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
@@ -70,7 +70,7 @@ bapi:
     key: bapi-db-connection-string  
 
 file-loader:
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
@@ -85,7 +85,7 @@ file-loader:
     containerName: container-1
 
 mp:
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
@@ -115,7 +115,7 @@ mp:
       key: bapi-url  
 
 pb: 
-  enabled:true
+  enabled: true
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse    
