@@ -1,5 +1,3 @@
-localUri: "host.docker.internal"
-
 azurite:
   enabled: true
   disabledUrl: "host.docker.internal"
