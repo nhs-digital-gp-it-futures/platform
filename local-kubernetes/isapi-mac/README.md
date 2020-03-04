@@ -60,9 +60,9 @@ To run your own component in place:
 | BAPI-MSSQL  | 1450              |
 | DAPI        | 5101              |
 | AZURITE     | 10000,10001,10002 |
-| MP          | 3002              |
-| PB          | 3000              |
-<!---
 | ISAPI       | 5102              |
 | ISAPI-MSSQL | 1451              |
--->
+| MP          | 3002              |
+| PB          | 3000              |
+| ADMIN       | 3005              |
+

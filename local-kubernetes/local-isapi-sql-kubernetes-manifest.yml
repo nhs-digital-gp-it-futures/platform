@@ -44,3 +44,4 @@ spec:
           value: "CatalogueUsers"
         - name: NHSD_PASSWORD
           value: "DisruptTheMarket1!"
+          
