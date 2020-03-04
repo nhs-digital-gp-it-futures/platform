@@ -75,5 +75,7 @@ Create the name of the service account to use
 {{- end }}
 {{- if $values.enabled }}
 {{- include $template (dict "Chart" (dict "Name" (last $subchart)) "Values" $values "Release" $dot.Release "Capabilities" $dot.Capabilities) }}
+{{- else }}
+{{"\"disabled\""}}
 {{- end }}
 {{- end }}
