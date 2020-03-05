@@ -1,51 +1,47 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql-deployment
+  name: isapi-mssql-deployment
   namespace: buyingcatalogue
 spec:
   ports:
-  - port: 1450
+  - port: 1451
     targetPort: 1433
     protocol: TCP    
   selector:
-    app: mssql
+    app: isapi-mssql
   type: LoadBalancer #ClusterIP
 
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: mssql-deployment
+  name: isapi-mssql-deployment
   namespace: buyingcatalogue
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: mssql
+        app: isapi-mssql
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
         - name: regcredlocal
       containers:
-      - name: mssql        
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db #mcr.microsoft.com/mssql/server:2019-latest
+      - name: isapi-mssql        
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db 
         ports:
         - containerPort: 1433
         env:
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mssql
-              key: SA_PASSWORD
+          value: "MyTestPassword123!"
         - name: MSSQL_PID
-          value: Developer
+          value: "Express"
         - name: DB_NAME
-          value: buyingcatalogue
-        - name: DB_USER
-          value: NHSD
-        - name: DB_PASSWORD
-          value: DisruptTheMarket1!
+          value: "CatalogueUsers"
+        - name: NHSD_PASSWORD
+          value: "DisruptTheMarket1!"
+          
