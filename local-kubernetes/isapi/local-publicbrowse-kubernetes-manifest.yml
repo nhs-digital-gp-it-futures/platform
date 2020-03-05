@@ -40,7 +40,7 @@ spec:
         - name: APP_BASE_URI
           value: http://localhost:3000
         - name: OIDC_BASE_URI
-          value: http://host.docker.internal:5102
+          value: http://docker.for.win.localhost:5102
         - name: OIDC_CLIENT_ID
           value: 'SampleClient'
         - name: OIDC_CLIENT_SECRET

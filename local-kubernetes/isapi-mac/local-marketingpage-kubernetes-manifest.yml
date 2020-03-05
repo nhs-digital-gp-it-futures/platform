@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-publicbrowse
+  name: gpitfutures-bc-deployment-marketingpage
   namespace: buyingcatalogue
 spec:
   replicas: 1
@@ -12,19 +12,19 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-publicbrowse
+      app: gpitfutures-bc-app-marketingpage
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-publicbrowse
+        app: gpitfutures-bc-app-marketingpage
     spec:
       imagePullSecrets:
       - name: regcredlocal
       containers:
-      - name: gpitfutures-bc-beta-publicbrowse
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+      - name: gpitfutures-bc-beta-marketingpage
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
         ports:
-        - containerPort: 3000
+        - containerPort: 3002
         resources:
           requests:
             memory: 100Mi
@@ -37,28 +37,15 @@ spec:
           value: http://bapi.buyingcatalogue:5100
         - name: DOCUMENT_HOST
           value: http://dapi.buyingcatalogue:5101
-        - name: APP_BASE_URI
-          value: http://localhost:3000
-        - name: OIDC_BASE_URI
-          value: http://host.docker.internal:5102
-        - name: OIDC_CLIENT_ID
-          value: 'SampleClient'
-        - name: OIDC_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: oidc-client-secret
-              key: OIDC_CLIENT_SECRET
-        - name: NODE_ENV
-          value: production
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: publicbrowse
+  name: marketingpage
   namespace: buyingcatalogue
 spec:
   ports:
-  - port: 3000
+  - port: 3002
   selector:
-    app: gpitfutures-bc-app-publicbrowse
+    app: gpitfutures-bc-app-marketingpage
   type: LoadBalancer

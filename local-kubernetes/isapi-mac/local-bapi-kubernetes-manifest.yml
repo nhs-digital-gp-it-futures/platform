@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-dapi
+  name: gpitfutures-bc-deployment-api
   namespace: buyingcatalogue
 spec:
   replicas: 1
@@ -12,17 +12,17 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-deployment-dapi 
+      app: gpitfutures-bc-app-api  
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-deployment-dapi
+        app: gpitfutures-bc-app-api
     spec:
       imagePullSecrets:
       - name: regcredlocal
       containers:
-      - name: gpitfutures-bc-beta-dapi
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
         ports:
         - containerPort: 80
         resources:
@@ -33,28 +33,28 @@ spec:
             cpu: 1000m
             memory: 500Mi
         env:                                
-        - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
-          value: AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://azurite.buyingcatalogue:10000/devstoreaccount1;QueueEndpoint=http://azurite.buyingcatalogue:10001/devstoreaccount1;TableEndpoint=http://azurite.buyingcatalogue:10002/devstoreaccount1;
-        - name: AZUREBLOBSTORAGE__CONTAINERNAME
-          value: container-1
+        - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
+          value: Server=bapi-mssql-deployment.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ASPNETCORE_URLS
           value: http://0.0.0.0:80
+        - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+          value: http://dapi.buyingcatalogue:5101
         - name: AUTHORITY
-          value: http://host.docker.internal:5102
+          value: http://docker.for.mac.localhost:5102
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: dapi
+  name: bapi
   namespace: buyingcatalogue
 spec:
   ports:
-  - port: 5101
+  - port: 5100
     targetPort: 80
     protocol: TCP
     name: http
   selector:
-    app: gpitfutures-bc-deployment-dapi
+    app: gpitfutures-bc-app-api
   type: LoadBalancer
