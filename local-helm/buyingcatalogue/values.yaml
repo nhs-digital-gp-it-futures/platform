@@ -1,0 +1,151 @@
+azurite:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: mcr.microsoft.com/azure-storage/azurite  
+  nameOverride: "azurite"
+  fullnameOverride: "gpitfutures-bc-azurite"
+  service:
+    type: LoadBalancer
+    blobPort: 10000  
+    queuePort: 10001
+    tablePort: 10002
+
+dapi:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "dapi"
+  fullnameOverride: "gpitfutures-bc-dapi"
+  service:
+    type: LoadBalancer
+    port: 5101
+  azureBlobStorage:    
+    connectionSecret: 
+      name: "bc-buyingcatalogue"
+      key: azure-blob-connection-string
+    containerName: container-1
+
+bapi-db:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "bapi-sql"
+  fullnameOverride: "gpitfutures-bc-bapi-sql"
+  service:
+    type: LoadBalancer
+    port: 1450
+  saPasswordSecret: 
+    name: "bc-buyingcatalogue"
+    key: sa-password    
+  dbName: buyingcatalogue
+  dbUser: NHSD
+  dbPasswordSecret: 
+    name: "bc-buyingcatalogue"
+    key: db-password    
+
+bapi:  
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "bapi"
+  fullnameOverride: "gpitfutures-bc-bapi"
+  service:
+    type: LoadBalancer
+    port: 5100
+  serviceDependencies:  
+    dapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: dapi-url          
+  connectionStringSecret: 
+    name: "bc-buyingcatalogue"
+    key: bapi-db-connection-string  
+
+file-loader:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "file-loader"
+  fullnameOverride: "gpitfutures-bc-file-loader"
+  azureBlobStorage:    
+    connectionSecret: 
+      name: "bc-buyingcatalogue"
+      key: azure-blob-connection-string
+    containerName: container-1
+
+mp:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "marketing-pages"
+  fullnameOverride: "gpitfutures-bc-mp"
+  service:
+    type: LoadBalancer
+    port: 3002
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - host: localhost
+        paths: 
+          - /supplier
+  serviceDependencies:    
+    dapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: dapi-url  
+    bapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: bapi-url  
+
+pb: 
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse    
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "public-browse"
+  fullnameOverride: "gpitfutures-bc-pb"
+  service:
+    type: LoadBalancer
+    port: 3000
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - host: localhost
+        paths: 
+          - /
+    tls: []
+  serviceDependencies:
+    dapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: dapi-url  
+    bapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: bapi-url  
