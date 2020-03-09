@@ -74,9 +74,7 @@ In order to tear down the system, simply run the appropriate tear down script.
 |                            BAPI-MSSQL                            |       1450        |                                                             |
 |              [DAPI](http://localhost:5101/swagger)               |       5101        |                                                             |
 |                             AZURITE                              | 10000,10001,10002 |                                                             |
+|              [ISAPI](http://localhost:5102/swagger)              |       5102        |             [ISAPI](http://localhost/identity)              |
+|                            ISAPI-MSSQL                           |       1451        |                                                             |
 | [MP](http://localhost:3002/supplier/solution/100000-001/preview) |       3002        | [MP](http://localhost/supplier/solution/100000-001/preview) |
 |                   [PB](http://localhost:3000)                    |       3000        |                   [PB](http://localhost)                    |
-<!---
-| ISAPI       | 5102              |
-| ISAPI-MSSQL | 1451              |
--->
