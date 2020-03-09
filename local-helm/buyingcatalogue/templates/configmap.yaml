@@ -1,7 +1,7 @@
 {{- $dapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "dapi" "dapi.fullname")) .Release.Namespace) .Values.dapi.disabledUrl .Values.dapi.enabled -}}
 {{- $bapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "bapi" "bapi.fullname")) .Release.Namespace) .Values.bapi.disabledUrl .Values.bapi.enabled -}}
-{{- $isapiUrl:= ternary "host.docker.internal" .Values.isapi.disabledUrl .Values.isapi.enabled -}}
-{{- $isapiIssuerUrl:= ternary "host.docker.internal" .Values.isapi.feDisabledIssuerUrl .Values.pb.enabled -}}
+{{- $isapiUrl:= ternary .Values.docker-internal-localhost .Values.isapi.disabledUrl .Values.isapi.enabled -}}
+{{- $isapiIssuerUrl:= ternary .Values.docker-internal-localhost .Values.isapi.feDisabledIssuerUrl .Values.pb.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap

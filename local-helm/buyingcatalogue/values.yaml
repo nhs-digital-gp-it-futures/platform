@@ -1,3 +1,7 @@
+dbPassword:
+clientSecret:
+docker-internal-localhost: "host.docker.internal"
+
 azurite:
   enabled: true
   disabledUrl: "host.docker.internal"
@@ -99,7 +103,7 @@ isapi-db:
 
 isapi:
   enabled: false
-  disabledUrl: "host.docker.internal"
+  disabledUrl: "docker.for.win.localhost"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
