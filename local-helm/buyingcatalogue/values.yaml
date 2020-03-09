@@ -74,6 +74,78 @@ bapi:
     name: "bc-buyingcatalogue"
     key: bapi-db-connection-string  
 
+isapi-db:
+  enabled: false
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "isapi-sql"
+  fullnameOverride: "gpitfutures-bc-isapi-sql"
+  saPasswordSecret: 
+    name: "bc-buyingcatalogue"
+    key: sa-password    
+  dbName: CatalogueUsers
+  dbUser: NHSD
+  dbPasswordSecret: 
+    name: "bc-buyingcatalogue"
+    key: db-password   
+
+  service:
+    type: LoadBalancer
+    port: 1451   
+
+isapi:
+  enabled: false
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "isapi"
+  fullnameOverride: "gpitfutures-bc-isapi"
+  service:
+    type: LoadBalancer
+    port: 5102      
+  connectionStringSecret: 
+    name: "bc-buyingcatalogue"
+    key: isapi-db-connection-string 
+  oidcClientSecret: 
+    name: "bc-buyingcatalogue"
+    key: oidc-client-secret 
+  issuerUrlConfig: 
+    name: "bc-buyingcatalogue"
+    key: issuer-url 
+  clients: 
+    - clientId: "node1"
+      clientName: "Main Node Client"
+      allowedGrantTypes: "Code"
+      allowOfflineAccess : false
+      requireClientSecret : true
+      secret: 
+        name: "bc-buyingcatalogue"
+        key: oidc-client-secret 
+      requirePkce : true
+      requireConsent: false
+      redirectUrls: 
+        - http://localhost:3000/oauth/callback
+        - http://host.docker.internal:3000/oauth/callback
+        - http://docker.for.win.localhost:3000/oauth/callback
+        - http://docker.for.mac.localhost:3000/oauth/callback
+      postLogoutRedirectUrls: 
+        - http://localhost:3000/signout-callback-oidc
+        - http://host.docker.internal:3000/signout-callback-oidc
+        - http://docker.for.win.localhost:3000/signout-callback-oidc
+        - http://docker.for.mac.localhost:3000/signout-callback-oidc
+      allowedScopes: 
+        - openid
+        - email
+        - profile
+        - SampleResource  
+
 file-loader:
   enabled: true
   replicaCount: 1
@@ -120,7 +192,7 @@ mp:
       key: bapi-url  
 
 pb: 
-  enabled: true
+  enabled: false
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse    
@@ -149,3 +221,11 @@ pb:
     bapiUrlConfig:
       name: "bc-buyingcatalogue"
       key: bapi-url  
+    oidc:
+      baseUriConfig:
+        name: "bc-buyingcatalogue"
+        key: isapi-url  
+      clientId: "node1"
+      clientSecret: 
+        name: "bc-buyingcatalogue"
+        key: oidc-client-secret          

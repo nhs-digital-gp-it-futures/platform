@@ -29,6 +29,10 @@ dependencies:
   condition: bapi-db.enabled
 - name: dapi
   condition: dapi.enabled
+- name: isapi
+  condition: isapi.enabled
+- name: isapi-db
+  condition: isapi-db.enabled
 - name: file-loader
   condition: file-loader.enabled
 - name: mp
