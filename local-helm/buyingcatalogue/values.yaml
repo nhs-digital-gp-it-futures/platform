@@ -120,7 +120,7 @@ isapi:
     name: "bc-buyingcatalogue"
     key: issuer-url 
   clients: 
-    - clientId: "node1"
+    - clientId: "SampleClient"
       clientName: "Main Node Client"
       allowedGrantTypes: "Code"
       allowOfflineAccess : false
@@ -225,7 +225,7 @@ pb:
       baseUriConfig:
         name: "bc-buyingcatalogue"
         key: isapi-url  
-      clientId: "node1"
+      clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret          
