@@ -1,21 +1,23 @@
-# Default values for pb.
+# Default values for isapi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/isapi
   pullPolicy: Always
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: "public-browse"
-fullnameOverride: "gpitfutures-bc-pb"
+nameOverride: isapi
+fullnameOverride: gpitfutures-bc-isapi
+
+minReadySeconds: 5
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -35,7 +37,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 3000
+  port: 5102
 
 ingress:
   enabled: true
@@ -46,43 +48,53 @@ ingress:
   hosts:
     - host: localhost
       paths: 
-        - /
+        - /identity
   tls: []
-  #  - secretName: chart-exapble-tls
-  #    hosts:
-  #      - chart-exapble.local
 
 resources: 
   requests:
-    memory: 100Mi
     cpu: 250m
+    memory: 50Mi
   limits:
     cpu: 1000m
-    memory: 300Mi
-
+    memory: 500Mi
+  
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
 
-serviceDependencies:
-  dapiUrlConfig:
-    name: 
-    key: 
-  bapiUrlConfig:
-    name: 
-    key: 
-  oidc:
-    baseUriConfig:
-      name: 
-      key:     
-    clientId :
-    clientSecret: 
-      name: 
-      key: 
+updateStrategy:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+
+issuerUrlConfig: 
+  name: 
+  key: 
+
+clients: 
+  - clientId:
+    clientName:
+    allowedGrantTypes:
+    allowOfflineAccess:
+    requireClientSecret:
+    secret:
+      name: "bc-buyingcatalogue"
+      key: oidc-client-secret 
+    requirePkce:
+    requireConsent:
+    redirectUrls: {}
+    postLogoutRedirectUrls: []
+    allowedScopes: []
+    
+connectionStringSecret: 
+  name: 
+  key:   
 
 env:
   configmap:
   secrets:
-  values:
+  values:    
+

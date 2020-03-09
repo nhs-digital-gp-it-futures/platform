@@ -8,6 +8,7 @@
 #     repository: nhsd/buying-catalogue/document-dapi
 
 dbPassword: DisruptTheMarket1!
+clientSecret: SampleClientSecret
 
 azurite:
   enabled: true
@@ -25,6 +26,15 @@ bapi:
   enabled: true
   disabledUrl: "host.docker.internal"
 
+isapi-db:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+
+isapi:  
+  enabled: true
+  disabledUrl: "docker.for.win.localhost"
+  feDisabledIssuerUrl: "localhost"
+
 file-loader:
   enabled: true
 
@@ -33,3 +43,4 @@ mp:
 
 pb: 
   enabled: true
+

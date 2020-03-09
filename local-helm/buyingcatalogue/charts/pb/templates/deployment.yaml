@@ -1,4 +1,4 @@
-{{- $name := include "bapi.fullname" . -}}
+{{- $name := include "pb.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -47,6 +47,8 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            - name: APP_BASE_URI
+              value: http://localhost:{{ .Values.service.port | int }}
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
@@ -62,7 +64,21 @@ spec:
                   name: {{ .Values.serviceDependencies.dapiUrlConfig.name | quote }}
                   key: {{ .Values.serviceDependencies.dapiUrlConfig.key | quote }}
             {{- end -}}
-            {{- end }}                        
+            {{- with .Values.serviceDependencies.oidc }}
+            - name: OIDC_BASE_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .baseUriConfig.name | quote }}
+                  key: {{ .baseUriConfig.key | quote }}
+            - name: OIDC_CLIENT_ID
+              value: {{ .clientId | quote }}
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .clientSecret.name }}
+                  key: {{ .clientSecret.key }}
+            {{- end }}          
+            {{- end }}                
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}
