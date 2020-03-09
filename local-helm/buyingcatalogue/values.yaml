@@ -1,6 +1,6 @@
 dbPassword:
 clientSecret:
-docker-internal-localhost: "host.docker.internal"
+dockerInternalLocalhost: "host.docker.internal"
 
 azurite:
   enabled: true
