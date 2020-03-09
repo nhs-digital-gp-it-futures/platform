@@ -8,7 +8,7 @@
 #     repository: nhsd/buying-catalogue/document-dapi
 
 dbPassword: DisruptTheMarket1!
-clientSecret: TopSecretSecret
+clientSecret: SampleClientSecret
 
 azurite:
   enabled: true

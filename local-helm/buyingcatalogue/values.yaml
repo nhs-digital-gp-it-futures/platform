@@ -262,9 +262,6 @@ admin:
           - /admin
     tls: []
   serviceDependencies:
-    bapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: bapi-url  
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"

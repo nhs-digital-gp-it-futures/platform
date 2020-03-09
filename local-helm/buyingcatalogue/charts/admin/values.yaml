@@ -67,10 +67,15 @@ tolerations: []
 affinity: {}
 
 serviceDependencies: 
-  bapiUrlConfig:
-    name: 
-    key: 
-
+  oidc:
+    baseUriConfig:
+      name: 
+      key:     
+    clientId :
+    clientSecret: 
+      name: 
+      key: 
+      
 env:
   configmap:
   secrets:
