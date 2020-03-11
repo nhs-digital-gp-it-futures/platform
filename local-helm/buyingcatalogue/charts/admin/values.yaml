@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nhsd/buying-catalogue/admin
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
   pullPolicy: Always
 
 imagePullSecrets: 
@@ -46,7 +46,7 @@ ingress:
   hosts:
     - host: localhost
       paths: 
-        - /admin
+        - /organisations
   tls: []
   #  - secretName: chart-exapble-tls
   #    hosts:

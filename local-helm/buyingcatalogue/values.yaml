@@ -263,7 +263,7 @@ admin:
     hosts:
       - host: localhost
         paths: 
-          - /admin
+          - /organisations
     tls: []
   serviceDependencies:
     oidc:
