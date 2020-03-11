@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+useLocalImage:
+
 image:
   repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
   pullPolicy: Always
