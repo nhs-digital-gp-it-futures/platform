@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+useLocalImage:
+
 image:
   repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db 
   pullPolicy: Always

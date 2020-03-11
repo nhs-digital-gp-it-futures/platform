@@ -17,9 +17,8 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         securityContext:
-        {{- toYaml .Values.securityContext | nindent 12 }}
-        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        {{- include "image.properties" . | nindent 8 }}
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
         env:

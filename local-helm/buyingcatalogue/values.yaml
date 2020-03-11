@@ -8,6 +8,7 @@ azurite:
   replicaCount: 1
   image:
     repository: mcr.microsoft.com/azure-storage/azurite  
+  useLocalImage: false
   nameOverride: "azurite"
   fullnameOverride: "gpitfutures-bc-azurite"
   service:
@@ -22,6 +23,7 @@ dapi:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "dapi"
@@ -41,6 +43,7 @@ bapi-db:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "bapi-sql"
@@ -63,6 +66,7 @@ bapi:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "bapi"
@@ -84,6 +88,7 @@ isapi-db:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "isapi-sql"
@@ -107,6 +112,7 @@ isapi:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "isapi"
@@ -163,6 +169,7 @@ file-loader:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
+  useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "file-loader"
@@ -178,6 +185,7 @@ mp:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
+  useLocalImage: false   
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "marketing-pages"
@@ -207,7 +215,8 @@ pb:
   enabled: false
   replicaCount: 1
   image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse    
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse 
+  useLocalImage: false    
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "public-browse"
@@ -246,7 +255,8 @@ admin:
   enabled: true
   replicaCount: 1
   image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin    
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
+  useLocalImage: false    
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "admin"
@@ -274,4 +284,3 @@ admin:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret                
-

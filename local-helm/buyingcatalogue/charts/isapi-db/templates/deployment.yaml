@@ -27,8 +27,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"          
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "image.properties" . | nindent 10 }}
           ports:
             - name: mssql
               containerPort: {{ .Values.service.port }}

@@ -48,7 +48,15 @@ The script will start [all services available on these ports](#configuration-ove
 
 Ingress is also set up, so the front ends are exposed on localhost, as they would be when running in production.
 
+### Overrides 
 Overrides in [local-overrides.yaml](local-overrides.yaml) can be set to choose whether to run a component in Kubernetes, or to consider it as running on the developers machine. When a service is disabled, anything that uses that service routes out to the developers machine, using `host.docker.internal`.
+
+By default cluster spins up containers from latest images built from development branches. You can, however, override this and use a locally build image.
+```
+mp:
+  enabled: true
+  useLocalImage: true
+```
 
 ## Tearing Down the Environment
 

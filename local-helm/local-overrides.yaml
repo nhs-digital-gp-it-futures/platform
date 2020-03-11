@@ -4,8 +4,8 @@
 # This is normally set to host.docker.internal, so that it refers to components running directly on the host machine
 # If you wish to work with a locally compiled docker file running in k8s, instead of the latest from development, override per component, e.g. as below for dapi:
 # dapi: 
-#   image:
-#     repository: nhsd/buying-catalogue/document-dapi
+#   useLocalImage: true
+# Please note that you need to build the local image yourself and it needs to follow the standard name specified in its docker-compose, custom tags are not supported yet.
 
 dbPassword: DisruptTheMarket1!
 clientSecret: SampleClientSecret
