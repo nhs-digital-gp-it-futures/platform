@@ -44,3 +44,5 @@ mp:
 pb: 
   enabled: true
 
+admin:
+  enabled: true
