@@ -12,14 +12,6 @@ The following steps are needed to be able to run the system successfully:
 
 To begin, make sure you have kubernetes running locally as per the [Kubernetes Dev Setup Instructions](../Docs/DevSetup/local-k8s-setup.md)
 
-### Setup Namespace
-
-Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
-
-### Setup Registry Secret
-
-To run the system, you need to create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
-
 ### Setup Helm
 
 Note that this system relies upon helm charts. Instructions on how to install helm can be found [here](https://helm.sh/docs/intro/install/).
@@ -27,6 +19,21 @@ Note that this system relies upon helm charts. Instructions on how to install he
 ### (Optional) Run Dashboard
 
 You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-dashboard.md).
+
+### (Optional) Set up Ingress
+
+You may wish to run the system together with an ingress controller to get closer to production environment. 
+
+
+To enable the ingress, execute these two snippets in shell of your preference
+
+```
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+```
+```
+helm install bc stable/nginx-ingress
+```
+
 
 ## Launching, Updating the Environment
 
