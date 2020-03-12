@@ -62,6 +62,7 @@ resource "azurerm_public_ip" "Pip" {
   name                = "${var.project}-${var.environment}-pip"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
+  domain_name_label   = "${var.dns_label}"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
