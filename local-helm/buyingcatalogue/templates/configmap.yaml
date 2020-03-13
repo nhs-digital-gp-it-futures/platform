@@ -13,5 +13,5 @@ metadata:
 data:
   dapi-url: {{ printf "http://%s:%d" $dapiUrl (.Values.dapi.service.port | int ) }}
   bapi-url: {{ printf "http://%s:%d" $bapiUrl (.Values.bapi.service.port | int ) }}
-  isapi-url: {{ printf "http://%s:%d" $isapiUrl (.Values.isapi.service.port | int ) }}
-  issuer-url: {{ printf "http://%s:%d" $isapiIssuerUrl (.Values.isapi.service.port | int ) }}
+  isapi-url: "http://51.132.48.118/"
+  issuer-url: "http://51.132.48.118/"

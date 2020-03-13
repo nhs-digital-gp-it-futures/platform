@@ -44,10 +44,16 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: LOGGER_LEVEL
+              value: "info"
+            - name: LOGIN_ENABLED
+              value: "true"
+            - name: USE_CAPABILITIES_SELECTOR
+              value: "true"
             - name: NODE_ENV
               value: production
             - name: APP_BASE_URI
-              value: http://localhost:{{ .Values.service.port | int }}
+              value: http://51.132.48.118
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              

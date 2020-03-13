@@ -149,6 +149,7 @@ isapi:
         - http://host.docker.internal:3005/oauth/callback
         - http://docker.for.win.localhost:3005/oauth/callback
         - http://docker.for.mac.localhost:3005/oauth/callback
+        - http://51.132.48.118/oauth/callback
       postLogoutRedirectUrls: 
         - http://localhost:3000/signout-callback-oidc
         - http://host.docker.internal:3000/signout-callback-oidc
@@ -158,6 +159,7 @@ isapi:
         - http://host.docker.internal:3005/signout-callback-oidc
         - http://docker.for.win.localhost:3005/signout-callback-oidc
         - http://docker.for.mac.localhost:3005/signout-callback-oidc
+        - http://51.132.48.118/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
