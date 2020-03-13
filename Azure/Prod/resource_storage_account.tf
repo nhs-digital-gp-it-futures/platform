@@ -45,6 +45,12 @@ resource "azurerm_storage_container" "data" {
   container_access_type = "blob"
 }
 
+resource "azurerm_storage_container" "documents" {
+  name                  = "documents"
+  storage_account_name  = "${azurerm_storage_account.data.name}"
+  container_access_type = "blob"
+}
+
 resource "azurerm_storage_container" "sqluks" {
   name                  = "sqlauditlogs"
   storage_account_name  = "${azurerm_storage_account.sqluks.name}"

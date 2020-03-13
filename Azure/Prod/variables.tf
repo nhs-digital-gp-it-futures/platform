@@ -223,16 +223,6 @@ variable "kv_sp_pass" {
   description = "GP IT Future Buying Catalogue SharePoint Online password"
 }
 
-variable "kv_devops_user" {
-  type        = "string"
-  description = "GP IT Future Buying Catalogue AzureDevOps Self Hosted Agent Username"
-}
-
-variable "kv_devops_pass" {
-  type        = "string"
-  description = "GP IT Future Buying Catalogue AzureDevOps Self Hosted Agent Password"
-}
-
 variable "dns_service" {
   type        = "string"
   description = "DNS Service IP Address used by AKS"
@@ -255,4 +245,34 @@ variable "akspool_rg" {
 variable "akspool_nsg" {
   type        = "string"
   description = "NSG for the AKS Pool"
+}
+
+variable "dns_label" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "sql_login" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "kv_sql_admins" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "sql_pri" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "sql_pub" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "aks_ips" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
 }
