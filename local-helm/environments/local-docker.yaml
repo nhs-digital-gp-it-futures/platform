@@ -144,8 +144,8 @@ isapi:
         - https://docker.for.win.localhost/oauth/callback
         - https://docker.for.mac.localhost/oauth/callback
       postLogoutRedirectUrls: 
-        - https://docker.for.win.localhost/oauth/callback
-        - https://docker.for.mac.localhost/oauth/callback
+        - https://docker.for.win.localhost/signout-callback-oidc
+        - https://docker.for.mac.localhost/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
