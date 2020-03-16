@@ -167,16 +167,16 @@ isapi:
         - SampleResource  
         - Organisation
   ingress:
-  enabled: true
-  annotations: 
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  hosts:
-    - paths: 
-        - /.well-known
-        - /Account
-        - /connect
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - paths: 
+          - /.well-known
+          - /Account
+          - /connect
 
 file-loader:
   enabled: true
