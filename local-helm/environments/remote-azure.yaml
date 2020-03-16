@@ -1,7 +1,6 @@
 dbPassword:
 clientSecret:
-
-baseIsapiEnabledUrl: "https://localhost/"
+baseIsapiEnabledUrl: "<Remote Ingress URL>"
 
 azurite:
   enabled: true
@@ -263,7 +262,7 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret                
-  baseUri: "https://localhost:3000"
+  baseUri: "<REPLACE ME>"
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"

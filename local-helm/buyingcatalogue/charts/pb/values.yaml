@@ -46,8 +46,7 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
-    - host: localhost
-      paths: 
+    - paths: 
         - /
   tls: []
   #  - secretName: chart-exapble-tls
@@ -68,6 +67,14 @@ tolerations: []
 
 affinity: {}
 
+#custom variables
+
+baseUri: "https://localhost:3000"
+
+featureFlags:
+  loginEnabled : "true"
+  useCapabilitiesSelector: "true"
+
 serviceDependencies:
   dapiUrlConfig:
     name: 
@@ -85,6 +92,8 @@ serviceDependencies:
       key: 
 
 env:
-  configmap:
+  configmap:    
   secrets:
   values:
+    - name: NODE_TLS_REJECT_UNAUTHORIZED
+      value: "0"

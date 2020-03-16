@@ -33,7 +33,7 @@ isapi-db:
 isapi:  
   enabled: true
   disabledUrl: "docker.for.win.localhost"
-  feDisabledIssuerUrl: "localhost"
+  
 
 file-loader:
   enabled: true
@@ -43,6 +43,7 @@ mp:
 
 pb: 
   enabled: true
+  baseUri: "https://docker.for.win.localhost"
 
 admin:
   enabled: true

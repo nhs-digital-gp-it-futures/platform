@@ -43,19 +43,17 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:
-            - name: NODE_TLS_REJECT_UNAUTHORIZED
-              value: "0"
+          env:            
             - name: LOGGER_LEVEL
               value: "info"
             - name: LOGIN_ENABLED
-              value: "true"
+              value: {{ .Values.featureFlags.loginEnabled | default "false" | quote }}
             - name: USE_CAPABILITIES_SELECTOR
-              value: "true"
+              value: {{ .Values.featureFlags.useCapabilitiesSelector | default "false" | quote }}
             - name: NODE_ENV
               value: production
             - name: APP_BASE_URI
-              value: https://51.132.48.118
+              value: {{ .Values.baseUri }}
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
@@ -86,28 +84,28 @@ spec:
                   key: {{ .clientSecret.key }}
             {{- end }}          
             {{- end }}                
-            {{- if .Values.env.values -}}
+            {{- if .Values.env.values }}
             {{- range .Values.env.values }}
-              - name: {{ .name }}
-                value: {{ .value | quote }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
             {{- end -}}
             {{- end -}}
             {{- if .Values.env.configmap -}}
             {{- range .Values.env.configmap }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ $cfgname }}
-                    key: {{ .key }}
+            - name: {{ .name }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $cfgname }}
+                  key: {{ .key }}
             {{- end -}}
             {{- end }}
             {{- if .Values.env.secrets -}}
             {{- range .Values.env.secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:            
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key }}            
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:            
+                  name: {{ .valueFrom.secretKeyRef.name }}
+                  key: {{ .valueFrom.secretKeyRef.key }}            
             {{- end -}}
             {{- end }}
       {{- with .Values.nodeSelector }}

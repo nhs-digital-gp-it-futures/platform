@@ -1,7 +1,6 @@
 dbPassword:
 clientSecret:
-
-baseIsapiEnabledUrl: "https://localhost/"
+baseIsapiEnabledUrl: "https://docker.for.win.localhost/"
 
 azurite:
   enabled: true
@@ -108,7 +107,7 @@ isapi-db:
     port: 1451   
 
 isapi:
-  enabled: false
+  enabled: true
   disabledUrl: "docker.for.win.localhost"
   replicaCount: 1
   image:
@@ -141,26 +140,12 @@ isapi:
         key: oidc-client-secret 
       requirePkce : true
       requireConsent: false
-      redirectUrls: 
-        - http://localhost:3000/oauth/callback
-        - http://host.docker.internal:3000/oauth/callback
-        - http://docker.for.win.localhost:3000/oauth/callback
-        - http://docker.for.mac.localhost:3000/oauth/callback
-        - http://localhost:3005/oauth/callback
-        - http://host.docker.internal:3005/oauth/callback
-        - http://docker.for.win.localhost:3005/oauth/callback
-        - http://docker.for.mac.localhost:3005/oauth/callback
-        - https://51.132.48.118/oauth/callback
+      redirectUrls:         
+        - https://docker.for.win.localhost/oauth/callback
+        - https://docker.for.mac.localhost/oauth/callback
       postLogoutRedirectUrls: 
-        - http://localhost:3000/signout-callback-oidc
-        - http://host.docker.internal:3000/signout-callback-oidc
-        - http://docker.for.win.localhost:3000/signout-callback-oidc
-        - http://docker.for.mac.localhost:3000/signout-callback-oidc
-        - http://localhost:3005/signout-callback-oidc
-        - http://host.docker.internal:3005/signout-callback-oidc
-        - http://docker.for.win.localhost:3005/signout-callback-oidc
-        - http://docker.for.mac.localhost:3005/signout-callback-oidc
-        - https://51.132.48.118/signout-callback-oidc
+        - https://docker.for.win.localhost/oauth/callback
+        - https://docker.for.mac.localhost/oauth/callback
       allowedScopes: 
         - openid
         - email
@@ -168,16 +153,16 @@ isapi:
         - SampleResource  
         - Organisation
   ingress:
-  enabled: true
-  annotations: 
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  hosts:
-    - paths: 
-        - /.well-known
-        - /Account
-        - /connect
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - paths: 
+          - /.well-known
+          - /Account
+          - /connect
 
 file-loader:
   enabled: true
@@ -263,7 +248,7 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret                
-  baseUri: "https://localhost:3000"
+  baseUri: "https://docker.for.win.localhost/"
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"
