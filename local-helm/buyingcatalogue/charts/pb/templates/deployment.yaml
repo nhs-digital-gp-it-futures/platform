@@ -44,6 +44,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
             - name: LOGGER_LEVEL
               value: "info"
             - name: LOGIN_ENABLED
@@ -53,7 +55,7 @@ spec:
             - name: NODE_ENV
               value: production
             - name: APP_BASE_URI
-              value: http://51.132.48.118
+              value: https://51.132.48.118
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
