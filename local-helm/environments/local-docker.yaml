@@ -143,9 +143,19 @@ isapi:
       redirectUrls:         
         - https://docker.for.win.localhost/oauth/callback
         - https://docker.for.mac.localhost/oauth/callback
+        - https://docker.for.win.localhost/admin/oauth/callback
+        - https://docker.for.mac.localhost/admin/oauth/callback
+        - https://docker.for.win.localhost:3005/admin/oauth/callback
+        - https://docker.for.mac.localhost:3005/admin/oauth/callback
+        - http://localhost:3005/admin/oauth/callback
+        - http://localhost:3005/admin/oauth/callback
       postLogoutRedirectUrls: 
         - https://docker.for.win.localhost/signout-callback-oidc
         - https://docker.for.mac.localhost/signout-callback-oidc
+        - https://docker.for.win.localhost/admin/signout-callback-oidc
+        - https://docker.for.mac.localhost/admin/signout-callback-oidc
+        - https://docker.for.win.localhost:3005/admin/signout-callback-oidc
+        - https://docker.for.mac.localhost:3005/admin/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
@@ -274,9 +284,8 @@ admin:
       ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
-      - host: localhost
-        paths: 
-          - /organisations
+      - paths: 
+          - /admin
     tls: []
   serviceDependencies:
     oidc:

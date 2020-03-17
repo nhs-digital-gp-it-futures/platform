@@ -291,7 +291,7 @@ admin:
     hosts:
       - host: localhost
         paths: 
-          - /organisations
+          - /admin
     tls: []
   serviceDependencies:
     oidc:

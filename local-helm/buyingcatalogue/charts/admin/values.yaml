@@ -46,9 +46,8 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
-    - host: localhost
-      paths: 
-        - /organisations
+    - paths: 
+        - /admin
   tls: []
   #  - secretName: chart-exapble-tls
   #    hosts:
@@ -68,6 +67,9 @@ tolerations: []
 
 affinity: {}
 
+appBaseUri: 'https://docker.for.win.localhost/admin'
+baseUri: '/admin'
+
 serviceDependencies: 
   oidc:
     baseUriConfig:
@@ -82,3 +84,5 @@ env:
   configmap:
   secrets:
   values:
+    - name: NODE_TLS_REJECT_UNAUTHORIZED
+      value: "0"
