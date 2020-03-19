@@ -44,4 +44,6 @@ spec:
           value: "CatalogueUsers"
         - name: NHSD_PASSWORD
           value: "DisruptTheMarket1!"
+        - name: INSERT_TEST_DATA
+          value: "True"
           
