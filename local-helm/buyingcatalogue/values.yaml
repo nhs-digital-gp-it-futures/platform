@@ -164,6 +164,29 @@ isapi:
         - profile
         - SampleResource  
 
+organisations:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "organisations"
+  fullnameOverride: "gpitfutures-bc-organisations"
+  service:
+    type: LoadBalancer
+    port: 5103      
+  connectionStringSecret: 
+    name: "bc-buyingcatalogue"
+    key: isapi-db-connection-string 
+  serviceDependencies:
+    oidc:
+      baseUriConfig:
+        name: "bc-buyingcatalogue"
+        key: isapi-url  
+
 file-loader:
   enabled: true
   replicaCount: 1

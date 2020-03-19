@@ -33,6 +33,8 @@ dependencies:
   condition: isapi.enabled
 - name: isapi-db
   condition: isapi-db.enabled
+- name: organisations
+  condition: organisations.enabled
 - name: file-loader
   condition: file-loader.enabled
 - name: mp
