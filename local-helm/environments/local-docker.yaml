@@ -1,6 +1,6 @@
 dbPassword:
 clientSecret:
-baseIsapiEnabledUrl: "https://host.docker.internal/"
+baseIsapiEnabledUrl: "https://docker.for.win.localhost/"
 
 azurite:
   enabled: true
@@ -260,7 +260,7 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret                
-  baseUri: "https://docker.for.win.localhost/"
+  baseUri: "https://docker.for.win.localhost"
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"

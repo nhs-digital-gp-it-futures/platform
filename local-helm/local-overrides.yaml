@@ -41,8 +41,7 @@ mp:
   enabled: true
 
 pb: 
-  enabled: true
-  baseUri: "https://host.docker.internal"
+  enabled: true  
 
 admin:
   enabled: true
