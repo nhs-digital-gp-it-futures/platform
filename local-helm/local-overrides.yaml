@@ -34,6 +34,10 @@ isapi:
   enabled: true
   disabledUrl: "docker.for.win.localhost"  
 
+organisations:  
+  enabled: true
+  disabledUrl: "host.docker.internal"
+
 file-loader:
   enabled: true
 
