@@ -66,6 +66,8 @@ dbPasswordSecret:
   name:
   key:
 
+insertTestData: false
+
 livenessprobe:
   initialDelaySeconds: 15
   periodSeconds: 20

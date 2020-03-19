@@ -61,12 +61,7 @@ data "azurerm_key_vault_secret" "kv-sp-pass" {
   key_vault_id = "${var.kv_id}"
 }
 
-data "azurerm_key_vault_secret" "kv-devops-user" {
-  name         = "${var.kv_devops_user}"
-  key_vault_id = "${var.kv_id}"
-}
-
-data "azurerm_key_vault_secret" "kv-devops-pass" {
-  name         = "${var.kv_devops_pass}"
+data "azurerm_key_vault_secret" "kv-sqladmins" {
+  name         = "${var.kv_sql_admins}"
   key_vault_id = "${var.kv_id}"
 }

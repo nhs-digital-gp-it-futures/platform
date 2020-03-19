@@ -52,6 +52,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.dbPasswordSecret.name }}
                   key: {{ .Values.dbPasswordSecret.key }}
+            {{- if .Values.insertTestData }}
+            - name: INSERT_TEST_DATA
+              value: "True" 
+            {{- end}}
             {{- if .Values.env.values }}
             {{- range .Values.env.values }}
             - name: {{ .name }}

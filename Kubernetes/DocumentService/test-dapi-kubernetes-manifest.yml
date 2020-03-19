@@ -40,3 +40,15 @@ spec:
             secretKeyRef:
                 name: testpipelinevariables
                 key: AZUREBLOBSTORAGE__CONTAINERNAME
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: dapi
+spec:
+  ports:
+  - port: 5000
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-dapi

@@ -45,3 +45,13 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: DOCUMENT_HOST
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketingpage
+spec:
+  ports:
+  - port: 3002
+  selector:
+    app: gpitfutures-bc-app-marketingpage

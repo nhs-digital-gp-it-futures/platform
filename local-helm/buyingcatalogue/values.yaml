@@ -102,7 +102,7 @@ isapi-db:
   dbPasswordSecret: 
     name: "bc-buyingcatalogue"
     key: db-password   
-
+  insertTestData: true
   service:
     type: LoadBalancer
     port: 1451   

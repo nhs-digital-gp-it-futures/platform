@@ -40,10 +40,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id                = "${azurerm_subnet.aks.id}"
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "true"
-    max_count                     = 9
-    min_count                     = 3
-    node_count                    = 3
-   #enable_node_public_ip         = "true"
+    max_count                     = 8
+    min_count                     = 2
+    node_count                    = 2
   }
 
   service_principal {
@@ -71,9 +70,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  api_server_authorized_ip_ranges = []
+  api_server_authorized_ip_ranges = [
+  ]
 
-  enable_pod_security_policy      = "false"
+  enable_pod_security_policy      = "true"
 
   role_based_access_control {
     enabled                       = "true"
