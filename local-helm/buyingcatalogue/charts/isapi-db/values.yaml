@@ -49,6 +49,8 @@ resources:
 
 nodeSelector: {}
 
+insertTestData: false
+
 tolerations: []
 
 affinity: {}

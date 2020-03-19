@@ -1,6 +1,6 @@
 dbPassword:
 clientSecret:
-baseIsapiEnabledUrl: "https://docker.for.win.localhost/"
+baseIsapiEnabledUrl: "https://host.docker.internal/"
 
 azurite:
   enabled: true
@@ -101,7 +101,7 @@ isapi-db:
   dbPasswordSecret: 
     name: "bc-buyingcatalogue"
     key: db-password   
-
+  insertTestData: true
   service:
     type: LoadBalancer
     port: 1451   
@@ -116,7 +116,7 @@ isapi:
   imagePullSecrets: 
   - name: regcredlocal
   nameOverride: "isapi"
-  fullnameOverride: "gpitfutures-bc-isapi"
+  fullnameOverride: "gpitfutures-bc-isapi"  
   service:
     type: LoadBalancer
     port: 5102      
@@ -147,6 +147,7 @@ isapi:
         - https://docker.for.mac.localhost/admin/oauth/callback
         - https://docker.for.win.localhost:3005/admin/oauth/callback
         - https://docker.for.mac.localhost:3005/admin/oauth/callback
+        - https://host.docker.internal/oauth/callback
         - http://localhost:3005/admin/oauth/callback
         - http://localhost:3005/admin/oauth/callback
       postLogoutRedirectUrls: 
@@ -156,6 +157,7 @@ isapi:
         - https://docker.for.mac.localhost/admin/signout-callback-oidc
         - https://docker.for.win.localhost:3005/admin/signout-callback-oidc
         - https://docker.for.mac.localhost:3005/admin/signout-callback-oidc
+        - https://host.docker.internal/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
