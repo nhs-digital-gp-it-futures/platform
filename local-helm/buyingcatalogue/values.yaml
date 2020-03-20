@@ -315,6 +315,9 @@ admin:
         paths: 
           - /admin
     tls: []
+  cookieSecret:
+    name: "bc-buyingcatalogue"
+    key: "cookie-secret"
   serviceDependencies:
     oidc:
       baseUriConfig:

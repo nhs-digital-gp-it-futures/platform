@@ -53,6 +53,11 @@ spec:
               value: {{ .Values.appBaseUri }}
             - name: BASE_URL
               value: {{ .Values.baseUri }}
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.cookieSecret.name }}
+                  key: {{ .Values.cookieSecret.key }}
             {{- if .Values.serviceDependencies }}            
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI

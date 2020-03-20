@@ -67,8 +67,11 @@ tolerations: []
 
 affinity: {}
 
-appBaseUri: 'https://docker.for.win.localhost/admin'
+appBaseUri: 'https://docker.for.win.localhost'
 baseUri: '/admin'
+cookieSecret:
+  name: 
+  key:
 
 serviceDependencies: 
   oidc:

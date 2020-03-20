@@ -43,7 +43,9 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:            
+          env:   
+            - name: BUYING_CATALOGUE_ADMIN_HOST
+              value: "/admin"
             - name: LOGGER_LEVEL
               value: "info"
             - name: LOGIN_ENABLED
