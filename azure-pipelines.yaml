@@ -21,7 +21,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: Utility Services'
   inputs:
-    SourceFolder: 'utility-services'
+    SourceFolder: 'UtilityServices'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)\utilityservices'
     CleanTargetFolder: true
