@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: buyingcatalogue-test-pb
-  name: buyingcatalogue-test-pb
+    app: buyingcatalogue-private
+  name: buyingcatalogue-private
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: buyingcatalogue-test-mp
-  name: buyingcatalogue-test-mp
+    app: buyingcatalogue-public
+  name: buyingcatalogue-public
