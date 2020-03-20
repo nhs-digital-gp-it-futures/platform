@@ -1,4 +1,4 @@
-# Default values for organisations.
+# Default values for oapi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -12,8 +12,8 @@ image:
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: organisations
-fullnameOverride: gpitfutures-bc-organisations
+nameOverride: oapi
+fullnameOverride: gpitfutures-bc-oapi
 
 minReadySeconds: 5
 

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: organisations
+name: oapi
 description: A Helm chart for the identity server
 
 type: application

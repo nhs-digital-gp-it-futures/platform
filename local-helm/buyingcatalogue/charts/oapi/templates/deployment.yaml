@@ -1,11 +1,11 @@
-{{- $name := include "organisations.fullname" . -}}
+{{- $name := include "oapi.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "organisations.labels" . | nindent 4 }}
+    {{- include "oapi.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   {{- if .Values.updateStrategy }}
@@ -14,17 +14,17 @@ spec:
   minReadySeconds: {{ .Values.minReadySeconds }}
   selector:
     matchLabels:
-      {{- include "organisations.selectorLabels" . | nindent 6 }}
+      {{- include "oapi.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "organisations.selectorLabels" . | nindent 8 }}
+        {{- include "oapi.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "organisations.serviceAccountName" . }}
+      serviceAccountName: {{ include "oapi.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

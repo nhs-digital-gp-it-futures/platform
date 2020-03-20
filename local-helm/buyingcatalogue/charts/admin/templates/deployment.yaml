@@ -71,7 +71,14 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .baseUriConfig.name | quote }}
-                  key: {{ .baseUriConfig.key | quote }}
+                  key: {{ .baseUriConfig.key | quote }}             
+            {{- end }}
+            {{- with .Values.serviceDependencies.oapi }}
+            - name: ORGANISATION_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .name | quote }}
+                  key: {{ .key | quote }}            
             {{- end }}          
             {{- end }}                
             {{- if .Values.env.values -}}

@@ -79,6 +79,9 @@ serviceDependencies:
     clientSecret: 
       name: 
       key: 
+  oapi:
+    name:
+    key:
       
 env:
   configmap:
