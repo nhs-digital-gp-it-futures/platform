@@ -6,8 +6,19 @@ resource "azurerm_resource_group" "storage" {
   }
 }
 
-resource "azurerm_storage_account" "data" {
-  name                              = "${var.project}${var.environment}sa"
+resource "azurerm_storage_account" "private" {
+  name                              = "${var.project}${var.environment}sapri"
+  location                          = "${var.region}"
+  resource_group_name               = "${azurerm_resource_group.storage.name}"
+  account_tier                      = "${var.sa_tier}"
+  account_replication_type          = "${var.sa_rep_type}"
+  account_kind                      = "${var.sa_kind}"
+  enable_advanced_threat_protection = "true"
+  enable_https_traffic_only         = "true"
+}
+
+resource "azurerm_storage_account" "public" {
+  name                              = "${var.project}${var.environment}sapub"
   location                          = "${var.region}"
   resource_group_name               = "${azurerm_resource_group.storage.name}"
   account_tier                      = "${var.sa_tier}"
@@ -39,15 +50,27 @@ resource "azurerm_storage_account" "sqlukw" {
   enable_https_traffic_only         = "true"
 }
 
-resource "azurerm_storage_container" "data" {
+resource "azurerm_storage_container" "pri-web" {
   name                  = "$web"
-  storage_account_name  = "${azurerm_storage_account.data.name}"
+  storage_account_name  = "${azurerm_storage_account.private.name}"
   container_access_type = "blob"
 }
 
-resource "azurerm_storage_container" "documents" {
+resource "azurerm_storage_container" "pri-documents" {
   name                  = "documents"
-  storage_account_name  = "${azurerm_storage_account.data.name}"
+  storage_account_name  = "${azurerm_storage_account.private.name}"
+  container_access_type = "blob"
+}
+
+resource "azurerm_storage_container" "pub-web" {
+  name                  = "$web"
+  storage_account_name  = "${azurerm_storage_account.public.name}"
+  container_access_type = "blob"
+}
+
+resource "azurerm_storage_container" "pub-documents" {
+  name                  = "documents"
+  storage_account_name  = "${azurerm_storage_account.public.name}"
   container_access_type = "blob"
 }
 

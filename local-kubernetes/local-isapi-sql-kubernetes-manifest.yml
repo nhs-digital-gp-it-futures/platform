@@ -46,4 +46,15 @@ spec:
           value: "DisruptTheMarket1!"
         - name: INSERT_TEST_DATA
           value: "True"
-          
+        - name: CREATE_EA_USER 
+          value: "True"
+        - name: EA_USER_FIRST_NAME
+          value: "Agency"
+        - name: EA_USER_LAST_NAME
+          value: "User"
+        - name: EA_USER_EMAIL
+          value: user@agency.com
+        - name: EA_USER_PASSWORD_HASH
+          value: "AQAAAAEAACcQAAAAEEOFkNNrFpKmDC2TBv2CP/dzxfnjdXk97RoqRlunE/CGs2tmFcewKZj4M/fITiP2tg=="
+        - name: EA_USER_PHONE
+          value: "01234567890"

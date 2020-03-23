@@ -103,6 +103,16 @@ isapi-db:
     name: "bc-buyingcatalogue"
     key: db-password   
   insertTestData: true
+  createEaUser: true
+  eaUser:
+    firstName: Agency
+    lastName: User
+    email: user@agency.com
+    passwordHash:
+      name: "bc-buyingcatalogue"
+      key: ea-user-password   
+    phone: "01234567890"
+
   service:
     type: LoadBalancer
     port: 1451   

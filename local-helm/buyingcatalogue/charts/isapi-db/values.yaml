@@ -68,6 +68,16 @@ dbPasswordSecret:
 
 insertTestData: false
 
+createEaUser: false
+eaUser:
+  firstName:
+  lastName:
+  email:
+  passwordHash: 
+    name: "bc-buyingcatalogue"
+    key: ea-user-password  
+  phone:
+
 livenessprobe:
   initialDelaySeconds: 15
   periodSeconds: 20

@@ -18,10 +18,10 @@ spec:
         app: gpitfutures-bc-app-publicbrowse
     spec:
       imagePullSecrets:
-      - name: pprodpipelinevariables
+      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturespprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
         ports:
         - containerPort: 3000
         resources:
@@ -33,17 +33,17 @@ spec:
         - name: API_HOST
           valueFrom:
             secretKeyRef:
-              name: pprodpipelinevariables
+              name: devpipelinevariables
               key: API_HOST
         - name: BLOBSTORE_HOST
           valueFrom:
             secretKeyRef:
-              name: pprodpipelinevariables
+              name: devpipelinevariables
               key: BLOBSTORE_HOST
         - name: DOCUMENT_HOST
           valueFrom:
             secretKeyRef:
-              name: pprodpipelinevariables
+              name: devpipelinevariables
               key: DOCUMENT_HOST
 ---
 apiVersion: v1
