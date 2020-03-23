@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:20200323.1
         ports:
         - containerPort: 3000
         resources:
@@ -45,6 +45,16 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: DOCUMENT_HOST
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: COOKIE_SECRET
+        - name: oidcClientSecret
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: oidcClientSecret
 ---
 apiVersion: v1
 kind: Service
