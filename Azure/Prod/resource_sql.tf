@@ -70,17 +70,6 @@ resource "azurerm_sql_database" "sql-bapi-pub" {
 
 }
 
-resource "azurerm_sql_database" "sql-isapi" {
-  name                             = "${var.project}-${var.environment}-db-isapi"
-  resource_group_name              = "${azurerm_resource_group.bc-sql-pri.name}"
-  location                         = "${var.region}"
-  server_name                      = "${azurerm_sql_server.bc-sql-pri.name}"
-  collation                        = "${var.sql_collation}"
-  edition                          = "${var.sql_edition}"
-  requested_service_objective_name = "${var.sql_size}"
-
-}
-
 resource "azurerm_advanced_threat_protection" "bc-sql-pri" {
   target_resource_id = "${azurerm_storage_account.sqluks.id}"
   enabled            = true
@@ -110,20 +99,6 @@ resource "azurerm_sql_failover_group" "sql-bapi-pub" {
   resource_group_name = "${azurerm_resource_group.bc-sql-pri.name}"
   server_name         = "${azurerm_sql_server.bc-sql-pri.name}"
   databases           = ["${azurerm_sql_database.sql-bapi-pub.id}"]
-  partner_servers {
-    id = "${azurerm_sql_server.bc-sql-sec.id}"
-  }
-  read_write_endpoint_failover_policy {
-    mode          = "Automatic"
-    grace_minutes = 30
-  }
-}
-
-resource "azurerm_sql_failover_group" "sql-isapi" {
-  name                = "${var.project}-${var.environment}-sql-fog2"
-  resource_group_name = "${azurerm_resource_group.bc-sql-pri.name}"
-  server_name         = "${azurerm_sql_server.bc-sql-pri.name}"
-  databases           = ["${azurerm_sql_database.sql-isapi.id}"]
   partner_servers {
     id = "${azurerm_sql_server.bc-sql-sec.id}"
   }

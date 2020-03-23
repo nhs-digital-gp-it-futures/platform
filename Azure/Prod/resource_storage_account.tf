@@ -17,6 +17,17 @@ resource "azurerm_storage_account" "data" {
   enable_https_traffic_only         = "true"
 }
 
+resource "azurerm_storage_account" "staging" {
+  name                              = "${var.project}${var.environment}sastg"
+  location                          = "${var.region}"
+  resource_group_name               = "${azurerm_resource_group.storage.name}"
+  account_tier                      = "${var.sa_tier}"
+  account_replication_type          = "${var.sa_rep_type}"
+  account_kind                      = "${var.sa_kind}"
+  enable_advanced_threat_protection = "true"
+  enable_https_traffic_only         = "true"
+}
+
 resource "azurerm_storage_account" "sqluks" {
   name                              = "${var.project}${var.environment}sasqluks"
   location                          = "${var.region}"
@@ -39,15 +50,27 @@ resource "azurerm_storage_account" "sqlukw" {
   enable_https_traffic_only         = "true"
 }
 
-resource "azurerm_storage_container" "data" {
+resource "azurerm_storage_container" "documents" {
   name                  = "$web"
   storage_account_name  = "${azurerm_storage_account.data.name}"
   container_access_type = "blob"
 }
 
-resource "azurerm_storage_container" "documents" {
+resource "azurerm_storage_container" "documents1" {
   name                  = "documents"
   storage_account_name  = "${azurerm_storage_account.data.name}"
+  container_access_type = "blob"
+}
+
+resource "azurerm_storage_container" "stg" {
+  name                  = "$web"
+  storage_account_name  = "${azurerm_storage_account.staging.name}"
+  container_access_type = "blob"
+}
+
+resource "azurerm_storage_container" "stg1" {
+  name                  = "documents"
+  storage_account_name  = "${azurerm_storage_account.staging.name}"
   container_access_type = "blob"
 }
 
