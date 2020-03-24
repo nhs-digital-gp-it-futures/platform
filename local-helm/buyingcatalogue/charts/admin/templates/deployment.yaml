@@ -38,17 +38,29 @@ spec:
             httpGet:
               path: /health/live
               port: http
-          readinessProbe:
-            httpGet:
-              path: /health/ready
-              port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health/ready
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: LOGGER_LEVEL
+              value: "info"
             - name: NODE_ENV
               value: production
             - name: APP_BASE_URI
-              value: http://localhost:{{ .Values.service.port | int }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.appBaseUri.name | quote }}
+                  key: {{ .Values.appBaseUri.key | quote }}              
+            - name: BASE_URL
+              value: {{ .Values.baseUri }}
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.cookieSecret.name }}
+                  key: {{ .Values.cookieSecret.key }}
             {{- if .Values.serviceDependencies }}            
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI
@@ -67,31 +79,38 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .baseUriConfig.name | quote }}
-                  key: {{ .baseUriConfig.key | quote }}
+                  key: {{ .baseUriConfig.key | quote }}             
+            {{- end }}
+            {{- with .Values.serviceDependencies.oapi }}
+            - name: ORGANISATION_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .name | quote }}
+                  key: {{ .key | quote }}            
             {{- end }}          
             {{- end }}                
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
-              - name: {{ .name }}
-                value: {{ .value | quote }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
             {{- end -}}
             {{- end -}}
             {{- if .Values.env.configmap -}}
             {{- range .Values.env.configmap }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ $cfgname }}
-                    key: {{ .key }}
+            - name: {{ .name }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $cfgname }}
+                  key: {{ .key }}
             {{- end -}}
             {{- end }}
             {{- if .Values.env.secrets -}}
             {{- range .Values.env.secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:            
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key }}            
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:            
+                  name: {{ .valueFrom.secretKeyRef.name }}
+                  key: {{ .valueFrom.secretKeyRef.key }}            
             {{- end -}}
             {{- end }}
       {{- with .Values.nodeSelector }}

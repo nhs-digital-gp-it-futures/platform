@@ -1,12 +1,10 @@
 dbPassword:
 clientSecret:
-
-appBaseUrl: 
-baseIsapiEnabledUrl: 
+baseIsapiEnabledUrl: "<Remote Ingress URL>"
 
 azurite:
   enabled: true
-  disabledUrl: 
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: mcr.microsoft.com/azure-storage/azurite  
@@ -14,23 +12,24 @@ azurite:
   nameOverride: "azurite"
   fullnameOverride: "gpitfutures-bc-azurite"
   service:
-    type: ClusterIP
+    type: LoadBalancer
     blobPort: 10000  
     queuePort: 10001
     tablePort: 10002
 
 dapi:
   enabled: true
-  disabledUrl: 
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "dapi"
   fullnameOverride: "gpitfutures-bc-dapi"
   service:
-    type: ClusterIP
+    type: LoadBalancer
     port: 5101
   azureBlobStorage:    
     connectionSecret: 
@@ -40,16 +39,17 @@ dapi:
 
 bapi-db:
   enabled: true
-  disabledUrl: 
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "bapi-sql"
   fullnameOverride: "gpitfutures-bc-bapi-sql"
   service:
-    type: ClusterIP
+    type: LoadBalancer
     port: 1450
   saPasswordSecret: 
     name: "bc-buyingcatalogue"
@@ -62,16 +62,17 @@ bapi-db:
 
 bapi:  
   enabled: true
-  disabledUrl: 
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "bapi"
   fullnameOverride: "gpitfutures-bc-bapi"
   service:
-    type: ClusterIP
+    type: LoadBalancer
     port: 5100
   serviceDependencies:  
     dapiUrlConfig:
@@ -83,17 +84,15 @@ bapi:
 
 isapi-db:
   enabled: false
-  disabledUrl: 
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "isapi-sql"
   fullnameOverride: "gpitfutures-bc-isapi-sql"
-  service:
-    type: ClusterIP
-    port: 1451  
   saPasswordSecret: 
     name: "bc-buyingcatalogue"
     key: sa-password    
@@ -102,27 +101,20 @@ isapi-db:
   dbPasswordSecret: 
     name: "bc-buyingcatalogue"
     key: db-password   
-  insertTestData: true
-  createEaUser: true
-  eaUser:
-    firstName: Agency
-    lastName: User
-    email: user@agency.com
-    passwordHash:
-      name: "bc-buyingcatalogue"
-      key: ea-user-password   
-    phone: "01234567890"
- 
+
+  service:
+    type: LoadBalancer
+    port: 1451   
 
 isapi:
   enabled: false
-  disabledUrl: 
-  feDisabledIssuerUrl:
+  disabledUrl: "docker.for.win.localhost"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "isapi"
   fullnameOverride: "gpitfutures-bc-isapi"
   service:
@@ -137,9 +129,8 @@ isapi:
   issuerUrlConfig: 
     name: "bc-buyingcatalogue"
     key: issuer-url 
-  insertTestData: true
   clients: 
-    - clientId: "NodeClient"
+    - clientId: "SampleClient"
       clientName: "Main Node Client"
       allowedGrantTypes: "Code"
       allowOfflineAccess : false
@@ -150,11 +141,30 @@ isapi:
       requirePkce : true
       requireConsent: false
       redirectUrls: 
+        - http://localhost:3000/oauth/callback
+        - http://host.docker.internal:3000/oauth/callback
+        - http://docker.for.win.localhost:3000/oauth/callback
+        - http://docker.for.mac.localhost:3000/oauth/callback
+        - http://localhost:3005/oauth/callback
+        - http://host.docker.internal:3005/oauth/callback
+        - http://docker.for.win.localhost:3005/oauth/callback
+        - http://docker.for.mac.localhost:3005/oauth/callback
+        - https://51.132.48.118/oauth/callback
       postLogoutRedirectUrls: 
+        - http://localhost:3000/signout-callback-oidc
+        - http://host.docker.internal:3000/signout-callback-oidc
+        - http://docker.for.win.localhost:3000/signout-callback-oidc
+        - http://docker.for.mac.localhost:3000/signout-callback-oidc
+        - http://localhost:3005/signout-callback-oidc
+        - http://host.docker.internal:3005/signout-callback-oidc
+        - http://docker.for.win.localhost:3005/signout-callback-oidc
+        - http://docker.for.mac.localhost:3005/signout-callback-oidc
+        - https://51.132.48.118/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
         - profile
+        - SampleResource  
         - Organisation
   ingress:
     enabled: true
@@ -168,28 +178,6 @@ isapi:
           - /Account
           - /connect
 
-oapi:
-  enabled: true
-  disabledUrl: 
-  replicaCount: 1
-  image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
-  useLocalImage: false
-  imagePullSecrets: 
-  nameOverride: "oapi"
-  fullnameOverride: "gpitfutures-bc-oapi"
-  service:
-    type: LoadBalancer
-    port: 5103      
-  connectionStringSecret: 
-    name: "bc-buyingcatalogue"
-    key: isapi-db-connection-string 
-  serviceDependencies:
-    oidc:
-      baseUriConfig:
-        name: "bc-buyingcatalogue"
-        key: isapi-url  
-
 file-loader:
   enabled: true
   replicaCount: 1
@@ -197,6 +185,7 @@ file-loader:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "file-loader"
   fullnameOverride: "gpitfutures-bc-file-loader"
   azureBlobStorage:    
@@ -211,7 +200,8 @@ mp:
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
   useLocalImage: false   
-  imagePullSecrets:   
+  imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "marketing-pages"
   fullnameOverride: "gpitfutures-bc-mp"
   service:
@@ -241,6 +231,7 @@ pb:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse 
   useLocalImage: false    
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "public-browse"
   fullnameOverride: "gpitfutures-bc-pb"
   service:
@@ -256,20 +247,7 @@ pb:
       - paths: 
           - /
     tls: []
-  appBaseUri:
-    name: "bc-buyingcatalogue"
-    key: app-base-url
-  baseUri: "/"
-  cookieSecret:
-    name: "bc-buyingcatalogue"
-    key: cookie-secret
-  featureFlags:
-    loginEnabled : "true"
-    useCapabilitiesSelector: "true"
   serviceDependencies:
-    adminUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: admin-url
     dapiUrlConfig:
       name: "bc-buyingcatalogue"
       key: dapi-url  
@@ -283,7 +261,12 @@ pb:
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
-        key: oidc-client-secret                  
+        key: oidc-client-secret                
+  baseUri: "<REPLACE ME>"
+  featureFlags:
+    loginEnabled : "true"
+    useCapabilitiesSelector: "true"
+
 
 admin: 
   enabled: true
@@ -292,6 +275,7 @@ admin:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
   useLocalImage: false    
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "admin"
   fullnameOverride: "gpitfutures-bc-admin"
   service:
@@ -304,16 +288,10 @@ admin:
       ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
-      - paths: 
-          - /admin
+      - host: localhost
+        paths: 
+          - /organisations
     tls: []
-  appBaseUri: 
-    name: "bc-buyingcatalogue"
-    key: "app-base-url"
-  baseUri: "/admin"
-  cookieSecret:
-    name: "bc-buyingcatalogue"
-    key: "cookie-secret"
   serviceDependencies:
     oidc:
       baseUriConfig:
@@ -322,7 +300,4 @@ admin:
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
-        key: oidc-client-secret   
-    oapi:
-      name: "bc-buyingcatalogue"
-      key: oapi-url
+        key: oidc-client-secret                

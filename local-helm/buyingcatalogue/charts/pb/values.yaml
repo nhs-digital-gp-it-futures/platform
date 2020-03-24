@@ -46,8 +46,7 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
-    - host: localhost
-      paths: 
+    - paths: 
         - /
   tls: []
   #  - secretName: chart-exapble-tls
@@ -56,8 +55,8 @@ ingress:
 
 resources: 
   requests:
-    memory: 100Mi
-    cpu: 250m
+    memory: 64Mi
+    cpu: 25m
   limits:
     cpu: 1000m
     memory: 300Mi
@@ -68,7 +67,23 @@ tolerations: []
 
 affinity: {}
 
+#custom variables
+appBaseUri:
+  name: 
+  key:
+baseUri: 
+cookieSecret:
+  name: 
+  key:
+
+featureFlags:
+  loginEnabled : "true"
+  useCapabilitiesSelector: "true"
+
 serviceDependencies:
+  adminUrlConfig:
+    name: 
+    key: 
   dapiUrlConfig:
     name: 
     key: 
@@ -85,6 +100,6 @@ serviceDependencies:
       key: 
 
 env:
-  configmap:
+  configmap:    
   secrets:
   values:

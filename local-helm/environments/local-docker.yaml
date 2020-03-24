@@ -1,0 +1,229 @@
+dbPassword:
+clientSecret:
+appBaseUrl: "https://docker.for.win.localhost"
+baseIsapiEnabledUrl: "https://docker.for.win.localhost/"
+
+azurite:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: mcr.microsoft.com/azure-storage/azurite  
+  useLocalImage: false
+  service:
+    type: LoadBalancer
+
+dapi:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  service:
+    type: LoadBalancer
+  azureBlobStorage:    
+    containerName: container-1
+
+bapi-db:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/debug-db
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  service:
+    type: LoadBalancer
+
+bapi:  
+  enabled: true
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  service:
+    type: LoadBalancer
+
+isapi-db:
+  enabled: false
+  disabledUrl: "host.docker.internal"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal  
+  service:
+    type: LoadBalancer
+  insertTestData: true
+  eaUser:
+    firstName: Agency
+    lastName: User
+    email: user@agency.com
+    passwordHash:
+      name: "bc-buyingcatalogue"
+      key: ea-user-password   
+    phone: "01234567890"
+
+isapi:
+  enabled: true
+  disabledUrl: "docker.for.win.localhost"
+  feDisabledIssuerUrl: "localhost"
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "isapi"
+  fullnameOverride: "gpitfutures-bc-isapi"  
+  service:
+    type: LoadBalancer
+  insertTestData: true
+  clients: 
+    - clientId: "SampleClient"
+      clientName: "Main Node Client"
+      allowedGrantTypes: "Code"
+      allowOfflineAccess : false
+      requireClientSecret : true
+      secret: 
+        name: "bc-buyingcatalogue"
+        key: oidc-client-secret 
+      requirePkce : true
+      requireConsent: false
+      redirectUrls:         
+        - https://docker.for.win.localhost/oauth/callback
+        - https://docker.for.mac.localhost/oauth/callback
+        - https://docker.for.win.localhost/admin/oauth/callback
+        - https://docker.for.mac.localhost/admin/oauth/callback
+        - http://docker.for.win.localhost:3000/oauth/callback
+        - http://docker.for.mac.localhost:3000/oauth/callback
+        - http://docker.for.win.localhost:3005/admin/oauth/callback
+        - http://docker.for.mac.localhost:3005/admin/oauth/callback
+        - http://localhost:3000/oauth/callback
+        - http://localhost:3005/admin/oauth/callback
+      postLogoutRedirectUrls: 
+        - https://docker.for.win.localhost/signout-callback-oidc
+        - https://docker.for.mac.localhost/signout-callback-oidc
+        - https://docker.for.win.localhost/admin/signout-callback-oidc
+        - https://docker.for.mac.localhost/admin/signout-callback-oidc
+        - http://docker.for.win.localhost:3000/signout-callback-oidc
+        - http://docker.for.mac.localhost:3000/signout-callback-oidc
+        - http://docker.for.win.localhost:3005/admin/signout-callback-oidc
+        - http://docker.for.mac.localhost:3005/admin/signout-callback-oidc        
+        - http://localhost:3000/signout-callback-oidc
+        - http://localhost:3005/admin/signout-callback-oidc
+      allowedScopes: 
+        - openid
+        - email
+        - profile
+        - SampleResource  
+        - Organisation
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - paths: 
+          - /identity
+          - /.well-known
+          - /Account
+          - /connect
+          - /Error
+
+file-loader:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/file-uploader
+  useLocalImage: false
+  imagePullSecrets: 
+  - name: regcredlocal
+  azureBlobStorage:    
+    containerName: container-1
+
+mp:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
+  useLocalImage: false   
+  imagePullSecrets: 
+  - name: regcredlocal
+  service:
+    type: LoadBalancer
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - paths: 
+          - /supplier
+
+pb: 
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse 
+  useLocalImage: false    
+  imagePullSecrets: 
+  - name: regcredlocal
+  service:
+    type: LoadBalancer    
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - paths: 
+          - /
+    tls: []
+  baseUri: "https://docker.for.win.localhost"
+  featureFlags:
+    loginEnabled : "true"
+    useCapabilitiesSelector: "true"
+  env:
+    values:
+      - name: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
+
+admin: 
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
+  useLocalImage: false    
+  imagePullSecrets: 
+  - name: regcredlocal
+  nameOverride: "admin"
+  fullnameOverride: "gpitfutures-bc-admin"
+  service:
+    type: LoadBalancer
+    port: 3005
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - paths: 
+          - /admin
+    tls: []      
+  env:
+      values:
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"

@@ -43,11 +43,20 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:
+          env:   
+            - name: LOGGER_LEVEL
+              value: "info"
+            - name: LOGIN_ENABLED
+              value: {{ .Values.featureFlags.loginEnabled | default "false" | quote }}
+            - name: USE_CAPABILITIES_SELECTOR
+              value: {{ .Values.featureFlags.useCapabilitiesSelector | default "false" | quote }}
             - name: NODE_ENV
-              value: production
+              value: "production"
             - name: APP_BASE_URI
-              value: http://localhost:{{ .Values.service.port | int }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.appBaseUri.name | quote }}
+                  key: {{ .Values.appBaseUri.key | quote }}    
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
@@ -62,6 +71,13 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.serviceDependencies.dapiUrlConfig.name | quote }}
                   key: {{ .Values.serviceDependencies.dapiUrlConfig.key | quote }}
+            {{- end -}}
+            {{- if .Values.serviceDependencies.adminUrlConfig }}
+            - name: BUYING_CATALOGUE_ADMIN_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.adminUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.adminUrlConfig.key | quote }}
             {{- end -}}
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI
@@ -78,28 +94,28 @@ spec:
                   key: {{ .clientSecret.key }}
             {{- end }}          
             {{- end }}                
-            {{- if .Values.env.values -}}
+            {{- if .Values.env.values }}
             {{- range .Values.env.values }}
-              - name: {{ .name }}
-                value: {{ .value | quote }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
             {{- end -}}
             {{- end -}}
             {{- if .Values.env.configmap -}}
             {{- range .Values.env.configmap }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ $cfgname }}
-                    key: {{ .key }}
+            - name: {{ .name }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $cfgname }}
+                  key: {{ .key }}
             {{- end -}}
             {{- end }}
             {{- if .Values.env.secrets -}}
             {{- range .Values.env.secrets }}
-              - name: {{ .name }}
-                valueFrom:
-                  secretKeyRef:            
-                    name: {{ .valueFrom.secretKeyRef.name }}
-                    key: {{ .valueFrom.secretKeyRef.key }}            
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:            
+                  name: {{ .valueFrom.secretKeyRef.name }}
+                  key: {{ .valueFrom.secretKeyRef.key }}            
             {{- end -}}
             {{- end }}
       {{- with .Values.nodeSelector }}

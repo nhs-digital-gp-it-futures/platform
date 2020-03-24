@@ -82,6 +82,10 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+            {{- if .Values.insertTestData }}
+            - name: INSERT_TEST_DATA
+              value: "True" 
+            {{- end}}
 
             {{- if .Values.env.configmap }}
             {{- range .Values.env.configmap }}
