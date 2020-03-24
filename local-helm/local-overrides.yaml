@@ -49,4 +49,3 @@ pb:
 
 admin:
   enabled: true
-  useLocalImage: false

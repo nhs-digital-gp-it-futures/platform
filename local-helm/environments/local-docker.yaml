@@ -75,6 +75,7 @@ isapi-db:
 isapi:
   enabled: true
   disabledUrl: "docker.for.win.localhost"
+  feDisabledIssuerUrl: "localhost"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
@@ -102,19 +103,23 @@ isapi:
         - https://docker.for.mac.localhost/oauth/callback
         - https://docker.for.win.localhost/admin/oauth/callback
         - https://docker.for.mac.localhost/admin/oauth/callback
-        - https://docker.for.win.localhost:3000/oauth/callback
-        - https://docker.for.mac.localhost:3000/oauth/callback
-        - https://docker.for.win.localhost:3005/admin/oauth/callback
-        - https://docker.for.mac.localhost:3005/admin/oauth/callback
+        - http://docker.for.win.localhost:3000/oauth/callback
+        - http://docker.for.mac.localhost:3000/oauth/callback
+        - http://docker.for.win.localhost:3005/admin/oauth/callback
+        - http://docker.for.mac.localhost:3005/admin/oauth/callback
+        - http://localhost:3000/oauth/callback
+        - http://localhost:3005/admin/oauth/callback
       postLogoutRedirectUrls: 
         - https://docker.for.win.localhost/signout-callback-oidc
         - https://docker.for.mac.localhost/signout-callback-oidc
         - https://docker.for.win.localhost/admin/signout-callback-oidc
         - https://docker.for.mac.localhost/admin/signout-callback-oidc
-        - https://docker.for.win.localhost:3000/signout-callback-oidc
-        - https://docker.for.mac.localhost:3000/signout-callback-oidc
-        - https://docker.for.win.localhost:3005/admin/signout-callback-oidc
-        - https://docker.for.mac.localhost:3005/admin/signout-callback-oidc        
+        - http://docker.for.win.localhost:3000/signout-callback-oidc
+        - http://docker.for.mac.localhost:3000/signout-callback-oidc
+        - http://docker.for.win.localhost:3005/admin/signout-callback-oidc
+        - http://docker.for.mac.localhost:3005/admin/signout-callback-oidc        
+        - http://localhost:3000/signout-callback-oidc
+        - http://localhost:3005/admin/signout-callback-oidc
       allowedScopes: 
         - openid
         - email
@@ -129,6 +134,7 @@ isapi:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
+          - /identity
           - /.well-known
           - /Account
           - /connect

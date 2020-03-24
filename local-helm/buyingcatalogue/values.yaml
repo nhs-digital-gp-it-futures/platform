@@ -117,6 +117,7 @@ isapi-db:
 isapi:
   enabled: false
   disabledUrl: 
+  feDisabledIssuerUrl:
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
