@@ -1,5 +1,6 @@
 dbPassword:
 clientSecret:
+appBaseUrl: "https://docker.for.win.localhost"
 baseIsapiEnabledUrl: "https://docker.for.win.localhost/"
 
 azurite:
@@ -9,13 +10,8 @@ azurite:
   image:
     repository: mcr.microsoft.com/azure-storage/azurite  
   useLocalImage: false
-  nameOverride: "azurite"
-  fullnameOverride: "gpitfutures-bc-azurite"
   service:
     type: LoadBalancer
-    blobPort: 10000  
-    queuePort: 10001
-    tablePort: 10002
 
 dapi:
   enabled: true
@@ -26,15 +22,9 @@ dapi:
   useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "dapi"
-  fullnameOverride: "gpitfutures-bc-dapi"
   service:
     type: LoadBalancer
-    port: 5101
   azureBlobStorage:    
-    connectionSecret: 
-      name: "bc-buyingcatalogue"
-      key: azure-blob-connection-string
     containerName: container-1
 
 bapi-db:
@@ -46,19 +36,8 @@ bapi-db:
   useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "bapi-sql"
-  fullnameOverride: "gpitfutures-bc-bapi-sql"
   service:
     type: LoadBalancer
-    port: 1450
-  saPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: sa-password    
-  dbName: buyingcatalogue
-  dbUser: NHSD
-  dbPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: db-password    
 
 bapi:  
   enabled: true
@@ -69,18 +48,8 @@ bapi:
   useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "bapi"
-  fullnameOverride: "gpitfutures-bc-bapi"
   service:
     type: LoadBalancer
-    port: 5100
-  serviceDependencies:  
-    dapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: dapi-url          
-  connectionStringSecret: 
-    name: "bc-buyingcatalogue"
-    key: bapi-db-connection-string  
 
 isapi-db:
   enabled: false
@@ -90,21 +59,18 @@ isapi-db:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-api-user-db
   useLocalImage: false
   imagePullSecrets: 
-  - name: regcredlocal
-  nameOverride: "isapi-sql"
-  fullnameOverride: "gpitfutures-bc-isapi-sql"
-  saPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: sa-password    
-  dbName: CatalogueUsers
-  dbUser: NHSD
-  dbPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: db-password   
-  insertTestData: true
+  - name: regcredlocal  
   service:
     type: LoadBalancer
-    port: 1451   
+  insertTestData: true
+  eaUser:
+    firstName: Agency
+    lastName: User
+    email: user@agency.com
+    passwordHash:
+      name: "bc-buyingcatalogue"
+      key: ea-user-password   
+    phone: "01234567890"
 
 isapi:
   enabled: true
@@ -119,16 +85,7 @@ isapi:
   fullnameOverride: "gpitfutures-bc-isapi"  
   service:
     type: LoadBalancer
-    port: 5102      
-  connectionStringSecret: 
-    name: "bc-buyingcatalogue"
-    key: isapi-db-connection-string 
-  oidcClientSecret: 
-    name: "bc-buyingcatalogue"
-    key: oidc-client-secret 
-  issuerUrlConfig: 
-    name: "bc-buyingcatalogue"
-    key: issuer-url 
+  insertTestData: true
   clients: 
     - clientId: "SampleClient"
       clientName: "Main Node Client"
@@ -145,19 +102,19 @@ isapi:
         - https://docker.for.mac.localhost/oauth/callback
         - https://docker.for.win.localhost/admin/oauth/callback
         - https://docker.for.mac.localhost/admin/oauth/callback
+        - https://docker.for.win.localhost:3000/oauth/callback
+        - https://docker.for.mac.localhost:3000/oauth/callback
         - https://docker.for.win.localhost:3005/admin/oauth/callback
         - https://docker.for.mac.localhost:3005/admin/oauth/callback
-        - https://host.docker.internal/oauth/callback
-        - http://localhost:3005/admin/oauth/callback
-        - http://localhost:3005/admin/oauth/callback
       postLogoutRedirectUrls: 
         - https://docker.for.win.localhost/signout-callback-oidc
         - https://docker.for.mac.localhost/signout-callback-oidc
         - https://docker.for.win.localhost/admin/signout-callback-oidc
         - https://docker.for.mac.localhost/admin/signout-callback-oidc
+        - https://docker.for.win.localhost:3000/signout-callback-oidc
+        - https://docker.for.mac.localhost:3000/signout-callback-oidc
         - https://docker.for.win.localhost:3005/admin/signout-callback-oidc
-        - https://docker.for.mac.localhost:3005/admin/signout-callback-oidc
-        - https://host.docker.internal/signout-callback-oidc
+        - https://docker.for.mac.localhost:3005/admin/signout-callback-oidc        
       allowedScopes: 
         - openid
         - email
@@ -168,13 +125,14 @@ isapi:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
           - /.well-known
           - /Account
           - /connect
+          - /Error
 
 file-loader:
   enabled: true
@@ -184,12 +142,7 @@ file-loader:
   useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "file-loader"
-  fullnameOverride: "gpitfutures-bc-file-loader"
   azureBlobStorage:    
-    connectionSecret: 
-      name: "bc-buyingcatalogue"
-      key: azure-blob-connection-string
     containerName: container-1
 
 mp:
@@ -200,27 +153,17 @@ mp:
   useLocalImage: false   
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "marketing-pages"
-  fullnameOverride: "gpitfutures-bc-mp"
   service:
     type: LoadBalancer
-    port: 3002
   ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
           - /supplier
-  serviceDependencies:    
-    dapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: dapi-url  
-    bapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: bapi-url  
 
 pb: 
   enabled: false
@@ -230,41 +173,26 @@ pb:
   useLocalImage: false    
   imagePullSecrets: 
   - name: regcredlocal
-  nameOverride: "public-browse"
-  fullnameOverride: "gpitfutures-bc-pb"
   service:
-    type: LoadBalancer
-    port: 3000
+    type: LoadBalancer    
   ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
           - /
     tls: []
-  serviceDependencies:
-    dapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: dapi-url  
-    bapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: bapi-url  
-    oidc:
-      baseUriConfig:
-        name: "bc-buyingcatalogue"
-        key: isapi-url  
-      clientId: "SampleClient"
-      clientSecret: 
-        name: "bc-buyingcatalogue"
-        key: oidc-client-secret                
   baseUri: "https://docker.for.win.localhost"
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"
-
+  env:
+    values:
+      - name: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
 
 admin: 
   enabled: true
@@ -283,18 +211,13 @@ admin:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
           - /admin
-    tls: []
-  serviceDependencies:
-    oidc:
-      baseUriConfig:
-        name: "bc-buyingcatalogue"
-        key: isapi-url  
-      clientId: "SampleClient"
-      clientSecret: 
-        name: "bc-buyingcatalogue"
-        key: oidc-client-secret                
+    tls: []      
+  env:
+      values:
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"

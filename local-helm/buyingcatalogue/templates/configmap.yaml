@@ -2,7 +2,7 @@
 {{- $bapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "bapi" "bapi.fullname")) .Release.Namespace) .Values.bapi.disabledUrl .Values.bapi.enabled -}}
 {{- $oapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "oapi" "oapi.fullname")) .Release.Namespace) .Values.oapi.disabledUrl .Values.oapi.enabled -}}
 {{- $isapiUrl:= ternary .Values.baseIsapiEnabledUrl  (printf "%s:%d" .Values.isapi.disabledUrl (.Values.isapi.service.port | int )) .Values.isapi.enabled -}}
-
+{{- $adminUrl:= ternary .Values.admin.baseUri .Values.admin.disabledUrl .Values.admin.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap
@@ -15,4 +15,6 @@ data:
   bapi-url: {{ printf "http://%s:%d" $bapiUrl (.Values.bapi.service.port | int ) }}
   oapi-url: {{ printf "http://%s:%d" $oapiUrl (.Values.oapi.service.port | int ) }}
   isapi-url: {{  $isapiUrl | quote }}
-  issuer-url: {{  $isapiUrl | quote }}
+  issuer-url: {{  $isapiUrl | quote }}  
+  admin-url: {{  $adminUrl | quote }}
+  app-base-url: {{ .Values.appBaseUrl }}

@@ -44,8 +44,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:   
-            - name: BUYING_CATALOGUE_ADMIN_HOST
-              value: "/admin"
             - name: LOGGER_LEVEL
               value: "info"
             - name: LOGIN_ENABLED
@@ -53,9 +51,12 @@ spec:
             - name: USE_CAPABILITIES_SELECTOR
               value: {{ .Values.featureFlags.useCapabilitiesSelector | default "false" | quote }}
             - name: NODE_ENV
-              value: production
+              value: "production"
             - name: APP_BASE_URI
-              value: {{ .Values.baseUri }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.appBaseUri.name | quote }}
+                  key: {{ .Values.appBaseUri.key | quote }}    
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
@@ -70,6 +71,13 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.serviceDependencies.dapiUrlConfig.name | quote }}
                   key: {{ .Values.serviceDependencies.dapiUrlConfig.key | quote }}
+            {{- end -}}
+            {{- if .Values.serviceDependencies.adminUrlConfig }}
+            - name: BUYING_CATALOGUE_ADMIN_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.adminUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.adminUrlConfig.key | quote }}
             {{- end -}}
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI

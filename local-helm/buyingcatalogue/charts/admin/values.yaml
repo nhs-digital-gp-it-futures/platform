@@ -67,8 +67,10 @@ tolerations: []
 
 affinity: {}
 
-appBaseUri: 'https://docker.for.win.localhost'
-baseUri: '/admin'
+appBaseUri:
+  name: 
+  key:
+baseUri: 
 cookieSecret:
   name: 
   key:
@@ -90,5 +92,4 @@ env:
   configmap:
   secrets:
   values:
-    - name: NODE_TLS_REJECT_UNAUTHORIZED
-      value: "0"
+

@@ -68,14 +68,22 @@ tolerations: []
 affinity: {}
 
 #custom variables
-
-baseUri: "https://localhost:3000"
+appBaseUri:
+  name: 
+  key:
+baseUri: 
+cookieSecret:
+  name: 
+  key:
 
 featureFlags:
   loginEnabled : "true"
   useCapabilitiesSelector: "true"
 
 serviceDependencies:
+  adminUrlConfig:
+    name: 
+    key: 
   dapiUrlConfig:
     name: 
     key: 
@@ -95,5 +103,3 @@ env:
   configmap:    
   secrets:
   values:
-    - name: NODE_TLS_REJECT_UNAUTHORIZED
-      value: "0"

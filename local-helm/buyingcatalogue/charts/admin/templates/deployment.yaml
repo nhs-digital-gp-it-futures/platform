@@ -50,7 +50,10 @@ spec:
             - name: NODE_ENV
               value: production
             - name: APP_BASE_URI
-              value: {{ .Values.appBaseUri }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.appBaseUri.name | quote }}
+                  key: {{ .Values.appBaseUri.key | quote }}              
             - name: BASE_URL
               value: {{ .Values.baseUri }}
             - name: COOKIE_SECRET
