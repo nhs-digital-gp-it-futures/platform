@@ -225,7 +225,11 @@ mp:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
       - paths: 
-          - /supplier
+          - /marketing
+  #custom variables
+  appBaseUri:
+    name: "bc-buyingcatalogue"
+    key: app-base-url
   serviceDependencies:    
     dapiUrlConfig:
       name: "bc-buyingcatalogue"

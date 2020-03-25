@@ -35,15 +35,24 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /health/live
+              path: /marketing/health/live
               port: http
           readinessProbe:
             httpGet:
-              path: /health/ready
+              path: /marketing/health/ready
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:            
+          env:
+            - name: LOGGER_LEVEL
+              value: "info"   
+            - name: NODE_ENV
+              value: "production"
+            - name: APP_BASE_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.appBaseUri.name | quote }}
+                  key: {{ .Values.appBaseUri.key | quote }}    
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
