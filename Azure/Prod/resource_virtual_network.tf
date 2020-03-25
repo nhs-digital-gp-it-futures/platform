@@ -58,11 +58,23 @@ resource "azurerm_subnet" "vm" {
   address_prefix       = "${var.sub_vm}"
 }
 
-resource "azurerm_public_ip" "Pip" {
-  name                = "${var.project}-${var.environment}-pip"
+resource "azurerm_public_ip" "pri-Pip" {
+  name                = "${var.project}-${var.environment}-${var.pip_private}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
   domain_name_label   = "${var.dns_label}"
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  tags = {
+    environment = "${var.environment}"
+  }
+}
+
+resource "azurerm_public_ip" "pub-Pip" {
+  name                = "${var.project}-${var.environment}-${var.pip_public}"
+  location            = "${var.region}"
+  resource_group_name = "${azurerm_resource_group.vnet.name}"
+  domain_name_label   = "buyingcatalogueprodpublic"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
@@ -81,8 +93,8 @@ locals {
   gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
 }
 
-resource "azurerm_application_gateway" "AppGate" {
-  name                = "${var.project}-${var.environment}-appgw"
+resource "azurerm_application_gateway" "pri-AppGate" {
+  name                = "${var.project}-${var.environment}-${var.gw_private}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
 
@@ -93,7 +105,7 @@ resource "azurerm_application_gateway" "AppGate" {
   }
 
   gateway_ip_configuration {
-    name      = "${var.project}-gwip"
+    name      = "${var.project}-gwip-pri"
     subnet_id = "${azurerm_subnet.gateway.id}"
   }
 
@@ -104,7 +116,62 @@ resource "azurerm_application_gateway" "AppGate" {
 
   frontend_ip_configuration {
     name                 = "${local.frontend_ip_configuration_name}"
-    public_ip_address_id = "${azurerm_public_ip.Pip.id}"
+    public_ip_address_id = "${azurerm_public_ip.pri-Pip.id}"
+  }
+
+  backend_address_pool {
+    name = "${local.backend_address_pool_name}"
+  }
+
+  backend_http_settings {
+    name                  = "${local.http_setting_name}"
+    cookie_based_affinity = "Disabled"
+    path                  = "/path/"
+    port                  = 80
+    protocol              = "Http"
+    request_timeout       = 1
+  }
+
+  http_listener {
+    name                           = "${local.listener_name}"
+    frontend_ip_configuration_name = "${local.frontend_ip_configuration_name}"
+    frontend_port_name             = "${local.frontend_port_name}"
+    protocol                       = "Http"
+  }
+
+  request_routing_rule {
+    name                       = "${local.request_routing_rule_name}"
+    rule_type                  = "Basic"
+    http_listener_name         = "${local.listener_name}"
+    backend_address_pool_name  = "${local.backend_address_pool_name}"
+    backend_http_settings_name = "${local.http_setting_name}"
+  }
+}
+
+resource "azurerm_application_gateway" "pub-AppGate" {
+  name                = "${var.project}-${var.environment}-${var.gw_public}"
+  location            = "${var.region}"
+  resource_group_name = "${azurerm_resource_group.vnet.name}"
+
+  sku {
+    name     = "${var.waf_name}"
+    tier     = "${var.waf_tier}"
+    capacity = "${var.waf_capacity}"
+  }
+
+  gateway_ip_configuration {
+    name      = "${var.project}-gwip-pub"
+    subnet_id = "${azurerm_subnet.gateway.id}"
+  }
+
+  frontend_port {
+    name = "${local.frontend_port_name}"
+    port = 80
+  }
+
+  frontend_ip_configuration {
+    name                 = "${local.frontend_ip_configuration_name}"
+    public_ip_address_id = "${azurerm_public_ip.pub-Pip.id}"
   }
 
   backend_address_pool {

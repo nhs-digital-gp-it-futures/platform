@@ -276,3 +276,23 @@ variable "aks_ips" {
   type        = "string"
   description = "DNS label to be used for public IP Address"
 }
+
+variable "pip_private" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "pip_public" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "gw_private" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
+
+variable "gw_public" {
+  type        = "string"
+  description = "DNS label to be used for public IP Address"
+}
