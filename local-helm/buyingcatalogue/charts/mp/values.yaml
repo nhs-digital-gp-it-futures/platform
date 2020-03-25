@@ -67,7 +67,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
+#custom variables
+appBaseUri:
+  name: 
+  key:
 serviceDependencies:
   dapiUrlConfig:
     name: 
