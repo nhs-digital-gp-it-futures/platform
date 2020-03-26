@@ -1,12 +1,3 @@
-resource "azurerm_network_security_group" "bastion" {
-  name                = "${var.project}-${var.environment}-${var.nsg}-bastion"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
-  tags = {
-    environment = "${var.environment}"
-  }
-}
-
 resource "azurerm_network_security_group" "gateway" {
   name                = "${var.project}-${var.environment}-${var.nsg}-gateway"
   location            = "${var.region}"
@@ -25,71 +16,66 @@ resource "azurerm_network_security_group" "splunk" {
   }
 }
 
-resource "azurerm_network_security_group" "vm" {
-  name                = "${var.project}-${var.environment}-${var.nsg}-vm"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
-  tags = {
-    environment = "${var.environment}"
-  }
-}
-
-resource "azurerm_network_security_rule" "aks" {
-    name = "AllowAzureCloudInBoundMp"
-    priority = "150"
-    direction = "Inbound"
-    access = "Allow"
-    protocol = "*"
-    source_port_range = "*"
-    destination_port_range = "*"
-    source_address_prefix = "AzureCloud"
-    destination_address_prefix = "51.11.47.225"
-    resource_group_name = "${var.akspool_rg}"
-    network_security_group_name = "${var.akspool_nsg}"
-    description = "Allow AzureDevops Access to MarketingPage"
-}
-
-resource "azurerm_network_security_rule" "aks1" {
-    name = "AllowAzureCloudInBoundPb"
-    priority = "151"
-    direction = "Inbound"
-    access = "Allow"
-    protocol = "*"
-    source_port_range = "*"
-    destination_port_range = "*"
-    source_address_prefix = "AzureCloud"
-    destination_address_prefix = "51.132.41.29"
-    resource_group_name = "${var.akspool_rg}"
-    network_security_group_name = "${var.akspool_nsg}"
-    description = "Allow AzureDevops Access to PublicBrowse"
-}
-
-resource "azurerm_network_security_rule" "aks2" {
-  name                        = "AllowDevAksMp"
+resource "azurerm_network_security_rule" "BWP" {
+  name                        = "AllowBwpGovIp"
+  resource_group_name         = "${azurerm_resource_group.vnet.name}"
+  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  destination_address_prefix  = "*"
+  source_address_prefix       = "${var.gov_ip_add}"
+  source_port_range           = "*"
+  destination_port_range      = "*"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
-  priority                    = 160
-  source_address_prefixes     = ["${var.gov_ip_add}"]
-  source_port_range           = "*"
-  destination_address_prefix  = "51.11.47.225"
-  destination_port_range      = "80"
-  description                 = "Gov public IP addresses which have access to this environment"
-  resource_group_name         = "${var.akspool_rg}"
-  network_security_group_name = "${var.akspool_nsg}"
+  priority                    = "150"
+  description                 = "Allow staff access who work within Bridgewater Place"
+
 }
 
-resource "azurerm_network_security_rule" "aks3" {
-  name                        = "AllowDevAksPb"
+resource "azurerm_network_security_rule" "BJSS" {
+  name                        = "AllowBjssVpn"
+  resource_group_name         = "${azurerm_resource_group.vnet.name}"
+  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  source_address_prefix       = "${var.bjss_ip_add}"
+  destination_address_prefix  = "*"
+  source_port_range           = "*"
+  destination_port_range      = "80"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
-  priority                    = 161
-  source_address_prefixes     = ["${var.gov_ip_add}"]
+  priority                    = "160"
+  description                 = "Allow staff access who are connect to the BJSS VPN"
+
+}
+
+resource "azurerm_network_security_rule" "DevOps" {
+  name                        = "AllowAzureDevOps"
+  resource_group_name         = "${azurerm_resource_group.vnet.name}"
+  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  source_address_prefix       = "AzureCloud"
+  destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_address_prefix  = "51.132.41.29"
   destination_port_range      = "80"
-  description                 = "Gov public IP addresses which have access to this environment"
-  resource_group_name         = "${var.akspool_rg}"
-  network_security_group_name = "${var.akspool_nsg}"
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  priority                    = "200"
+  description                 = "Allow AzureDevops Access to Kubernetes Cluster"
+
+}
+
+resource "azurerm_network_security_rule" "Azure" {
+  name                        = "AllowAzureInfrastructurePorts"
+  resource_group_name         = "${azurerm_resource_group.vnet.name}"
+  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  source_address_prefix       = "${var.gov_ip_add}"
+  destination_address_prefix  = "*"
+  source_port_range           = "*"
+  destination_port_range      = "65200-65535"
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  priority                    = "500"
+  description                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
+
 }
