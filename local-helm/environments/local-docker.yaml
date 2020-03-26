@@ -197,6 +197,7 @@ pb:
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"
+    showCovid19: "true"
   env:
     values:
       - name: NODE_TLS_REJECT_UNAUTHORIZED

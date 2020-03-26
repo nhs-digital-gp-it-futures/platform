@@ -79,6 +79,7 @@ cookieSecret:
 featureFlags:
   loginEnabled : "true"
   useCapabilitiesSelector: "true"
+  showCovid19: "true"
 
 serviceDependencies:
   adminUrlConfig:

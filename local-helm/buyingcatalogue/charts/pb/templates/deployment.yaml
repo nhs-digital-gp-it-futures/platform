@@ -50,6 +50,8 @@ spec:
               value: {{ .Values.featureFlags.loginEnabled | default "false" | quote }}
             - name: USE_CAPABILITIES_SELECTOR
               value: {{ .Values.featureFlags.useCapabilitiesSelector | default "false" | quote }}
+            - name: SHOW_COVID19
+              value: {{ .Values.featureFlags.showCovid19 | default "false" | quote }}
             - name: NODE_ENV
               value: "production"
             - name: APP_BASE_URI
