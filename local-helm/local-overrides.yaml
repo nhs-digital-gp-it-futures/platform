@@ -46,8 +46,6 @@ mp:
 
 pb: 
   enabled: true  
-  featureFlags:
-    showCovid19: "true"
 
 admin:
   enabled: true
