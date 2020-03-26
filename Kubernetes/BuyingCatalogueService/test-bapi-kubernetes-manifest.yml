@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-bapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-bapi
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-bapi
+    spec:
+      imagePullSecrets:
+      - name: testpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-bapi
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/bapi
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:
+        - name: ConnectionStrings__BuyingCatalogue
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: ConnectionStrings__BuyingCatalogue
+        - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: api
+spec:
+  ports:
+  - port: 5100
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-bapi

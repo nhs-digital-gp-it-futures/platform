@@ -1,13 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-publicbrowse
-  namespace: buyingcatalogue-dev-pb
+  name: gpitfutures-bc-app-publicbrowse
 spec:
   replicas: 1
   strategy:
     rollingUpdate:
-      maxSurge: 1   
+      maxSurge: 1
       maxUnavailable: 1
   minReadySeconds: 5
   selector:
@@ -19,12 +18,10 @@ spec:
         app: gpitfutures-bc-app-publicbrowse
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: devpipelinevariables
       containers:
-      - name: gpitfutures-bc-beta-publicbrowse
+      - name: gpitfutures-bc-app-publicbrowse
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
-        command: ["/bin/sh"]
-        args: ["-c", "npm run start"]
         ports:
         - containerPort: 3000
         resources:
@@ -32,7 +29,7 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-        env:                                
+        env:
         - name: API_HOST
           valueFrom:
             secretKeyRef:
@@ -43,12 +40,16 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: BLOBSTORE_HOST
+        - name: DOCUMENT_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: DOCUMENT_HOST
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: publicbrowse
-  namespace: buyingcatalogue-dev-pb
 spec:
   ports:
   - port: 3000

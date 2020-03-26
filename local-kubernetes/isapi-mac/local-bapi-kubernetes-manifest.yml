@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-deployment-api
+  namespace: buyingcatalogue
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-api  
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-api
+    spec:
+      imagePullSecrets:
+      - name: regcredlocal
+      containers:
+      - name: gpitfutures-bc-beta-api
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 100Mi
+          limits:
+            cpu: 1000m
+            memory: 500Mi
+        env:                                
+        - name: CONNECTIONSTRINGS__BUYINGCATALOGUE
+          value: Server=bapi-mssql-deployment.buyingcatalogue,1450;Initial Catalog=buyingcatalogue;Persist Security Info=False;User Id=NHSD;Password=DisruptTheMarket1!
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: http://0.0.0.0:80
+        - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+          value: http://dapi.buyingcatalogue:5101
+        - name: AUTHORITY
+          value: http://docker.for.mac.localhost:5102
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bapi
+  namespace: buyingcatalogue
+spec:
+  ports:
+  - port: 5100
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: gpitfutures-bc-app-api
+  type: LoadBalancer

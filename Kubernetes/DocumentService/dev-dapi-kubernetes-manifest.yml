@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-dapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-dapi
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-dapi
+    spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-dapi
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:
+        - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
+          valueFrom:
+            secretKeyRef:
+                name: devpipelinevariables
+                key: AZUREBLOBSTORAGE__CONNECTIONSTRING
+        - name: AZUREBLOBSTORAGE__CONTAINERNAME
+          valueFrom:
+            secretKeyRef:
+                name: devpipelinevariables
+                key: AZUREBLOBSTORAGE__CONTAINERNAME
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: dapi
+spec:
+  ports:
+  - port: 5000
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-dapi

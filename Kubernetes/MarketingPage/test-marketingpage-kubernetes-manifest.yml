@@ -1,13 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-deployment-marketingpage
-  namespace: buyingcatalogue-test-mp
+  name: gpitfutures-bc-app-marketingpage
 spec:
   replicas: 1
   strategy:
     rollingUpdate:
-      maxSurge: 1   
+      maxSurge: 1
       maxUnavailable: 1
   minReadySeconds: 5
   selector:
@@ -19,12 +18,10 @@ spec:
         app: gpitfutures-bc-app-marketingpage
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: testpipelinevariables
       containers:
-      - name: gpitfutures-bc-beta-marketingpage
+      - name: gpitfutures-bc-app-marketingpage
         image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/marketingpage
-        command: ["/bin/sh"]
-        args: ["-c", "npm run start"]
         ports:
         - containerPort: 3002
         resources:
@@ -42,13 +39,17 @@ spec:
           valueFrom:
             secretKeyRef:
               name: testpipelinevariables
-              key: BLOBSTORE_HOST  
+              key: BLOBSTORE_HOST
+        - name: DOCUMENT_HOST
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: DOCUMENT_HOST
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: marketingpage
-  namespace: buyingcatalogue-test-mp
 spec:
   ports:
   - port: 3002

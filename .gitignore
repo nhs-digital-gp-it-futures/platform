@@ -46,3 +46,6 @@ pb_backup_deploy/dev-kubernetes-manifest.yml
 pb_backup_deploy/prod-kubernetes-manifest.yml
 pb_backup_deploy/test-kubernetes-manifest.yml
 utility-services/nginx.conf.backup
+
+#Local overrides git ignored, so people can change them without risk of committing
+local-helm/local-overrides.yaml
