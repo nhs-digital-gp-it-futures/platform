@@ -60,6 +60,41 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: LOGGER_LEVEL
+        - name: APP_BASE_URI
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: APP_BASE_URI
+        - name: BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BASE_URL
+        - name: OIDC_BASE_URI
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: OIDC_BASE_URI
+        - name: OIDC_CLIENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: OIDC_CLIENT_SECRET
+        - name: IDENTITY_SERVER
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: IDENTITY_SERVER
+        - name: ORGANISATION_API_URL
+        valueFrom:
+          secretKeyRef:
+            name: devpipelinevariables
+            key: ORGANISATION_API_URL
 ---
 apiVersion: v1
 kind: Service

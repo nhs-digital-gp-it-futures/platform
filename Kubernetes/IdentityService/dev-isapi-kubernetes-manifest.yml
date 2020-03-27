@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-isapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-isapi
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-isapi
+    spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-isapi
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1
+        env:
+        - name: ConnectionStrings__CatalogueUsers
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ConnectionStrings__CatalogueUsers
+        - name: issuerUrlConfig
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: issuerUrlConfig
+        - name: clientId
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: clientId
+        - name: clientName
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: clientName
+        - name: allowOfflineAccess
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: allowOfflineAccess
+        - name: RequireClientSecret
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RequireClientSecret
+        - name: RequirePkce
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RequirePkce
+        - name: ClientSecrets
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ClientSecrets
+        - name: RequireConsent
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RequireConsent
+        - name: RedirectUris
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RedirectUris
+        - name: PostLogoutRedirectUris
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: PostLogoutRedirectUris
+        - name: RequireClientSecret
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RequireClientSecret
+        - name: AllowedScopes
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: AllowedScopes
+        - name: PostLogoutRedirectUris
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: PostLogoutRedirectUris
+        - name: RequireClientSecret
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: RequireClientSecret
+        - name: AllowedScopes
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: AllowedScopes
+        - name: AllowedGrantTypes
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: AllowedGrantTypes
+        - name: AccessTokenLifetime
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: AccessTokenLifetime
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: isapi
+spec:
+  ports:
+  - port: 8070
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-isapi
