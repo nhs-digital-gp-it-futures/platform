@@ -27,99 +27,36 @@ spec:
         resources:
           requests:
             cpu: 500m
+            memory: 50Mi
           limits:
-            cpu: 1
+            cpu: 1000m
+            memory: 1000Mi
         env:
-        - name: ConnectionStrings__CatalogueUsers
+        - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+          value: "true"
+        - name: CONNECTIONSTRINGS__CATALOGUEUSERS
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: ConnectionStrings__CatalogueUsers
-        - name: issuerUrlConfig
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: issuerUrlConfig
-        - name: clientId
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: clientId
-        - name: clientName
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: clientName
-        - name: allowOfflineAccess
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: allowOfflineAccess
-        - name: RequireClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RequireClientSecret
-        - name: RequirePkce
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RequirePkce
-        - name: ClientSecrets
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: ClientSecrets
-        - name: RequireConsent
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RequireConsent
-        - name: RedirectUris
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RedirectUris
-        - name: PostLogoutRedirectUris
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: PostLogoutRedirectUris
-        - name: RequireClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RequireClientSecret
-        - name: AllowedScopes
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: AllowedScopes
-        - name: PostLogoutRedirectUris
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: PostLogoutRedirectUris
-        - name: RequireClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: RequireClientSecret
-        - name: AllowedScopes
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: AllowedScopes
-        - name: AllowedGrantTypes
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: AllowedGrantTypes
-        - name: AccessTokenLifetime
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: AccessTokenLifetime
+        - name: ISSUERURL
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
+        - name: CLIENTS__0__CLIENTID
+          value: "NodeClient"
+        - name: CLIENTS__0__SECRET
+          value: "SECRET"
+        - name: CLIENTS__0__CLIENTNAME
+          value: "Node Client"
+        - name: CLIENTS__0__REQUIRECLIENTSECRET
+          value: "true"        
+        - name: CLIENTS__0__REDIRECTURLS__0
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/oauth/callback
+        - name: CLIENTS__0__REDIRECTURLS__1
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/oauth/callback
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/signout-callback-oidc
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/signout-callback-oidc          
 ---
 apiVersion: v1
 kind: Service

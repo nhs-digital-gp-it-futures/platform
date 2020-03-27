@@ -30,71 +30,32 @@ spec:
           limits:
             cpu: 500m
         env:
-        - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: API_HOST
-        - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: BLOBSTORE_HOST
-        - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: DOCUMENT_HOST
         - name: COOKIE_SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: COOKIE_SECRET
-        - name: oidcClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: oidcClientSecret
         - name: LOGGER_LEVEL
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: LOGGER_LEVEL
         - name: APP_BASE_URI
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: APP_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
         - name: BASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: BASE_URL
+          value: "/admin"
         - name: OIDC_BASE_URI
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: OIDC_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
         - name: OIDC_CLIENT_ID
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: OIDC_CLIENT_ID
+          value: "NodeClient"
         - name: OIDC_CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: OIDC_CLIENT_SECRET
+          value: "SECRET"
         - name: IDENTITY_SERVER
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: IDENTITY_SERVER
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
         - name: ORGANISATION_API_URL
-        valueFrom:
-          secretKeyRef:
-            name: devpipelinevariables
-            key: ORGANISATION_API_URL
+          value: ""
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
 ---
 apiVersion: v1
 kind: Service
