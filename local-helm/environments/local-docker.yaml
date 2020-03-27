@@ -1,7 +1,7 @@
 dbPassword:
 clientSecret:
 appBaseUrl: "https://host.docker.internal"
-baseIsapiEnabledUrl: "https://host.docker.internal/"
+baseIsapiEnabledUrl: "https://host.docker.internal/identity"
 
 azurite:
   enabled: true
