@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-adminpage
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-adminpage
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-adminpage
+    spec:
+      imagePullSecrets:
+      - name: testpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-adminpage
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/admin
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: API_HOST
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: API_HOST
+        - name: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: BLOBSTORE_HOST
+        - name: DOCUMENT_HOST
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: DOCUMENT_HOST
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: COOKIE_SECRET
+        - name: oidcClientSecret
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: oidcClientSecret
+        - name: LOGGER_LEVEL
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: LOGGER_LEVEL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin
+spec:
+  ports:
+  - port: 3005
+  selector:
+    app: gpitfutures-bc-app-adminpage
