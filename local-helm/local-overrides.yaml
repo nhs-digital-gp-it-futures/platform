@@ -32,7 +32,7 @@ isapi-db:
 
 isapi:  
   enabled: true
-  disabledUrl: "docker.for.win.localhost"  
+  disabledUrl: "http://host.docker.internal"  
 
 oapi:  
   enabled: true
