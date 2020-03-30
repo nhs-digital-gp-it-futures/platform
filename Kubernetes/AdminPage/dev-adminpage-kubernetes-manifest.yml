@@ -53,7 +53,7 @@ spec:
         - name: IDENTITY_SERVER
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
         - name: ORGANISATION_API_URL
-          value: ""
+          value: "http://oapi:5103"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
 ---
