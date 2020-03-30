@@ -49,11 +49,11 @@ spec:
               name: testpipelinevariables
               key: LOGGER_LEVEL
         - name: APP_BASE_URI
-          value: "https://buyingcataloguetest.uksouth.cloudapp.azure.com"
+          value: "https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com"
         - name: BASE_URL
           value: "/admin"
         - name: OIDC_BASE_URI
-          value: "https://buyingcataloguetest.uksouth.cloudapp.azure.com/identity"
+          value: "https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/identity"
         - name: OIDC_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -65,7 +65,7 @@ spec:
               name: testpipelinevariables
               key: OIDC_CLIENT_SECRET
         - name: IDENTITY_SERVER
-          value: "https://buyingcataloguetest.uksouth.cloudapp.azure.com/identity"
+          value: "https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/identity"
         - name: ORGANISATION_API_URL
           value: ""
         - name: NODE_TLS_REJECT_UNAUTHORIZED
