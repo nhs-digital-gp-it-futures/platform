@@ -29,6 +29,14 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: http
         env:
         - name: COOKIE_SECRET
           valueFrom:
