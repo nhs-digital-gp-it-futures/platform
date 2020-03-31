@@ -47,12 +47,12 @@ spec:
         - name: OIDC_CLIENT_ID
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: OIDC_CLIENT_ID
         - name: OIDC_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: OIDC_CLIENT_SECRET
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
