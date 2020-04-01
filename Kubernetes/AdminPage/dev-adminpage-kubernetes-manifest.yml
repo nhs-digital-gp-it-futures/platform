@@ -23,7 +23,7 @@ spec:
       - name: gpitfutures-bc-app-adminpage
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
         resources:
           requests:
             cpu: 250m
@@ -32,11 +32,11 @@ spec:
         livenessProbe:
           httpGet:
             path: /admin/health/live
-            port: http
+            port: 3005
         readinessProbe:
           httpGet:
             path: /admin/health/live
-            port: http
+            port: 3005
         env:
         - name: COOKIE_SECRET
           valueFrom:
@@ -67,7 +67,7 @@ spec:
         - name: IDENTITY_SERVER
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
         - name: ORGANISATION_API_URL
-          value: ""
+          value: "http://oapi:5103"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
 ---

@@ -45,9 +45,15 @@ spec:
         - name: OIDC_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
         - name: OIDC_CLIENT_ID
-          value: "NodeClient"
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
         - name: OIDC_CLIENT_SECRET
-          value: "SECRET"
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
         - name: BUYING_CATALOGUE_ADMIN_HOST
