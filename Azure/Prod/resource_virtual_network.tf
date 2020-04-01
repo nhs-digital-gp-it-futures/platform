@@ -62,7 +62,7 @@ resource "azurerm_public_ip" "pri-Pip" {
   name                = "${var.project}-${var.environment}-${var.pip_private}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
-  domain_name_label   = "${var.dns_label}"
+  domain_name_label   = "${dns_label_pri}"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
@@ -74,7 +74,7 @@ resource "azurerm_public_ip" "pub-Pip" {
   name                = "${var.project}-${var.environment}-${var.pip_public}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
-  domain_name_label   = "buyingcatalogueprodpublic"
+  domain_name_label   = "dns_label_pub"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {

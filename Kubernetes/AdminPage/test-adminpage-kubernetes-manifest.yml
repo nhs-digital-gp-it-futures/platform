@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-app-publicbrowse
+  name: gpitfutures-bc-app-adminpage
 spec:
   replicas: 1
   strategy:
@@ -11,37 +11,47 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-publicbrowse
+      app: gpitfutures-bc-app-adminpage
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-publicbrowse
+        app: gpitfutures-bc-app-adminpage
     spec:
       imagePullSecrets:
       - name: testpipelinevariables
       containers:
-      - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
+      - name: gpitfutures-bc-app-adminpage
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/admin
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
         resources:
           requests:
             cpu: 250m
           limits:
             cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
+        readinessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
         env:
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: COOKIE_SECRET
         - name: LOGGER_LEVEL
-          value: "info"
-        - name: LOGIN_ENABLED
-          value: "true"
-        - name: USE_CAPABILITIES_SELECTOR
-          value: "true"
-        - name: SHOW_COVID19
-          value: "true"
-        - name: NODE_ENV
-          value: "production"
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: LOGGER_LEVEL
         - name: APP_BASE_URI
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
+        - name: BASE_URL
+          value: "/admin"
         - name: OIDC_BASE_URI
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity"
         - name: OIDC_CLIENT_ID
@@ -54,32 +64,19 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: OIDC_CLIENT_SECRET
+        - name: IDENTITY_SERVER
+          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity"
+        - name: ORGANISATION_API_URL
+          value: "http://oapi:5103"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
-        - name: BUYING_CATALOGUE_ADMIN_HOST
-          value: "/admin"
-        - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: testpipelinevariables
-              key: API_HOST
-        - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: testpipelinevariables
-              key: BLOBSTORE_HOST
-        - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: testpipelinevariables
-              key: DOCUMENT_HOST
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: publicbrowse
+  name: admin
 spec:
   ports:
-  - port: 3000
+  - port: 3005
   selector:
-    app: gpitfutures-bc-app-publicbrowse
+    app: gpitfutures-bc-app-adminpage
