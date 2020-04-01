@@ -26,7 +26,7 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: 500m
+            cpu: 50m
             memory: 50Mi
           limits:
             cpu: 1000m
@@ -60,13 +60,13 @@ spec:
         - name: CLIENTS__0__REQUIRECLIENTSECRET
           value: "true"
         - name: CLIENTS__0__REDIRECTURLS__0
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/oauth/callback
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__1
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/admin/oauth/callback
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/oauth/callback
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/signout-callback-oidc
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
         - name: RESOURCES__0__RESOURCENAME
           value: Organisation
         - name: RESOURCES__0__DISPLAYNAME
