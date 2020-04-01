@@ -23,43 +23,53 @@ spec:
       - name: gpitfutures-bc-app-adminpage
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
         resources:
           requests:
             cpu: 250m
           limits:
             cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
+        readinessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
         env:
-        - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: API_HOST
-        - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: BLOBSTORE_HOST
-        - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: DOCUMENT_HOST
         - name: COOKIE_SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: COOKIE_SECRET
-        - name: oidcClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: oidcClientSecret
         - name: LOGGER_LEVEL
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: LOGGER_LEVEL
+        - name: APP_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+        - name: BASE_URL
+          value: "/admin"
+        - name: OIDC_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
+        - name: IDENTITY_SERVER
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+        - name: ORGANISATION_API_URL
+          value: "http://oapi:5103"
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
 ---
 apiVersion: v1
 kind: Service
