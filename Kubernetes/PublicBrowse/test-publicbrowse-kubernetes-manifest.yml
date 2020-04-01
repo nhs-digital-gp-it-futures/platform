@@ -41,19 +41,13 @@ spec:
         - name: NODE_ENV
           value: "production"
         - name: APP_BASE_URI
-          value: "https://buyingcataloguetest.uksouth.cloudapp.azure.com"
+          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
         - name: OIDC_BASE_URI
-          value: "https://buyingcataloguetest.uksouth.cloudapp.azure.com/identity"
+          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity"
         - name: OIDC_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: testpipelinevariables
-              key: OIDC_CLIENT_ID
+          value: "NodeClient"
         - name: OIDC_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: testpipelinevariables
-              key: OIDC_CLIENT_SECRET
+          value: "SECRET"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
         - name: BUYING_CATALOGUE_ADMIN_HOST

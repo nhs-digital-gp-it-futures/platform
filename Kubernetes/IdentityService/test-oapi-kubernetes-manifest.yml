@@ -21,7 +21,7 @@ spec:
       - name: testpipelinevariables
       containers:
       - name: gpitfutures-bc-app-oapi
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/organisations-api
         ports:
         - containerPort: 80
         resources:
@@ -40,7 +40,7 @@ spec:
               name: testpipelinevariables
               key: ConnectionStrings__CatalogueUsers
         - name: AUTHORITY
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/identity/
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
 ---
