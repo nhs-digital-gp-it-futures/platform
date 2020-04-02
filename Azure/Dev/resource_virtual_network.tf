@@ -134,13 +134,9 @@ resource "azurerm_application_gateway" "AppGate" {
     backend_address_pool_name  = "${local.backend_address_pool_name}"
     backend_http_settings_name = "${local.http_setting_name}"
   }
-<<<<<<< Updated upstream
-}
-=======
 
   ssl_policy {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
 }
->>>>>>> Stashed changes
