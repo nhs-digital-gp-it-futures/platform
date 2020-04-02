@@ -61,6 +61,7 @@ resource "azurerm_subnet" "vm" {
 resource "azurerm_public_ip" "Pip" {
   name                = "${var.project}-${var.environment}-pip"
   location            = "${var.region}"
+  domain_name_label   = "${var.dns_label}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -133,4 +134,13 @@ resource "azurerm_application_gateway" "AppGate" {
     backend_address_pool_name  = "${local.backend_address_pool_name}"
     backend_http_settings_name = "${local.http_setting_name}"
   }
+<<<<<<< Updated upstream
 }
+=======
+
+  ssl_policy {
+    policy_type = "Predefined"
+    policy_name = "AppGwSslPolicy20170401S"
+  }
+}
+>>>>>>> Stashed changes
