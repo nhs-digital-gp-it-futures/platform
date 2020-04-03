@@ -49,7 +49,7 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
 }
 
 resource "azurerm_sql_database" "sql-bapi-pri" {
-  name                             = var.project}-${var.environment}-${var.sql_pri
+  name                             = "${var.project}-${var.environment}-${var.sql_pri}"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name
@@ -60,7 +60,7 @@ resource "azurerm_sql_database" "sql-bapi-pri" {
 }
 
 resource "azurerm_sql_database" "sql-bapi-pub" {
-  name                             = var.project}-${var.environment}-${var.sql_pub
+  name                             = "${var.project}-${var.environment}-${var.sql_pub}"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name

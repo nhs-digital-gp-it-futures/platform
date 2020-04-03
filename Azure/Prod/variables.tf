@@ -306,3 +306,8 @@ variable "gw_public" {
   type        = string
   description = "DNS label to be used for public IP Address"
 }
+
+variable "bjss_ip_add" {
+  type        = string
+  description = "DNS label to be used for public IP Address"
+}
