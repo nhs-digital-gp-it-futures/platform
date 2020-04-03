@@ -62,7 +62,7 @@ resource "azurerm_public_ip" "pri-Pip" {
   name                = "${var.project}-${var.environment}-${var.pip_private}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
-  domain_name_label   = "${var.dns_label}"
+  domain_name_label   = "${dns_label_pri}"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
@@ -74,7 +74,7 @@ resource "azurerm_public_ip" "pub-Pip" {
   name                = "${var.project}-${var.environment}-${var.pip_public}"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
-  domain_name_label   = "buyingcatalogueprodpublic"
+  domain_name_label   = "dns_label_pub"
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
@@ -200,5 +200,10 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     http_listener_name         = "${local.listener_name}"
     backend_address_pool_name  = "${local.backend_address_pool_name}"
     backend_http_settings_name = "${local.http_setting_name}"
+  }
+
+  ssl_policy {
+    policy_type = "Predefined"
+    policy_name = "AppGwSslPolicy20170401S"
   }
 }

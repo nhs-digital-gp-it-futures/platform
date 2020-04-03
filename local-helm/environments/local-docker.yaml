@@ -1,7 +1,7 @@
 dbPassword:
 clientSecret:
 appBaseUrl: "https://host.docker.internal"
-baseIsapiEnabledUrl: "https://host.docker.internal/"
+baseIsapiEnabledUrl: "https://host.docker.internal/identity"
 
 azurite:
   enabled: true
@@ -197,6 +197,7 @@ pb:
   featureFlags:
     loginEnabled : "true"
     useCapabilitiesSelector: "true"
+    showCovid19: "true"
   env:
     values:
       - name: NODE_TLS_REJECT_UNAUTHORIZED
@@ -204,6 +205,7 @@ pb:
 
 admin: 
   enabled: true
+  disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin

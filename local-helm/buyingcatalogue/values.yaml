@@ -268,8 +268,9 @@ pb:
     name: "bc-buyingcatalogue"
     key: cookie-secret
   featureFlags:
-    loginEnabled : "true"
+    loginEnabled: "true"
     useCapabilitiesSelector: "true"
+    showCovid19: "true"
   serviceDependencies:
     adminUrlConfig:
       name: "bc-buyingcatalogue"

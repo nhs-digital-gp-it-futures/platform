@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-isapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-isapi
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-isapi
+    spec:
+      imagePullSecrets:
+      - name: testpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-isapi
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 50Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+        readinessProbe:
+          httpGet:
+            path: /identity/.well-known/openid-configuration
+            port: 80
+        env:
+        - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+          value: "true"
+        - name: CONNECTIONSTRINGS__CATALOGUEUSERS
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: ConnectionStrings__CatalogueUsers
+        - name: ISSUERURL
+          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/identity/
+        - name: CLIENTS__0__CLIENTID
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: CLIENTS__0__CLIENTID
+        - name: CLIENTS__0__SECRET
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: CLIENTS__0__SECRET
+        - name: CLIENTS__0__CLIENTNAME
+          value: "Node Client"
+        - name: CLIENTS__0__REQUIRECLIENTSECRET
+          value: "true"
+        - name: CLIENTS__0__REDIRECTURLS__0
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/oauth/callback
+        - name: CLIENTS__0__REDIRECTURLS__1
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/oauth/callback
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/signout-callback-oidc
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
+        - name: RESOURCES__0__RESOURCENAME
+          value: Organisation
+        - name: RESOURCES__0__DISPLAYNAME
+          value: Organisation
+        - name: RESOURCES__0__CLAIMTYPES__0
+          value: organisation
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: isapi
+spec:
+  ports:
+  - port: 8070
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-isapi
