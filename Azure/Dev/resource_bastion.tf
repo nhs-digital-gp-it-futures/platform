@@ -120,8 +120,8 @@ resource "azurerm_virtual_machine" "jump" {
 #--- Define password + hostname ---
   os_profile {
     computer_name  = "Jump"
-    admin_username = var.kv_badmin_user
-    admin_password = var.kv_badmin_pass
+    admin_username = data.azurerm_key_vault_secret.kv-buser.value
+    admin_password = data.azurerm_key_vault_secret.kv-bpass.value
   }
  
 #---
