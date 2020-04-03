@@ -84,7 +84,7 @@ resource "azurerm_application_gateway" "AppGate" {
   name                = "${var.project}-${var.environment}-appgw"
   location            = "${var.region}"
   resource_group_name = "${azurerm_resource_group.vnet.name}"
-
+  
   sku {
     name     = "${var.waf_name}"
     tier     = "${var.waf_tier}"
@@ -132,5 +132,10 @@ resource "azurerm_application_gateway" "AppGate" {
     http_listener_name         = "${local.listener_name}"
     backend_address_pool_name  = "${local.backend_address_pool_name}"
     backend_http_settings_name = "${local.http_setting_name}"
+  }
+
+  ssl_policy {
+    policy_type = "Predefined"
+    policy_name = "AppGwSslPolicy20170401S"
   }
 }
