@@ -94,3 +94,4 @@ In order to tear down the system, simply run the appropriate tear down script.
 |                            ISAPI-MSSQL                           |       1451        |                                                             |
 | [MP](http://localhost:3002/supplier/solution/100000-001/preview) |       3002        | [MP](http://localhost/supplier/solution/100000-001/preview) |
 |                   [PB](http://localhost:3000)                    |       3000        |                   [PB](http://localhost)                    |
+|                  [EMAIL](http://localhost:1080)                  |    1080,25,587    |                                                             |

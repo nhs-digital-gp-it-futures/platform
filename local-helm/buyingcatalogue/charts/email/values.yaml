@@ -1,4 +1,4 @@
-# Default values for oapi.
+# Default values for email.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,19 +7,17 @@ replicaCount: 1
 useLocalImage:
 
 image:
-  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/smtp-server
   pullPolicy: Always
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: oapi
-fullnameOverride: gpitfutures-bc-oapi
-
-minReadySeconds: 5
+nameOverride: "email"
+fullnameOverride: "gpitfutures-bc-email"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -39,47 +37,23 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 5103
+  ports:
+    http:
+    smtp:
+    smtps:
 
 resources: 
   requests:
-    cpu: 250m
-    memory: 50Mi
+    memory: 64Mi
+    cpu: 10m
   limits:
     cpu: 1000m
-    memory: 500Mi
-  
+    memory: 300Mi
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
 
-updateStrategy:
-  rollingUpdate:
-    maxSurge: 1
-    maxUnavailable: 1
-
-connectionStringSecret: 
-  name: 
-  key:   
-
-# make sure its false if env == prod
-allowInvalidCertificate: false
-
-serviceDependencies:
-  oidc:
-    baseUriConfig:
-      name: 
-      key: 
-  email:
-    hostUriConfig:
-      name:
-      key:  
-    port:
-
-env:
-  configmap:
-  secrets:
-  values:    
 
