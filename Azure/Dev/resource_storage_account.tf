@@ -7,13 +7,13 @@ resource "azurerm_resource_group" "storage" {
 }
 
 resource "azurerm_storage_account" "data" {
-  name                              = "${var.project}${var.environment}sa"
-  location                          = var.region
-  resource_group_name               = azurerm_resource_group.storage.name
-  account_tier                      = var.sa_tier
-  account_replication_type          = var.sa_rep_type
-  account_kind                      = var.sa_kind  
-  enable_https_traffic_only         = "true"
+  name                      = "${var.project}${var.environment}sa"
+  location                  = var.region
+  resource_group_name       = azurerm_resource_group.storage.name
+  account_tier              = var.sa_tier
+  account_replication_type  = var.sa_rep_type
+  account_kind              = var.sa_kind
+  enable_https_traffic_only = "true"
 }
 
 resource "azurerm_advanced_threat_protection" "data" {
@@ -22,13 +22,13 @@ resource "azurerm_advanced_threat_protection" "data" {
 }
 
 resource "azurerm_storage_account" "sqluks" {
-  name                              = "${var.project}${var.environment}sasqluks"
-  location                          = var.region
-  resource_group_name               = azurerm_resource_group.storage.name
-  account_tier                      = var.sa_tier
-  account_replication_type          = var.sa_rep_type
-  account_kind                      = var.sa_kind 
-  enable_https_traffic_only         = "true"
+  name                      = "${var.project}${var.environment}sasqluks"
+  location                  = var.region
+  resource_group_name       = azurerm_resource_group.storage.name
+  account_tier              = var.sa_tier
+  account_replication_type  = var.sa_rep_type
+  account_kind              = var.sa_kind
+  enable_https_traffic_only = "true"
 }
 
 resource "azurerm_advanced_threat_protection" "sqluks" {
@@ -37,13 +37,13 @@ resource "azurerm_advanced_threat_protection" "sqluks" {
 }
 
 resource "azurerm_storage_account" "sqlukw" {
-  name                              = "${var.project}${var.environment}sasqlukw"
-  location                          = var.region1
-  resource_group_name               = azurerm_resource_group.storage.name
-  account_tier                      = var.sa_tier
-  account_replication_type          = var.sa_rep_type
-  account_kind                      = var.sa_kind  
-  enable_https_traffic_only         = "true"
+  name                      = "${var.project}${var.environment}sasqlukw"
+  location                  = var.region1
+  resource_group_name       = azurerm_resource_group.storage.name
+  account_tier              = var.sa_tier
+  account_replication_type  = var.sa_rep_type
+  account_kind              = var.sa_kind
+  enable_https_traffic_only = "true"
 }
 
 resource "azurerm_advanced_threat_protection" "sqlukw" {
