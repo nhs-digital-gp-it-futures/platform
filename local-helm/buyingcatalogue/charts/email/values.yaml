@@ -39,7 +39,6 @@ service:
   type: LoadBalancer
   ports:
     http:
-    smtp:
     smtps:
 
 resources: 

@@ -5,7 +5,7 @@
 {{- $isapiUrl:= ternary .Values.baseIsapiEnabledUrl  (printf "%s:%d" .Values.isapi.disabledUrl (.Values.isapi.service.port | int )) .Values.isapi.enabled -}}
 {{- $isapiIssuerUrl:= ternary $isapiUrl .Values.isapi.feDisabledIssuerUrl $areAllFEComponentsEnabled -}}
 {{- $adminUrl:= ternary .Values.admin.baseUri .Values.admin.disabledUrl .Values.admin.enabled -}}
-{{- $emailUrl:= printf "%s.%s" (include "call-nested" (list . "email" "email.fullname")) .Release.Namespace -}}
+{{- $emailUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "email" "email.fullname")) .Release.Namespace) .Values.email.disabledUrl .Values.email.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap

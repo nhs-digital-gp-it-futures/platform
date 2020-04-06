@@ -209,7 +209,6 @@ email:
     type: LoadBalancer
     ports:
       http: 1080
-      smtp: 25
       smtps: 587
  
 file-loader:

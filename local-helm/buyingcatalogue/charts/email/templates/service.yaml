@@ -12,10 +12,6 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-    - port: {{ .smtp }}
-      targetPort: smtp
-      protocol: TCP
-      name: smtp
     - port: {{ .smtps }}
       targetPort: smtps
       protocol: TCP
