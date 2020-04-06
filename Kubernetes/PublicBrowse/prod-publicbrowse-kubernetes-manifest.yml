@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:20200323.1
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:20200402.4
         ports:
         - containerPort: 3000
         resources:

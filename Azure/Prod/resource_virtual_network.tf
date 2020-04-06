@@ -199,4 +199,9 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+
+  ssl_policy {
+    policy_type = "Predefined"
+    policy_name = "AppGwSslPolicy20170401S"
+  }
 }
