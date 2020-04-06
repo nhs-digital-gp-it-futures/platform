@@ -1,29 +1,29 @@
 resource "azurerm_network_security_group" "gateway" {
   name                = "${var.project}-${var.environment}-${var.nsg}-gateway"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
+  location            = var.region
+  resource_group_name = azurerm_resource_group.vnet.name
   tags = {
-    environment = "${var.environment}"
+    environment = var.environment
   }
 }
 
 resource "azurerm_network_security_group" "splunk" {
   name                = "${var.project}-${var.environment}-${var.nsg}-splunk"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
+  location            = var.region
+  resource_group_name = azurerm_resource_group.vnet.name
   tags = {
-    environment = "${var.environment}"
+    environment = var.environment
   }
 }
 
 resource "azurerm_network_security_rule" "BWP" {
   name                        = "AllowBwpGovIp"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
   destination_address_prefix  = "*"
-  source_address_prefix       = "${var.gov_ip_add}"
+  source_address_prefix       = var.gov_ip_add
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_range      = "80"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
@@ -34,12 +34,12 @@ resource "azurerm_network_security_rule" "BWP" {
 
 resource "azurerm_network_security_rule" "BJSS" {
   name                        = "AllowBjssVpn"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
-  source_address_prefix       = "${var.bjss_ip_add}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
+  source_address_prefix       = var.bjss_ip_add
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_range      = "80"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
@@ -50,25 +50,24 @@ resource "azurerm_network_security_rule" "BJSS" {
 
 resource "azurerm_network_security_rule" "DevOps" {
   name                        = "AllowAzureDevOps"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
   source_address_prefix       = "AzureCloud"
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_range      = "80"
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
-  priority                    = "200"
-  description                 = "Allow AzureDevops Access to Kubernetes Cluster"
-
+  priority                    = 200
+  description                 = "Allow AzureDevOps access to this environment"
 }
 
 resource "azurerm_network_security_rule" "Azure" {
   name                        = "AllowAzureInfrastructurePorts"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
-  source_address_prefix       = "${var.gov_ip_add}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
   source_port_range           = "*"
   destination_port_range      = "65200-65535"
@@ -77,5 +76,9 @@ resource "azurerm_network_security_rule" "Azure" {
   protocol                    = "TCP"
   priority                    = "500"
   description                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
+}
 
+resource "azurerm_subnet_network_security_group_association" "gateway" {
+  subnet_id                 = azurerm_subnet.gateway.id
+  network_security_group_id = azurerm_network_security_group.gateway.id
 }
