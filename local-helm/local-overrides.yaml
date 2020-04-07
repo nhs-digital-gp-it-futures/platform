@@ -38,6 +38,10 @@ oapi:
   enabled: true
   disabledUrl: "host.docker.internal"  
 
+email:
+  enabled: true
+  disabledUrl: ""
+  
 file-loader:
   enabled: true
 
