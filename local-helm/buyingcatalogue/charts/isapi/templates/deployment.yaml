@@ -107,6 +107,17 @@ spec:
             {{- end -}}            
             {{- end -}}
 
+            {{- with .Values.serviceDependencies.email }}
+            - name: SMTPSERVER__HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .hostUriConfig.name | quote }}
+                  key: {{ .hostUriConfig.key | quote }}
+            - name: SMTPSERVER__PORT
+              value: {{ .port | quote }}
+            {{- end }}
+            - name: ALLOWINVALIDCERTIFICATE
+              value: {{ .Values.allowInvalidCertificate | quote }}
 
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}

@@ -93,7 +93,16 @@ clients:
     
 connectionStringSecret: 
   name: 
-  key:   
+  key:  
+
+serviceDependencies:
+  email:
+    hostUriConfig:
+      name:
+      key:  
+    port:
+# make sure its false if env == prod
+allowInvalidCertificate: false 
 
 env:
   configmap:
