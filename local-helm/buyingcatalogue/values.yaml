@@ -156,6 +156,13 @@ isapi:
         - email
         - profile
         - Organisation
+  serviceDependencies:
+    email:
+      hostUriConfig:
+        name: "bc-buyingcatalogue"
+        key: email-url      
+      port: 587
+  allowInvalidCertificate: false
   ingress:
     enabled: true
     annotations: 

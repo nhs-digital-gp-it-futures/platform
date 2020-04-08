@@ -130,6 +130,13 @@ isapi:
         - profile
         - SampleResource  
         - Organisation
+  serviceDependencies:
+    email:
+      hostUriConfig:
+        name: "bc-buyingcatalogue"
+        key: email-url      
+      port: 587
+  allowInvalidCertificate: true
   ingress:
     enabled: true
     annotations: 
