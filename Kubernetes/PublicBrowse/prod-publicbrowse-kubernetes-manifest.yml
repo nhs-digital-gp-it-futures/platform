@@ -55,6 +55,10 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: oidcClientSecret
+        - name: LOGIN_ENABLED
+          value: "false"
+        - name: BASE_URL
+          value: "/"
 ---
 apiVersion: v1
 kind: Service
