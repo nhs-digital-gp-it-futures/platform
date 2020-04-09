@@ -36,14 +36,14 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health/live
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health/ready
-          #     port: http
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -54,13 +54,22 @@ spec:
                 secretKeyRef:            
                   name: {{ .Values.connectionStringSecret.name }}
                   key: {{ .Values.connectionStringSecret.key }} 
-            {{- with .Values.serviceDependencies.oidc }}
+            {{- with .Values.serviceDependencies }}
             - name: AUTHORITY
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .baseUriConfig.name | quote }}
-                  key: {{ .baseUriConfig.key | quote }}
+                  name: {{ .oidc.baseUriConfig.name | quote }}
+                  key: {{ .oidc.baseUriConfig.key | quote }}
+            - name: SMTPSERVER__HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .email.hostUriConfig.name | quote }}
+                  key: {{ .email.hostUriConfig.key | quote }}
+            - name: SMTPSERVER__PORT
+              value: {{ .email.port | quote }}
             {{- end }}
+            - name: ALLOWINVALIDCERTIFICATE
+              value: {{ .Values.allowInvalidCertificate | quote }}
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}

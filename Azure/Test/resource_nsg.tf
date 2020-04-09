@@ -1,27 +1,27 @@
 resource "azurerm_network_security_group" "gateway" {
   name                = "${var.project}-${var.environment}-${var.nsg}-gateway"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
+  location            = var.region
+  resource_group_name = azurerm_resource_group.vnet.name
   tags = {
-    environment = "${var.environment}"
+    environment = var.environment
   }
 }
 
 resource "azurerm_network_security_group" "splunk" {
   name                = "${var.project}-${var.environment}-${var.nsg}-splunk"
-  location            = "${var.region}"
-  resource_group_name = "${azurerm_resource_group.vnet.name}"
+  location            = var.region
+  resource_group_name = azurerm_resource_group.vnet.name
   tags = {
-    environment = "${var.environment}"
+    environment = var.environment
   }
 }
 
 resource "azurerm_network_security_rule" "BWP" {
   name                        = "AllowBwpGovIp"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
   destination_address_prefix  = "*"
-  source_address_prefix       = "${var.gov_ip_add}"
+  source_address_prefix       = var.gov_ip_add
   source_port_range           = "*"
   destination_port_range      = "80,433"
   direction                   = "Inbound"
@@ -34,9 +34,9 @@ resource "azurerm_network_security_rule" "BWP" {
 
 resource "azurerm_network_security_rule" "BJSS" {
   name                        = "AllowBjssVpn"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
-  source_address_prefix       = "${var.bjss_ip_add}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
+  source_address_prefix       = var.bjss_ip_add
   destination_address_prefix  = "*"
   source_port_range           = "*"
   destination_port_range      = "80,433"
@@ -50,8 +50,8 @@ resource "azurerm_network_security_rule" "BJSS" {
 
 resource "azurerm_network_security_rule" "DevOps" {
   name                        = "AllowAzureDevOps"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
   source_address_prefix       = "AzureCloud"
   destination_address_prefix  = "*"
   source_port_range           = "*"
@@ -66,9 +66,9 @@ resource "azurerm_network_security_rule" "DevOps" {
 
 resource "azurerm_network_security_rule" "Azure" {
   name                        = "AllowAzureInfrastructurePorts"
-  resource_group_name         = "${azurerm_resource_group.vnet.name}"
-  network_security_group_name = "${azurerm_network_security_group.gateway.name}"
-  source_address_prefix       = "${var.gov_ip_add}"
+  resource_group_name         = azurerm_resource_group.vnet.name
+  network_security_group_name = azurerm_network_security_group.gateway.name
+  source_address_prefix       = var.gov_ip_add
   destination_address_prefix  = "*"
   source_port_range           = "*"
   destination_port_range      = "65200-65535"

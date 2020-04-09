@@ -156,6 +156,13 @@ isapi:
         - email
         - profile
         - Organisation
+  serviceDependencies:
+    email:
+      hostUriConfig:
+        name: "bc-buyingcatalogue"
+        key: email-url      
+      port: 587
+  allowInvalidCertificate: false
   ingress:
     enabled: true
     annotations: 
@@ -188,8 +195,29 @@ oapi:
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
-        key: isapi-url  
+        key: isapi-url
+    email:
+      hostUriConfig:
+        name: "bc-buyingcatalogue"
+        key: email-url      
+      port: 587
+  allowInvalidCertificate: false
 
+email:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/smtp-server
+  useLocalImage: false
+  imagePullSecrets: 
+  nameOverride: "email"
+  fullnameOverride: "gpitfutures-bc-email"
+  service:
+    type: LoadBalancer
+    ports:
+      http: 1080
+      smtps: 587
+ 
 file-loader:
   enabled: true
   replicaCount: 1
