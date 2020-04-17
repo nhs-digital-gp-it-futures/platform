@@ -16,24 +16,22 @@ To begin, make sure you have kubernetes running locally as per the [Kubernetes D
 
 Note that this system relies upon helm charts. Instructions on how to install helm can be found [here](https://helm.sh/docs/intro/install/).
 
-### (Optional) Run Dashboard
+### Set up Ingress
 
-You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-dashboard.md).
+Ingress is required for the identity stuff to work. To enable the ingress, execute these two snippets in shell of your preference
 
-### (Optional) Set up Ingress
-
-You may wish to run the system together with an ingress controller to get closer to production environment. 
-
-
-To enable the ingress, execute these two snippets in shell of your preference
-
-```
+```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-```
-```
 helm install bc stable/nginx-ingress
 ```
 
+### Add Namespace
+
+Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
+
+### (Optional) Run Dashboard
+
+You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-dashboard.md).
 
 ## Launching, Updating the Environment
 
@@ -95,3 +93,5 @@ In order to tear down the system, simply run the appropriate tear down script.
 | [MP](http://localhost:3002/supplier/solution/100000-001/preview) |       3002        | [MP](http://localhost/supplier/solution/100000-001/preview) |
 |                   [PB](http://localhost:3000)                    |       3000        |                   [PB](http://localhost)                    |
 |                  [EMAIL](http://localhost:1080)                  |      1080,587     |                                                             |
+|                  [REDIS](not exposed)                            |      6379         |                                                             |
+|                  [REDIS COMMANDER](http://localhost:8181)        |      8181         |                                                             |

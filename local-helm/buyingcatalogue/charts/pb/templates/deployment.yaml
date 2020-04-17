@@ -52,6 +52,8 @@ spec:
               value: {{ .Values.featureFlags.useCapabilitiesSelector | default "false" | quote }}
             - name: SHOW_COVID19
               value: {{ .Values.featureFlags.showCovid19 | default "false" | quote }}
+            - name: SHOW_ORDER_FORM
+              value: {{ .Values.featureFlags.showOrderForm | default "false" | quote }}              
             - name: NODE_ENV
               value: "production"
             - name: APP_BASE_URI
@@ -59,7 +61,14 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.appBaseUri.name | quote }}
                   key: {{ .Values.appBaseUri.key | quote }}    
-            {{- if .Values.serviceDependencies }}            
+            {{- if .Values.serviceDependencies }}
+            {{- if .Values.serviceDependencies.redisUrlConfig }}
+            - name: REDIS_URL              
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.redisUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.redisUrlConfig.key | quote }}
+            {{- end -}}       
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
               valueFrom:

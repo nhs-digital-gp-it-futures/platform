@@ -281,3 +281,14 @@ admin:
       values:
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+
+redis:
+  enabled: true
+  cluster:
+    enabled: false
+  usePassword: false
+
+redis-commander:
+  enabled: true
+  service:
+    port: 8181

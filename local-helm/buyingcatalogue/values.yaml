@@ -299,16 +299,17 @@ pb:
     loginEnabled: "true"
     useCapabilitiesSelector: "true"
     showCovid19: "true"
+    showOrderForm: "true"
   serviceDependencies:
     adminUrlConfig:
       name: "bc-buyingcatalogue"
-      key: admin-url
-    dapiUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: dapi-url  
+      key: admin-url    
     bapiUrlConfig:
       name: "bc-buyingcatalogue"
-      key: bapi-url  
+      key: bapi-url 
+    dapiUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: dapi-url   
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
@@ -316,7 +317,10 @@ pb:
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
-        key: oidc-client-secret                  
+        key: oidc-client-secret    
+    redisUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: redis-full-url          
 
 admin: 
   enabled: true
@@ -359,3 +363,18 @@ admin:
     oapi:
       name: "bc-buyingcatalogue"
       key: oapi-url
+    redisUrlConfig:
+      name: "bc-buyingcatalogue"
+      key: redis-full-url 
+
+redis:
+  enabled: true
+  disabledUrl: 
+  #See Redis Chart Values - https://github.com/bitnami/charts/tree/master/bitnami/redis
+
+redis-commander:
+  enabled: true
+  useLocalImage: false
+  redisHost:
+    name: "bc-buyingcatalogue"
+    key: redis-short-url

@@ -87,7 +87,10 @@ serviceDependencies:
   oapi:
     name:
     key:
-      
+  redisUrlConfig:
+    name: 
+    key: 
+
 env:
   configmap:
   secrets:
