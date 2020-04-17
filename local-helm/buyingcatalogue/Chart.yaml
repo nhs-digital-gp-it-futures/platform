@@ -23,25 +23,44 @@ appVersion: 0.1.0
 dependencies:
 - name: azurite
   condition: azurite.enabled
+  version: ~0.1.0
 - name: bapi
   condition: bapi.enabled
+  version: ~0.1.0
 - name: bapi-db
   condition: bapi-db.enabled
+  version: ~0.1.0
 - name: dapi
   condition: dapi.enabled
+  version: ~0.1.0
 - name: isapi
   condition: isapi.enabled
+  version: ~0.1.0
 - name: isapi-db
   condition: isapi-db.enabled
+  version: ~0.1.0
 - name: oapi
   condition: oapi.enabled
+  version: ~0.1.0
 - name: email
   condition: email.enabled
+  version: ~0.1.0
 - name: file-loader
   condition: file-loader.enabled
+  version: ~0.1.0
 - name: mp
   condition: mp.enabled
+  version: ~0.1.0
 - name: pb
   condition: pb.enabled
+  version: ~0.1.0
 - name: admin
   condition: admin.enabled
+  version: ~0.1.0
+- name: redis
+  condition: redis.enabled
+  version: ~10.6.7
+  repository: "https://charts.bitnami.com/bitnami"
+- name: redis-commander
+  condition: redis-commander.enabled
+  version: ~0.1.0

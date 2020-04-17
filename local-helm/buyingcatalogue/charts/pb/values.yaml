@@ -80,17 +80,18 @@ featureFlags:
   loginEnabled : "true"
   useCapabilitiesSelector: "true"
   showCovid19: "true"
+  showOrderForm: "true"
 
 serviceDependencies:
   adminUrlConfig:
     name: 
     key: 
-  dapiUrlConfig:
-    name: 
-    key: 
   bapiUrlConfig:
     name: 
     key: 
+  dapiUrlConfig:
+    name: 
+    key:   
   oidc:
     baseUriConfig:
       name: 
@@ -99,7 +100,9 @@ serviceDependencies:
     clientSecret: 
       name: 
       key: 
-
+  redisUrlConfig:
+    name: 
+    key: 
 env:
   configmap:    
   secrets:

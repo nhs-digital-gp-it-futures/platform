@@ -38,10 +38,10 @@ spec:
             httpGet:
               path: /health/live
               port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health/ready
-          #     port: http
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -61,7 +61,14 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.cookieSecret.name }}
                   key: {{ .Values.cookieSecret.key }}
-            {{- if .Values.serviceDependencies }}            
+            {{- if .Values.serviceDependencies }}   
+            {{- if .Values.serviceDependencies.redisUrlConfig }}
+            - name: REDIS_URL              
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.redisUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.redisUrlConfig.key | quote }}
+            {{- end -}}         
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI
               valueFrom:

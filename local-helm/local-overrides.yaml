@@ -53,3 +53,9 @@ pb:
 
 admin:
   enabled: true
+
+redis:
+  enabled: true
+
+redis-commander:
+  enabled: true

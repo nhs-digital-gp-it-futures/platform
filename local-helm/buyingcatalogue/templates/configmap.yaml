@@ -6,6 +6,8 @@
 {{- $isapiIssuerUrl:= ternary $isapiUrl .Values.isapi.feDisabledIssuerUrl $areAllFEComponentsEnabled -}}
 {{- $adminUrl:= ternary .Values.admin.baseUri .Values.admin.disabledUrl .Values.admin.enabled -}}
 {{- $emailUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "email" "email.fullname")) .Release.Namespace) .Values.email.disabledUrl .Values.email.enabled -}}
+{{- $redisFullUrl:= ternary (printf "redis://%s-master.%s:%d" (include "call-nested" (list . "redis" "redis.fullname")) .Release.Namespace (.Values.redis.master.service.port | int )) .Values.redis.disabledUrl .Values.redis.enabled -}}
+{{- $redisShortUrl:= ternary (printf "%s-master" (include "call-nested" (list . "redis" "redis.fullname"))) .Values.redis.disabledUrl .Values.redis.enabled -}}
 
 apiVersion: v1
 kind: ConfigMap
@@ -22,4 +24,6 @@ data:
   admin-url: {{  $adminUrl | quote }}
   app-base-url: {{ .Values.appBaseUrl }}
   email-url: {{ $emailUrl | quote }}
+  redis-full-url: {{ $redisFullUrl | quote }}
+  redis-short-url: {{ $redisShortUrl | quote }}
   
