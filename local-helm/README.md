@@ -33,6 +33,10 @@ Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
 
 You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-dashboard.md).
 
+## Install Dependencies
+
+The umbrella chart depends on some standard charts. These need to be added by running `helm dependency update buyingcatalogue`.
+
 ## Launching, Updating the Environment
 
 In order to launch or update the system to the latest built images or chosen config, simply run the appropriate launch script. It will run until torn down, even being restarted automatically once kubernetes is running again after a system restart.
