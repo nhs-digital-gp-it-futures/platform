@@ -318,9 +318,15 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret    
-    redisUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: redis-full-url          
+    redis:
+      urlConfig:
+        name: "bc-buyingcatalogue"
+        key: redis-full-url 
+      port: 6379
+      tls: false
+      passSecret:
+        name:
+        key:        
 
 admin: 
   enabled: true
@@ -363,9 +369,16 @@ admin:
     oapi:
       name: "bc-buyingcatalogue"
       key: oapi-url
-    redisUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: redis-full-url 
+    redis:
+      urlConfig:
+        name: "bc-buyingcatalogue"
+        key: redis-full-url 
+      port: 6379
+      tls: false
+      passSecret:
+        name:
+        key:
+    
 
 redis:
   enabled: true

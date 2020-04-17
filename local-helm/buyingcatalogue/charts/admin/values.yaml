@@ -87,9 +87,15 @@ serviceDependencies:
   oapi:
     name:
     key:
-  redisUrlConfig:
-    name: 
-    key: 
+  redis:
+    urlConfig:
+      name: 
+      key: 
+    port: 6379
+    tls: false
+    passSecret:
+      name:
+      key:
 
 env:
   configmap:
