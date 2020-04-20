@@ -321,7 +321,7 @@ pb:
     redis:
       urlConfig:
         name: "bc-buyingcatalogue"
-        key: redis-full-url 
+        key: redis-url 
       port: "6379"
       tls: false
       passSecret:
@@ -372,7 +372,7 @@ admin:
     redis:
       urlConfig:
         name: "bc-buyingcatalogue"
-        key: redis-full-url 
+        key: redis-url 
       port: "6379"
       tls: false
       passSecret:
