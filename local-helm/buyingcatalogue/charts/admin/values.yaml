@@ -91,7 +91,7 @@ serviceDependencies:
     urlConfig:
       name: 
       key: 
-    port: 6379
+    port: "6379"
     tls: false
     passSecret:
       name:

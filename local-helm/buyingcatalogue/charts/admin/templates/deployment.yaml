@@ -71,11 +71,11 @@ spec:
             {{- end -}}       
             {{- if .Values.serviceDependencies.redis.port }}
             - name: REDIS_PORT
-              value: {{ .Values.serviceDependencies.redis.port }}
+              value: {{ .Values.serviceDependencies.redis.port | quote }}
             {{- end -}} 
             {{- if .Values.serviceDependencies.redis.tls }}
             - name: REDIS_TLS
-              value: {{ .Values.serviceDependencies.redis.tls }}
+              value: {{ .Values.serviceDependencies.redis.tls  | quote}}
             {{- end -}} 
             {{- if .Values.serviceDependencies.redis.passSecret }}
             - name: REDIS_PASS             

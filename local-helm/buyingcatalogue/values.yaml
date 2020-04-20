@@ -322,11 +322,11 @@ pb:
       urlConfig:
         name: "bc-buyingcatalogue"
         key: redis-full-url 
-      port: 6379
+      port: "6379"
       tls: false
       passSecret:
-        name:
-        key:        
+        name: "bc-buyingcatalogue"
+        key:  "redis-password"
 
 admin: 
   enabled: true
@@ -373,16 +373,19 @@ admin:
       urlConfig:
         name: "bc-buyingcatalogue"
         key: redis-full-url 
-      port: 6379
+      port: "6379"
       tls: false
       passSecret:
-        name:
-        key:
+        name: "bc-buyingcatalogue"
+        key: "redis-password"
     
 
 redis:
   enabled: true
   disabledUrl: 
+  usePassword: true
+  existingSecret: "bc-buyingcatalogue"
+  existingSecretPasswordKey: "redis-password"
   #See Redis Chart Values - https://github.com/bitnami/charts/tree/master/bitnami/redis
 
 redis-commander:
