@@ -393,4 +393,4 @@ redis-commander:
   useLocalImage: false
   redisHost:
     name: "bc-buyingcatalogue"
-    key: redis-short-url
+    key: redis-url
