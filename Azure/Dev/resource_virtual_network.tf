@@ -132,4 +132,17 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      request_routing_rule, 
+      http_listener, 
+      backend_http_settings, 
+      frontend_ip_configuration, 
+      frontend_port,
+      backend_address_pool,
+      probe
+    ]
+  }
 }
