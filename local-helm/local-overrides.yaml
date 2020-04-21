@@ -38,6 +38,14 @@ oapi:
   enabled: true
   disabledUrl: "host.docker.internal"  
 
+ordapi-db:
+  enabled: true
+  disabledUrl: "host.docker.internal"
+
+ordapi:  
+  enabled: true
+  disabledUrl: "host.docker.internal"
+
 email:
   enabled: true
   disabledUrl: ""

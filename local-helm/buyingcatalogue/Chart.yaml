@@ -42,6 +42,12 @@ dependencies:
 - name: oapi
   condition: oapi.enabled
   version: ~0.1.0
+- name: ordapi
+  condition: ordapi.enabled
+  version: ~0.1.0
+- name: ordapi-db
+  condition: ordapi-db.enabled
+  version: ~0.1.0
 - name: email
   condition: email.enabled
   version: ~0.1.0
