@@ -2,15 +2,17 @@
 
 Eventually, a service principle will be set up. In the interim, the best approach is to create a local secret called regcredlocal using the command line as below.
 
-```bash
-kubectl create secret docker-registry regcredlocal --docker-server=gpitfuturesdevacr.azurecr.io --docker-username=gpitfuturesdevacr --docker-password=<password> --docker-email=<your-hscic.gov.uk email> --namespace buyingcatalogue
-```
 
-### To retrieve the relevant password:
+### To retrieve the 'docker password':
 You will need to look in the azure portal http://portal.azure.com
 Log in using your hscic.gov.uk email adress.
 
 Go to: All services > Containers > Container registries > gpitfuturesdevacr > Access Keys > password
+
+One you have this password, run this snippet, replacing values in '<>'
+```bash
+kubectl create secret docker-registry regcredlocal --docker-server=gpitfuturesdevacr.azurecr.io --docker-username=gpitfuturesdevacr --docker-password=<password> --docker-email=<your-hscic.gov.uk email> --namespace buyingcatalogue
+```
 
 ### References
 
