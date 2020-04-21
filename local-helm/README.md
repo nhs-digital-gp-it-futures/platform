@@ -18,7 +18,7 @@ Note that this system relies upon helm charts. Instructions on how to install he
 
 ### Set up Ingress
 
-Ingress is required for the identity stuff to work. To enable the ingress, execute these two snippets in shell of your preference
+Ingress is required for the identity api to work. To enable the ingress, execute these two snippets in shell of your preference
 
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
@@ -28,6 +28,10 @@ helm install bc stable/nginx-ingress
 ### Add Namespace
 
 Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
+
+### Add Container Registry Secret
+
+Create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
 
 ### (Optional) Run Dashboard
 
