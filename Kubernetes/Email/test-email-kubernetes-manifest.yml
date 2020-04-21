@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-email
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-email
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-email
+    spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-email
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/smtp-server
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+          - name: smtps
+            containerPort: 587
+            protocol: TCP
+        resources:
+          requests:
+            cpu: 250m
+            memory: 50Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+        env:
+       
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: email
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 587
+      targetPort: smtps
+      protocol: TCP
+      name: smtps
+  selector:
+    app: gpitfutures-bc-app-email

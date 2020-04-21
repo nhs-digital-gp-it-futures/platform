@@ -43,6 +43,13 @@ spec:
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
+        - name: SMTPSERVER__HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: SMTPSERVER__HOST
+        - name: SMTPSERVER__PORT
+          value: "587"
 ---
 apiVersion: v1
 kind: Service
