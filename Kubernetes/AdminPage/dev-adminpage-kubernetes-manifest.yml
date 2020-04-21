@@ -71,12 +71,12 @@ spec:
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
         - name: REDIS_URL
-            valueFrom:
-              configMapKeyRef:
-                name: devpipelinevariables
-                key: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
         - name: REDIS_PORT
-          value: 6380
+          value: "6380"
         - name: REDIS_TLS
           value: "true"
         - name: REDIS_PASS             
