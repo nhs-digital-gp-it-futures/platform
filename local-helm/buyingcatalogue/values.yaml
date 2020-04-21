@@ -318,9 +318,15 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret    
-    redisUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: redis-full-url          
+    redis:
+      urlConfig:
+        name: "bc-buyingcatalogue"
+        key: redis-url 
+      port: "6379"
+      tls: false
+      passSecret:
+        name: "bc-buyingcatalogue"
+        key:  "redis-password"
 
 admin: 
   enabled: true
@@ -363,13 +369,23 @@ admin:
     oapi:
       name: "bc-buyingcatalogue"
       key: oapi-url
-    redisUrlConfig:
-      name: "bc-buyingcatalogue"
-      key: redis-full-url 
+    redis:
+      urlConfig:
+        name: "bc-buyingcatalogue"
+        key: redis-url 
+      port: "6379"
+      tls: false
+      passSecret:
+        name: "bc-buyingcatalogue"
+        key: "redis-password"
+    
 
 redis:
   enabled: true
   disabledUrl: 
+  usePassword: true
+  existingSecret: "bc-buyingcatalogue"
+  existingSecretPasswordKey: "redis-password"
   #See Redis Chart Values - https://github.com/bitnami/charts/tree/master/bitnami/redis
 
 redis-commander:
@@ -377,4 +393,4 @@ redis-commander:
   useLocalImage: false
   redisHost:
     name: "bc-buyingcatalogue"
-    key: redis-short-url
+    key: redis-url

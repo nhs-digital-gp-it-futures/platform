@@ -73,6 +73,20 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: DOCUMENT_HOST
+        - name: REDIS_URL
+            valueFrom:
+              configMapKeyRef:
+                name: devpipelinevariables
+                key: REDIS_HOST
+        - name: REDIS_PORT
+          value: 6380
+        - name: REDIS_TLS
+          value: "true"
+        - name: REDIS_PASS             
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
 ---
 apiVersion: v1
 kind: Service
