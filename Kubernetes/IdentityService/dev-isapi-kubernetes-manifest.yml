@@ -67,12 +67,15 @@ spec:
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
-        - name: RESOURCES__0__RESOURCENAME
-          value: Organisation
-        - name: RESOURCES__0__DISPLAYNAME
-          value: Organisation
-        - name: RESOURCES__0__CLAIMTYPES__0
-          value: organisation
+        - name: SMTPSERVER__HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: SMTPSERVER__HOST
+        - name: SMTPSERVER__PORT
+          value: "587"
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
 ---
 apiVersion: v1
 kind: Service

@@ -60,3 +60,8 @@ data "azurerm_key_vault_secret" "kv-sp-pass" {
   name         = var.kv_sp_pass
   key_vault_id = var.kv_id
 }
+
+data "azurerm_key_vault_secret" "kv-sqladmins" {
+  name         = var.kv_sql_admins
+  key_vault_id = var.kv_id
+}
