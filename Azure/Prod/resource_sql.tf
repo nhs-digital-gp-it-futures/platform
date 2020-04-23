@@ -171,6 +171,23 @@ resource "azurerm_sql_failover_group" "sql-bapi-pub" {
 #   }
 # }
 
+#AzureAD Security Group used to manage SQL Server. This group is managed by the ServiceDesk
+resource "azurerm_sql_active_directory_administrator" "bc-sql-pri" {
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  login               = var.sql_login
+  tenant_id           = data.azurerm_key_vault_secret.kv-tenant.value
+  object_id           = data.azurerm_key_vault_secret.kv-sqladmins.value
+}
+
+#AzureAD Security Group used to manage SQL Server. This group is managed by the ServiceDesk
+resource "azurerm_sql_active_directory_administrator" "bc-sql-sec" {
+  server_name         = azurerm_sql_server.bc-sql-sec.name
+  resource_group_name = azurerm_resource_group.bc-sql-sec.name
+  login               = var.sql_login
+  tenant_id           = data.azurerm_key_vault_secret.kv-tenant.value
+  object_id           = data.azurerm_key_vault_secret.kv-sqladmins.value
+}
 
 //Code from https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
 //must use arm until TF implements these natively see https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
