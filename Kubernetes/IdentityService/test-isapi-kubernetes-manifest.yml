@@ -67,12 +67,12 @@ spec:
           value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
           value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
-        - name: RESOURCES__0__RESOURCENAME
-          value: Organisation
-        - name: RESOURCES__0__DISPLAYNAME
-          value: Organisation
-        - name: RESOURCES__0__CLAIMTYPES__0
-          value: organisation
+        # - name: RESOURCES__0__RESOURCENAME
+        #   value: Organisation
+        # - name: RESOURCES__0__DISPLAYNAME
+        #   value: Organisation
+        # - name: RESOURCES__0__CLAIMTYPES__0
+        #   value: organisation
         - name: SMTPSERVER__HOST
           valueFrom:
             secretKeyRef:

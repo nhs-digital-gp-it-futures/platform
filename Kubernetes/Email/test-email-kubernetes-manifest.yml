@@ -35,8 +35,7 @@ spec:
             memory: 50Mi
           limits:
             cpu: 1000m
-            memory: 1000Mi
-        env:
+            memory: 1000Mi        
        
 ---
 apiVersion: v1
