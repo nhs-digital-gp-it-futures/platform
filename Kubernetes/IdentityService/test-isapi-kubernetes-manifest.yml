@@ -76,10 +76,12 @@ spec:
         - name: SMTPSERVER__HOST
           valueFrom:
             secretKeyRef:
-              name: devpipelinevariables
+              name: testpipelinevariables
               key: SMTPSERVER__HOST
         - name: SMTPSERVER__PORT
           value: "587"
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
 ---
 apiVersion: v1
 kind: Service

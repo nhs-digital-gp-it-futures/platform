@@ -50,6 +50,8 @@ spec:
               key: SMTPSERVER__HOST
         - name: SMTPSERVER__PORT
           value: "587"
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
 ---
 apiVersion: v1
 kind: Service
