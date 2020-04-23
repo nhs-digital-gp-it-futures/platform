@@ -153,6 +153,16 @@ resource "azurerm_application_gateway" "pri-AppGate" {
   #   key_vault_secret_id = local.gateway_certificate_name
   # }
 
+  waf_configuration {
+    enabled                  = true
+    file_upload_limit_mb     = 100
+    firewall_mode            = "Detection"
+    max_request_body_size_kb = 128
+    request_body_check       = true 
+    rule_set_type            = "OWASP"
+    rule_set_version         = "3.0"
+  }
+
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
     ignore_changes = [
@@ -164,7 +174,8 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       backend_address_pool,
       probe,
       ssl_certificate,
-      url_path_map
+      url_path_map,
+      redirect_configuration
     ]
   }
 }
@@ -233,6 +244,16 @@ resource "azurerm_application_gateway" "pub-AppGate" {
   #   key_vault_secret_id = local.gateway_certificate_name
   # }
 
+  waf_configuration {
+    enabled                  = true
+    file_upload_limit_mb     = 100
+    firewall_mode            = "Detection"
+    max_request_body_size_kb = 128
+    request_body_check       = true 
+    rule_set_type            = "OWASP"
+    rule_set_version         = "3.0"
+  }
+
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
     ignore_changes = [
@@ -244,7 +265,8 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       backend_address_pool,
       probe,
       ssl_certificate,
-      url_path_map
+      url_path_map,
+      redirect_configuration
     ]
   }
 }
