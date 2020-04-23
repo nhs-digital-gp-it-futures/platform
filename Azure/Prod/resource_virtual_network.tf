@@ -37,6 +37,13 @@ resource "azurerm_subnet" "gateway" {
   address_prefix       = var.sub_gateway
 }
 
+resource "azurerm_subnet" "gateway_pri" {
+  name                 = "${var.project}-${var.environment}-${var.sub}-gateway-pri"
+  resource_group_name  = azurerm_resource_group.vnet.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefix       = var.sub_gateway_pri
+}
+
 resource "azurerm_subnet" "splunk" {
   name                 = "${var.project}-${var.environment}-${var.sub}-splunk"
   resource_group_name  = azurerm_resource_group.vnet.name
@@ -99,7 +106,7 @@ resource "azurerm_application_gateway" "pri-AppGate" {
 
   gateway_ip_configuration {
     name      = "${var.project}-gwip-pri"
-    subnet_id = azurerm_subnet.gateway.id
+    subnet_id = azurerm_subnet.gateway_pri.id
   }
 
   frontend_port {
@@ -138,6 +145,24 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     http_listener_name         = local.listener_name
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
+  }
+
+  # ssl_certificate {
+  #   name = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_name
+  # }
+
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      request_routing_rule, 
+      http_listener, 
+      backend_http_settings, 
+      frontend_ip_configuration, 
+      frontend_port,
+      backend_address_pool,
+      probe
+    ]
   }
 }
 
@@ -199,9 +224,22 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+  
+  # ssl_certificate {
+  #   name = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_name
+  # }
 
-  ssl_policy {
-    policy_type = "Predefined"
-    policy_name = "AppGwSslPolicy20170401S"
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      request_routing_rule, 
+      http_listener, 
+      backend_http_settings, 
+      frontend_ip_configuration, 
+      frontend_port,
+      backend_address_pool,
+      probe
+    ]
   }
 }

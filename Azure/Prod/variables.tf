@@ -63,6 +63,11 @@ variable "sub_gateway" {
   description = "Subnet for Gateway"
 }
 
+variable "sub_gateway_pri" {
+  type        = string
+  description = "Subnet for Gateway"
+}
+
 variable "sub_splunk" {
   type        = string
   description = "Subnet for splunk"
