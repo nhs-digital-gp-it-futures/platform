@@ -6,6 +6,7 @@ This process is designed to easily allow a developer to spin up the current envi
 
 ## System Setup
 
+Instructions expect you to be in the local-helm directory of the platform repository.
 The following steps are needed to be able to run the system successfully:
 
 ### Setup Kubernetes

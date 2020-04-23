@@ -7,10 +7,10 @@ kubectl create secret docker-registry regcredlocal --docker-server=gpitfuturesde
 ```
 
 ### To retrieve the relevant password:
-You will need to look in the azure portal http://portal.azure.com
+You will need to look in the azure portal https://portal.azure.com
 Log in using your hscic.gov.uk email adress.
 
-Go to: All services > Containers > Container registries > gpitfuturesdevacr > Access Keys > password
+Go to: [All services > Containers > Container registries](https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.ContainerRegistry%2Fregistries) > gpitfuturesdevacr > Access Keys > password
 
 ### References
 
