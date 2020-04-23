@@ -84,6 +84,7 @@ locals {
   request_routing_rule_name      = "${var.project}-${var.environment}-appgw-rqrt"
   redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
   gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
+  gateway_certificate_name       = "buyingcatalogue${var.environment}"
 }
 
 resource "azurerm_application_gateway" "pri-AppGate" {
@@ -138,6 +139,23 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     http_listener_name         = local.listener_name
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
+  }
+  ssl_certificate {
+    name = locals.gateway_certificate_name
+    key_vault_secret_id = locals.gateway_certificate_name
+  }
+
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      request_routing_rule, 
+      http_listener, 
+      backend_http_settings, 
+      frontend_ip_configuration, 
+      frontend_port,
+      backend_address_pool,
+      probe
+    ]
   }
 }
 
@@ -197,5 +215,22 @@ resource "azurerm_application_gateway" "pub-AppGate" {
   ssl_policy {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
+  }
+  ssl_certificate {
+    name = locals.gateway_certificate_name
+    key_vault_secret_id = locals.gateway_certificate_name
+  }
+
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      request_routing_rule, 
+      http_listener, 
+      backend_http_settings, 
+      frontend_ip_configuration, 
+      frontend_port,
+      backend_address_pool,
+      probe
+    ]
   }
 }
