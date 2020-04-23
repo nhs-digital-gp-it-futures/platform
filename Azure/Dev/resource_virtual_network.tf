@@ -134,10 +134,10 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
 
-  ssl_certificate {
-    name = locals.gateway_certificate_name
-    key_vault_secret_id = locals.gateway_certificate_name
-  }
+  # ssl_certificate {
+  #   name = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_name
+  # }
 
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
@@ -148,7 +148,9 @@ resource "azurerm_application_gateway" "AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      redirect_configuration,
+      ssl_certificate
     ]
   }
 }
