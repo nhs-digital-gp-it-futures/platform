@@ -2,7 +2,7 @@
 {{- $bapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "bapi" "bapi.fullname")) .Release.Namespace) .Values.bapi.disabledUrl .Values.bapi.enabled -}}
 {{- $oapiUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "oapi" "oapi.fullname")) .Release.Namespace) .Values.oapi.disabledUrl .Values.oapi.enabled -}}
 {{- $areAllFEComponentsEnabled:= and .Values.mp.enabled .Values.pb.enabled .Values.admin.enabled -}}
-{{- $isapiUrl:= ternary .Values.baseIsapiEnabledUrl  (printf "%s:%d" .Values.isapi.disabledUrl (.Values.isapi.service.port | int )) .Values.isapi.enabled -}}
+{{- $isapiUrl:= ternary .Values.baseIsapiEnabledUrl .Values.isapi.disabledUrl .Values.isapi.enabled -}}
 {{- $isapiIssuerUrl:= ternary $isapiUrl .Values.isapi.feDisabledIssuerUrl $areAllFEComponentsEnabled -}}
 {{- $adminUrl:= ternary .Values.admin.baseUri .Values.admin.disabledUrl .Values.admin.enabled -}}
 {{- $emailUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "email" "email.fullname")) .Release.Namespace) .Values.email.disabledUrl .Values.email.enabled -}}
