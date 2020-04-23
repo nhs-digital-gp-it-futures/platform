@@ -26,7 +26,7 @@ resource "azurerm_network_security_rule" "BWP" {
   destination_port_range      = "80,433"
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   priority                    = "150"
   description                 = "Allow staff access who work within Bridgewater Place"
 
@@ -42,7 +42,7 @@ resource "azurerm_network_security_rule" "BJSS" {
   destination_port_range      = "80,433"
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   priority                    = "160"
   description                 = "Allow staff access who are connect to the BJSS VPN"
 
@@ -58,7 +58,7 @@ resource "azurerm_network_security_rule" "DevOps" {
   destination_port_range      = "80,433"
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   priority                    = "200"
   description                 = "Allow AzureDevops Access to Kubernetes Cluster"
 
@@ -74,7 +74,7 @@ resource "azurerm_network_security_rule" "Azure" {
   destination_port_range      = "65200-65535"
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   priority                    = "500"
   description                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
 

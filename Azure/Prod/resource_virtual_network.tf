@@ -91,6 +91,7 @@ locals {
   request_routing_rule_name      = "${var.project}-${var.environment}-appgw-rqrt"
   redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
   gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
+  gateway_certificate_name       = "buyingcatalogue${var.environment}"
 }
 
 resource "azurerm_application_gateway" "pri-AppGate" {

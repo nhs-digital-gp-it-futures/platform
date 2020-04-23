@@ -6,6 +6,7 @@ This process is designed to easily allow a developer to spin up the current envi
 
 ## System Setup
 
+Instructions expect you to be in the local-helm directory of the platform repository.
 The following steps are needed to be able to run the system successfully:
 
 ### Setup Kubernetes
@@ -18,7 +19,7 @@ Note that this system relies upon helm charts. Instructions on how to install he
 
 ### Set up Ingress
 
-Ingress is required for the identity stuff to work. To enable the ingress, execute these two snippets in shell of your preference
+Ingress is required for the identity api to work. To enable the ingress, execute these two snippets in shell of your preference
 
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
@@ -28,6 +29,10 @@ helm install bc stable/nginx-ingress
 ### Add Namespace
 
 Create the buying catalogue namespace - `kubectl apply -f local-namespace.yml`
+
+### Add Container Registry Secret
+
+Create a secret in kubernetes to access the private container registry, as per the [Connect Local Kubernetes with our Private Container Registry Instructions](../Docs/DevSetup/k8s-private-registry.md).
 
 ### (Optional) Run Dashboard
 

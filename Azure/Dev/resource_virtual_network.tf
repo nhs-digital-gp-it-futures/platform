@@ -1,3 +1,15 @@
+locals {
+  backend_address_pool_name      = "${var.project}-${var.environment}-appgw-beap"
+  frontend_port_name             = "${var.project}-${var.environment}-appgw-feport"
+  frontend_ip_configuration_name = "${var.project}-${var.environment}-appgw-feip"
+  http_setting_name              = "${var.project}-${var.environment}-appgw-be-htst"
+  listener_name                  = "${var.project}-${var.environment}-appgw-httplstn"
+  request_routing_rule_name      = "${var.project}-${var.environment}-appgw-rqrt"
+  redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
+  gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
+  gateway_certificate_name       = "buyingcatalogue${var.environment}"
+}
+
 resource "azurerm_resource_group" "vnet" {
   name     = "${var.project}-${var.environment}-rg-vnet"
   location = var.region
@@ -63,17 +75,6 @@ resource "azurerm_public_ip" "Pip" {
   }
 }
 
-locals {
-  backend_address_pool_name      = "${var.project}-${var.environment}-appgw-beap"
-  frontend_port_name             = "${var.project}-${var.environment}-appgw-feport"
-  frontend_ip_configuration_name = "${var.project}-${var.environment}-appgw-feip"
-  http_setting_name              = "${var.project}-${var.environment}-appgw-be-htst"
-  listener_name                  = "${var.project}-${var.environment}-appgw-httplstn"
-  request_routing_rule_name      = "${var.project}-${var.environment}-appgw-rqrt"
-  redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
-  gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
-}
-
 resource "azurerm_application_gateway" "AppGate" {
   name                = "${var.project}-${var.environment}-appgw"
   location            = var.region
@@ -133,6 +134,11 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
 
+  # ssl_certificate {
+  #   name = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_name
+  # }
+
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
     ignore_changes = [
@@ -142,7 +148,9 @@ resource "azurerm_application_gateway" "AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      redirect_configuration,
+      ssl_certificate
     ]
   }
 }
