@@ -48,3 +48,5 @@ local-helm/local-overrides.yaml
 local-helm/buyingcatalogue/charts/*.tgz 
 #inore chart lock file
 local-helm/buyingcatalogue/Chart.lock 
+
+temp*
