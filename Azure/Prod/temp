@@ -1,0 +1,1323 @@
+[0m[1mRefreshing Terraform state in-memory prior to plan...[0m
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+[0m
+[0m[1mazurerm_subnet_network_security_group_association.gateway: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway][0m
+[0m[1mazurerm_network_security_rule.bjss: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowBjssVpn][0m
+[0m[1mazurerm_network_security_rule.bwp: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowBwpGovIp][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-bpass: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-secret: Refreshing state...[0m
+[0m[1mazurerm_resource_group.acr: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-acr][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-buser: Refreshing state...[0m
+[0m[1mazurerm_resource_group.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-sp-user: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-appid: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-sqlpass: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-tenant: Refreshing state...[0m
+[0m[1mazurerm_resource_group.aks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-aks][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-sqladmins: Refreshing state...[0m
+[0m[1mazurerm_resource_group.ehubukw: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-ukw][0m
+[0m[1mazurerm_resource_group.log_analytics: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-la][0m
+[0m[1mazurerm_resource_group.storage: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-objectid: Refreshing state...[0m
+[0m[1mazurerm_resource_group.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-subscription: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-spn: Refreshing state...[0m
+[0m[1mdata.azurerm_key_vault_secret.kv-sqluser: Refreshing state...[0m
+[0m[1mazurerm_resource_group.ehubuks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-uks][0m
+[0m[1mdata.azurerm_key_vault_secret.kv-sp-pass: Refreshing state...[0m
+[0m[1mazurerm_resource_group.vnet: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet][0m
+[0m[1mazurerm_management_lock.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_management_lock.acr: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-acr/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_container_registry.acr: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesprodacr][0m
+[0m[1mazurerm_management_lock.aks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-aks/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_management_lock.ehubukw: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-ukw/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_eventhub_namespace.ehubukw: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-ukw/providers/Microsoft.EventHub/namespaces/gpitfutures-prod-ensukw][0m
+[0m[1mazurerm_log_analytics_workspace.workspace: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-la/providers/microsoft.operationalinsights/workspaces/gpitfutures-prod-logs][0m
+[0m[1mazurerm_management_lock.logs: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-la/providers/Microsoft.Authorization/locks/az_mgm_lock_ehub_uks][0m
+[0m[1mazurerm_management_lock.storage: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_storage_account.public: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsapub][0m
+[0m[1mazurerm_storage_account.sqlukw: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqlukw][0m
+[0m[1mazurerm_storage_account.sqluks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqluks][0m
+[0m[1mazurerm_storage_account.private: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsapri][0m
+[0m[1mazurerm_management_lock.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_eventhub_namespace.ehubuks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-uks/providers/Microsoft.EventHub/namespaces/gpitfutures-prod-ensuks][0m
+[0m[1mazurerm_management_lock.ehubuks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-uks/providers/Microsoft.Authorization/locks/az_mgm_lock_ehub_uks][0m
+[0m[1mazurerm_network_security_group.splunk: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-splunk][0m
+[0m[1mazurerm_management_lock.vnet: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Authorization/locks/az_mgm_lock_aks][0m
+[0m[1mazurerm_virtual_network.vnet: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet][0m
+[0m[1mazurerm_network_security_group.gateway: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway][0m
+[0m[1mazurerm_public_ip.pub-Pip: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/publicIPAddresses/gpitfutures-prod-pip-pub][0m
+[0m[1mazurerm_public_ip.pri-Pip: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/publicIPAddresses/gpitfutures-prod-pip-pri][0m
+[0m[1mazurerm_eventhub.ehubukw: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-ukw/providers/Microsoft.EventHub/namespaces/gpitfutures-prod-ensukw/eventhubs/gpitfutures-prod-ehubukw][0m
+[0m[1mazurerm_network_security_rule.DevOps: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowAzureDevOps][0m
+[0m[1mazurerm_network_security_rule.Azure: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowAzureInfrastructurePorts][0m
+[0m[1mazurerm_subnet.vm: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-vm][0m
+[0m[1mazurerm_subnet.gateway: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway][0m
+[0m[1mazurerm_subnet.splunk: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-splunk][0m
+[0m[1mazurerm_subnet.aks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-aks][0m
+[0m[1mazurerm_subnet.bastion: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-bastion][0m
+[0m[1mazurerm_subnet.ehub: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-ehub][0m
+[0m[1mazurerm_sql_server.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri][0m
+[0m[1mazurerm_sql_server.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-sec][0m
+[0m[1mazurerm_application_gateway.pri-AppGate: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri][0m
+[0m[1mazurerm_application_gateway.pub-AppGate: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub][0m
+[0m[1mazurerm_kubernetes_cluster.aks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-aks/providers/Microsoft.ContainerService/managedClusters/gpitfutures-prod-aks][0m
+[0m[1mazurerm_sql_firewall_rule.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/firewallRules/azure_services][0m
+[0m[1mazurerm_sql_active_directory_administrator.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/administrators/activeDirectory][0m
+[0m[1mazurerm_sql_database.sql-bapi-pub: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/databases/gpitfutures-prod-db-bapi-private][0m
+[0m[1mazurerm_sql_database.sql-bapi-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/databases/gpitfutures-prod-db-bapi-public][0m
+[0m[1mazurerm_sql_active_directory_administrator.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-sec/administrators/activeDirectory][0m
+[0m[1mazurerm_sql_firewall_rule.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-sec/firewallRules/azure_services][0m
+[0m[1mazurerm_storage_container.pri-web: Refreshing state... [id=https://gpitfuturesprodsapri.blob.core.windows.net/$web][0m
+[0m[1mazurerm_storage_container.pri-documents: Refreshing state... [id=https://gpitfuturesprodsapri.blob.core.windows.net/documents][0m
+[0m[1mazurerm_advanced_threat_protection.bc-sql-sec: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqlukw/providers/Microsoft.Security/advancedThreatProtectionSettings/current][0m
+[0m[1mazurerm_storage_container.sqlukw: Refreshing state... [id=https://gpitfuturesprodsasqlukw.blob.core.windows.net/sqlauditlogs][0m
+[0m[1mazurerm_storage_container.sqluks: Refreshing state... [id=https://gpitfuturesprodsasqluks.blob.core.windows.net/sqlauditlogs][0m
+[0m[1mazurerm_advanced_threat_protection.bc-sql-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqluks/providers/Microsoft.Security/advancedThreatProtectionSettings/current][0m
+[0m[1mazurerm_sql_failover_group.sql-bapi-pub: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/failoverGroups/gpitfutures-prod-sql-fog1][0m
+[0m[1mazurerm_storage_container.pub-web: Refreshing state... [id=https://gpitfuturesprodsapub.blob.core.windows.net/$web][0m
+[0m[1mazurerm_storage_container.pub-documents: Refreshing state... [id=https://gpitfuturesprodsapub.blob.core.windows.net/documents][0m
+[0m[1mazurerm_sql_failover_group.sql-bapi-pri: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri/failoverGroups/gpitfutures-prod-sql-fog][0m
+[0m[1mazurerm_eventhub.ehubuks: Refreshing state... [id=/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-ehub-uks/providers/Microsoft.EventHub/namespaces/gpitfutures-prod-ensuks/eventhubs/gpitfutures-prod-ehubuks][0m
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  [32m+[0m create
+  [33m~[0m update in-place
+  [31m-[0m destroy
+[31m-[0m/[32m+[0m destroy and then create replacement
+[0m
+Terraform will perform the following actions:
+
+[1m  # azurerm_advanced_threat_protection.private[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_advanced_threat_protection" "private" {
+      [32m+[0m [0m[1m[0menabled[0m[0m            = true
+      [32m+[0m [0m[1m[0mid[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_resource_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsapri"
+    }
+
+[1m  # azurerm_advanced_threat_protection.public[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_advanced_threat_protection" "public" {
+      [32m+[0m [0m[1m[0menabled[0m[0m            = true
+      [32m+[0m [0m[1m[0mid[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_resource_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsapub"
+    }
+
+[1m  # azurerm_advanced_threat_protection.sqluks[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_advanced_threat_protection" "sqluks" {
+      [32m+[0m [0m[1m[0menabled[0m[0m            = true
+      [32m+[0m [0m[1m[0mid[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_resource_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqluks"
+    }
+
+[1m  # azurerm_advanced_threat_protection.sqlukw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_advanced_threat_protection" "sqlukw" {
+      [32m+[0m [0m[1m[0menabled[0m[0m            = true
+      [32m+[0m [0m[1m[0mid[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_resource_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sa/providers/Microsoft.Storage/storageAccounts/gpitfuturesprodsasqlukw"
+    }
+
+[1m  # azurerm_application_gateway.pri-AppGate[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_application_gateway" "pri-AppGate" {
+        [1m[0mdisabled_ssl_protocols[0m[0m = []
+        [1m[0menable_http2[0m[0m           = false
+        [1m[0mid[0m[0m                     = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri"
+        [1m[0mlocation[0m[0m               = "uksouth"
+        [1m[0mname[0m[0m                   = "gpitfutures-prod-appgw-pri"
+        [1m[0mresource_group_name[0m[0m    = "gpitfutures-prod-rg-vnet"
+        [1m[0mtags[0m[0m                   = {
+            "last-updated-by-k8s-ingress" = "2020-04-14 08:10:25.997943095 +0000 UTC m=+262713.622071797"
+            "managed-by-k8s-ingress"      = "1.0.0/cd166d64/2019-11-07-22:55T+0000"
+        }
+        [1m[0mzones[0m[0m                  = []
+
+        backend_address_pool {
+            [1m[0mfqdn_list[0m[0m       = []
+            [1m[0mfqdns[0m[0m           = []
+            [1m[0mid[0m[0m              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/defaultaddresspool"
+            [1m[0mip_address_list[0m[0m = []
+            [1m[0mip_addresses[0m[0m    = []
+            [1m[0mname[0m[0m            = "defaultaddresspool"
+        }
+        backend_address_pool {
+            [1m[0mfqdn_list[0m[0m       = []
+            [1m[0mfqdns[0m[0m           = []
+            [1m[0mid[0m[0m              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/pool-buyingcatalogue-private-marketingpage-3002-bp-3002"
+            [1m[0mip_address_list[0m[0m = [
+                "10.100.49.13",
+            ]
+            [1m[0mip_addresses[0m[0m    = [
+                "10.100.49.13",
+            ]
+            [1m[0mname[0m[0m            = "pool-buyingcatalogue-private-marketingpage-3002-bp-3002"
+        }
+        backend_address_pool {
+            [1m[0mfqdn_list[0m[0m       = []
+            [1m[0mfqdns[0m[0m           = []
+            [1m[0mid[0m[0m              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/bepool-buyingcatalogue-private-publicbrowse"
+            [1m[0mip_address_list[0m[0m = [
+                "10.100.49.27",
+            ]
+            [1m[0mip_addresses[0m[0m    = [
+                "10.100.49.27",
+            ]
+            [1m[0mname[0m[0m            = "bepool-buyingcatalogue-private-publicbrowse"
+        }
+        backend_address_pool {
+            [1m[0mfqdn_list[0m[0m       = []
+            [1m[0mfqdns[0m[0m           = []
+            [1m[0mid[0m[0m              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/bepool-buyingcatalogue-private-marketingpage"
+            [1m[0mip_address_list[0m[0m = [
+                "10.100.49.13",
+            ]
+            [1m[0mip_addresses[0m[0m    = [
+                "10.100.49.13",
+            ]
+            [1m[0mname[0m[0m            = "bepool-buyingcatalogue-private-marketingpage"
+        }
+
+        backend_http_settings {
+            [1m[0maffinity_cookie_name[0m[0m                = "ApplicationGatewayAffinity"
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp"
+            [1m[0mname[0m[0m                                = "bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 3002
+            [1m[0mprobe_id[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/pb-buyingcatalogue-private-marketingpage-3002-buyingcatalogue-pri-mp"
+            [1m[0mprobe_name[0m[0m                          = "pb-buyingcatalogue-private-marketingpage-3002-buyingcatalogue-pri-mp"
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 30
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+        backend_http_settings {
+            [1m[0maffinity_cookie_name[0m[0m                = "ApplicationGatewayAffinity"
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb"
+            [1m[0mname[0m[0m                                = "bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 3000
+            [1m[0mprobe_id[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/pb-buyingcatalogue-private-publicbrowse-3000-buyingcatalogue-pri-pb"
+            [1m[0mprobe_name[0m[0m                          = "pb-buyingcatalogue-private-publicbrowse-3000-buyingcatalogue-pri-pb"
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 30
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+        backend_http_settings {
+            [1m[0maffinity_cookie_name[0m[0m                = "ApplicationGatewayAffinity"
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/defaulthttpsetting"
+            [1m[0mname[0m[0m                                = "defaulthttpsetting"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 80
+            [1m[0mprobe_id[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/defaultprobe-Http"
+            [1m[0mprobe_name[0m[0m                          = "defaultprobe-Http"
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 30
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+        backend_http_settings {
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/http-buyingcatalogue-private-publicbrowse-3000"
+            [1m[0mname[0m[0m                                = "http-buyingcatalogue-private-publicbrowse-3000"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 3000
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 20
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+        backend_http_settings {
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/http-buyingcatalogue-private-marketingpage-3002"
+            [1m[0mname[0m[0m                                = "http-buyingcatalogue-private-marketingpage-3002"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 3002
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 20
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+
+        frontend_ip_configuration {
+            [1m[0mid[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mname[0m[0m                          = "gpitfutures-prod-appgw-feip"
+            [1m[0mprivate_ip_address_allocation[0m[0m = "Dynamic"
+            [1m[0mpublic_ip_address_id[0m[0m          = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/publicIPAddresses/gpitfutures-prod-pip-pri"
+        }
+
+        frontend_port {
+            [1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mname[0m[0m = "gpitfutures-prod-appgw-feport"
+            [1m[0mport[0m[0m = 80
+        }
+        frontend_port {
+            [1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendPorts/port_443"
+            [1m[0mname[0m[0m = "port_443"
+            [1m[0mport[0m[0m = 443
+        }
+
+      [33m~[0m [0mgateway_ip_configuration {
+            [1m[0mid[0m[0m        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/gatewayIPConfigurations/gpitfutures-gwip-pri"
+            [1m[0mname[0m[0m      = "gpitfutures-gwip-pri"
+          [33m~[0m [0m[1m[0msubnet_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway" [33m->[0m [0m(known after apply)
+        }
+
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mfrontend_port_name[0m[0m             = "gpitfutures-prod-appgw-feport"
+            [1m[0mhost_name[0m[0m                      = "buyingcatalogueprodprivate.uksouth.cloudapp.azure.com"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/httpListeners/listener-buyingcatalogueprodprivate.uksouth.cloudapp.azure.com-80"
+            [1m[0mname[0m[0m                           = "listener-buyingcatalogueprodprivate.uksouth.cloudapp.azure.com-80"
+            [1m[0mprotocol[0m[0m                       = "Http"
+            [1m[0mrequire_sni[0m[0m                    = false
+        }
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mfrontend_port_name[0m[0m             = "gpitfutures-prod-appgw-feport"
+            [1m[0mhost_name[0m[0m                      = "private.buyingcatalogue.digital.nhs.uk"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/httpListeners/listener-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mname[0m[0m                           = "listener-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mprotocol[0m[0m                       = "Http"
+            [1m[0mrequire_sni[0m[0m                    = false
+        }
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/frontendPorts/port_443"
+            [1m[0mfrontend_port_name[0m[0m             = "port_443"
+            [1m[0mhost_name[0m[0m                      = "private.buyingcatalogue.digital.nhs.uk"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/httpListeners/listener-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mname[0m[0m                           = "listener-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mprotocol[0m[0m                       = "Https"
+            [1m[0mrequire_sni[0m[0m                    = true
+            [1m[0mssl_certificate_id[0m[0m             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/sslCertificates/listener-private.buyingcatalogue.digital.nhs.uk-443vaultCert"
+            [1m[0mssl_certificate_name[0m[0m           = "listener-private.buyingcatalogue.digital.nhs.uk-443vaultCert"
+        }
+
+        identity {
+            [1m[0midentity_ids[0m[0m = [
+                "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-aks/providers/Microsoft.ManagedIdentity/userAssignedIdentities/gpitfutures-prod-aad-id",
+            ]
+            [1m[0mtype[0m[0m         = "UserAssigned"
+        }
+
+        probe {
+            [1m[0mhost[0m[0m                                      = "localhost"
+            [1m[0mid[0m[0m                                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/defaultprobe-Http"
+            [1m[0minterval[0m[0m                                  = 30
+            [1m[0mminimum_servers[0m[0m                           = 0
+            [1m[0mname[0m[0m                                      = "defaultprobe-Http"
+            [1m[0mpath[0m[0m                                      = "/"
+            [1m[0mpick_host_name_from_backend_http_settings[0m[0m = false
+            [1m[0mprotocol[0m[0m                                  = "Http"
+            [1m[0mtimeout[0m[0m                                   = 30
+            [1m[0munhealthy_threshold[0m[0m                       = 3
+
+            match {
+                [1m[0mstatus_code[0m[0m = [
+                    "200-399",
+                ]
+            }
+        }
+        probe {
+            [1m[0mhost[0m[0m                                      = "localhost"
+            [1m[0mid[0m[0m                                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/defaultprobe-Https"
+            [1m[0minterval[0m[0m                                  = 30
+            [1m[0mminimum_servers[0m[0m                           = 0
+            [1m[0mname[0m[0m                                      = "defaultprobe-Https"
+            [1m[0mpath[0m[0m                                      = "/"
+            [1m[0mpick_host_name_from_backend_http_settings[0m[0m = false
+            [1m[0mprotocol[0m[0m                                  = "Https"
+            [1m[0mtimeout[0m[0m                                   = 30
+            [1m[0munhealthy_threshold[0m[0m                       = 3
+
+            match {
+                [1m[0mstatus_code[0m[0m = [
+                    "200-399",
+                ]
+            }
+        }
+        probe {
+            [1m[0mhost[0m[0m                                      = "localhost"
+            [1m[0mid[0m[0m                                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/pb-buyingcatalogue-private-marketingpage-3002-buyingcatalogue-pri-mp"
+            [1m[0minterval[0m[0m                                  = 30
+            [1m[0mminimum_servers[0m[0m                           = 0
+            [1m[0mname[0m[0m                                      = "pb-buyingcatalogue-private-marketingpage-3002-buyingcatalogue-pri-mp"
+            [1m[0mpath[0m[0m                                      = "/marketing/"
+            [1m[0mpick_host_name_from_backend_http_settings[0m[0m = false
+            [1m[0mprotocol[0m[0m                                  = "Http"
+            [1m[0mtimeout[0m[0m                                   = 30
+            [1m[0munhealthy_threshold[0m[0m                       = 3
+
+            match {
+                [1m[0mstatus_code[0m[0m = [
+                    "200-399",
+                ]
+            }
+        }
+        probe {
+            [1m[0mhost[0m[0m                                      = "localhost"
+            [1m[0mid[0m[0m                                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/probes/pb-buyingcatalogue-private-publicbrowse-3000-buyingcatalogue-pri-pb"
+            [1m[0minterval[0m[0m                                  = 30
+            [1m[0mminimum_servers[0m[0m                           = 0
+            [1m[0mname[0m[0m                                      = "pb-buyingcatalogue-private-publicbrowse-3000-buyingcatalogue-pri-pb"
+            [1m[0mpath[0m[0m                                      = "/"
+            [1m[0mpick_host_name_from_backend_http_settings[0m[0m = false
+            [1m[0mprotocol[0m[0m                                  = "Http"
+            [1m[0mtimeout[0m[0m                                   = 30
+            [1m[0munhealthy_threshold[0m[0m                       = 3
+
+            match {
+                [1m[0mstatus_code[0m[0m = [
+                    "200-399",
+                ]
+            }
+        }
+
+        request_routing_rule {
+            [1m[0mhttp_listener_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/httpListeners/listener-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mhttp_listener_name[0m[0m = "listener-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mid[0m[0m                 = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/requestRoutingRules/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mname[0m[0m               = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mrule_type[0m[0m          = "PathBasedRouting"
+            [1m[0murl_path_map_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80"
+            [1m[0murl_path_map_name[0m[0m  = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80"
+        }
+        request_routing_rule {
+            [1m[0mhttp_listener_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/httpListeners/listener-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mhttp_listener_name[0m[0m = "listener-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mid[0m[0m                 = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/requestRoutingRules/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mname[0m[0m               = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mrule_type[0m[0m          = "PathBasedRouting"
+            [1m[0murl_path_map_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443"
+            [1m[0murl_path_map_name[0m[0m  = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443"
+        }
+
+        sku {
+            [1m[0mcapacity[0m[0m = 1
+            [1m[0mname[0m[0m     = "WAF_v2"
+            [1m[0mtier[0m[0m     = "WAF_v2"
+        }
+
+      [31m-[0m [0mssl_certificate {
+          [31m-[0m [0m[1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/sslCertificates/listener-private.buyingcatalogue.digital.nhs.uk-443vaultCert" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mname[0m[0m = "listener-private.buyingcatalogue.digital.nhs.uk-443vaultCert" [90m->[0m [0m[90mnull[0m[0m
+        }
+
+        ssl_policy {
+            [1m[0mcipher_suites[0m[0m      = []
+            [1m[0mdisabled_protocols[0m[0m = []
+            [1m[0mpolicy_name[0m[0m        = "AppGwSslPolicy20170401S"
+            [1m[0mpolicy_type[0m[0m        = "Predefined"
+        }
+
+      [31m-[0m [0murl_path_map {
+          [31m-[0m [0m[1m[0mdefault_backend_address_pool_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/bepool-buyingcatalogue-private-publicbrowse" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_address_pool_name[0m[0m  = "bepool-buyingcatalogue-private-publicbrowse" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_http_settings_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_http_settings_name[0m[0m = "bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mid[0m[0m                                 = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mname[0m[0m                               = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+
+          [31m-[0m [0mpath_rule {
+              [31m-[0m [0m[1m[0mbackend_address_pool_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/bepool-buyingcatalogue-private-marketingpage" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_address_pool_name[0m[0m  = "bepool-buyingcatalogue-private-marketingpage" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_http_settings_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_http_settings_name[0m[0m = "bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mid[0m[0m                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-80/pathRules/rrr-marketingpage-private.buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mname[0m[0m                       = "rrr-marketingpage-private.buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mpaths[0m[0m                      = [
+                  [31m-[0m [0m"/marketing/*",
+                ] [90m->[0m [0m[90mnull[0m[0m
+            }
+        }
+      [31m-[0m [0murl_path_map {
+          [31m-[0m [0m[1m[0mdefault_backend_address_pool_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/bepool-buyingcatalogue-private-publicbrowse" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_address_pool_name[0m[0m  = "bepool-buyingcatalogue-private-publicbrowse" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_http_settings_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mdefault_backend_http_settings_name[0m[0m = "bp-buyingcatalogue-private-publicbrowse-3000-3000-buyingcatalogue-pri-pb" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mid[0m[0m                                 = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mname[0m[0m                               = "rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+
+          [31m-[0m [0mpath_rule {
+              [31m-[0m [0m[1m[0mbackend_address_pool_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendAddressPools/pool-buyingcatalogue-private-marketingpage-3002-bp-3002" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_address_pool_name[0m[0m  = "pool-buyingcatalogue-private-marketingpage-3002-bp-3002" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_http_settings_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/backendHttpSettingsCollection/bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mbackend_http_settings_name[0m[0m = "bp-buyingcatalogue-private-marketingpage-3002-3002-buyingcatalogue-pri-mp" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mid[0m[0m                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pri/urlPathMaps/rrr-publicbrowse-private.buyingcatalogue.digital.nhs.uk-443/pathRules/rrr-marketingpage-private.buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mname[0m[0m                       = "rrr-marketingpage-private.buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+              [31m-[0m [0m[1m[0mpaths[0m[0m                      = [
+                  [31m-[0m [0m"/marketing/*",
+                ] [90m->[0m [0m[90mnull[0m[0m
+            }
+        }
+    }
+
+[1m  # azurerm_application_gateway.pub-AppGate[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_application_gateway" "pub-AppGate" {
+        [1m[0mdisabled_ssl_protocols[0m[0m = []
+        [1m[0menable_http2[0m[0m           = false
+        [1m[0mid[0m[0m                     = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub"
+        [1m[0mlocation[0m[0m               = "uksouth"
+        [1m[0mname[0m[0m                   = "gpitfutures-prod-appgw-pub"
+        [1m[0mresource_group_name[0m[0m    = "gpitfutures-prod-rg-vnet"
+        [1m[0mtags[0m[0m                   = {
+            "last-updated-by-k8s-ingress" = "2020-04-11 08:15:39.98606345 +0000 UTC m=+3823.365728695"
+            "managed-by-k8s-ingress"      = "1.0.0/cd166d64/2019-11-07-22:55T+0000"
+        }
+        [1m[0mzones[0m[0m                  = []
+
+        backend_address_pool {
+            [1m[0mfqdn_list[0m[0m       = []
+            [1m[0mfqdns[0m[0m           = []
+            [1m[0mid[0m[0m              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/backendAddressPools/bepool-buyingcatalogue-public-publicbrowse"
+            [1m[0mip_address_list[0m[0m = [
+                "10.100.49.14",
+            ]
+            [1m[0mip_addresses[0m[0m    = [
+                "10.100.49.14",
+            ]
+            [1m[0mname[0m[0m            = "bepool-buyingcatalogue-public-publicbrowse"
+        }
+
+        backend_http_settings {
+            [1m[0maffinity_cookie_name[0m[0m                = "ApplicationGatewayAffinity"
+            [1m[0mcookie_based_affinity[0m[0m               = "Disabled"
+            [1m[0mid[0m[0m                                  = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/backendHttpSettingsCollection/http-buyingcatalogue-public-publicbrowse-3000"
+            [1m[0mname[0m[0m                                = "http-buyingcatalogue-public-publicbrowse-3000"
+            [1m[0mpick_host_name_from_backend_address[0m[0m = false
+            [1m[0mport[0m[0m                                = 3000
+            [1m[0mprobe_id[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/probes/healthprobe-publicbrowse-public-3000"
+            [1m[0mprobe_name[0m[0m                          = "healthprobe-publicbrowse-public-3000"
+            [1m[0mprotocol[0m[0m                            = "Http"
+            [1m[0mrequest_timeout[0m[0m                     = 20
+            [1m[0mtrusted_root_certificate_names[0m[0m      = []
+        }
+
+        frontend_ip_configuration {
+            [1m[0mid[0m[0m                            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mname[0m[0m                          = "gpitfutures-prod-appgw-feip"
+            [1m[0mprivate_ip_address_allocation[0m[0m = "Dynamic"
+            [1m[0mpublic_ip_address_id[0m[0m          = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/publicIPAddresses/gpitfutures-prod-pip-pub"
+        }
+
+        frontend_port {
+            [1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mname[0m[0m = "gpitfutures-prod-appgw-feport"
+            [1m[0mport[0m[0m = 80
+        }
+        frontend_port {
+            [1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendPorts/port_443"
+            [1m[0mname[0m[0m = "port_443"
+            [1m[0mport[0m[0m = 443
+        }
+
+        gateway_ip_configuration {
+            [1m[0mid[0m[0m        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/gatewayIPConfigurations/gpitfutures-gwip-pub"
+            [1m[0mname[0m[0m      = "gpitfutures-gwip-pub"
+            [1m[0msubnet_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway"
+        }
+
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mfrontend_port_name[0m[0m             = "gpitfutures-prod-appgw-feport"
+            [1m[0mhost_name[0m[0m                      = "buyingcatalogueprodpublic.uksouth.cloudapp.azure.com"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogueprodpublic.uksouth.cloudapp.azure.com-80"
+            [1m[0mname[0m[0m                           = "listener-buyingcatalogueprodpublic.uksouth.cloudapp.azure.com-80"
+            [1m[0mprotocol[0m[0m                       = "Http"
+            [1m[0mrequire_sni[0m[0m                    = false
+        }
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendPorts/gpitfutures-prod-appgw-feport"
+            [1m[0mfrontend_port_name[0m[0m             = "gpitfutures-prod-appgw-feport"
+            [1m[0mhost_name[0m[0m                      = "buyingcatalogue.digital.nhs.uk"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mname[0m[0m                           = "listener-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mprotocol[0m[0m                       = "Http"
+            [1m[0mrequire_sni[0m[0m                    = false
+        }
+        http_listener {
+            [1m[0mfrontend_ip_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendIPConfigurations/gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_ip_configuration_name[0m[0m = "gpitfutures-prod-appgw-feip"
+            [1m[0mfrontend_port_id[0m[0m               = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/frontendPorts/port_443"
+            [1m[0mfrontend_port_name[0m[0m             = "port_443"
+            [1m[0mhost_name[0m[0m                      = "buyingcatalogue.digital.nhs.uk"
+            [1m[0mid[0m[0m                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mname[0m[0m                           = "listener-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mprotocol[0m[0m                       = "Https"
+            [1m[0mrequire_sni[0m[0m                    = true
+            [1m[0mssl_certificate_id[0m[0m             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/sslCertificates/listener-buyingcatalogue.digital.nhs.uk-443vaultCert"
+            [1m[0mssl_certificate_name[0m[0m           = "listener-buyingcatalogue.digital.nhs.uk-443vaultCert"
+        }
+
+        identity {
+            [1m[0midentity_ids[0m[0m = [
+                "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-aks/providers/Microsoft.ManagedIdentity/userAssignedIdentities/gpitfutures-prod-aad-id",
+            ]
+            [1m[0mtype[0m[0m         = "UserAssigned"
+        }
+
+        probe {
+            [1m[0mhost[0m[0m                                      = "buyingcatalogue.digital.nhs.uk"
+            [1m[0mid[0m[0m                                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/probes/healthprobe-publicbrowse-public-3000"
+            [1m[0minterval[0m[0m                                  = 30
+            [1m[0mminimum_servers[0m[0m                           = 0
+            [1m[0mname[0m[0m                                      = "healthprobe-publicbrowse-public-3000"
+            [1m[0mpath[0m[0m                                      = "/"
+            [1m[0mpick_host_name_from_backend_http_settings[0m[0m = false
+            [1m[0mprotocol[0m[0m                                  = "Http"
+            [1m[0mtimeout[0m[0m                                   = 30
+            [1m[0munhealthy_threshold[0m[0m                       = 3
+
+            match {
+                [1m[0mstatus_code[0m[0m = [
+                    "200-399",
+                ]
+            }
+        }
+
+      [31m-[0m [0mredirect_configuration {
+          [31m-[0m [0m[1m[0mid[0m[0m                   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/redirectConfigurations/rrr-buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0minclude_path[0m[0m         = true [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0minclude_query_string[0m[0m = true [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mname[0m[0m                 = "rrr-buyingcatalogue.digital.nhs.uk-80" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mredirect_type[0m[0m        = "Found" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtarget_listener_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtarget_listener_name[0m[0m = "listener-buyingcatalogue.digital.nhs.uk-443" [90m->[0m [0m[90mnull[0m[0m
+        }
+
+        request_routing_rule {
+            [1m[0mbackend_address_pool_id[0m[0m    = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/backendAddressPools/bepool-buyingcatalogue-public-publicbrowse"
+            [1m[0mbackend_address_pool_name[0m[0m  = "bepool-buyingcatalogue-public-publicbrowse"
+            [1m[0mbackend_http_settings_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/backendHttpSettingsCollection/http-buyingcatalogue-public-publicbrowse-3000"
+            [1m[0mbackend_http_settings_name[0m[0m = "http-buyingcatalogue-public-publicbrowse-3000"
+            [1m[0mhttp_listener_id[0m[0m           = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mhttp_listener_name[0m[0m         = "listener-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mid[0m[0m                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/requestRoutingRules/rrr-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mname[0m[0m                       = "rrr-buyingcatalogue.digital.nhs.uk-443"
+            [1m[0mrule_type[0m[0m                  = "Basic"
+        }
+        request_routing_rule {
+            [1m[0mhttp_listener_id[0m[0m            = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/httpListeners/listener-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mhttp_listener_name[0m[0m          = "listener-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mid[0m[0m                          = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/requestRoutingRules/rrr-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mname[0m[0m                        = "rrr-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mredirect_configuration_id[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/redirectConfigurations/rrr-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mredirect_configuration_name[0m[0m = "rrr-buyingcatalogue.digital.nhs.uk-80"
+            [1m[0mrule_type[0m[0m                   = "Basic"
+        }
+
+        sku {
+            [1m[0mcapacity[0m[0m = 1
+            [1m[0mname[0m[0m     = "WAF_v2"
+            [1m[0mtier[0m[0m     = "WAF_v2"
+        }
+
+      [31m-[0m [0mssl_certificate {
+          [31m-[0m [0m[1m[0mid[0m[0m   = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/applicationGateways/gpitfutures-prod-appgw-pub/sslCertificates/listener-buyingcatalogue.digital.nhs.uk-443vaultCert" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mname[0m[0m = "listener-buyingcatalogue.digital.nhs.uk-443vaultCert" [90m->[0m [0m[90mnull[0m[0m
+        }
+
+        ssl_policy {
+            [1m[0mcipher_suites[0m[0m      = []
+            [1m[0mdisabled_protocols[0m[0m = []
+            [1m[0mpolicy_name[0m[0m        = "AppGwSslPolicy20170401S"
+            [1m[0mpolicy_type[0m[0m        = "Predefined"
+        }
+
+      [31m-[0m [0mwaf_configuration {
+          [31m-[0m [0m[1m[0menabled[0m[0m                  = true [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mfile_upload_limit_mb[0m[0m     = 100 [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mfirewall_mode[0m[0m            = "Detection" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mmax_request_body_size_kb[0m[0m = 128 [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mrequest_body_check[0m[0m       = true [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mrule_set_type[0m[0m            = "OWASP" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mrule_set_version[0m[0m         = "3.0" [90m->[0m [0m[90mnull[0m[0m
+        }
+    }
+
+[1m  # azurerm_bastion_host.bastion[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_bastion_host" "bastion" {
+      [32m+[0m [0m[1m[0mdns_name[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m            = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m                = "gpitfutures-prod-bastion"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "gpitfutures-prod-rg-bastion"
+      [32m+[0m [0m[1m[0mtags[0m[0m                = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+
+      [32m+[0m [0mip_configuration {
+          [32m+[0m [0m[1m[0mname[0m[0m                 = "gpitfutures-bastionip"
+          [32m+[0m [0m[1m[0mpublic_ip_address_id[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m            = (known after apply)
+        }
+    }
+
+[1m  # azurerm_eventhub.ehubukw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_eventhub" "ehubukw" {
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mmessage_retention[0m[0m   = 1
+      [32m+[0m [0m[1m[0mname[0m[0m                = "gpitfutures-prod-ehubukw"
+      [32m+[0m [0m[1m[0mnamespace_name[0m[0m      = "gpitfutures-prod-ensukw"
+      [32m+[0m [0m[1m[0mpartition_count[0m[0m     = 2
+      [32m+[0m [0m[1m[0mpartition_ids[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "gpitfutures-prod-rg-ehub-ukw"
+    }
+
+[1m  # azurerm_eventhub_namespace.ehubukw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_eventhub_namespace" "ehubukw" {
+      [32m+[0m [0m[1m[0mauto_inflate_enabled[0m[0m                = false
+      [32m+[0m [0m[1m[0mcapacity[0m[0m                            = 2
+      [32m+[0m [0m[1m[0mdefault_primary_connection_string[0m[0m   = (sensitive value)
+      [32m+[0m [0m[1m[0mdefault_primary_key[0m[0m                 = (sensitive value)
+      [32m+[0m [0m[1m[0mdefault_secondary_connection_string[0m[0m = (sensitive value)
+      [32m+[0m [0m[1m[0mdefault_secondary_key[0m[0m               = (sensitive value)
+      [32m+[0m [0m[1m[0mid[0m[0m                                  = (known after apply)
+      [32m+[0m [0m[1m[0mkafka_enabled[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m                            = "ukwest"
+      [32m+[0m [0m[1m[0mmaximum_throughput_units[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                                = "gpitfutures-prod-ensukw"
+      [32m+[0m [0m[1m[0mnetwork_rulesets[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m                 = "gpitfutures-prod-rg-ehub-ukw"
+      [32m+[0m [0m[1m[0msku[0m[0m                                 = "Standard"
+      [32m+[0m [0m[1m[0mtags[0m[0m                                = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+    }
+
+[1m  # azurerm_kubernetes_cluster.aks[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_kubernetes_cluster" "aks" {
+        [1m[0mapi_server_authorized_ip_ranges[0m[0m = []
+        [1m[0mdns_prefix[0m[0m                      = "gpitfuturesprodaksdns"
+      [33m~[0m [0m[1m[0menable_pod_security_policy[0m[0m      = false [33m->[0m [0mtrue
+        [1m[0mfqdn[0m[0m                            = "gpitfuturesprodaksdns-03fbe41c.hcp.uksouth.azmk8s.io"
+        [1m[0mid[0m[0m                              = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-aks/providers/Microsoft.ContainerService/managedClusters/gpitfutures-prod-aks"
+        [1m[0mkube_admin_config[0m[0m               = []
+        [1m[0mkube_config[0m[0m                     = [
+            {
+                client_certificate     = "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUUvRENDQXVTZ0F3SUJBZ0lRWjd5UFM3dmFzOVJZMGFUVVVLcWxIVEFOQmdrcWhraUc5dzBCQVFzRkFEQU4KTVFzd0NRWURWUVFERXdKallUQWVGdzB5TURBek1URXdPVFF5TXpKYUZ3MHlNakF6TVRFd09UVXlNekphTURBeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1SVXdFd1lEVlFRREV3eHRZWE4wWlhKamJHbGxiblF3CmdnSWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUNEd0F3Z2dJS0FvSUNBUUN3Z3ZZTVd6c2VONUxFZGVFWE5SU0kKQWpxT3NSdnREWGRHYXZUakk1dHMwQVFoYkQ3M3NmTi9uaFErTngyTWxjejNkWmhGTFo1M2kwS3ZKbllkK2t0bgpMck44SGRzSmNJaHpYVXVSVUQ5a1hoTUNxL21mK0xpRCthN0pVbjFsbWtIVDlCNVdwalJCUnhRVHV4NlROZ0QrCjZ0bWxaV0xjeTFZL2xITUVpeHliNlJkR1dLNlhFbmx5VCttVzRjdzY0Q0RjbTYzUWtBUW1pYWtiZXpHdVRucWUKQXlWc0VnNkd2ZGhBQXcrQkxORzZIMW82OVA1ZE55YXQ5L0htcGVic3k2dTZiR3JZTGptZldkcllUUTFIVC8wdApqU1Z2Q2FmbGt6RmI5b01UTy92SVFTakszTVpVV2h4WElRSC9zZzVpS3o4Uzd0dlVJczI3aWY2SytvTnZXVDdvClRoSFJDZXdDeFJUS0R2SmNiaDBiSWN4TnFJeWdaaDJHVjBhV3o4bnpHUHl3OFE1WHFsVGQyakpKZWZHRGRScVMKbG1kRFo5ZDdudG42VW5lN1YybHlPbXl1OGF0bDVJR25ic20rTms4OFhvN2k1R3VwdlJGbkRRQmJabzZYMmJDawpFaHA1Zy81RXZIRis0elZFRkVtTVpVRytRc1NORWdPSHpxL29GdjNrYkkzWEJ1YUFESyt6Y0RvVmJ5WTBPVVZOClFVMHJiRzEvcVhUaHNYMlo3U2Y4T0kwUXVuaklhVnhxK29qbzI4M2JJWXcyY1Fqa0M5Yjh4SVZRSHlYbmxEY04KeFU0cGx4TXBGYW5oenpuTDRRa3hWbXJDMXRBSGlSVFlwczlQVVBJdGJTT2haSHZQWTl0RkJyZDZUT1hXdFU4YgpXMklOeTdiTnF5Rm91OURCOTRKNE9RSURBUUFCb3pVd016QU9CZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsCkJBd3dDZ1lJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUEKQnk5dmNqRVV2YzMydm9CMFo4clR1S0V6NXdnMkJqSm8xSm1oZElydnVaY1o2VitlMHBoWTRPeFFqWFJtczArZwplMFd5dExuUm9mdnVzMm1OWTFlOEZWV1ZndFVrZVhxRHJFR2hPSzcvV2dzMXNpWVkxWkpUbW43dmZnUE1aMFlRCmhwS3g4eWR3VitwQk1hczJBNC9sZytjUUpyK1k0cTVQcjFFYnJCSzU4NkczV2t1dG1SRVJlZHY3ZVJORXZUdlEKdUsydllORFV2MS9ESlZ3d3R5MFdRWjFTMnQxMHkxa2NMVVRUeDdqdUErYlp2NUZYWVZ4OE9zN1hQZ255S3FTSwplSlBDOUJXQlpsTkJZU1BHRFZsVC9pKzNEeFMwSmo2OFY4Ky9ETVBtRnBaeDBTcmtYUWtOMTFwV3FyM29TMiswCk5wUnpuaDg3NjNOa3YvdFJtU0xkOVhNS2tDVVFTdTRZVEkzcVFNWTNGWDR0ckdERHJjVTgycEIzZVhKdjNCR3QKUm5UWHRwa05VSnluZCtoZ0pqUlUzNDV2T2Z4VWJEUlk0cUIxK2h3bkxvSlFqQWgyZUdDUlBzZkFpdlM4MkQ0Zgo0UkpPN2FZVm1jaXVOZnNYL0JSQ3R5a3BTbFJHRkU4bXBFU3JJOVF1YTZWWnlUL3BrYWU5eHE1dEhKdXFKRGlrCngvMXZPVHY0MUIrUDBoTkEwc1U2Q1JJcGE4MFc1Q3lEWDJaYkh0cVIydldQTFU5S1JTaVV6VGJtdFRUaWxQMmgKNjlaNU9UMlRoZS9jaTVoSEpNT2VCa0thZmYybFlwb0JJeUREQlBZZ0psNFpubTRqUUV4a1FhRENiSzd3N3ovagp1SENMaFpZak5KUjA5aWR5Q0pOYmJTSkFxZDhIZVZrVEQ1ajRUeTNqclNZPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+                client_key             = "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKSndJQkFBS0NBZ0VBc0lMMkRGczdIamVTeEhYaEZ6VVVpQUk2anJFYjdRMTNSbXIwNHlPYmJOQUVJV3crCjk3SHpmNTRVUGpjZGpKWE05M1dZUlMyZWQ0dENyeVoySGZwTFp5NnpmQjNiQ1hDSWMxMUxrVkEvWkY0VEFxdjUKbi9pNGcvbXV5Vko5WlpwQjAvUWVWcVkwUVVjVUU3c2VrellBL3VyWnBXVmkzTXRXUDVSekJJc2NtK2tYUmxpdQpseEo1Y2svcGx1SE1PdUFnM0p1dDBKQUVKb21wRzNzeHJrNTZuZ01sYkJJT2hyM1lRQU1QZ1N6UnVoOWFPdlQrClhUY21yZmZ4NXFYbTdNdXJ1bXhxMkM0NW4xbmEyRTBOUjAvOUxZMGxid21uNVpNeFcvYURFenY3eUVFb3l0ekcKVkZvY1Z5RUIvN0lPWWlzL0V1N2IxQ0xOdTRuK2l2cURiMWsrNkU0UjBRbnNBc1VVeWc3eVhHNGRHeUhNVGFpTQpvR1lkaGxkR2xzL0o4eGo4c1BFT1Y2cFUzZG95U1hueGczVWFrcFpuUTJmWGU1N1orbEozdTFkcGNqcHNydkdyClplU0JwMjdKdmpaUFBGNk80dVJycWIwUlp3MEFXMmFPbDltd3BCSWFlWVArUkx4eGZ1TTFSQlJKakdWQnZrTEUKalJJRGg4NnY2QmI5NUd5TjF3Ym1nQXl2czNBNkZXOG1ORGxGVFVGTksyeHRmNmwwNGJGOW1lMG4vRGlORUxwNAp5R2xjYXZxSTZOdk4yeUdNTm5FSTVBdlcvTVNGVUI4bDU1UTNEY1ZPS1pjVEtSV3A0Yzg1eStFSk1WWnF3dGJRCkI0a1UyS2JQVDFEeUxXMGpvV1I3ejJQYlJRYTNla3psMXJWUEcxdGlEY3UyemFzaGFMdlF3ZmVDZURrQ0F3RUEKQVFLQ0FnQkUrbmpDN1dnVjcrdklJTFRkQjk1RkpISFR6M3kxVDd6YjVQSmNUVTd3My8ydFBnc0JheVpZS2VPSgpTS3FnaE8zN2lwWDkrc3podEtkVG9Ua3BqK1dscGdkNEtvYXRrcStRUGRaSkxFNEpvQVhYMW5NUHcvZi9nelI5CjhtR1VzZ3FsbE5IQ1ZPTTQyMWtLT09iQzZxaks5ZVltRDQvcDd3Qitpam5FZmNTcFhSYStZK3VlbUJhanlIemwKZk1uOS9CWjdmODhXSVNHdUdiL2ZRRzV5eXJKNlM0cDFTRDByQk1lY2hGV3J5bU1QVkM5RHVQZ3FYMkliUERqcApSTTRRbmFzM2lDVGM1SHVhUFZnYmpVanlKRjB4VHVaaEZTbnF1bkhnbVY0eHh4QW0rdWZCRnpQZVJQU3NTL2JuCkFLTkVVOWdyUXZMZlhOWi9RbmNad3JwWWFrejlmd0RlS0pibkJkQ1ZXUXpJa3dKVGNhWk44WldYbklpN3FYOUQKa20yU1Uwc3Y1bVJYUFhHZHFiUGZRS2VsUXVUYmRYR1Z5ZzhXT210eEdGeUwrWjBrdnA2SHloamV3ZjZIZVNKMgpjbDAwcTI2dlVNeDZma3BVbkdUNmhBeXVCaG5aYVl3RXdKcTJiVHJlWVlRa1FqK1A0MFBKZ1VOVnFlMmwwcnpBClZkUVdqdGdmWGt0VDdkQmV5RUFNMWpTbHg3bDlFRFJlRjZCVVF3S2w3M0lQVkZ2b2s5ME84VXIranBYOG55QU4KbnVTY1BKZGhRQXZTUytybXUrVTBqK0NJamJwT3RPWjdlUGM2elJpZnV2YXBBNk0zbmI2N1VmaDB2dHJ1UjliQgpwNWxxNG1aQjhMSjRsWFlOcVFQSTdaMFlsZXo5b1ZjOGpFL2ZvdUpQZFluT1c2ejBmUUtDQVFFQTRxRXUxRWVPCitIQ1VtSkFRRVhBRmFZSURKaDZUYWZTUzdZM0hlZTJzNTIxNTJ5VGcvUGM5RFNPd1dHM3ZYZEI1by9HdVk2RkcKZnZva3VUUm96OFczckN2Ky9wS1RHVVJDYXdPblJIbE1FQnhhUUtzNHVHS3FsSG8vTmxIOE14Ny9lSEl4cHNhQwpSa2ZOalhaWERBUEorNkNFRVZhU0VTa1hQS0tvMWNrUWFkalZWbE9zOVlBYWhnNWE1NEk5M2t0T2I2aEpaN3JwCkd3TUZWSGV1TFk4YVp1b3pLcUtKNU8valpFYTNUWDIzQmY2eEcwNFp0dEhGdjdkWkloMXhuZ2crQlI4dlRlQVkKdUpzM1NWY1Zwalo4TUhVV1JCc1Z0bEJ6ZnNvSWV3NEFSUXZrVnVUUlhVY0gzeHZWTEhIWnYvY21YWTJEM21jagpXdWUvbXBuOThUSkF6d0tDQVFFQXgyTUhJYkM3SHg2MFh4OW1tbElVVktwZnM1VmFGS0xSQm9QcGRRNDhOWkFGCjNHZCtQSElaSi9adDB3SThJaVRDalJ6SEpnSXF3UCtZZDRmekZFbTJ2VndVMlpkaFoydDY2S0JIc2dsZHcxVm8KcGdobHk2RDdyU2ZGZy9CWERXVmdlYnliNXR2b3BVOUZQTSt3NGw3ZUJjR0dsdnBDek1NMlVscDJrenlrRlBQUgpSc0NGei9hcWMzUVl2eTZJYmN1M3B3N2RSOHRvbDhCdGRjaFVZUmh0alJiYmlnbytUVFBGbm9JZVgrdXhZb2xCCkZ3YWYxVDVJckZmWjJhQ1hVeC9TMk9rMncvV3V3STl1dVFvcVJGWXdScGVZQ08yaUV4QVNQb2ZUWHg4aTMzUFkKYzZiZlprZ1VsTnRKeXNKNDcxU1ZPQ2dRWWp5YW4xOHJ6aHRqZGhvb2R3S0NBUUFOdjhtZmgxZmRLcmRaS2lSUAphb1JwaWtHMnBsUTdNV05ZbGlscjlFZHhJdXNwcUdzZDdjSCtjaFBZeVpLa0ZtbkswSGJNQkpUS1QxSzdDYnJ5CklBU3NwVjZyQXlsNWR2S3dtMkFpZjFsbUFOSlk2Z3BlNVYyRDlJYXhQUGdZQWVGdDVUK3Q1bzB3eGxwcUlxdlYKUnNXU1JvSzhxb3ZpRHFRaVFad01uRTRxbmNVVG42LzJsUGNHK3dmNDA2WDlQb1Jic2RJQ1FReXpYdE9MOUZiVQozTUcxVExBZC9nNXZuVDRtYjBQZnA2amE3RURDYjFLUURObjZiNTB3dktpUDllQU5YMzczTW9sTmFkMUl6Y2U2CmRjUERETmQwK2srdTUrS1o1cGZ0SDBSVTdBdkdXY3Q1NVQxTkE5dEMvd1UrNkRlanBWcEN1KzhoTEw0ckd2eVYKRFg5eEFvSUJBRGl5aERpa1ZOR0luYW5lK0FJeURPMzJkTGhRWkFreU0xWXk5SlFBdEVaVzZoTytxanJ1QnhGQwpGZ0RHeGVxL29VTVhSOW9iQzZWT0NVRVVPNTh0UnZXWjFhUDZWQXhnbDliR25SeVhaVDVDYnp1bmI2cno0QjFoCkRkMXkzbzVFb2FaOFo2akNKK202SE9vcDlSYXArMkNQbzRJVE1DT2g3elNEM093SmRtOHUxZmZVanppUDMvQnMKdHd6R1lxMDJITWM0aHR2L2o0SjNpYWpRaW80QnNFVktscXN1Tm9FbGs3QjdONy8yK2I0WFlaYjJuMFM0TFZvMApzUklkaEdweXhqWkFPdjZHUW1jbllramtCeGpmbVdLNWdOWXBITWxtN0lremZudXlFdXlQdUtGS2RvUlRRdWNCClpINXZ4b3ZuOVhhK2pjb2hpYWFBSGFqQ1NRb3diZ2tDZ2dFQWFyK0xHVFFvdEJjZkVZbno4L3lTeTF3UDhhdG8Kb1VjOU1nU1ZhVFRXNXhQNE1hQWlLbGttc1Jhd0RmM0tqck90bnhOMmM3WUlLVGJjTXFScTVoYWtDcytGN0V5TwpZNzFTM2NuZDRJdG9ORmt5YUtFN2s1bm92VE5VSS91TWpNbHBDOGIxSzNjZnlvZHlSYXhzWkZ0bVhONld0MEY5CmRSdHBPL3V4TnpQV0RXWUs3SzMxaWh0Rzd3NVg2cEVtcFRKZndPUVppN0hMbytNWGZ5N3ZIcHFrTTZ3TjVsbEEKczFVNW15N25STlV1dmNHQUlaS01QQ3VjZnFPY0xQMWREKzY5eDVmdExJVVpQS3dlcytFakRIZEhVU09WYjhkVgoxOGtacC91dVUzcEM2ajJ5YWNiNUJ3d3V4M2RiaVNEb3lTeTUzTUM2MXcxTU1VenFxWmtkN2Z6MVFBPT0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K"
+                cluster_ca_certificate = "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUV5VENDQXJHZ0F3SUJBZ0lRSXFCRDB0cC8rNGsvQTYxQytnZHZWVEFOQmdrcWhraUc5dzBCQVFzRkFEQU4KTVFzd0NRWURWUVFERXdKallUQWdGdzB5TURBek1URXdPVFF5TXpKYUdBOHlNRFV3TURNeE1UQTVOVEl6TWxvdwpEVEVMTUFrR0ExVUVBeE1DWTJFd2dnSWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUNEd0F3Z2dJS0FvSUNBUUMzCmVaMU9TUlNoQ2oxdXVUWDREQzlYUEVXNFlvU0Y3S3VKMkZpNDJCNnd1YjVpZXdleForMGdYdGRBeEx0eDYxVXQKYURNWTRHYUtVNllCL2hJeGVaSTlpcEJQSjV1SitoUDVDa2NmNGMwRG9ycFUzUzVGajJyaGtwbmYzaTQweWg4SAp5L2RjanlyZGF0blphaEhpL2Q3NnNHcUZhdkhrSHEwT2FLTVlqdzZaQ3ROcTJ4V2RtWENrOTBiOFY2Y3NsSENICm4rNFUrdHBoei8rekV2UUhjeGdmejVtWXZySVVLYnliblZPckxkRlZKQ0M3NEtabDAwTkpYZTN0MEFsbjZ3TTIKMUxISEFPVlFrb3pmUEtzUGU1azNkOUVDZUlwNVhmcmtVOUFMVGI0VEFuQXlvVnppdWNHcXVObUovMHJmSTZwNwptbnJGYjd4ZlVsNWRwWFVWbXFYdnJyMDV3ZHpPanNCbW9icnBhamZMUHJxOTBvMXd2cnJZNXQxOUlmdXZSR01xCnk1aDhRd1FyemI1QTNTMC9mN2ZzTnBkYzEwT3hJV29waHJQWkpBTitXa0hkUUtUNnQ1QTJsNFV1aDY2ZVJVVE8KKzNieXFPL0ZlZkhJdEJ2ZGJUMXpqbUJjSTcwaWFPTUR2alVUWjZWWC9Xb2xWY2pTQzgzOHdKTUVHUUdwTksyZgo2Wlk1MzlTOERDaC9lOGhpQUxYUFI1OXdYVGRoUlU1c0RJTk9tbVBIQnhMVUxhTHBFT29xc2NSWERUcmNnbzhPCllYdTBrWGZhYWRjZWdsL1NYS2hyQ2NyWkFGWGE0N3lVOUZEQmZOcWt6YkVjeEk0dThyeWFlUUl5ZWI0aCtKVjQKdXE2S2RDOVRwWUpSWFQ1QUJHMzA2S0xjY1lrQ1ZKZmlMRzduS1lyVmNRSURBUUFCb3lNd0lUQU9CZ05WSFE4QgpBZjhFQkFNQ0FxUXdEd1lEVlIwVEFRSC9CQVV3QXdFQi96QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUFEMGFJCmVxckRQS2g0S0xscndxU1Z1ZVFNN3lUa1hCckozRW14dmhCM3QzTlhIWW1rME1WMG1NM0FLQklYRG1Wa2ZMalcKSHprTVJGU2pzMFRjVkRUTHhnajZaYVBKb3dkSWYwWTArb2dCcEZtL3B3bDJxSUNHUldjbWM3dVBRWkxhWjJjLwpIM3VyU2dYeGVOS283b3BRSTVuSzJKWFdHblE4LzVYV0p0WFVjR1pnb1BNeU5YRHJkT0JyVUpMWFh3djR6SmxxClBveks3VWxQeDhHNE1QZThOQWxZN3BkVmZiY21IbHhFRkN1S0kra2trajg4T2ZFNkxReXFuQ0M5NzdidmVpQW0KMUNIY3lMVUFDajI1d1hIdEV4Ync2ejdQZmxRZ3dUbGJiLzRsVjhjdi9YQ09WK3BRRkk2aWdISStyOWZxUnhKUwpjVTFXdkN1RHVKN2lLcjczWU5JblpiRHJ2ZjllcnRXQzRtV2l4NWxOQmZwdlJNVVp1R1VKNVFacUY0dnVwUW04CjNBQnRYNGNLU0s4OGFDVkQ0ZURTcy9HYy9zZ0JSeFdBNGVmRXRvbWYwV1JrZ0JiK2IrenB0RUtjVXJLU3ZOdUoKRDVtMmYyK3NNUzRQOGJoMjU2NU54WGg3Y1RZS2pDblNLTnM2Tkg5enc2cGNtaEtsQnplbHVKNEwwWDVYY0xwTApHNXNIbjNHdS9iWk9WalpBeS83T0xxaXlNeUtPSjBMRFQ3clZvRSs0ditmcXQ4QnVTbFpRTStUNGtwNytMNFo2CkIvYzhwZTFpeE9XaXZuTFBCbGpCNFprWG1wQ0ZBRXFNT0Q0WVVza0gxcVBCdEx6eElQTzJ6d2Fnb2pYUmxPY3IKcUlJVlEvZVVUYzJsZFJ0N0hZdjdLdXRlOUcyU0pKL3hFMWhkK3hrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+                host                   = "https://gpitfuturesprodaksdns-03fbe41c.hcp.uksouth.azmk8s.io:443"
+                password               = "481708a9337910991e295c4f30bd698463b5a12fff91ae7ed321a890b9c851232acff58f59204f02166d63a1ead34d5f987f45707f5c3ab338251502c8841e00"
+                username               = "clusterUser_gpitfutures-prod-rg-aks_gpitfutures-prod-aks"
+            },
+        ]
+        [1m[0mkube_config_raw[0m[0m                 = (sensitive value)
+        [1m[0mkubernetes_version[0m[0m              = "1.15.7"
+        [1m[0mlocation[0m[0m                        = "uksouth"
+        [1m[0mname[0m[0m                            = "gpitfutures-prod-aks"
+        [1m[0mnode_resource_group[0m[0m             = "gpitfutures-prod-rg-aks-pool"
+        [1m[0mprivate_link_enabled[0m[0m            = false
+        [1m[0mresource_group_name[0m[0m             = "gpitfutures-prod-rg-aks"
+        [1m[0mtags[0m[0m                            = {
+            "environment" = "prod"
+        }
+
+        addon_profile {
+
+            kube_dashboard {
+                [1m[0menabled[0m[0m = true
+            }
+
+            oms_agent {
+                [1m[0menabled[0m[0m                    = true
+                [1m[0mlog_analytics_workspace_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourcegroups/gpitfutures-prod-rg-la/providers/microsoft.operationalinsights/workspaces/gpitfutures-prod-logs"
+            }
+        }
+
+        agent_pool_profile {
+            [1m[0mavailability_zones[0m[0m    = []
+            [1m[0mcount[0m[0m                 = 2
+            [1m[0menable_auto_scaling[0m[0m   = true
+            [1m[0menable_node_public_ip[0m[0m = false
+            [1m[0mfqdn[0m[0m                  = "gpitfuturesprodaksdns-03fbe41c.hcp.uksouth.azmk8s.io"
+            [1m[0mmax_count[0m[0m             = 9
+            [1m[0mmax_pods[0m[0m              = 30
+            [1m[0mmin_count[0m[0m             = 3
+            [1m[0mname[0m[0m                  = "prodpool1"
+            [1m[0mnode_taints[0m[0m           = []
+            [1m[0mos_disk_size_gb[0m[0m       = 128
+            [1m[0mos_type[0m[0m               = "Linux"
+            [1m[0mtype[0m[0m                  = "VirtualMachineScaleSets"
+            [1m[0mvm_size[0m[0m               = "Standard_F4s"
+            [1m[0mvnet_subnet_id[0m[0m        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-aks"
+        }
+
+      [33m~[0m [0mdefault_node_pool {
+            [1m[0mavailability_zones[0m[0m    = []
+            [1m[0menable_auto_scaling[0m[0m   = true
+            [1m[0menable_node_public_ip[0m[0m = false
+            [1m[0mmax_count[0m[0m             = 9
+            [1m[0mmax_pods[0m[0m              = 30
+            [1m[0mmin_count[0m[0m             = 3
+            [1m[0mname[0m[0m                  = "prodpool1"
+          [33m~[0m [0m[1m[0mnode_count[0m[0m            = 2 [33m->[0m [0m3
+            [1m[0mnode_taints[0m[0m           = []
+            [1m[0mos_disk_size_gb[0m[0m       = 128
+            [1m[0mtype[0m[0m                  = "VirtualMachineScaleSets"
+            [1m[0mvm_size[0m[0m               = "Standard_F4s"
+            [1m[0mvnet_subnet_id[0m[0m        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-aks"
+        }
+
+        network_profile {
+            [1m[0mdns_service_ip[0m[0m     = "10.110.48.111"
+            [1m[0mdocker_bridge_cidr[0m[0m = "172.17.48.1/24"
+            [1m[0mload_balancer_sku[0m[0m  = "Standard"
+            [1m[0mnetwork_plugin[0m[0m     = "azure"
+            [1m[0mnetwork_policy[0m[0m     = "azure"
+            [1m[0mservice_cidr[0m[0m       = "10.110.48.0/24"
+
+            load_balancer_profile {
+                [1m[0meffective_outbound_ips[0m[0m    = [
+                    "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-aks-pool/providers/Microsoft.Network/publicIPAddresses/9f92d442-0016-4c5f-b19b-e8c6b26384e4",
+                ]
+                [1m[0mmanaged_outbound_ip_count[0m[0m = 1
+                [1m[0moutbound_ip_address_ids[0m[0m   = []
+                [1m[0moutbound_ip_prefix_ids[0m[0m    = []
+            }
+        }
+
+        role_based_access_control {
+            [1m[0menabled[0m[0m = true
+        }
+
+        service_principal {
+            [1m[0mclient_id[0m[0m     = "cd7c98b2-31ca-4e02-9100-981697324ac5"
+            [1m[0mclient_secret[0m[0m = (sensitive value)
+        }
+    }
+
+[1m  # azurerm_management_lock.aks[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_management_lock" "aks" {
+      [32m+[0m [0m[1m[0mid[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mlock_level[0m[0m = "CanNotDelete"
+      [32m+[0m [0m[1m[0mname[0m[0m       = "az_mgm_lock_aks"
+      [32m+[0m [0m[1m[0mnotes[0m[0m      = "To prevent Production Resource Group from being deleted"
+      [32m+[0m [0m[1m[0mscope[0m[0m      = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-aks"
+    }
+
+[1m  # azurerm_management_lock.ehubukw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_management_lock" "ehubukw" {
+      [32m+[0m [0m[1m[0mid[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mlock_level[0m[0m = "CanNotDelete"
+      [32m+[0m [0m[1m[0mname[0m[0m       = "az_mgm_lock_aks"
+      [32m+[0m [0m[1m[0mnotes[0m[0m      = "To prevent Production Resource Group from being deleted"
+      [32m+[0m [0m[1m[0mscope[0m[0m      = (known after apply)
+    }
+
+[1m  # azurerm_network_interface.bastion_jump_nic[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_interface" "bastion_jump_nic" {
+      [32m+[0m [0m[1m[0mapplied_dns_servers[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mdns_servers[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0menable_accelerated_networking[0m[0m = false
+      [32m+[0m [0m[1m[0menable_ip_forwarding[0m[0m          = false
+      [32m+[0m [0m[1m[0mid[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0minternal_dns_name_label[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0minternal_fqdn[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m                      = "uksouth"
+      [32m+[0m [0m[1m[0mmac_address[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                          = "gpitfutures-prod-bstn-nic"
+      [32m+[0m [0m[1m[0mnetwork_security_group_id[0m[0m     = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip_address[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip_addresses[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m           = "gpitfutures-prod-rg-bastion"
+      [32m+[0m [0m[1m[0mtags[0m[0m                          = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+      [32m+[0m [0m[1m[0mvirtual_machine_id[0m[0m            = (known after apply)
+
+      [32m+[0m [0mip_configuration {
+          [32m+[0m [0m[1m[0mapplication_gateway_backend_address_pools_ids[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mapplication_security_group_ids[0m[0m                = (known after apply)
+          [32m+[0m [0m[1m[0mload_balancer_backend_address_pools_ids[0m[0m       = (known after apply)
+          [32m+[0m [0m[1m[0mload_balancer_inbound_nat_rules_ids[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mname[0m[0m                                          = "gpitfutures-prod-bstn-nic-ip"
+          [32m+[0m [0m[1m[0mprimary[0m[0m                                       = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip_address[0m[0m                            = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip_address_allocation[0m[0m                 = "dynamic"
+          [32m+[0m [0m[1m[0mprivate_ip_address_version[0m[0m                    = "IPv4"
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m                                     = (known after apply)
+        }
+    }
+
+[1m  # azurerm_network_security_group.bastion_jump[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "bastion_jump" {
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m            = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m                = "gpitfutures-prod-nsg-bst-jmp"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msecurity_rule[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+    }
+
+[1m  # azurerm_network_security_group.gateway_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "gateway_pri" {
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m            = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m                = "gpitfutures-prod-nsg-gateway-pri"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msecurity_rule[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+    }
+
+[1m  # azurerm_network_security_rule.Azure[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_network_security_rule" "Azure" {
+        [1m[0maccess[0m[0m                                     = "Allow"
+      [33m~[0m [0m[1m[0mdescription[0m[0m                                = "Allow incoming Azure Load Balancer probes (AzureLoadBalancer tag) and inbound virtual network traffic (VirtualNetwork tag) on the NSG." [33m->[0m [0m"Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
+        [1m[0mdestination_address_prefix[0m[0m                 = "*"
+        [1m[0mdestination_address_prefixes[0m[0m               = []
+        [1m[0mdestination_application_security_group_ids[0m[0m = []
+        [1m[0mdestination_port_range[0m[0m                     = "65200-65535"
+        [1m[0mdestination_port_ranges[0m[0m                    = []
+        [1m[0mdirection[0m[0m                                  = "Inbound"
+        [1m[0mid[0m[0m                                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowAzureInfrastructurePorts"
+        [1m[0mname[0m[0m                                       = "AllowAzureInfrastructurePorts"
+        [1m[0mnetwork_security_group_name[0m[0m                = "gpitfutures-prod-nsg-gateway"
+        [1m[0mpriority[0m[0m                                   = 500
+      [33m~[0m [0m[1m[0mprotocol[0m[0m                                   = "*" [33m->[0m [0m"TCP"
+        [1m[0mresource_group_name[0m[0m                        = "gpitfutures-prod-rg-vnet"
+      [33m~[0m [0m[1m[0msource_address_prefix[0m[0m                      = "*" [33m->[0m [0m"194.101.83.0/24"
+        [1m[0msource_address_prefixes[0m[0m                    = []
+        [1m[0msource_application_security_group_ids[0m[0m      = []
+        [1m[0msource_port_range[0m[0m                          = "*"
+        [1m[0msource_port_ranges[0m[0m                         = []
+    }
+
+[1m  # azurerm_network_security_rule.Azure_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "Azure_pri" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "65200-65535"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "AllowAzureInfrastructurePorts"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "gpitfutures-prod-nsg-gateway-pri"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 500
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "TCP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "194.101.83.0/24"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.BJSS_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "BJSS_pri" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Allow staff access who are connect to the BJSS VPN"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "80,433"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "AllowBjssVpn"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "gpitfutures-prod-nsg-gateway-pri"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 160
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "TCP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "86.156.184.218"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.BWP_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "BWP_pri" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Allow staff access who work within Bridgewater Place"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "80,433"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "AllowBwpGovIp"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "gpitfutures-prod-nsg-gateway-pri"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 150
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "TCP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "194.101.83.0/24"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.DevOps[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_network_security_rule" "DevOps" {
+        [1m[0maccess[0m[0m                                     = "Allow"
+        [1m[0mdescription[0m[0m                                = "Allow AzureDevops Access to Kubernetes Cluster"
+        [1m[0mdestination_address_prefix[0m[0m                 = "*"
+        [1m[0mdestination_address_prefixes[0m[0m               = []
+        [1m[0mdestination_application_security_group_ids[0m[0m = []
+      [33m~[0m [0m[1m[0mdestination_port_range[0m[0m                     = "*" [33m->[0m [0m"80,433"
+        [1m[0mdestination_port_ranges[0m[0m                    = []
+        [1m[0mdirection[0m[0m                                  = "Inbound"
+        [1m[0mid[0m[0m                                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowAzureDevOps"
+        [1m[0mname[0m[0m                                       = "AllowAzureDevOps"
+        [1m[0mnetwork_security_group_name[0m[0m                = "gpitfutures-prod-nsg-gateway"
+        [1m[0mpriority[0m[0m                                   = 200
+      [33m~[0m [0m[1m[0mprotocol[0m[0m                                   = "*" [33m->[0m [0m"TCP"
+        [1m[0mresource_group_name[0m[0m                        = "gpitfutures-prod-rg-vnet"
+        [1m[0msource_address_prefix[0m[0m                      = "AzureCloud"
+        [1m[0msource_address_prefixes[0m[0m                    = []
+        [1m[0msource_application_security_group_ids[0m[0m      = []
+        [1m[0msource_port_range[0m[0m                          = "*"
+        [1m[0msource_port_ranges[0m[0m                         = []
+    }
+
+[1m  # azurerm_network_security_rule.DevOps_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "DevOps_pri" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Allow AzureDevops Access to Kubernetes Cluster Private"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "80,433"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "AllowAzureDevOps"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "gpitfutures-prod-nsg-gateway-pri"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 200
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "TCP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "AzureCloud"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.Public[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "Public" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Allow public access"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "80,433"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "Public"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "gpitfutures-prod-nsg-gateway"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 160
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "TCP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "*"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.bjss[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "azurerm_network_security_rule" "bjss" {
+      [31m-[0m [0m[1m[0maccess[0m[0m                                     = "Allow" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdescription[0m[0m                                = "Allow staff access who are connect to the BJSS VPN" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_address_prefix[0m[0m                 = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_address_prefixes[0m[0m               = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_application_security_group_ids[0m[0m = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_port_range[0m[0m                     = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_port_ranges[0m[0m                    = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdirection[0m[0m                                  = "Inbound" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mid[0m[0m                                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowBjssVpn" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mname[0m[0m                                       = "AllowBjssVpn" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mnetwork_security_group_name[0m[0m                = "gpitfutures-prod-nsg-gateway" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mpriority[0m[0m                                   = 160 [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mprotocol[0m[0m                                   = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mresource_group_name[0m[0m                        = "gpitfutures-prod-rg-vnet" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_address_prefix[0m[0m                      = "148.253.134.213" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_address_prefixes[0m[0m                    = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_application_security_group_ids[0m[0m      = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_port_range[0m[0m                          = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_port_ranges[0m[0m                         = [] [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[1m  # azurerm_network_security_rule.bwp[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "azurerm_network_security_rule" "bwp" {
+      [31m-[0m [0m[1m[0maccess[0m[0m                                     = "Allow" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdescription[0m[0m                                = "Allow staff access who work within Bridgewater Place" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_address_prefix[0m[0m                 = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_address_prefixes[0m[0m               = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_application_security_group_ids[0m[0m = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_port_range[0m[0m                     = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdestination_port_ranges[0m[0m                    = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdirection[0m[0m                                  = "Inbound" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mid[0m[0m                                         = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway/securityRules/AllowBwpGovIp" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mname[0m[0m                                       = "AllowBwpGovIp" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mnetwork_security_group_name[0m[0m                = "gpitfutures-prod-nsg-gateway" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mpriority[0m[0m                                   = 150 [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mprotocol[0m[0m                                   = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mresource_group_name[0m[0m                        = "gpitfutures-prod-rg-vnet" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_address_prefix[0m[0m                      = "194.101.82.0/24" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_address_prefixes[0m[0m                    = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_application_security_group_ids[0m[0m      = [] [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_port_range[0m[0m                          = "*" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msource_port_ranges[0m[0m                         = [] [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[1m  # azurerm_public_ip.bastion[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_public_ip" "bastion" {
+      [32m+[0m [0m[1m[0mallocation_method[0m[0m            = "Static"
+      [32m+[0m [0m[1m[0mfqdn[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0midle_timeout_in_minutes[0m[0m      = 4
+      [32m+[0m [0m[1m[0mip_address[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mip_version[0m[0m                   = "IPv4"
+      [32m+[0m [0m[1m[0mlocation[0m[0m                     = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m                         = "gpitfutures-prod-bastion-pip"
+      [32m+[0m [0m[1m[0mpublic_ip_address_allocation[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m          = "gpitfutures-prod-rg-bastion"
+      [32m+[0m [0m[1m[0msku[0m[0m                          = "Standard"
+      [32m+[0m [0m[1m[0mtags[0m[0m                         = (known after apply)
+    }
+
+[1m  # azurerm_resource_group.bastion[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_resource_group" "bastion" {
+      [32m+[0m [0m[1m[0mid[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m     = "gpitfutures-prod-rg-bastion"
+      [32m+[0m [0m[1m[0mtags[0m[0m     = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+    }
+
+[1m  # azurerm_resource_group.ehubukw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_resource_group" "ehubukw" {
+      [32m+[0m [0m[1m[0mid[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m = "ukwest"
+      [32m+[0m [0m[1m[0mname[0m[0m     = "gpitfutures-prod-rg-ehub-ukw"
+      [32m+[0m [0m[1m[0mtags[0m[0m     = (known after apply)
+    }
+
+[1m  # azurerm_sql_server.bc-sql-pri[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_sql_server" "bc-sql-pri" {
+        [1m[0madministrator_login[0m[0m          = "gpitfutureadmin"
+        [1m[0madministrator_login_password[0m[0m = (sensitive value)
+        [1m[0mfully_qualified_domain_name[0m[0m  = "gpitfutures-prod-sql-pri.database.windows.net"
+        [1m[0mid[0m[0m                           = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-pri/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-pri"
+        [1m[0mlocation[0m[0m                     = "uksouth"
+        [1m[0mname[0m[0m                         = "gpitfutures-prod-sql-pri"
+        [1m[0mresource_group_name[0m[0m          = "gpitfutures-prod-rg-sql-pri"
+        [1m[0mtags[0m[0m                         = {}
+        [1m[0mversion[0m[0m                      = "12.0"
+
+      [31m-[0m [0midentity {
+          [31m-[0m [0m[1m[0mprincipal_id[0m[0m = "e88a10cd-3931-4322-8e3f-4d6d9c0bcfe8" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtenant_id[0m[0m    = "50f6071f-bbfe-401a-8803-673748e629e2" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtype[0m[0m         = "SystemAssigned" [90m->[0m [0m[90mnull[0m[0m
+        }
+    }
+
+[1m  # azurerm_sql_server.bc-sql-sec[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_sql_server" "bc-sql-sec" {
+        [1m[0madministrator_login[0m[0m          = "gpitfutureadmin"
+        [1m[0madministrator_login_password[0m[0m = (sensitive value)
+        [1m[0mfully_qualified_domain_name[0m[0m  = "gpitfutures-prod-sql-sec.database.windows.net"
+        [1m[0mid[0m[0m                           = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-sql-sec/providers/Microsoft.Sql/servers/gpitfutures-prod-sql-sec"
+        [1m[0mlocation[0m[0m                     = "ukwest"
+        [1m[0mname[0m[0m                         = "gpitfutures-prod-sql-sec"
+        [1m[0mresource_group_name[0m[0m          = "gpitfutures-prod-rg-sql-sec"
+        [1m[0mtags[0m[0m                         = {}
+        [1m[0mversion[0m[0m                      = "12.0"
+
+      [31m-[0m [0midentity {
+          [31m-[0m [0m[1m[0mprincipal_id[0m[0m = "bed6ab48-e56c-4f58-83b0-5f7125f7ea67" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtenant_id[0m[0m    = "50f6071f-bbfe-401a-8803-673748e629e2" [90m->[0m [0m[90mnull[0m[0m
+          [31m-[0m [0m[1m[0mtype[0m[0m         = "SystemAssigned" [90m->[0m [0m[90mnull[0m[0m
+        }
+    }
+
+[1m  # azurerm_subnet.bastion[0m must be [1m[31mreplaced[0m[0m
+[0m[31m-[0m/[32m+[0m[0m resource "azurerm_subnet" "bastion" {
+      [33m~[0m [0m[1m[0maddress_prefix[0m[0m                                 = "10.100.50.0/24" [33m->[0m [0m"10.100.50.0/27"
+        [1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+        [1m[0menforce_private_link_service_network_policies[0m[0m  = false
+      [33m~[0m [0m[1m[0mid[0m[0m                                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-bastion" [33m->[0m [0m(known after apply)
+      [33m~[0m [0m[1m[0mip_configurations[0m[0m                              = [] [33m->[0m [0m(known after apply)
+      [33m~[0m [0m[1m[0mname[0m[0m                                           = "gpitfutures-prod-sub-bastion" [33m->[0m [0m"AzureBastionSubnet" [31m# forces replacement[0m[0m
+        [1m[0mresource_group_name[0m[0m                            = "gpitfutures-prod-rg-vnet"
+      [31m-[0m [0m[1m[0mservice_endpoints[0m[0m                              = [] [90m->[0m [0m[90mnull[0m[0m
+        [1m[0mvirtual_network_name[0m[0m                           = "gpitfutures-prod-vnet"
+    }
+
+[1m  # azurerm_subnet.bastion_jump[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_subnet" "bastion_jump" {
+      [32m+[0m [0m[1m[0maddress_prefix[0m[0m                                 = "10.100.55.0/24"
+      [32m+[0m [0m[1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+      [32m+[0m [0m[1m[0menforce_private_link_service_network_policies[0m[0m  = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mip_configurations[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                                           = "gpitfutures-prod-sub-bst-jmp"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m                            = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0mvirtual_network_name[0m[0m                           = "gpitfutures-prod-vnet"
+    }
+
+[1m  # azurerm_subnet.gateway[0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "azurerm_subnet" "gateway" {
+        [1m[0maddress_prefix[0m[0m                                 = "10.100.48.0/28"
+        [1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+        [1m[0menforce_private_link_service_network_policies[0m[0m  = false
+        [1m[0mid[0m[0m                                             = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway"
+        [1m[0mip_configurations[0m[0m                              = []
+        [1m[0mname[0m[0m                                           = "gpitfutures-prod-sub-gateway"
+      [31m-[0m [0m[1m[0mnetwork_security_group_id[0m[0m                      = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway" [90m->[0m [0m[90mnull[0m[0m
+        [1m[0mresource_group_name[0m[0m                            = "gpitfutures-prod-rg-vnet"
+        [1m[0mservice_endpoints[0m[0m                              = []
+        [1m[0mvirtual_network_name[0m[0m                           = "gpitfutures-prod-vnet"
+    }
+
+[1m  # azurerm_subnet.gateway_pri[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_subnet" "gateway_pri" {
+      [32m+[0m [0m[1m[0maddress_prefix[0m[0m                                 = "10.100.54.0/28"
+      [32m+[0m [0m[1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+      [32m+[0m [0m[1m[0menforce_private_link_service_network_policies[0m[0m  = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mip_configurations[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                                           = "gpitfutures-prod-sub-gateway-pri"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m                            = "gpitfutures-prod-rg-vnet"
+      [32m+[0m [0m[1m[0mvirtual_network_name[0m[0m                           = "gpitfutures-prod-vnet"
+    }
+
+[1m  # azurerm_subnet_network_security_group_association.bastion_jump_subnet_assoc[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_subnet_network_security_group_association" "bastion_jump_subnet_assoc" {
+      [32m+[0m [0m[1m[0mid[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_security_group_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m                 = (known after apply)
+    }
+
+[1m  # azurerm_subnet_network_security_group_association.gateway[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "azurerm_subnet_network_security_group_association" "gateway" {
+      [31m-[0m [0m[1m[0mid[0m[0m                        = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mnetwork_security_group_id[0m[0m = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/networkSecurityGroups/gpitfutures-prod-nsg-gateway" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0msubnet_id[0m[0m                 = "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-vnet/providers/Microsoft.Network/virtualNetworks/gpitfutures-prod-vnet/subnets/gpitfutures-prod-sub-gateway" [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[1m  # azurerm_template_deployment.bc-sql-pri-retention[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_template_deployment" "bc-sql-pri-retention" {
+      [32m+[0m [0m[1m[0mdeployment_mode[0m[0m     = "Incremental"
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                = "bc-sql-pri-retention"
+      [32m+[0m [0m[1m[0moutputs[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "gpitfutures-prod-rg-sql-pri"
+      [32m+[0m [0m[1m[0mtemplate_body[0m[0m       = jsonencode(
+            {
+              [32m+[0m [0m$schema        = "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#"
+              [32m+[0m [0mcontentVersion = "1.0.0.0"
+              [32m+[0m [0mresources      = [
+                  [32m+[0m [0m{
+                      [32m+[0m [0mapiVersion = "2017-03-01-preview"
+                      [32m+[0m [0mname       = "gpitfutures-prod-sql-pri/gpitfutures-prod-db-bapi-public/default"
+                      [32m+[0m [0mproperties = {
+                          [32m+[0m [0mmonthlyRetention = "P12W"
+                          [32m+[0m [0mweekOfYear       = "17"
+                          [32m+[0m [0mweeklyRetention  = "P6W"
+                          [32m+[0m [0myearlyRetention  = "P7Y"
+                        }
+                      [32m+[0m [0mtype       = "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies"
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mapiVersion = "2017-10-01-preview"
+                      [32m+[0m [0mname       = "gpitfutures-prod-sql-pri/gpitfutures-prod-db-bapi-public/default"
+                      [32m+[0m [0mproperties = {
+                          [32m+[0m [0mretentionDays = 14
+                        }
+                      [32m+[0m [0mtype       = "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mapiVersion = "2017-03-01-preview"
+                      [32m+[0m [0mname       = "gpitfutures-prod-sql-pri/gpitfutures-prod-db-bapi-private/default"
+                      [32m+[0m [0mproperties = {
+                          [32m+[0m [0mmonthlyRetention = "P12W"
+                          [32m+[0m [0mweekOfYear       = "17"
+                          [32m+[0m [0mweeklyRetention  = "P6W"
+                          [32m+[0m [0myearlyRetention  = "P7Y"
+                        }
+                      [32m+[0m [0mtype       = "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies"
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mapiVersion = "2017-10-01-preview"
+                      [32m+[0m [0mname       = "gpitfutures-prod-sql-pri/gpitfutures-prod-db-bapi-private/default"
+                      [32m+[0m [0mproperties = {
+                          [32m+[0m [0mretentionDays = 14
+                        }
+                      [32m+[0m [0mtype       = "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
+                    },
+                ]
+            }
+        )
+    }
+
+[1m  # azurerm_virtual_machine.jump[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_virtual_machine" "jump" {
+      [32m+[0m [0m[1m[0mavailability_set_id[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mdelete_data_disks_on_termination[0m[0m = false
+      [32m+[0m [0m[1m[0mdelete_os_disk_on_termination[0m[0m    = true
+      [32m+[0m [0m[1m[0mid[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mlicense_type[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m                         = "uksouth"
+      [32m+[0m [0m[1m[0mname[0m[0m                             = "gpitfutures-prod-jump"
+      [32m+[0m [0m[1m[0mnetwork_interface_ids[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m              = "gpitfutures-prod-rg-bastion"
+      [32m+[0m [0m[1m[0mtags[0m[0m                             = {
+          [32m+[0m [0m"environment" = "prod"
+        }
+      [32m+[0m [0m[1m[0mvm_size[0m[0m                          = "Standard_B1ms"
+
+      [32m+[0m [0mboot_diagnostics {
+          [32m+[0m [0m[1m[0menabled[0m[0m = false
+        }
+
+      [32m+[0m [0midentity {
+          [32m+[0m [0m[1m[0midentity_ids[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mprincipal_id[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mtype[0m[0m         = (known after apply)
+        }
+
+      [32m+[0m [0mos_profile {
+          [32m+[0m [0m[1m[0madmin_password[0m[0m = (sensitive value)
+          [32m+[0m [0m[1m[0madmin_username[0m[0m = "gpitfurebastionadmin"
+          [32m+[0m [0m[1m[0mcomputer_name[0m[0m  = "Jump"
+          [32m+[0m [0m[1m[0mcustom_data[0m[0m    = (known after apply)
+        }
+
+      [32m+[0m [0mos_profile_windows_config {
+          [32m+[0m [0m[1m[0menable_automatic_upgrades[0m[0m = true
+          [32m+[0m [0m[1m[0mprovision_vm_agent[0m[0m        = true
+        }
+
+      [32m+[0m [0mstorage_data_disk {
+          [32m+[0m [0m[1m[0mcaching[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mcreate_option[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0mdisk_size_gb[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mlun[0m[0m                       = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_id[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_type[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0mname[0m[0m                      = (known after apply)
+          [32m+[0m [0m[1m[0mvhd_uri[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mwrite_accelerator_enabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mstorage_image_reference {
+          [32m+[0m [0m[1m[0moffer[0m[0m     = "Windows-10"
+          [32m+[0m [0m[1m[0mpublisher[0m[0m = "MicrosoftWindowsDesktop"
+          [32m+[0m [0m[1m[0msku[0m[0m       = "rs5-pro"
+          [32m+[0m [0m[1m[0mversion[0m[0m   = "latest"
+        }
+
+      [32m+[0m [0mstorage_os_disk {
+          [32m+[0m [0m[1m[0mcaching[0m[0m                   = "ReadWrite"
+          [32m+[0m [0m[1m[0mcreate_option[0m[0m             = "FromImage"
+          [32m+[0m [0m[1m[0mdisk_size_gb[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_id[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_type[0m[0m         = "Standard_LRS"
+          [32m+[0m [0m[1m[0mname[0m[0m                      = "disk1"
+          [32m+[0m [0m[1m[0mos_type[0m[0m                   = "Windows"
+          [32m+[0m [0m[1m[0mwrite_accelerator_enabled[0m[0m = false
+        }
+    }
+
+[0m[1mPlan:[0m 26 to add, 8 to change, 4 to destroy.[0m
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+

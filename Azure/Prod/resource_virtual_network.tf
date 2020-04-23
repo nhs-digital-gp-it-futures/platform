@@ -161,7 +161,9 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      ssl_certificate,
+      url_path_map
     ]
   }
 }
@@ -239,7 +241,9 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      ssl_certificate,
+      url_path_map
     ]
   }
 }
