@@ -7,15 +7,6 @@ resource "azurerm_resource_group" "bc-sql-pri" {
   }
 }
 
-#Secondary failover Azure Resource Group storing both the SQL Server & DB within UKWest
-resource "azurerm_resource_group" "bc-sql-sec" {
-  name     = "${var.project}-${var.environment}-rg-sql-sec"
-  location = var.region1
-  tags = {
-    environment = var.environment
-  }
-}
-
 #Primary Azure SQL Sever
 resource "azurerm_sql_server" "bc-sql-pri" {
   name                         = "${var.project}-${var.environment}-sql-pri"
@@ -40,7 +31,7 @@ resource "azurerm_sql_firewall_rule" "bc-sql-pri" {
   end_ip_address      = "0.0.0.0"
 }
 
-#SQL Database using for the BuyingCatalgueService Private
+#SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bapi-pri" {
   name                             = "${var.project}-${var.environment}-${var.sql_pri}"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -51,7 +42,7 @@ resource "azurerm_sql_database" "sql-bapi-pri" {
   requested_service_objective_name = var.sql_size
 }
 
-#SQL Database using for the BuyingCatalgueIdentityService
+#SQL Database using for the BuyingCatalogueIdentityService
 resource "azurerm_sql_database" "sql-isapi" {
   name                             = "${var.project}-${var.environment}-db-isapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -62,7 +53,7 @@ resource "azurerm_sql_database" "sql-isapi" {
   requested_service_objective_name = var.sql_size
 }
 
-#SQL Database using for the BuyingCatalgueOrderingService
+#SQL Database using for the BuyingCatalogueOrderingService
 resource "azurerm_sql_database" "sql-orapi" {
   name                             = "${var.project}-${var.environment}-db-orapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -73,7 +64,7 @@ resource "azurerm_sql_database" "sql-orapi" {
   requested_service_objective_name = var.sql_size
 }
 
-#Storage Account used to store the SQL activity logs
+#Storage Account used to store the SQL threat protection logs
 resource "azurerm_advanced_threat_protection" "bc-sql-pri" {
   target_resource_id = azurerm_storage_account.sqluks.id
   enabled            = true

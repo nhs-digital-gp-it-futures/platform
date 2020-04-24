@@ -54,7 +54,7 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
   end_ip_address      = "0.0.0.0"
 }
 
-#SQL Database using for the BuyingCatalgueService Private
+#SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bapi-pri" {
   name                             = "${var.project}-${var.environment}-${var.sql_pri}"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -66,7 +66,7 @@ resource "azurerm_sql_database" "sql-bapi-pri" {
 
 }
 
-#SQL Database using for the BuyingCatalgueService Public
+#SQL Database using for the BuyingCatalogueService Public
 resource "azurerm_sql_database" "sql-bapi-pub" {
   name                             = "${var.project}-${var.environment}-${var.sql_pub}"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -77,7 +77,7 @@ resource "azurerm_sql_database" "sql-bapi-pub" {
   requested_service_objective_name = var.sql_size
 }
 
-#SQL Database using for the BuyingCatalgueIdentityService
+#SQL Database using for the BuyingCatalogueIdentityService
 resource "azurerm_sql_database" "sql-isapi" {
   name                             = "${var.project}-${var.environment}-db-isapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -89,7 +89,7 @@ resource "azurerm_sql_database" "sql-isapi" {
 
 }
 
-#SQL Database using for the BuyingCatalgueOrderingService
+#SQL Database using for the BuyingCatalogueOrderingService
 resource "azurerm_sql_database" "sql-orapi" {
   name                             = "${var.project}-${var.environment}-db-orapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
@@ -101,19 +101,19 @@ resource "azurerm_sql_database" "sql-orapi" {
 
 }
 
-#Storage Account used to store the SQL activity logs
+#Storage Account used to store the SQL threat protection logs
 resource "azurerm_advanced_threat_protection" "bc-sql-pri" {
   target_resource_id = azurerm_storage_account.sqluks.id
   enabled            = true
 }
 
-#Storage Account used to store the SQL activity logs
+#Storage Account used to store the SQL threat protection logs
 resource "azurerm_advanced_threat_protection" "bc-sql-sec" {
   target_resource_id = azurerm_storage_account.sqlukw.id
   enabled            = true
 }
 
-#Failover config for BuyingCatalgueService Public
+#Failover config for BuyingCatalogueService Public
 resource "azurerm_sql_failover_group" "sql-bapi-pri" {
   name                = "${var.project}-${var.environment}-sql-fog"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
@@ -128,7 +128,7 @@ resource "azurerm_sql_failover_group" "sql-bapi-pri" {
   }
 }
 
-#Failover config for BuyingCatalgueService Private
+#Failover config for BuyingCatalogueService Private
 resource "azurerm_sql_failover_group" "sql-bapi-pub" {
   name                = "${var.project}-${var.environment}-sql-fog"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
@@ -143,7 +143,7 @@ resource "azurerm_sql_failover_group" "sql-bapi-pub" {
   }
 }
 
-#Failover config for BuyingCatalgueIdentityService
+#Failover config for BuyingCatalogueIdentityService
 resource "azurerm_sql_failover_group" "sql-isapi" {
   name                = "${var.project}-${var.environment}-sql-fog"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
@@ -158,7 +158,7 @@ resource "azurerm_sql_failover_group" "sql-isapi" {
   }
 }
 
-#Failover config for BuyingCatalgueOrderingService
+#Failover config for BuyingCatalogueOrderingService
 resource "azurerm_sql_failover_group" "sql-orapi" {
   name                = "${var.project}-${var.environment}-sql-fog"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
