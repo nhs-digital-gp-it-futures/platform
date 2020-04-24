@@ -5,6 +5,7 @@
 {{- $isapiUrl:= ternary .Values.baseIsapiEnabledUrl .Values.isapi.disabledUrl .Values.isapi.enabled -}}
 {{- $isapiIssuerUrl:= ternary $isapiUrl .Values.isapi.feDisabledIssuerUrl $areAllFEComponentsEnabled -}}
 {{- $adminUrl:= ternary .Values.admin.baseUri .Values.admin.disabledUrl .Values.admin.enabled -}}
+{{- $pbUrl:= ternary .Values.pb.baseUri .Values.pb.disabledUrl .Values.pb.enabled -}}
 {{- $emailUrl:= ternary (printf "%s.%s" (include "call-nested" (list . "email" "email.fullname")) .Release.Namespace) .Values.email.disabledUrl .Values.email.enabled -}}
 {{- $redisUrl:= ternary (printf "%s-master" (include "call-nested" (list . "redis" "redis.fullname"))) .Values.redis.disabledUrl .Values.redis.enabled -}}
 
@@ -24,4 +25,4 @@ data:
   app-base-url: {{ .Values.appBaseUrl }}
   email-url: {{ $emailUrl | quote }}  
   redis-url: {{ $redisUrl | quote }}
-  
+  pb-url: {{  $pbUrl | quote }}
