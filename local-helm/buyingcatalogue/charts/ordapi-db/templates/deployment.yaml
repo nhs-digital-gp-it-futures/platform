@@ -57,7 +57,7 @@ spec:
               value: {{ .Values.dbName | quote }}
             - name: DB_USER
               value: {{ .Values.dbUser | quote }}
-            - name: DB_PASSWORD
+            - name: NHSD_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.dbPasswordSecret.name }}
