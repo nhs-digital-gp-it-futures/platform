@@ -148,11 +148,6 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     backend_http_settings_name = local.http_setting_name
   }
 
-  # ssl_certificate {
-  #   name = local.gateway_certificate_name
-  #   key_vault_secret_id = local.gateway_certificate_name
-  # }
-
   waf_configuration {
     enabled                  = true
     file_upload_limit_mb     = 100
@@ -239,10 +234,6 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
   
-  # ssl_certificate {
-  #   name = local.gateway_certificate_name
-  #   key_vault_secret_id = local.gateway_certificate_name
-  # }
 
   waf_configuration {
     enabled                  = true

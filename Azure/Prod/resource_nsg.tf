@@ -23,11 +23,11 @@ resource "azurerm_network_security_rule" "Public" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_ranges     = [ "80", "433"  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
-  priority                    = "160"
+  priority                    = "161"
   description                 = "Allow public access"
 }
 
@@ -38,7 +38,7 @@ resource "azurerm_network_security_rule" "DevOps" {
   source_address_prefix       = "AzureCloud"
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_ranges     = [ "80", "433"  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"

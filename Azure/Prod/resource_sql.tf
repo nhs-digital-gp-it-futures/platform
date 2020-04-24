@@ -37,6 +37,11 @@ resource "azurerm_sql_server" "bc-sql-sec" {
   version                      = var.sql_version
   administrator_login          = data.azurerm_key_vault_secret.kv-sqluser.value
   administrator_login_password = data.azurerm_key_vault_secret.kv-sqlpass.value
+  lifecycle {    
+    ignore_changes = [
+      identity
+    ]
+  }
 }
 
 resource "azurerm_sql_firewall_rule" "bc-sql-pri" {
