@@ -99,13 +99,13 @@ resource "azurerm_sql_database" "sql-bapi-pub" {
 #   requested_service_objective_name = var.sql_size
 # }
 
-#Storage Account used to store the SQL threat protection logs
+#Threat protection settings for the storage account
 resource "azurerm_advanced_threat_protection" "bc-sql-pri" {
   target_resource_id = azurerm_storage_account.sqluks.id
   enabled            = true
 }
 
-#Storage Account used to store the SQL threat protection logs
+#Threat protection settings for the storage account
 resource "azurerm_advanced_threat_protection" "bc-sql-sec" {
   target_resource_id = azurerm_storage_account.sqlukw.id
   enabled            = true
