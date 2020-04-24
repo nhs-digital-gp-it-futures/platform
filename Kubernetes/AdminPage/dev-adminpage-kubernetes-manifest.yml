@@ -84,6 +84,8 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: REDIS_PASS
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 ---
 apiVersion: v1
 kind: Service
