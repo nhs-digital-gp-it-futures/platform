@@ -47,6 +47,11 @@ resource "azurerm_subnet" "gateway" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.sub_gateway
+  lifecycle {     
+    ignore_changes = [
+      network_security_group_id
+    ]
+  }
 }
 
 resource "azurerm_subnet" "splunk" {

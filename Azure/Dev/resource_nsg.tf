@@ -23,7 +23,9 @@ resource "azurerm_network_security_rule" "BWP" {
   destination_address_prefix  = "*"
   source_address_prefix       = var.gov_ip_add
   source_port_range           = "*"
-  destination_port_range      = "80"
+  destination_port_ranges     = [
+    "443","80"
+  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
@@ -39,7 +41,9 @@ resource "azurerm_network_security_rule" "BJSS" {
   source_address_prefix       = var.bjss_ip_add
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80"
+  destination_port_ranges     = [
+    "443","80"
+  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
@@ -55,7 +59,9 @@ resource "azurerm_network_security_rule" "DevOps" {
   source_address_prefix       = "AzureCloud"
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80"
+  destination_port_ranges     = [
+    "443","80"
+  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
