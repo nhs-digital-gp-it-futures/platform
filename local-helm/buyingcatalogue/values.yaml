@@ -408,6 +408,9 @@ admin:
     oapi:
       name: "bc-buyingcatalogue"
       key: oapi-url
+    pb:
+      name: "bc-buyingcatalogue"
+      key: pb-url
     redis:
       urlConfig:
         name: "bc-buyingcatalogue"

@@ -87,6 +87,9 @@ serviceDependencies:
   oapi:
     name:
     key:
+  pb:
+    name:
+    key:
   redis:
     urlConfig:
       name: 

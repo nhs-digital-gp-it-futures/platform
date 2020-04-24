@@ -61,6 +61,7 @@ pb:
 
 admin:
   enabled: true
+  disabledUrl: "http://localhost:3005/admin"
 
 redis:
   enabled: true
