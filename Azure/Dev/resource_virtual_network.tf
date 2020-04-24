@@ -134,6 +134,16 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
 
+  waf_configuration {
+    enabled                  = true
+    file_upload_limit_mb     = 100
+    firewall_mode            = "Prevention"
+    max_request_body_size_kb = 128
+    request_body_check       = true 
+    rule_set_type            = "OWASP"
+    rule_set_version         = "3.0"
+  }
+
   # ssl_certificate {
   #   name = local.gateway_certificate_name
   #   key_vault_secret_id = local.gateway_certificate_name
