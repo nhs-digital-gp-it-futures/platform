@@ -7,6 +7,11 @@ resource "azurerm_network_security_group" "gateway_pri" {
   }
 }
 
+resource "azurerm_subnet_network_security_group_association" "gateway_pri" {
+  subnet_id                 = azurerm_subnet.gateway_pri.id
+  network_security_group_id = azurerm_network_security_group.gateway_pri.id
+}
+
 resource "azurerm_network_security_rule" "BWP_pri" {
   name                        = "AllowBwpGovIp"
   resource_group_name         = azurerm_resource_group.vnet.name
@@ -59,7 +64,7 @@ resource "azurerm_network_security_rule" "Azure_pri" {
   name                        = "AllowAzureInfrastructurePorts"
   resource_group_name         = azurerm_resource_group.vnet.name
   network_security_group_name = azurerm_network_security_group.gateway_pri.name
-  source_address_prefix       = var.gov_ip_add
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
   source_port_range           = "*"
   destination_port_range      = "65200-65535"

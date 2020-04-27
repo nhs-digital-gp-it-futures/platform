@@ -7,6 +7,11 @@ resource "azurerm_network_security_group" "gateway" {
   }
 }
 
+resource "azurerm_subnet_network_security_group_association" "gateway" {
+  subnet_id                 = azurerm_subnet.gateway.id
+  network_security_group_id = azurerm_network_security_group.gateway.id
+}
+
 resource "azurerm_network_security_group" "splunk" {
   name                = "${var.project}-${var.environment}-${var.nsg}-splunk"
   location            = var.region

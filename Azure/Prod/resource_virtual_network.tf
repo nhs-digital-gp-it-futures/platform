@@ -35,6 +35,7 @@ resource "azurerm_subnet" "gateway" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.sub_gateway
+  #network_security_group_id = azurerm_network_security_group.gateway.id
 }
 
 resource "azurerm_subnet" "gateway_pri" {
@@ -42,6 +43,7 @@ resource "azurerm_subnet" "gateway_pri" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.sub_gateway_pri
+  #network_security_group_id = azurerm_network_security_group.gateway_pri.id
 }
 
 resource "azurerm_subnet" "splunk" {
