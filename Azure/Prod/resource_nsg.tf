@@ -7,6 +7,11 @@ resource "azurerm_network_security_group" "gateway" {
   }
 }
 
+resource "azurerm_subnet_network_security_group_association" "gateway" {
+  subnet_id                 = azurerm_subnet.gateway.id
+  network_security_group_id = azurerm_network_security_group.gateway.id
+}
+
 resource "azurerm_network_security_group" "splunk" {
   name                = "${var.project}-${var.environment}-${var.nsg}-splunk"
   location            = var.region
@@ -16,36 +21,19 @@ resource "azurerm_network_security_group" "splunk" {
   }
 }
 
-resource "azurerm_network_security_rule" "BWP" {
-  name                        = "AllowBwpGovIp"
+resource "azurerm_network_security_rule" "Public" {
+  name                        = "Public"
   resource_group_name         = azurerm_resource_group.vnet.name
   network_security_group_name = azurerm_network_security_group.gateway.name
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  source_address_prefix       = var.gov_ip_add
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_ranges     = [ "80", "433"  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
-  priority                    = "150"
-  description                 = "Allow staff access who work within Bridgewater Place"
-
-}
-
-resource "azurerm_network_security_rule" "BJSS" {
-  name                        = "AllowBjssVpn"
-  resource_group_name         = azurerm_resource_group.vnet.name
-  network_security_group_name = azurerm_network_security_group.gateway.name
-  source_address_prefix       = var.bjss_ip_add
-  destination_address_prefix  = "*"
-  source_port_range           = "*"
-  destination_port_range      = "80,433"
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "TCP"
-  priority                    = "160"
-  description                 = "Allow staff access who are connect to the BJSS VPN"
-
+  priority                    = "161"
+  description                 = "Allow public access"
 }
 
 resource "azurerm_network_security_rule" "DevOps" {
@@ -55,7 +43,7 @@ resource "azurerm_network_security_rule" "DevOps" {
   source_address_prefix       = "AzureCloud"
   destination_address_prefix  = "*"
   source_port_range           = "*"
-  destination_port_range      = "80,433"
+  destination_port_ranges     = [ "80", "433"  ]
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "TCP"
@@ -68,7 +56,7 @@ resource "azurerm_network_security_rule" "Azure" {
   name                        = "AllowAzureInfrastructurePorts"
   resource_group_name         = azurerm_resource_group.vnet.name
   network_security_group_name = azurerm_network_security_group.gateway.name
-  source_address_prefix       = var.gov_ip_add
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
   source_port_range           = "*"
   destination_port_range      = "65200-65535"
@@ -79,3 +67,5 @@ resource "azurerm_network_security_rule" "Azure" {
   description                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
 
 }
+
+

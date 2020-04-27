@@ -63,6 +63,11 @@ variable "sub_gateway" {
   description = "Subnet for Gateway"
 }
 
+variable "sub_gateway_pri" {
+  type        = string
+  description = "Subnet for Gateway"
+}
+
 variable "sub_splunk" {
   type        = string
   description = "Subnet for splunk"
@@ -310,4 +315,9 @@ variable "gw_public" {
 variable "bjss_ip_add" {
   type        = string
   description = "DNS label to be used for public IP Address"
+}
+
+variable "gov_wfh_ip_add" {
+  type        = string
+  description = "IPs for wfh staff access"
 }

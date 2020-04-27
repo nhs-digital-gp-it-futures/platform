@@ -24,6 +24,13 @@ resource "azurerm_sql_server" "bc-sql-pri" {
   version                      = var.sql_version
   administrator_login          = data.azurerm_key_vault_secret.kv-sqluser.value
   administrator_login_password = data.azurerm_key_vault_secret.kv-sqlpass.value
+
+  lifecycle {
+    # AGIC owns most app gateway settings, so we should ignore differences
+    ignore_changes = [
+      identity
+    ]
+  }
 }
 
 #Secondary Azure SQL Sever
@@ -34,6 +41,11 @@ resource "azurerm_sql_server" "bc-sql-sec" {
   version                      = var.sql_version
   administrator_login          = data.azurerm_key_vault_secret.kv-sqluser.value
   administrator_login_password = data.azurerm_key_vault_secret.kv-sqlpass.value
+  lifecycle {    
+    ignore_changes = [
+      identity
+    ]
+  }
 }
 
 #SQL Firewall rule for primary sql server to allow internal Azure Services to connect to DB

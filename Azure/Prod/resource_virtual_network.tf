@@ -35,6 +35,15 @@ resource "azurerm_subnet" "gateway" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.sub_gateway
+  #network_security_group_id = azurerm_network_security_group.gateway.id
+}
+
+resource "azurerm_subnet" "gateway_pri" {
+  name                 = "${var.project}-${var.environment}-${var.sub}-gateway-pri"
+  resource_group_name  = azurerm_resource_group.vnet.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefix       = var.sub_gateway_pri
+  #network_security_group_id = azurerm_network_security_group.gateway_pri.id
 }
 
 resource "azurerm_subnet" "splunk" {
@@ -100,7 +109,7 @@ resource "azurerm_application_gateway" "pri-AppGate" {
 
   gateway_ip_configuration {
     name      = "${var.project}-gwip-pri"
-    subnet_id = azurerm_subnet.gateway.id
+    subnet_id = azurerm_subnet.gateway_pri.id
   }
 
   frontend_port {
@@ -141,9 +150,14 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     backend_http_settings_name = local.http_setting_name
   }
 
-  ssl_certificate {
-    name = locals.gateway_certificate_name
-    key_vault_secret_id = locals.gateway_certificate_name
+  waf_configuration {
+    enabled                  = true
+    file_upload_limit_mb     = 100
+    firewall_mode            = "Detection"
+    max_request_body_size_kb = 128
+    request_body_check       = true 
+    rule_set_type            = "OWASP"
+    rule_set_version         = "3.0"
   }
 
   lifecycle {
@@ -155,7 +169,10 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      ssl_certificate,
+      url_path_map,
+      redirect_configuration
     ]
   }
 }
@@ -219,9 +236,15 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
   
-  ssl_certificate {
-    name = locals.gateway_certificate_name
-    key_vault_secret_id = locals.gateway_certificate_name
+
+  waf_configuration {
+    enabled                  = true
+    file_upload_limit_mb     = 100
+    firewall_mode            = "Detection"
+    max_request_body_size_kb = 128
+    request_body_check       = true 
+    rule_set_type            = "OWASP"
+    rule_set_version         = "3.0"
   }
 
   lifecycle {
@@ -233,7 +256,10 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       frontend_ip_configuration, 
       frontend_port,
       backend_address_pool,
-      probe
+      probe,
+      ssl_certificate,
+      url_path_map,
+      redirect_configuration
     ]
   }
 }
