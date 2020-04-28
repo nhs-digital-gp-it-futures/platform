@@ -21,7 +21,7 @@ spec:
       - name: testpipelinevariables
       containers:
       - name: gpitfutures-bc-app-orapi
-        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/orapi
+        image: gpitfuturestestacr.azurecr.io/nhsd/buying-catalogue/ordering-api
         ports:
         - containerPort: 80
         resources:
