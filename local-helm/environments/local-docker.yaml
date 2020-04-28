@@ -147,6 +147,7 @@ isapi:
       - paths: 
           - /identity/health
           - /identity/css  
+          - /identity/nhsuk-frontend
           - /identity/Account
           - /identity/Consent
           - /identity/Error
