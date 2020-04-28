@@ -31,9 +31,13 @@ spec:
           limits:
             cpu: 1000m
             memory: 1000Mi
+        livenessProbe:
+          httpGet:
+            path: /identity/health/live
+            port: 80
         readinessProbe:
           httpGet:
-            path: /identity/.well-known/openid-configuration
+            path: /identity/health/ready
             port: 80
         env:
         - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
@@ -44,7 +48,7 @@ spec:
               name: testpipelinevariables
               key: ConnectionStrings__CatalogueUsers
         - name: ISSUERURL
-          value: https://buyingcataloguetestprivate.uksouth.cloudapp.azure.com/identity/
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity/
         - name: CLIENTS__0__CLIENTID
           valueFrom:
             secretKeyRef:
@@ -89,7 +93,7 @@ metadata:
  name: isapi
 spec:
   ports:
-  - port: 8070
+  - port: 5102
     targetPort: 80
     protocol: TCP
   selector:
