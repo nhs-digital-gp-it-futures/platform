@@ -145,11 +145,14 @@ isapi:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
-          - /identity
-          - /.well-known
-          - /Account
-          - /connect
-          - /Error
+          - /identity/health
+          - /identity/css  
+          - /identity/nhsuk-frontend
+          - /identity/Account
+          - /identity/Consent
+          - /identity/Error
+          - /identity/connect
+          - /identity/.well-known
 
 oapi:
   enabled: true
