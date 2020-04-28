@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-orderform
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-orderform
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-orderform
+    spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-orderform
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/order-form
+        ports:
+        - containerPort: 3006
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+          ##Base URL
+        - name: BASE_URL
+          value: "orderform"
+          ##Public browse base URL
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+          ##Environment
+        - name: NODE_ENV
+          value: "development"
+          ##The base uri the app is running on to pass to identity service for redirection
+        - name: APP_BASE_URI
+          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
+          ##LOGGER_LEVEL options are info, warn, error, off
+        - name: LOGGER_LEVEL
+          value: "info"
+          ##The base uri of identity service
+        - name: OIDC_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+          ##The client id to be sent to identity service
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
+          ##The secret need to decode JWT tokens
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
+          ##How long before the cookies stored in the session expire in ms
+        - name: MAX_COOKIE_AGE
+          value: "3600000"
+          ##The secret needed for encoding and decoding the cookie
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderform
+spec:
+  ports:
+  - port: 3006
+  selector:
+    app: gpitfutures-bc-app-orderform
