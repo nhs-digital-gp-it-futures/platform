@@ -40,7 +40,7 @@ You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-
 
 ### (Optional) Run Rancher
 
-You may wish to run Rancher rather than the dashboard. Rancher provide a step by step walkthrough to install, located [here](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/helm-rancher/)
+You may wish to run Rancher rather than the dashboard. Rancher provide a step by step walkthrough to install, which is linked [here](../Docs/DevSetup/rancher-setup.md)
 
 ## Install Dependencies
 
