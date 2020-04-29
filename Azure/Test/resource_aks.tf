@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enable_auto_scaling           = "true"
     max_count                     = 5
     min_count                     = 3
-    node_count                    = 4
+    node_count                    = 3
    #enable_node_public_ip         = "true"
   }
 
