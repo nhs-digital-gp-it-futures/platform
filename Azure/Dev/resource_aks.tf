@@ -41,7 +41,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "true"
     max_count                     = 6
-    min_count                     = 3
+    min_count                     = 4
     node_count                    = 4
    #enable_node_public_ip         = "true"
   }

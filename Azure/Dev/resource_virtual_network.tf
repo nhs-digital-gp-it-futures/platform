@@ -8,6 +8,7 @@ locals {
   redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
   gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
   gateway_certificate_name       = "buyingcatalogue${var.environment}"
+  gateway_certificate_key_vault_secret_id = "https://${var.project}-${var.environment}-kv.vault.azure.net/secrets/buyingcatalogue${var.environment}"
 }
 
 resource "azurerm_resource_group" "vnet" {
@@ -133,10 +134,11 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
-
+  
+  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
   # ssl_certificate {
   #   name = local.gateway_certificate_name
-  #   key_vault_secret_id = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_key_vault_secret_id   
   # }
 
   waf_configuration {
@@ -171,9 +173,10 @@ resource "azurerm_application_gateway" "AppGate" {
       frontend_port,
       backend_address_pool,
       probe,
-      redirect_configuration,
-      ssl_certificate,
-      url_path_map
+      redirect_configuration,      
+      url_path_map,     
+      tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
+      ssl_certificate # see issue above 
     ]
   }
 }
