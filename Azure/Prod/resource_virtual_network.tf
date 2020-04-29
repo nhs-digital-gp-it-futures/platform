@@ -153,11 +153,23 @@ resource "azurerm_application_gateway" "pri-AppGate" {
   waf_configuration {
     enabled                  = true
     file_upload_limit_mb     = 100
-    firewall_mode            = "Detection"
+    firewall_mode            = "Prevention"
     max_request_body_size_kb = 128
-    request_body_check       = true 
+    request_body_check       = true
     rule_set_type            = "OWASP"
-    rule_set_version         = "3.0"
+    rule_set_version         = "3.1"
+
+    disabled_rule_group {
+      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+      rules           = [
+        942430,
+        942130,
+      ]
+    }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rules           = [ 920230 ]
+    }
   }
 
   lifecycle {
@@ -240,11 +252,23 @@ resource "azurerm_application_gateway" "pub-AppGate" {
   waf_configuration {
     enabled                  = true
     file_upload_limit_mb     = 100
-    firewall_mode            = "Detection"
+    firewall_mode            = "Prevention"
     max_request_body_size_kb = 128
-    request_body_check       = true 
+    request_body_check       = true
     rule_set_type            = "OWASP"
-    rule_set_version         = "3.0"
+    rule_set_version         = "3.1"
+
+    disabled_rule_group {
+      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+      rules           = [
+        942430,
+        942130,
+      ]
+    }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rules           = [ 920230 ]
+    }
   }
 
   lifecycle {

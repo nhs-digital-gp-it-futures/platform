@@ -163,7 +163,7 @@ resource "azurerm_sql_failover_group" "sql-orapi" {
   name                = "${var.project}-${var.environment}-sql-fog3"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
   server_name         = azurerm_sql_server.bc-sql-pri.name
-  databases           = [azurerm_sql_database.sql-isapi.id]
+  databases           = [azurerm_sql_database.sql-orapi.id]
   partner_servers {
     id = azurerm_sql_server.bc-sql-sec.id
   }
