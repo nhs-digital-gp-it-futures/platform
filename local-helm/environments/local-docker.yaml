@@ -130,7 +130,6 @@ isapi:
         - profile
         - SampleResource  
         - Organisation
-  serviceDependencies:
   allowInvalidCertificate: true
   ingress:
     enabled: true
