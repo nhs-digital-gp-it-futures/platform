@@ -19,7 +19,7 @@ Note that this system relies upon helm charts. Instructions on how to install he
 
 ### Add Namespace
 
-Create the buying catalogue namespace - `kubectl apply -f grid-namespace.yml`
+Create the selenium grid namespace - `kubectl apply -f grid-namespace.yml`
 
 ## Launching, Updating the Environment
 
