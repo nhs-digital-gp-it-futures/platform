@@ -65,7 +65,7 @@ spec:
               name: testpipelinevariables
               key: OIDC_CLIENT_SECRET
         - name: IDENTITY_SERVER
-          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity"
+          value: "http://isapi:5102/identity"
         - name: ORGANISATION_API_URL
           value: "http://oapi:5103"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
