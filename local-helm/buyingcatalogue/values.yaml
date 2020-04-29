@@ -195,7 +195,7 @@ oapi:
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
-        key: isapi-url
+        key: issuer-url
     email:
       hostUriConfig:
         name: "bc-buyingcatalogue"
@@ -352,7 +352,7 @@ pb:
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
-        key: isapi-url  
+        key: issuer-url  
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
@@ -397,10 +397,13 @@ admin:
     name: "bc-buyingcatalogue"
     key: "cookie-secret"
   serviceDependencies:
+    isapi: 
+      name: "bc-buyingcatalogue"
+      key: isapi-url
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
-        key: isapi-url  
+        key: issuer-url
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
