@@ -155,6 +155,10 @@ resource "azurerm_application_gateway" "AppGate" {
         942130,
       ]
     }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rules           = [ 920230 ]
+    }
   }
 
   lifecycle {

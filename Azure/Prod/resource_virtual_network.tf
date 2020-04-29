@@ -166,6 +166,10 @@ resource "azurerm_application_gateway" "pri-AppGate" {
         942130,
       ]
     }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rules           = [ 920230 ]
+    }
   }
 
   lifecycle {
@@ -260,6 +264,10 @@ resource "azurerm_application_gateway" "pub-AppGate" {
         942430,
         942130,
       ]
+    }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+      rules           = [ 920230 ]
     }
   }
 
