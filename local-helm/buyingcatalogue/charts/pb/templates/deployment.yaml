@@ -60,7 +60,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.appBaseUri.name | quote }}
-                  key: {{ .Values.appBaseUri.key | quote }}    
+                  key: {{ .Values.appBaseUri.key | quote }}  
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.cookieSecret.name }}
+                  key: {{ .Values.cookieSecret.key }}
             {{- if .Values.serviceDependencies }}
             {{- if .Values.serviceDependencies.redis.urlConfig }}
             - name: REDIS_URL              
@@ -105,6 +110,13 @@ spec:
                   name: {{ .Values.serviceDependencies.adminUrlConfig.name | quote }}
                   key: {{ .Values.serviceDependencies.adminUrlConfig.key | quote }}
             {{- end -}}
+            {{- if .Values.serviceDependencies.ofUrlConfig }}
+            - name: ORDER_FORM_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.ofUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.ofUrlConfig.key | quote }}
+            {{- end -}}            
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI
               valueFrom:

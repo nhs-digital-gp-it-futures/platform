@@ -1,4 +1,4 @@
-# Default values for admin.
+# Default values for of.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,13 +7,13 @@ replicaCount: 1
 useLocalImage:
 
 image:
-  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
+  repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/order-form
   pullPolicy: Always
 
 imagePullSecrets: 
 - name: regcredlocal
-nameOverride: "admin"
-fullnameOverride: "gpitfutures-bc-admin"
+nameOverride: "of"
+fullnameOverride: "gpitfutures-bc-of"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -37,21 +37,21 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 3005
+  port: 3006
 
 ingress:
   enabled: true
   annotations: 
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class:
+    ingress.kubernetes.io/ssl-redirect:
+    nginx.ingress.kubernetes.io/ssl-redirect:
   hosts:
     - paths: 
-        - /admin
+
   tls: []
-  #  - secretName: chart-exapble-tls
+  #  - secretName: chart-example-tls
   #    hosts:
-  #      - chart-exapble.local
+  #      - chart-example.local
 
 resources: 
   requests:
@@ -76,10 +76,7 @@ cookieSecret:
   key:
 
 serviceDependencies: 
-  isapi: # used for internal calls to isapi custom api
-    name:
-    key:
-  oidc: # used for external references to isapi for oidc use
+  oidc:
     baseUriConfig:
       name: 
       key:     
@@ -87,7 +84,7 @@ serviceDependencies:
     clientSecret: 
       name: 
       key: 
-  oapi:
+  ordapi:
     name:
     key:
   pb:

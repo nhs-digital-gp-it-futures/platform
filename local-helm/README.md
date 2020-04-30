@@ -38,6 +38,10 @@ Create a secret in kubernetes to access the private container registry, as per t
 
 You may wish to run the dashboard. Instructions are [here](../Docs/DevSetup/run-dashboard.md).
 
+### (Optional) Run Rancher
+
+You may wish to run Rancher rather than the dashboard. Rancher provide a step by step walkthrough to install, which is linked [here](../Docs/DevSetup/rancher-setup.md)
+
 ## Install Dependencies
 
 The umbrella chart depends on some standard charts. These need to be added by running `helm dependency update buyingcatalogue`.
