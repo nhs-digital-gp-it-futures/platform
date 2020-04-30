@@ -9,7 +9,7 @@ From a terminal at the `platform/local-helm` sub folder, run one of the followin
 
 #### Powershell
 ```powershell
-start-dashboard-proxy.ps1
+.\start-dashboard-proxy.ps1
 ```
 The address of the dashboard will be copied to your clipboard. To browse to the dashboard paste the copied URL into a browser.
 
@@ -17,7 +17,7 @@ The address of the dashboard will be copied to your clipboard. To browse to the 
 
 #### Bash
 ```bash
-start-dashboard-proxy.sh
+./start-dashboard-proxy.sh
 ```
 Copy the URL displayed in your terminal and paste it into a browser to view the dashboard.
 
