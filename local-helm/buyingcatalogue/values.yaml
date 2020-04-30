@@ -357,6 +357,9 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret    
+    ofUrlConfig:
+      name: "bc-buyingcatalogue"
+      key:  of-url
     redis:
       urlConfig:
         name: "bc-buyingcatalogue"
@@ -423,8 +426,61 @@ admin:
       passSecret:
         name: "bc-buyingcatalogue"
         key: "redis-password"
-    
 
+of: 
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/order-form
+  useLocalImage: false    
+  imagePullSecrets: 
+  nameOverride: "of"
+  fullnameOverride: "gpitfutures-bc-of"
+  service:
+    type: LoadBalancer
+    port: 3006
+  ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - paths: 
+          - /order
+    tls: []
+  appBaseUri: 
+    name: "bc-buyingcatalogue"
+    key: "app-base-url"
+  baseUri: "/order"
+  cookieSecret:
+    name: "bc-buyingcatalogue"
+    key: "cookie-secret"
+  serviceDependencies:
+    oidc:
+      baseUriConfig:
+        name: "bc-buyingcatalogue"
+        key: isapi-url  
+      clientId: "SampleClient"
+      clientSecret: 
+        name: "bc-buyingcatalogue"
+        key: oidc-client-secret   
+    ordapi:
+      name: "bc-buyingcatalogue"
+      key: ordapi-url
+    pb:
+      name: "bc-buyingcatalogue"
+      key: pb-url
+    redis:
+      urlConfig:
+        name: "bc-buyingcatalogue"
+        key: redis-url 
+      port: "6379"
+      tls: false
+      passSecret:
+        name: "bc-buyingcatalogue"
+        key: "redis-password"
+    
 redis:
   enabled: true
   disabledUrl: 
