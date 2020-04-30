@@ -142,12 +142,6 @@ isapi:
         - profile
         - SampleResource  
         - Organisation
-  serviceDependencies:
-    email:
-      hostUriConfig:
-        name: "bc-buyingcatalogue"
-        key: email-url      
-      port: 587
   allowInvalidCertificate: true
   ingress:
     enabled: true
@@ -179,19 +173,6 @@ oapi:
   service:
     type: LoadBalancer
     port: 5103      
-  connectionStringSecret: 
-    name: "bc-buyingcatalogue"
-    key: isapi-db-connection-string 
-  serviceDependencies:
-    oidc:
-      baseUriConfig:
-        name: "bc-buyingcatalogue"
-        key: isapi-url
-    email:
-      hostUriConfig:
-        name: "bc-buyingcatalogue"
-        key: email-url      
-      port: 587
   allowInvalidCertificate: true
 
 email:

@@ -37,7 +37,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /admin/health/live
-              port: http
+              port: http            
           readinessProbe:
             httpGet:
               path: /admin/health/ready
@@ -96,12 +96,14 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .clientSecret.name }}
-                  key: {{ .clientSecret.key }}
+                  key: {{ .clientSecret.key }}             
+            {{- end }}
+            {{- with .Values.serviceDependencies.isapi }}
             - name: IDENTITY_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .baseUriConfig.name | quote }}
-                  key: {{ .baseUriConfig.key | quote }}             
+                  name: {{ .name | quote }}
+                  key: {{ .key | quote }}                   
             {{- end }}
             {{- with .Values.serviceDependencies.oapi }}
             - name: ORGANISATION_API_URL
