@@ -8,6 +8,7 @@ locals {
   redirect_configuration_name    = "${var.project}-${var.environment}-appgw-rdrcfg"
   gateway_ip_configuration       = "${var.project}-${var.environment}-appgw-gwip"
   gateway_certificate_name       = "buyingcatalogue${var.environment}"
+  gateway_certificate_key_vault_secret_id = "https://${var.project}-${var.environment}-kv.vault.azure.net/secrets/buyingcatalogue${var.environment}"
 }
 
 resource "azurerm_resource_group" "vnet" {
@@ -140,9 +141,11 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
   }
+
+  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
   # ssl_certificate {
   #   name = local.gateway_certificate_name
-  #   key_vault_secret_id = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_key_vault_secret_id   
   # }
 
   waf_configuration {
@@ -179,7 +182,8 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       probe,
       url_path_map,
       redirect_configuration,
-      ssl_certificate
+      tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
+      ssl_certificate # see issue above
     ]
   }
 }
@@ -241,9 +245,10 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
   # ssl_certificate {
   #   name = local.gateway_certificate_name
-  #   key_vault_secret_id = local.gateway_certificate_name
+  #   key_vault_secret_id = local.gateway_certificate_key_vault_secret_id   
   # }
 
   waf_configuration {
@@ -281,7 +286,8 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       probe,
       url_path_map,
       redirect_configuration,
-      ssl_certificate
+      tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
+      ssl_certificate # see issue above
     ]
   }
 }
