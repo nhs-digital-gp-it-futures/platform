@@ -29,14 +29,6 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-        livenessProbe:
-          httpGet:
-            path: /order/health/live
-            port: 3006
-        readinessProbe:
-          httpGet:
-            path: /order/health/live
-            port: 3006
         env:
           ##Base URL
         - name: BASE_URL
