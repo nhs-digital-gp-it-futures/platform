@@ -304,6 +304,9 @@ mp:
     bapiUrlConfig:
       name: "bc-buyingcatalogue"
       key: bapi-url  
+  cookieSecret:
+    name: "bc-buyingcatalogue"
+    key: cookie-secret
 
 pb: 
   enabled: false
