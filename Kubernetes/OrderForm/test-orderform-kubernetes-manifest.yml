@@ -29,16 +29,21 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /order/health/live
+            port: 3006
+        readinessProbe:
+          httpGet:
+            path: /order/health/live
+            port: 3006
         env:
           ##Base URL
         - name: BASE_URL
-          value: "orderform"
+          value: "/order"
           ##Public browse base URL
         - name: PUBLIC_BROWSE_BASE_URL
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
-          ##Environment
-        - name: NODE_ENV
-          value: "testelopment"
           ##The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
@@ -69,6 +74,20 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: COOKIE_SECRET
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          value: "6380"
+        - name: REDIS_TLS
+          value: "true"
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_PASS
 ---
 apiVersion: v1
 kind: Service
