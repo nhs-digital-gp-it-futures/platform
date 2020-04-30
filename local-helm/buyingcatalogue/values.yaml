@@ -357,6 +357,9 @@ pb:
       clientSecret: 
         name: "bc-buyingcatalogue"
         key: oidc-client-secret    
+    ofUrlConfig:
+      name: "bc-buyingcatalogue"
+      key:  of-url
     redis:
       urlConfig:
         name: "bc-buyingcatalogue"

@@ -105,6 +105,13 @@ spec:
                   name: {{ .Values.serviceDependencies.adminUrlConfig.name | quote }}
                   key: {{ .Values.serviceDependencies.adminUrlConfig.key | quote }}
             {{- end -}}
+            {{- if .Values.serviceDependencies.ofUrlConfig }}
+            - name: ORDER_FORM_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.ofUrlConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.ofUrlConfig.key | quote }}
+            {{- end -}}            
             {{- with .Values.serviceDependencies.oidc }}
             - name: OIDC_BASE_URI
               valueFrom:
