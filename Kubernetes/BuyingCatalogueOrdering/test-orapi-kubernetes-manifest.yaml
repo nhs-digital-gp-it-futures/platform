@@ -29,6 +29,14 @@ spec:
             cpu: 250m
           limits:
             cpu: 1
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
