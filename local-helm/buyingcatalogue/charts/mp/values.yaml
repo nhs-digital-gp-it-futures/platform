@@ -78,9 +78,6 @@ serviceDependencies:
   bapiUrlConfig:
     name: 
     key: 
-cookieSecret:
-  name: "bc-buyingcatalogue"
-  key: cookie-secret
   
 env:
   configmap:
