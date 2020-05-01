@@ -60,11 +60,11 @@ pb:
   enabled: true  
 
 admin:
-  enabled: false
+  enabled: true
   disabledUrl: "http://localhost:3005/admin"
 
 of:
-  enabled: false
+  enabled: true
   disabledUrl: "http://localhost:3006/order"
 
 redis:
