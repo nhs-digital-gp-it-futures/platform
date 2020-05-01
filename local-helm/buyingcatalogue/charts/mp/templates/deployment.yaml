@@ -53,11 +53,6 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.appBaseUri.name | quote }}
                   key: {{ .Values.appBaseUri.key | quote }}   
-            - name: COOKIE_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.cookieSecret.name }}
-                  key: {{ .Values.cookieSecret.key }}
             {{- if .Values.serviceDependencies }}            
             {{- if .Values.serviceDependencies.bapiUrlConfig }}
             - name: API_HOST              
