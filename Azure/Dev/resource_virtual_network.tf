@@ -159,6 +159,10 @@ resource "azurerm_application_gateway" "AppGate" {
       rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
       rules           = [ 920230 ]
     }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
+      rules           = [ 931130 ]
+    }
   }
 
   lifecycle {
