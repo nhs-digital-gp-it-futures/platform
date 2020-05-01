@@ -63,6 +63,9 @@ dependencies:
 - name: admin
   condition: admin.enabled
   version: ~0.1.0
+- name: of
+  condition: of.enabled
+  version: ~0.1.0
 - name: redis
   condition: redis.enabled
   version: ~10.6.7
