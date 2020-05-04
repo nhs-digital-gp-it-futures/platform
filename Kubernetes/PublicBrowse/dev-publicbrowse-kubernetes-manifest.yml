@@ -29,9 +29,7 @@ spec:
             cpu: 500m
         env:
 
-        - name: BASE_URL
-          value: ""
-
+          ## logger_level options are info, warn, error, off"
         - name: LOGGER_LEVEL
           value: srt-loggerlevel@azurekeyvault
 
