@@ -143,6 +143,8 @@ isapi:
         - SampleResource  
         - Organisation
   allowInvalidCertificate: true
+  dataProtection:
+    applicationName: "ISAPI Development"
   ingress:
     enabled: true
     annotations: 

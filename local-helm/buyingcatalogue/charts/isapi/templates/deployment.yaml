@@ -118,7 +118,8 @@ spec:
             {{- end }}
             - name: ALLOWINVALIDCERTIFICATE
               value: {{ .Values.allowInvalidCertificate | quote }}
-
+            - name: DATAPROTECTION_APPLICATIONNAME
+              value: {{ .Values.dataProtection.applicationName | quote }}
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}

@@ -163,6 +163,8 @@ isapi:
         key: email-url      
       port: 587
   allowInvalidCertificate: false
+  dataProtection:
+    applicationName: "ISAPI Development"
   ingress:
     enabled: true
     annotations: 

@@ -86,6 +86,8 @@ spec:
           value: "587"
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
+        - name: DATAPROTECTION__APPLICATIONNAME
+          value: "ISAPI Test"
 ---
 apiVersion: v1
 kind: Service
