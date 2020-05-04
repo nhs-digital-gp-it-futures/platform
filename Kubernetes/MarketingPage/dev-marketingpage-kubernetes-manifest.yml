@@ -30,11 +30,11 @@ spec:
         env:
           ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
-          value: srt-apihost@azurekeyvault # ref to akvs
+          value: srt-apihost@azurekeyvault
 
           ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
-          value: srt-blobstorehost@azurekeyvault # ref to akvs
+          value: srt-blobstorehost
 
           ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
