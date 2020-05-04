@@ -6,7 +6,9 @@ terraform {
 }
 
 provider "azurerm" {
-  version                 = "=1.44.0"
+  version                = "2.7.0"
+  features {
+  }
 }
 
 terraform {

@@ -15,6 +15,12 @@ resource "azurerm_sql_server" "bc-sql-pri" {
   version                      = var.sql_version
   administrator_login          = data.azurerm_key_vault_secret.kv-sqluser.value
   administrator_login_password = data.azurerm_key_vault_secret.kv-sqlpass.value
+  extended_auditing_policy {
+    retention_in_days                       = 14 
+    storage_account_access_key_is_secondary = false 
+    storage_endpoint                        = azurerm_storage_account.sqluks.primary_blob_endpoint
+    storage_account_access_key              = azurerm_storage_account.sqluks.primary_access_key
+  }
   lifecycle {
     ignore_changes = [
       identity
