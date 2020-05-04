@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-marketingpage
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-marketingpage
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/marketingpage
@@ -30,21 +28,17 @@ spec:
           limits:
             cpu: 500m
         env:
+          ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: API_HOST
+          value: srt-apihost@azurekeyvault
+
+          ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: BLOBSTORE_HOST
+          value: srt-blobstorehost
+
+          ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: DOCUMENT_HOST
+          value: srt-documenthost@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
