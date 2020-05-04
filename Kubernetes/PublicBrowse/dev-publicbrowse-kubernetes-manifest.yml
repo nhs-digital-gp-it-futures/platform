@@ -30,77 +30,68 @@ spec:
           limits:
             cpu: 500m
         env:
-
-          ## LOGGER_LEVEL options are info, warn, error, off
-        - name: LOGGER_LEVEL #
-          value: srt.logger-level@azurekeyvault
-
-          ## Boolean to indicate if we show the login/logout component
+        - name: LOGGER_LEVEL
+          value: "info"
         - name: LOGIN_ENABLED
           value: "true"
-
-          ##Boolean to indicate if we show the capabilities selector page
         - name: USE_CAPABILITIES_SELECTOR
           value: "true"
-
-          ##Boolean to indicate if we show the COVID-19 feature
         - name: SHOW_COVID19
           value: "true"
-
-          ## Node Environment
-        - name: NODE_ENV #
-          value: srt-node-env@azurekeyvault
-
-          ## The base uri the app is running on to pass to identity service for redirection
-        - name: APP_BASE_URI #
-          value: srt.app-base-url@azurekeyvault
-
-          ## The base uri of identity service
-        - name: OIDC_BASE_URI #
-          value: srt.oidc-base-uri@azurekeyvault
-
-          ## The client id to be sent to identity service
-        - name: OIDC_CLIENT_ID #
-          value: srt.oidc-client-id@azurekeyvault
-
-          ## The secret need to decode JWT tokens
-        - name: OIDC_CLIENT_SECRET #
-          value: srt.oidc.client-secret@azurekeyvault
-
+        - name: NODE_ENV
+          value: "production"
+        - name: APP_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+        - name: OIDC_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
-
-          ## BUYING_CATALOGUE_ADMIN_HOST
-        - name: BUYING_CATALOGUE_ADMIN_HOST #
-          value: srt.admin-host@azurekeyvault
-
-          ##  Environment variable to allow front end services talk to bapi
-        - name: API_HOST #
-          value: srt.api-host@azurekeyvault
-
-          ## URL for Azure Storage Account
+        - name: BUYING_CATALOGUE_ADMIN_HOST
+          value: "/admin"
+        - name: API_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: API_HOST
         - name: BLOBSTORE_HOST
-          value: srt.blobstore-host@azurekeyvault
-
-          ## Environment variable to allow front end services talk to dapi
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
         - name: DOCUMENT_HOST
-          value: srt.document-host@azurekeyvault
-
-          ## The url in which redis is running
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: DOCUMENT_HOST
         - name: REDIS_URL
-          value: srt.redis-url@azurekeyvault
-
-          ## The port redis is runnin
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
         - name: REDIS_PORT
-          value: srt.redis-port@azurekeyvault
-
-          ## Boolean to indicate whether to connect to redis via TLS
+          value: "6380"
         - name: REDIS_TLS
-          value: srt.redis-tls@azurekeyvault
-
-          ## The password to connect to redis
+          value: "true"
         - name: REDIS_PASS
-          value: srt.redis-pass|@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
 ---
 apiVersion: v1
 kind: Service
