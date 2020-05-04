@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-adminpage
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-adminpage
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
@@ -38,54 +36,69 @@ spec:
             path: /admin/health/live
             port: 3005
         env:
-        - name: COOKIE_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: COOKIE_SECRET
-        - name: LOGGER_LEVEL
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: LOGGER_LEVEL
-        - name: APP_BASE_URI
-          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+          ## Base URL
         - name: BASE_URL
           value: "/admin"
+
+          ## How long before the cookies stored in the session expire in ms
+        - name: MAX_COOKIE_AGE
+          value: srt-maxcookieage@azurekeyvault
+
+          ## The secret needed for encoding and decoding the cookie
+        - name: COOKIE_SECRET
+          value: srt-cookiesecret@azurekeyvault
+
+          ## logger_level options are info, warn, error, off"
+        - name: LOGGER_LEVEL
+          value: srt-loggerlevel@azurekeyvault
+
+          ## The base uri the app is running on to pass to identity service for redirection
+        - name: APP_BASE_URI
+          value: srt-appbaseuri@azurekeyvault
+
+          ## The base uri of identity service
         - name: OIDC_BASE_URI
-          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+          value: srt-oidcbaseuri@azurekeyvault
+
+          ## The client id to be sent to identity service
         - name: OIDC_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: OIDC_CLIENT_ID
+          value: srt-oidcclientid@azurekeyvault
+
+          ## The secret need to decode JWT tokens
         - name: OIDC_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: OIDC_CLIENT_SECRET
+          value: srt-oidcclientsecret@azurekeyvault
+
+          ## identity server
         - name: IDENTITY_SERVER
-          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+          value: srt-identityserver@azurekeyvault
+
+          ## organization api url
         - name: ORGANISATION_API_URL
-          value: "http://oapi:5103"
+          value: srt-organisationapiurl@azurekeyvault
+
+          ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+
+          ## The Host in which redis is running
         - name: REDIS_URL
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: REDIS_HOST
+          value: srt-redishost@azurekeyvault
+
+          ## The port redis is running
         - name: REDIS_PORT
-          value: "6380"
+          value: srt-redisport@azurekeyvault
+
+          ## Boolean to indicate whether to connect to redis via TLS
         - name: REDIS_TLS
-          value: "true"
-        - name: REDIS_PASS             
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: REDIS_PASS
+          value: srt-redistls@azurekeyvault
+
+          ## The password to connect to redis
+        - name: REDIS_PASS
+          value: srt-redispass@azurekeyvault
+
+          ## public browse base url"
         - name: PUBLIC_BROWSE_BASE_URL
-          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+          value: srt-publicbrowsebaseurl@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
