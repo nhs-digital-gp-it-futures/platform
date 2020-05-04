@@ -113,7 +113,7 @@ spec:
 
           ## OrderForm Host
         - name: ORDER_FORM_HOST
-          value: "/order"
+          value: srt-orderformhost@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
