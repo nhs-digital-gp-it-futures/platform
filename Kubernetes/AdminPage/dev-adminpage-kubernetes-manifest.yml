@@ -40,15 +40,10 @@ spec:
         - name: BASE_URL
           value: "/admin"
 
-          ## How long before the cookies stored in the session expire in ms
-        - name: MAX_COOKIE_AGE
-          value: srt-maxcookieage@azurekeyvault
-
           ## The secret needed for encoding and decoding the cookie
         - name: COOKIE_SECRET
           value: srt-cookiesecret@azurekeyvault
 
-          ## logger_level options are info, warn, error, off"
         - name: LOGGER_LEVEL
           value: info
 
