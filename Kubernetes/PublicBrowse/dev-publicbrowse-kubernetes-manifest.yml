@@ -31,7 +31,7 @@ spec:
 
           ## logger_level options are info, warn, error, off"
         - name: LOGGER_LEVEL
-          value: srt-loggerlevel@azurekeyvault
+          value: info
 
           ## Boolean to indicate if we show the login/logout component
         - name: LOGIN_ENABLED
