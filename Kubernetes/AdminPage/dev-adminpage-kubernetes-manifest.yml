@@ -50,7 +50,7 @@ spec:
 
           ## logger_level options are info, warn, error, off"
         - name: LOGGER_LEVEL
-          value: srt-loggerlevel@azurekeyvault
+          value: info
 
           ## The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
