@@ -103,6 +103,8 @@ serviceDependencies:
     port:
 # make sure its false if env == prod
 allowInvalidCertificate: false 
+dataProtection:
+  applicationName: "ISAPI Development"
 
 env:
   configmap:
