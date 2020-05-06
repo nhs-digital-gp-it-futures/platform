@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-oapi
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-oapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
@@ -35,19 +33,13 @@ spec:
         - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
           value: "true"
         - name: CONNECTIONSTRINGS__CATALOGUEUSERS
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: ConnectionStrings__CatalogueUsers
+          value: srt-connectionstringcatalogueusers@azurekeyvault
         - name: AUTHORITY
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
         - name: SMTPSERVER__HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: SMTPSERVER__HOST
+          value: srt-smtpserverhost@azurekeyvault@azurekeyvault
         - name: SMTPSERVER__PORT
           value: "587"
         - name: ALLOWINVALIDCERTIFICATE
