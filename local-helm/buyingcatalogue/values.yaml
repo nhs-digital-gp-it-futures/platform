@@ -166,7 +166,7 @@ isapi:
       baseAddressConfig:
         name: "bc-buyingcatalogue"
         key: pb-url
-      loginPath: /back-from-admin
+      loginPath: /re-login
   allowInvalidCertificate: false
   dataProtection:
     applicationName: "ISAPI Development"
