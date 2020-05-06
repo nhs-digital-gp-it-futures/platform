@@ -116,8 +116,7 @@ isapi-db:
 
 isapi:
   enabled: false
-  disabledUrl: 
-  feDisabledIssuerUrl:
+  disabledUrl:   
   replicaCount: 1
   image:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
@@ -165,17 +164,21 @@ isapi:
   allowInvalidCertificate: false
   dataProtection:
     applicationName: "ISAPI Development"
+  pathBase: "identity"
   ingress:
     enabled: true
     annotations: 
-      kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - paths: 
-          - /.well-known
-          - /Account
-          - /connect
+          - /identity/health
+          - /identity/css  
+          - /identity/nhsuk-frontend
+          - /identity/Account
+          - /identity/Consent
+          - /identity/Error
+          - /identity/connect
+          - /identity/.well-known
 
 oapi:
   enabled: true

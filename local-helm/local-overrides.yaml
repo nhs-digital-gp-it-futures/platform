@@ -31,7 +31,7 @@ isapi-db:
   disabledUrl: "host.docker.internal"
 
 isapi:  
-  enabled: true
+  enabled: false
   disabledUrl: "http://host.docker.internal:5102/identity"  
 
 oapi:  
