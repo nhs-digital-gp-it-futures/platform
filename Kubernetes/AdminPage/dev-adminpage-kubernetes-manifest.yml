@@ -44,12 +44,13 @@ spec:
         - name: COOKIE_SECRET
           value: srt-cookiesecret@azurekeyvault
 
+          ## logger_level options are info, warn, error, off
         - name: LOGGER_LEVEL
           value: info
 
           ## The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
-          value: srt-appbaseuri@azurekeyvault
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 
           ## The base uri of identity service
         - name: OIDC_BASE_URI
@@ -65,11 +66,11 @@ spec:
 
           ## identity server
         - name: IDENTITY_SERVER
-          value: srt-identityserver@azurekeyvault
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
 
           ## organization api url
         - name: ORGANISATION_API_URL
-          value: srt-organisationapiurl@azurekeyvault
+          value: "http://oapi:5103"
 
           ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
@@ -93,7 +94,7 @@ spec:
 
           ## public browse base url"
         - name: PUBLIC_BROWSE_BASE_URL
-          value: srt-publicbrowsebaseurl@azurekeyvault
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 ---
 apiVersion: v1
 kind: Service
