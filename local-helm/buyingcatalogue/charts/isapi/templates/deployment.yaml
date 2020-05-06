@@ -116,6 +116,16 @@ spec:
             - name: SMTPSERVER__PORT
               value: {{ .port | quote }}
             {{- end }}
+
+            {{- with .Values.serviceDependencies.pb }}
+            - name: PUBLICBROWSE__BASEADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .baseAddressConfig.name | quote }}
+                  key: {{ .baseAddressConfig.key | quote }}
+            - name: PUBLICBROWSE__LOGINPATH
+              value: {{ .loginPath | quote }}
+            {{- end }}
             - name: ALLOWINVALIDCERTIFICATE
               value: {{ .Values.allowInvalidCertificate | quote }}
             - name: DATAPROTECTION__APPLICATIONNAME
