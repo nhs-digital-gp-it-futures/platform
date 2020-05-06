@@ -162,6 +162,11 @@ isapi:
         name: "bc-buyingcatalogue"
         key: email-url      
       port: 587
+    pb:
+      baseAddressConfig:
+        name: "bc-buyingcatalogue"
+        key: pb-url
+      loginPath: /re-login
   allowInvalidCertificate: false
   dataProtection:
     applicationName: "ISAPI Development"
