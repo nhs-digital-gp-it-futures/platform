@@ -130,6 +130,8 @@ spec:
               value: {{ .Values.allowInvalidCertificate | quote }}
             - name: DATAPROTECTION__APPLICATIONNAME
               value: {{ .Values.dataProtection.applicationName | quote }}
+            - name: PATHBASE
+              value: {{ .Values.pathBase | quote }}
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}

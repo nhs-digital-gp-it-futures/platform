@@ -111,6 +111,7 @@ allowInvalidCertificate: false
 dataProtection:
   applicationName: "ISAPI Development"
 
+pathBase: "identity"
 env:
   configmap:
   secrets:
