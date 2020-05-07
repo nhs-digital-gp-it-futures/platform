@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-orapi
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-orapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/ordering-api
@@ -41,10 +39,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: CONNECTIONSTRINGS__ORDERINGDB
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: CONNECTIONSTRINGS__ORDERINGDB
+          value: srt-connectionstringsordering@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
