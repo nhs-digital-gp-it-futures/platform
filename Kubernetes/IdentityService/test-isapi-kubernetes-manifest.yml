@@ -88,6 +88,10 @@ spec:
           value: "true"
         - name: DATAPROTECTION__APPLICATIONNAME
           value: "ISAPI Test"
+        - name: PUBLICBROWSE__BASEADDRESS
+          value: http://buyingcataloguetestpublic.uksouth.cloudapp.azure.com
+        - name: PUBLICBROWSE__LOGINPATH
+          value: /re-login
 ---
 apiVersion: v1
 kind: Service
