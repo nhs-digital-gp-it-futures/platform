@@ -306,38 +306,8 @@ of:
     hosts:
       - paths: 
           - /order
-    tls: []
-  appBaseUri: 
-    name: "bc-buyingcatalogue"
-    key: "app-base-url"
-  baseUri: "/order"
-  cookieSecret:
-    name: "bc-buyingcatalogue"
-    key: "cookie-secret"
-  serviceDependencies:
-    oidc:
-      baseUriConfig:
-        name: "bc-buyingcatalogue"
-        key: isapi-url  
-      clientId: "SampleClient"
-      clientSecret: 
-        name: "bc-buyingcatalogue"
-        key: oidc-client-secret   
-    ordapi:
-      name: "bc-buyingcatalogue"
-      key: ordapi-url
-    pb:
-      name: "bc-buyingcatalogue"
-      key: pb-url
-    redis:
-      urlConfig:
-        name: "bc-buyingcatalogue"
-        key: redis-url 
-      port: "6379"
-      tls: false
-      passSecret:
-        name: "bc-buyingcatalogue"
-        key: "redis-password"
+    tls: []  
+  baseUri: "/order"  
   env:
       values:
         - name: NODE_TLS_REJECT_UNAUTHORIZED

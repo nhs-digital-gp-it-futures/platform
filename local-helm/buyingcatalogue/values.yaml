@@ -470,7 +470,7 @@ of:
     oidc:
       baseUriConfig:
         name: "bc-buyingcatalogue"
-        key: isapi-url  
+        key: issuer-url  
       clientId: "SampleClient"
       clientSecret: 
         name: "bc-buyingcatalogue"
