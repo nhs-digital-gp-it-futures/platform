@@ -64,17 +64,17 @@ spec:
         - name: CLIENTS__0__REQUIRECLIENTSECRET
           value: "true"
         - name: CLIENTS__0__REDIRECTURLS__0
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/oauth/callback
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__1
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/admin/oauth/callback
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__2
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/order/oauth/callback
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/order/oauth/callback
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/signout-callback-oidc
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__2
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com/order/signout-callback-oidc
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/order/signout-callback-oidc
         - name: CLIENTS__0__ALLOWEDSCOPES__0
           value: openid
         - name: CLIENTS__0__ALLOWEDSCOPES__1
@@ -97,7 +97,7 @@ spec:
         - name: DATAPROTECTION__APPLICATIONNAME
           value: "ISAPI Test"
         - name: PUBLICBROWSE__BASEADDRESS
-          value: https://buyingcataloguetest.uksouth.cloudapp.azure.com
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com
         - name: PUBLICBROWSE__LOGINPATH
           value: /re-login
 ---
