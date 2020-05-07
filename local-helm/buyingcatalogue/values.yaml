@@ -246,7 +246,7 @@ ordapi-db:
   saPasswordSecret: 
     name: "bc-buyingcatalogue"
     key: sa-password    
-  dbName: buyingcatalogue
+  dbName: CatalogueOrdering
   dbUser: NHSD
   dbPasswordSecret: 
     name: "bc-buyingcatalogue"

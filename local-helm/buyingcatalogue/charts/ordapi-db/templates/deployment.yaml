@@ -31,16 +31,6 @@ spec:
           ports:
             - name: mssql
               containerPort: {{ .Values.service.port }}
-          # livenessProbe:
-          #    tcpSocket:
-          #      port: mssql
-          #    initialDelaySeconds: {{ .Values.livenessprobe.initialDelaySeconds }}
-          #    periodSeconds: {{ .Values.livenessprobe.periodSeconds }}
-          # readinessProbe:
-          #    tcpSocket:
-          #      port: mssql
-          #    initialDelaySeconds: {{ .Values.readinessprobe.initialDelaySeconds }}
-          #    periodSeconds: {{ .Values.readinessprobe.periodSeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -52,7 +42,7 @@ spec:
             - name: ACCEPT_EULA
               value: "Y"      
             - name: MSSQL_PID
-              value: Developer  
+              value: Express  
             - name: DB_NAME
               value: {{ .Values.dbName | quote }}
             - name: DB_USER
