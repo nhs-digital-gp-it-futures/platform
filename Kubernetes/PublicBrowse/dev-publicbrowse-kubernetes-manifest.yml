@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-publicbrowse
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-publicbrowse
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
@@ -30,68 +28,89 @@ spec:
           limits:
             cpu: 500m
         env:
+          ## LOGGER_LEVEL options are info, warn, error, off
         - name: LOGGER_LEVEL
           value: "info"
+
+          ## Boolean to indicate if we show the login/logout component
         - name: LOGIN_ENABLED
           value: "true"
+
+          ## Boolean to indicate if we show the capabilities selector page
         - name: USE_CAPABILITIES_SELECTOR
           value: "true"
+
+          ## Boolean to indicate if we show the COVID-19 feature
         - name: SHOW_COVID19
           value: "true"
+
+          ## Boolean to indicate if we show the order form tile
+        - name: SHOW_ORDER_FORM
+          value: "true"
+
+          ## Node Environment
         - name: NODE_ENV
-          value: "production"
+          value: "development"
+
+          ## The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+
+          ## The base uri of identity service
         - name: OIDC_BASE_URI
-          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+          value: srt-oidcbaseuri@azurekeyvault
+
+          ## The client id to be sent to identity service
         - name: OIDC_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: OIDC_CLIENT_ID
+          value: srt-oidcclientid@azurekeyvault
+
+          ## The secret need to decode JWT tokens
         - name: OIDC_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: OIDC_CLIENT_SECRET
+          value: srt-oidcclientsecret@azurekeyvault
+
+          ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+
+          ## BUYING_CATALOGUE_ADMIN_HOST
         - name: BUYING_CATALOGUE_ADMIN_HOST
           value: "/admin"
+
+          ## ORDER_FORM_HOST
+        - name: ORDER_FORM_HOST
+          value: "/order/"
+
+          ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: API_HOST
+          value: srt-apihost@azurekeyvault
+
+          ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: BLOBSTORE_HOST
+          value: srt-blobstorehost
+
+          ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: DOCUMENT_HOST
+          value: srt-documenthost@azurekeyvault
+
+          ## The Host in which redis is running
         - name: REDIS_URL
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: REDIS_HOST
+          value: srt-redishost@azurekeyvault
+
+          ## The port redis is running
         - name: REDIS_PORT
-          value: "6380"
+          value: srt-redisport@azurekeyvault
+
+          ## Boolean to indicate whether to connect to redis via TLS
         - name: REDIS_TLS
-          value: "true"
+          value: srt-redistls@azurekeyvault
+
+          ## The password to connect to redis
         - name: REDIS_PASS
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: REDIS_PASS
+          value: srt-redispass@azurekeyvault
+
+          ## The secret needed for encoding and decoding the cookie
         - name: COOKIE_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: COOKIE_SECRET
+          value: srt-cookiesecret@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
