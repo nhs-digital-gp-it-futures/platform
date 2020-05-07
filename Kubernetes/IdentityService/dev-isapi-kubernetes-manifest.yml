@@ -56,10 +56,14 @@ spec:
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__1
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/oauth/callback
+        - name: CLIENTS__0__REDIRECTURLS__2
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/order/oauth/callback
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__2
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/order/signout-callback-oidc
         - name: SMTPSERVER__HOST
           value: srt-smtpserverhost@azurekeyvault
         - name: SMTPSERVER__PORT
@@ -68,6 +72,10 @@ spec:
           value: "true"
         - name: DATAPROTECTION__APPLICATIONNAME
           value: "ISAPI Development"
+        - name: PUBLICBROWSE__BASEADDRESS
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com
+        - name: PUBLICBROWSE__LOGINPATH
+          value: /re-login
 ---
 apiVersion: v1
 kind: Service
