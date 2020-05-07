@@ -85,11 +85,16 @@ spec:
           value: "6380"
         - name: REDIS_TLS
           value: "true"
-        - name: REDIS_PASS             
+        - name: REDIS_PASS
           valueFrom:
             secretKeyRef:
               name: testpipelinevariables
               key: REDIS_PASS
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: COOKIE_SECRET
 ---
 apiVersion: v1
 kind: Service
