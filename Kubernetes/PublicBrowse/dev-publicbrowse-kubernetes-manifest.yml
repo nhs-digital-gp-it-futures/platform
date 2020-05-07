@@ -44,6 +44,10 @@ spec:
         - name: SHOW_COVID19
           value: "true"
 
+          ## Boolean to indicate if we show the order form tile
+        - name: SHOW_ORDER_FORM
+          value: "true"
+
           ## Node Environment
         - name: NODE_ENV
           value: "development"
@@ -71,6 +75,10 @@ spec:
           ## BUYING_CATALOGUE_ADMIN_HOST
         - name: BUYING_CATALOGUE_ADMIN_HOST
           value: "/admin"
+
+          ## ORDER_FORM_HOST
+        - name: ORDER_FORM_HOST
+          value: "/order"
 
           ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
