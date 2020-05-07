@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-dapi
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-dapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/document-dapi
@@ -31,15 +29,9 @@ spec:
             cpu: 1
         env:
         - name: AZUREBLOBSTORAGE__CONNECTIONSTRING
-          valueFrom:
-            secretKeyRef:
-                name: devpipelinevariables
-                key: AZUREBLOBSTORAGE__CONNECTIONSTRING
+          value: srt-azureblobstorageconnectionstring@azurekeyvault
         - name: AZUREBLOBSTORAGE__CONTAINERNAME
-          valueFrom:
-            secretKeyRef:
-                name: devpipelinevariables
-                key: AZUREBLOBSTORAGE__CONTAINERNAME
+          value: srt-azureblobstoragecontainername@azurekeyvault
 ---
 apiVersion: v1
 kind: Service
