@@ -78,7 +78,7 @@ spec:
 
           ## ORDER_FORM_HOST
         - name: ORDER_FORM_HOST
-          value: "/order"
+          value: "/order/"
 
           ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
