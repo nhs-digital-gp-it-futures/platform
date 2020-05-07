@@ -89,6 +89,10 @@ spec:
           ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+              
+          ## Identity Server
+        - name: IDENTITY_SERVER
+          value: "http://isapi:8070/identity" 
 ---
 apiVersion: v1
 kind: Service
