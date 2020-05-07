@@ -52,6 +52,12 @@ spec:
           value: srt-clients0clientname@azurekeyvault
         - name: CLIENTS__0__REQUIRECLIENTSECRET
           value: "true"
+        - name: CLIENTS__0__REQUIREPKCE
+          value: "true"
+        - name: CLIENTS__0__ALLOWEDGRANTTYPES
+          value: "Code"
+        - name: CLIENTS__0__REQUIRECONSENT
+          value: "true"          
         - name: CLIENTS__0__REDIRECTURLS__0
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__1
@@ -64,6 +70,16 @@ spec:
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__2
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/order/signout-callback-oidc
+        - name: CLIENTS__0__ALLOWEDSCOPES__0
+          value: openid
+        - name: CLIENTS__0__ALLOWEDSCOPES__1
+          value: email
+        - name: CLIENTS__0__ALLOWEDSCOPES__2
+          value: profile
+        - name: CLIENTS__0__ALLOWEDSCOPES__3
+          value: Organisation
+        - name: CLIENTS__0__ALLOWEDSCOPES__3
+          value: Ordering
         - name: SMTPSERVER__HOST
           value: srt-smtpserverhost@azurekeyvault
         - name: SMTPSERVER__PORT
