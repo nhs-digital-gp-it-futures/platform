@@ -181,26 +181,9 @@ oapi:
   allowInvalidCertificate: true
 
 ordapi-db:
-  enabled: true
-  disabledUrl: 
-  replicaCount: 1
-  image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/ordering-api-ordering-db
-  useLocalImage: false
-  imagePullSecrets: 
-  nameOverride: "ordapi-sql"
-  fullnameOverride: "gpitfutures-bc-ordapi-sql"
   service:
     type: LoadBalancer
     port: 1452
-  saPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: sa-password    
-  dbName: CatalogueOrdering
-  dbUser: NHSD
-  dbPasswordSecret: 
-    name: "bc-buyingcatalogue"
-    key: db-password    
 
 email:
   enabled: true

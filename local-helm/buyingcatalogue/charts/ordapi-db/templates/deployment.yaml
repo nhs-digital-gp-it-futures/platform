@@ -42,7 +42,7 @@ spec:
             - name: ACCEPT_EULA
               value: "Y"      
             - name: MSSQL_PID
-              value: Express  
+              value: Developer  
             - name: DB_NAME
               value: {{ .Values.dbName | quote }}
             - name: DB_USER
