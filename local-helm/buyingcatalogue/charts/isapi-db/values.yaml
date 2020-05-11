@@ -78,9 +78,11 @@ eaUser:
     key: ea-user-password  
   phone:
 
-livenessprobe:
-  initialDelaySeconds: 15
-  periodSeconds: 20
-readinessprobe:
-  initialDelaySeconds: 5
-  periodSeconds: 10
+probes:
+  port: 1433
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
