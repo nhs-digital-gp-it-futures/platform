@@ -180,6 +180,11 @@ oapi:
     port: 5103      
   allowInvalidCertificate: true
 
+ordapi-db:
+  service:
+    type: LoadBalancer
+    port: 1452
+
 email:
   enabled: true
   disabledUrl: ""  
