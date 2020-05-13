@@ -155,6 +155,7 @@ resource "azurerm_application_gateway" "AppGate" {
       rules           = [
         942430,
         942130,
+        942450
       ]
     }
     disabled_rule_group {
