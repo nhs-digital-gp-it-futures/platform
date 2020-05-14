@@ -50,7 +50,14 @@ spec:
               valueFrom:
                 secretKeyRef:            
                   name: {{ .Values.connectionStringSecret.name }}
-                  key: {{ .Values.connectionStringSecret.key }} 
+                  key: {{ .Values.connectionStringSecret.key }}
+            - name: AUTHORITY
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.oidc.baseUriConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.oidc.baseUriConfig.key | quote }}
+            - name: ALLOWINVALIDCERTIFICATE
+              value: {{ .Values.allowInvalidCertificate | quote }}
             {{- if .Values.env.values -}}
             {{- range .Values.env.values }}
               - name: {{ .name }}
