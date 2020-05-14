@@ -38,12 +38,6 @@ spec:
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
-        - name: SMTPSERVER__HOST
-          value: srt-smtpserverhost@azurekeyvault@azurekeyvault
-        - name: SMTPSERVER__PORT
-          value: "587"
-        - name: ALLOWINVALIDCERTIFICATE
-          value: "true"
 ---
 apiVersion: v1
 kind: Service

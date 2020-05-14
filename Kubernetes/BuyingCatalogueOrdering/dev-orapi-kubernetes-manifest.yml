@@ -40,6 +40,10 @@ spec:
           value: Development
         - name: CONNECTIONSTRINGS__ORDERINGDB
           value: srt-connectionstringsordering@azurekeyvault
+        - name: AUTHORITY
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
 ---
 apiVersion: v1
 kind: Service
