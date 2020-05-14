@@ -225,10 +225,16 @@ ordapi:
   fullnameOverride: "gpitfutures-bc-ordapi"
   service:
     type: LoadBalancer
-    port: 5104      
+    port: 5104     
+  allowInvalidCertificate: false
   connectionStringSecret: 
     name: "bc-buyingcatalogue"
     key: ordapi-db-connection-string 
+  serviceDependencies:
+    oidc:
+      baseUriConfig:
+        name: "bc-buyingcatalogue"
+        key: issuer-url
 
 ordapi-db:
   enabled: true

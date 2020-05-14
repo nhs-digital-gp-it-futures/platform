@@ -75,6 +75,14 @@ connectionStringSecret:
   name: 
   key:   
 
+allowInvalidCertificate: false
+
+serviceDependencies:
+  oidc:
+    baseUriConfig:
+      name: 
+      key: 
+
 env:
   configmap:
   secrets:

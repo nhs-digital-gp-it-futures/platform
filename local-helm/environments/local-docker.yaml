@@ -180,6 +180,21 @@ oapi:
     port: 5103      
   allowInvalidCertificate: true
 
+ordapi:
+  enabled: true
+  disabledUrl: 
+  replicaCount: 1
+  image:
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/ordering-api
+  useLocalImage: false
+  imagePullSecrets: 
+  nameOverride: "ordapi"
+  fullnameOverride: "gpitfutures-bc-ordapi"
+  service:
+    type: LoadBalancer
+    port: 5104   
+  allowInvalidCertificate: true
+
 ordapi-db:
   service:
     type: LoadBalancer
