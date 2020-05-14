@@ -44,11 +44,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: AUTHORITY
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.serviceDependencies.oidc.baseUriConfig.name | quote }}
-                  key: {{ .Values.serviceDependencies.oidc.baseUriConfig.key | quote }}
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
             - name: CONNECTIONSTRINGS__ORDERINGDB
@@ -56,6 +51,11 @@ spec:
                 secretKeyRef:            
                   name: {{ .Values.connectionStringSecret.name }}
                   key: {{ .Values.connectionStringSecret.key }}
+            - name: AUTHORITY
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.serviceDependencies.oidc.baseUriConfig.name | quote }}
+                  key: {{ .Values.serviceDependencies.oidc.baseUriConfig.key | quote }}
             - name: ALLOWINVALIDCERTIFICATE
               value: {{ .Values.allowInvalidCertificate | quote }}
             {{- if .Values.env.values -}}
