@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-orderform
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-orderform
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/order-form
@@ -38,6 +36,10 @@ spec:
         - name: PUBLIC_BROWSE_BASE_URL
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 
+          #Ordering API base URL
+        - name: ORDER_API_URL 
+          value: "http://orapi:5104"
+          
           ##Environment
         - name: NODE_ENV
           value: "development"
