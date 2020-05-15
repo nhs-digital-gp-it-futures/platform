@@ -188,6 +188,7 @@ ordapi:
     repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/ordering-api
   useLocalImage: false
   imagePullSecrets: 
+  - name: regcredlocal
   nameOverride: "ordapi"
   fullnameOverride: "gpitfutures-bc-ordapi"
   service:
