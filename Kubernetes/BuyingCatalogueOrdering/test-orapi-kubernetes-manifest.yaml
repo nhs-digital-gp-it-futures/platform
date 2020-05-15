@@ -45,6 +45,10 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: CONNECTIONSTRINGS__ORDERINGDB
+        - name: AUTHORITY
+          value: https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity/
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
 ---
 apiVersion: v1
 kind: Service

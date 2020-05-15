@@ -39,6 +39,12 @@ spec:
           ##The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
+          #Ordering API base URL
+        - name: ORDER_API_URL 
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: ORDER_API_URL 
           ##LOGGER_LEVEL options are info, warn, error, off
         - name: LOGGER_LEVEL
           value: "info"
@@ -80,6 +86,12 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: REDIS_PASS
+          ## Allow invalid self-signed ssl certificate
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
+          ## Identity Server
+        - name: IDENTITY_SERVER
+          value: "http://isapi:5102/identity"
 ---
 apiVersion: v1
 kind: Service
