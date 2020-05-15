@@ -17,6 +17,8 @@ spec:
       labels:
         app: gpitfutures-bc-app-isapi
     spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-isapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
@@ -41,15 +43,27 @@ spec:
         - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
           value: "true"
         - name: CONNECTIONSTRINGS__CATALOGUEUSERS
-          value: srt-connectionstringcatalogueusers@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ConnectionStrings__CatalogueUsers
         - name: ISSUERURL
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: CLIENTS__0__CLIENTID
-          value: srt-clients0clientid@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
         - name: CLIENTS__0__SECRET
-          value: srt-clients0secret@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
         - name: CLIENTS__0__CLIENTNAME
-          value: srt-clients0clientname@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: CLIENTS__0__CLIENTNAME
         - name: CLIENTS__0__REQUIRECLIENTSECRET
           value: "true"
         - name: CLIENTS__0__REQUIREPKCE
@@ -81,7 +95,10 @@ spec:
         - name: CLIENTS__0__ALLOWEDSCOPES__3
           value: Ordering
         - name: SMTPSERVER__HOST
-          value: srt-smtpserverhost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: SMTPSERVER__HOST
         - name: SMTPSERVER__PORT
           value: "587"
         - name: ALLOWINVALIDCERTIFICATE

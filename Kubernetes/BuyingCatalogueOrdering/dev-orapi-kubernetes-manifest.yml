@@ -39,7 +39,11 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: CONNECTIONSTRINGS__ORDERINGDB
-          value: srt-connectionstringsordering@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: CONNECTIONSTRINGS__ORDERINGDB
+              
         - name: AUTHORITY
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
