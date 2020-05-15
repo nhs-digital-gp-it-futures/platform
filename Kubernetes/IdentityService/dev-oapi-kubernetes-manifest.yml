@@ -17,6 +17,8 @@ spec:
       labels:
         app: gpitfutures-bc-app-oapi
     spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-oapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
@@ -33,7 +35,10 @@ spec:
         - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
           value: "true"
         - name: CONNECTIONSTRINGS__CATALOGUEUSERS
-          value: srt-connectionstringcatalogueusers@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ConnectionStrings__CatalogueUsers
         - name: AUTHORITY
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE

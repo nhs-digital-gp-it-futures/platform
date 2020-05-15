@@ -17,6 +17,8 @@ spec:
       labels:
         app: gpitfutures-bc-app-publicbrowse
     spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-publicbrowse
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/publicbrowse
@@ -58,15 +60,21 @@ spec:
 
           ## The base uri of identity service
         - name: OIDC_BASE_URI
-          value: srt-oidcbaseuri@azurekeyvault
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
 
           ## The client id to be sent to identity service
         - name: OIDC_CLIENT_ID
-          value: srt-oidcclientid@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
 
           ## The secret need to decode JWT tokens
         - name: OIDC_CLIENT_SECRET
-          value: srt-oidcclientsecret@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
 
           ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
@@ -82,35 +90,53 @@ spec:
 
           ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
-          value: srt-apihost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: API_HOST
 
           ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
-          value: srt-blobstorehost
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
 
           ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
-          value: srt-documenthost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: DOCUMENT_HOST
 
           ## The Host in which redis is running
         - name: REDIS_URL
-          value: srt-redishost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
 
           ## The port redis is running
         - name: REDIS_PORT
-          value: srt-redisport@azurekeyvault
+          value: "6380"
 
           ## Boolean to indicate whether to connect to redis via TLS
         - name: REDIS_TLS
-          value: srt-redistls@azurekeyvault
+          value: "true"
 
           ## The password to connect to redis
         - name: REDIS_PASS
-          value: srt-redispass@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
 
           ## The secret needed for encoding and decoding the cookie
         - name: COOKIE_SECRET
-          value: srt-cookiesecret@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
 ---
 apiVersion: v1
 kind: Service

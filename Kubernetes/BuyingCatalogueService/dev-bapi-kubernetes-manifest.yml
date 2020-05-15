@@ -17,6 +17,8 @@ spec:
       labels:
         app: gpitfutures-bc-app-bapi
     spec:
+      imagePullSecrets:
+      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-bapi
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/bapi
@@ -29,9 +31,15 @@ spec:
             cpu: 1
         env:
         - name: ConnectionStrings__BuyingCatalogue
-          value: srt-connectionstringsbuyingcatalogue@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: ConnectionStrings__BuyingCatalogue
         - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
-          value: srt-apiclientsettingdocumentapibaseurl@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
 ---
 apiVersion: v1
 kind: Service
