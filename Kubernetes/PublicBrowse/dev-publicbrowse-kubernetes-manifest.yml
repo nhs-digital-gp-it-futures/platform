@@ -76,6 +76,13 @@ spec:
               name: devpipelinevariables
               key: OIDC_CLIENT_SECRET
 
+          ##The secret needed for encoding and decoding the cookie
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
+
           ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
@@ -130,13 +137,6 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: REDIS_PASS
-
-          ## The secret needed for encoding and decoding the cookie
-        - name: COOKIE_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: COOKIE_SECRET
 ---
 apiVersion: v1
 kind: Service
