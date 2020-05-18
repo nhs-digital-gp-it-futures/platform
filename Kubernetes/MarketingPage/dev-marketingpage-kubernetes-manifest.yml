@@ -30,15 +30,24 @@ spec:
         env:
           ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
-          value: srt-apihost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: API_HOST
 
           ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
-          value: srt-blobstorehost
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
 
           ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
-          value: srt-documenthost@azurekeyvault
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: DOCUMENT_HOST
 ---
 apiVersion: v1
 kind: Service
