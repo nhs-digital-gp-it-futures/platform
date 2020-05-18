@@ -116,7 +116,7 @@ metadata:
  name: isapi
 spec:
   ports:
-  - port: 8070
+  - port: 5102
     targetPort: 80
     protocol: TCP
   selector:
