@@ -102,11 +102,13 @@ In order to tear down the system, simply run the appropriate tear down script.
 |                             AZURITE                              | 10000,10001,10002 |                                                             |
 |              [ISAPI](http://localhost:5102/swagger)              |       5102        |             [ISAPI](http://localhost/identity)              |
 |                            ISAPI-MSSQL                           |       1451        |                                                             |
-|              [ORGANISATIONS](http://localhost:5103)              |       5103        |                                                             |
-|                 [ORDERING](http://localhost:5104)                |       5104        |                                                             |
+|                   [OAPI](http://localhost:5103)                  |       5103        |                                                             |
+|                  [ORDAPI](http://localhost:5104)                 |       5104        |                                                             |
 |                           ORDAPI-MSSQL                           |       1452        |                                                             |
 | [MP](http://localhost:3002/supplier/solution/100000-001/preview) |       3002        | [MP](http://localhost/supplier/solution/100000-001/preview) |
 |                   [PB](http://localhost:3000)                    |       3000        |                   [PB](http://localhost)                    |
+|                 [ADMIN](http://localhost:3005)                   |       3005        |              [ADMIN](http://localhost/admin)                |
+|                   [OF](http://localhost:3006)                    |       3006        |                 [OF](http://localhost/order)                |
 |                  [EMAIL](http://localhost:1080)                  |      1080,587     |                                                             |
-|                      [REDIS](not exposed)                        |       6379        |                                                             |
+|                            [REDIS]                               |       6379        |                                                             |
 |             [REDIS COMMANDER](http://localhost:8181)             |       8181        |                                                             |
