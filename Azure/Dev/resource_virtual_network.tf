@@ -153,10 +153,11 @@ resource "azurerm_application_gateway" "AppGate" {
     disabled_rule_group {
       rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
       rules           = [
+        942130,
+        942210, 
         942430,
-        942130,        
-        942450,
         942440,
+        942450
       ]
     }
     disabled_rule_group {

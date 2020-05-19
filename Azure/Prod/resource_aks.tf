@@ -70,8 +70,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  api_server_authorized_ip_ranges = [
-  ]
+  api_server_authorized_ip_ranges = []
 
   enable_pod_security_policy      = "false"
 

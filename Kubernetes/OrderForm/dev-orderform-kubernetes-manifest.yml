@@ -113,7 +113,7 @@ spec:
               
           ## Identity Server
         - name: IDENTITY_SERVER
-          value: "http://isapi:8070/identity" 
+          value: "http://isapi:5102/identity" 
 ---
 apiVersion: v1
 kind: Service
