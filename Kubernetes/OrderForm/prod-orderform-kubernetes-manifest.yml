@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-app-publicbrowse
+  name: gpitfutures-bc-app-orderform
 spec:
   replicas: 1
   strategy:
@@ -11,56 +11,38 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-publicbrowse
+      app: gpitfutures-bc-app-orderform
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-publicbrowse
+        app: gpitfutures-bc-app-orderform
     spec:
       imagePullSecrets:
       - name: prodpipelinevariables
       containers:
-      - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:20200409.4
+      - name: gpitfutures-bc-app-orderform
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/order-form
         ports:
-        - containerPort: 3000
+        - containerPort: 3006
         resources:
           requests:
             cpu: 250m
           limits:
             cpu: 500m
         env:
-        - name: NODE_ENV
-          value: "production"
-        - name: LOGGER_LEVEL
-          value: "info"
-        - name: API_HOST
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: API_HOST
-        - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: BLOBSTORE_HOST
-        - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: DOCUMENT_HOST
-        - name: LOGIN_ENABLED
-          value: "true"
-        - name: USE_CAPABILITIES_SELECTOR
-          value: "true"
-        - name: SHOW_COVID19
-          value: "true"
         - name: BASE_URL
-          value: "/"
+          value: "/order"
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcatalogue.digital.nhs.uk"
         - name: APP_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk"
-        - name: BUYING_CATALOGUE_ADMIN_HOST
-          value: "/admin"
+        - name: ORDER_API_URL 
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: ORDER_API_URL 
+        - name: LOGGER_LEVEL
+          value: "info"
         - name: OIDC_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk/identity"
         - name: OIDC_CLIENT_ID
@@ -73,6 +55,8 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: OIDC_CLIENT_SECRET
+        - name: MAX_COOKIE_AGE
+          value: "3600000"
         - name: COOKIE_SECRET
           valueFrom:
             secretKeyRef:
@@ -92,13 +76,18 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: REDIS_PASS
+        - name: IDENTITY_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: IDENTITY_SERVER
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: publicbrowse
+  name: orderform
 spec:
   ports:
-  - port: 3000
+  - port: 3006
   selector:
-    app: gpitfutures-bc-app-publicbrowse
+    app: gpitfutures-bc-app-orderform
