@@ -27,7 +27,7 @@ print_usage() {
 while getopts "pe:n:" flag; do
   case "${flag}" in
   	p) ISPRIVATE=1 ;;
-    e) ENV="${OPTARG}" ;;
+	e) ENV="${OPTARG}" ;;
 	n) NAMESPACE="${OPTARG}" ;;
     *) print_usage
        exit 1 ;;
@@ -43,7 +43,7 @@ if [[ $ISPRIVATE -eq 1 ]]; then
 			fi
 		done
 	done
-	exit 1
+	exit 0
 fi
 
 shopt -s extglob
