@@ -21,6 +21,7 @@ print_usage() {
 	defaults to: $NAMESPACE
 	
 	-p) [optional] deploy only to private. Not true by default.
+	
   "
 }
 
@@ -29,8 +30,8 @@ while getopts "pe:n:" flag; do
   	p) ISPRIVATE=1 ;;
 	e) ENV="${OPTARG}" ;;
 	n) NAMESPACE="${OPTARG}" ;;
-    *) print_usage
-       exit 1 ;;
+	*) print_usage
+		exit 1 ;;
   esac
 done
 
