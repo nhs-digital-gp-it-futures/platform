@@ -49,7 +49,6 @@ resource "azurerm_network_security_rule" "DevOps" {
   protocol                    = "TCP"
   priority                    = "200"
   description                 = "Allow AzureDevops Access to Kubernetes Cluster"
-
 }
 
 resource "azurerm_network_security_rule" "Azure" {
@@ -65,7 +64,6 @@ resource "azurerm_network_security_rule" "Azure" {
   protocol                    = "TCP"
   priority                    = "500"
   description                 = "Allow incoming Azure Gateway Manager and inbound virtual network traffic (VirtualNetwork tag) on the NSG."
-
 }
 
 
