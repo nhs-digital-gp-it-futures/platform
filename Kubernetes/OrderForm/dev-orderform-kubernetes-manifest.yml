@@ -32,10 +32,6 @@ spec:
         - name: BASE_URL
           value: "/order"
 
-          #Ordering API base URL
-        - name: ORDER_API_URL 
-          value: "http://orapi:5104"
-
           ##Public browse base URL
         - name: PUBLIC_BROWSE_BASE_URL
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
@@ -43,6 +39,13 @@ spec:
           #Ordering API base URL
         - name: ORDER_API_URL 
           value: "http://orapi:5104"
+
+          ## URL for Azure Storage Account
+        - name: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
           
           ##Environment
         - name: NODE_ENV

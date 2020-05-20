@@ -97,7 +97,6 @@ spec:
               key: COOKIE_SECRET
         - name: ORDER_FORM_HOST
           value: "/order/"
-
 ---
 apiVersion: v1
 kind: Service

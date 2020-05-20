@@ -43,7 +43,6 @@ spec:
             secretKeyRef:
               name: devpipelinevariables
               key: CONNECTIONSTRINGS__ORDERINGDB
-              
         - name: AUTHORITY
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
