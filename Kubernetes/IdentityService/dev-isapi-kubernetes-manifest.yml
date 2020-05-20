@@ -92,7 +92,7 @@ spec:
           value: profile
         - name: CLIENTS__0__ALLOWEDSCOPES__3
           value: Organisation
-        - name: CLIENTS__0__ALLOWEDSCOPES__3
+        - name: CLIENTS__0__ALLOWEDSCOPES__4
           value: Ordering
         - name: SMTPSERVER__HOST
           valueFrom:
@@ -101,6 +101,8 @@ spec:
               key: SMTPSERVER__HOST
         - name: SMTPSERVER__PORT
           value: "587"
+        - name: SMTPSERVER__EMAILSUBJECTPREFIX
+          value: "dev"
         - name: ALLOWINVALIDCERTIFICATE
           value: "true"
         - name: DATAPROTECTION__APPLICATIONNAME
@@ -108,7 +110,9 @@ spec:
         - name: PUBLICBROWSE__BASEADDRESS
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com
         - name: PUBLICBROWSE__LOGINPATH
-          value: /re-login
+          value: "/re-login"
+        - name: PUBLICBROWSE__LOGOUTPATH
+          value: "/logout-callback"
 ---
 apiVersion: v1
 kind: Service

@@ -41,6 +41,11 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: ORDER_API_URL 
+        - name: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: BLOBSTORE_HOST
         - name: LOGGER_LEVEL
           value: "info"
         - name: OIDC_BASE_URI
