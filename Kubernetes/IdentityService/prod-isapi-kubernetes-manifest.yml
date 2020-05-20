@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-isapi
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/identity-isapi
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/identity-isapi:20200520.5
         ports:
         - containerPort: 80
         resources:
