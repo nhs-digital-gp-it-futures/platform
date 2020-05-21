@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-orapi
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/ordering-api
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/ordering-api:20200520.15
         ports:
         - containerPort: 80
         resources:

@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-orderform
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/order-form
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/order-form:20200520.15 
         ports:
         - containerPort: 3006
         resources:

@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-adminpage
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/admin
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/admin:20200520.5
         ports:
         - containerPort: 3005
         resources:
