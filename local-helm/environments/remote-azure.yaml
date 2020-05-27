@@ -65,7 +65,7 @@ bapi:
   disabledUrl: "host.docker.internal"
   replicaCount: 1
   image:
-    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+    repository: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/bapi
   useLocalImage: false
   imagePullSecrets: 
   - name: regcredlocal
