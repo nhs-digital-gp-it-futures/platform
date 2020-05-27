@@ -22,7 +22,7 @@ spec:
       - name: regcredlocal
       containers:
       - name: gpitfutures-bc-beta-api
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/api
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/bapi
         ports:
         - containerPort: 80
         resources:
