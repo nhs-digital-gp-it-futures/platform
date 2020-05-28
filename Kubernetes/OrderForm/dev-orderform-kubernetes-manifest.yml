@@ -36,20 +36,9 @@ spec:
         - name: PUBLIC_BROWSE_BASE_URL
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 
-          #Organisations API base URL
-        - name: ORGANISATION_API_URL  
-          value: "http://oapi:5103"
-
           #Ordering API base URL
         - name: ORDER_API_URL 
           value: "http://orapi:5104"
-
-          #BuyingCatalogue API base URL
-        - name: SOLUTIONS_API_URL
-          valueFrom:
-                secretKeyRef:
-                  name: devpipelinevariables
-                  key: API_HOST
 
           ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST

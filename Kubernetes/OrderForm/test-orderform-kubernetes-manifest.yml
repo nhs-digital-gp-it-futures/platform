@@ -39,20 +39,12 @@ spec:
           ##The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
-          #Organisations API base URL
-        - name: ORGANISATION_API_URL  
-          value: "http://oapi:5103"
           #Ordering API base URL
         - name: ORDER_API_URL 
           valueFrom:
             secretKeyRef:
               name: testpipelinevariables
               key: ORDER_API_URL 
-        - name: SOLUTIONS_API_URL
-          valueFrom:
-                secretKeyRef:
-                  name: testpipelinevariables
-                  key: API_HOST
         - name: BLOBSTORE_HOST
           valueFrom:
             secretKeyRef:

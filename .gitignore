@@ -6,7 +6,6 @@
 *.tfvars
 
 .vs
-.vscode
 backup_deploy/prod-kubernetes-manifest.yml
 backup_deploy/dev-kubernetes-manifest.yml
 backup_deploy/test-kubernetes-manifest.yml
@@ -51,4 +50,3 @@ local-helm/buyingcatalogue/charts/*.tgz
 local-helm/buyingcatalogue/Chart.lock 
 
 temp*
-
