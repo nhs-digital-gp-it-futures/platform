@@ -50,13 +50,15 @@ spec:
               name: prodpipelinevariables
               key: DOCUMENT_HOST
         - name: LOGIN_ENABLED
-          value: "true"
+          value: "false"
         - name: USE_CAPABILITIES_SELECTOR
           value: "true"
         - name: SHOW_COVID19
           value: "true"
+        - name: SHOW_ORDER_FORM
+          value: "false"
         - name: BASE_URL
-          value: "/"
+          value: ""
         - name: APP_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk"
         - name: BUYING_CATALOGUE_ADMIN_HOST
