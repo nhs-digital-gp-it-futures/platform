@@ -36,11 +36,18 @@ spec:
           value: "https://buyingcatalogue.digital.nhs.uk"
         - name: APP_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk"
+        - name: ORGANISATION_API_URL  
+          value: "http://oapi:5103"
         - name: ORDER_API_URL 
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
               key: ORDER_API_URL 
+        - name: SOLUTIONS_API_URL
+          valueFrom:
+                secretKeyRef:
+                  name: prodpipelinevariables
+                  key: API_HOST
         - name: BLOBSTORE_HOST
           valueFrom:
             secretKeyRef:
