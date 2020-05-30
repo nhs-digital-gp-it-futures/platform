@@ -78,7 +78,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
-              key: REDIS_URL
+              key: REDIS_HOST
         - name: REDIS_PORT
           value: "6380"
         - name: REDIS_TLS

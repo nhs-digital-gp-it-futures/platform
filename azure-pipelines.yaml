@@ -1,5 +1,5 @@
 pool:
-  name: GP IT Futures AKS Build Agents
+  vmImage: 'ubuntu-latest'
 steps:
 
 - task: CopyFiles@2

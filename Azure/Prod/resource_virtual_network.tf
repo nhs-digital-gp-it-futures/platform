@@ -161,23 +161,25 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     rule_set_version         = "3.1"
 
     disabled_rule_group {
-      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-      rules           = [
-        942130,
-        942210,
-        942380,
-        942430,
-        942440,
-        942450
-      ]
-    }
-    disabled_rule_group {
       rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
       rules           = [ 920230 ]
     }
+
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
       rules           = [ 931130 ]
+    }
+
+    disabled_rule_group {
+      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+      rules           = [
+        942130,
+        942430,
+        942210,        
+        942440,
+        942450,
+        942380
+      ]
     }
   }
 
@@ -275,23 +277,28 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     rule_set_version         = "3.1"
 
     disabled_rule_group {
-      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-      rules           = [
-        942130,
-        942210,
-        942430,
-        942440,
-        942450
-      ]
-    }
-    disabled_rule_group {
       rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
       rules           = [ 920230 ]
     }
+
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
       rules           = [ 931130 ]
     }
+
+    disabled_rule_group {
+      rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
+      rules           = [
+        942130,
+        942430,
+        942210,        
+        942440,
+        942450,
+        942380
+      ]
+    }
+    
+    
   }
 
   # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
