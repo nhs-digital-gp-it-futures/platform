@@ -1,5 +1,0 @@
-appBaseUrl: "https://docker.for.mac.localhost"
-baseIsapiEnabledUrl: "https://docker.for.mac.localhost/identity"
-
-pb:
-  baseUri: "https://docker.for.mac.localhost"

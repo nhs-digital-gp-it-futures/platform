@@ -1,3 +1,0 @@
-redis-commander is running on the following port: {{ .Values.service.port }}
-
-
