@@ -39,10 +39,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb               = 30
     vnet_subnet_id                = azurerm_subnet.aks.id
     type                          = "VirtualMachineScaleSets"
-    enable_auto_scaling           = "true"
-    max_count                     = 6
-    min_count                     = 4
-    node_count                    = 4
+    enable_auto_scaling           = "false"
+    #max_count                     = 6
+    #min_count                     = 4 
+    node_count                    = 8
    #enable_node_public_ip         = "true"
   }
 
