@@ -45,16 +45,16 @@ resource "azurerm_network_security_rule" "BJSS_pri" {
 }
 
 resource "azurerm_network_security_rule" "GovWfh_pri" {
-  name                        = "AllowGovWfh"
+  name                        = "AllowGovWfhStaff"
   resource_group_name         = azurerm_resource_group.vnet.name
   network_security_group_name = azurerm_network_security_group.gateway_pri.name
   source_address_prefixes     = var.gov_wfh_ip_add
-  destination_address_prefix  = "*"
+  destination_address_prefix  = "*"  
   source_port_range           = "*"
-  destination_port_ranges     = [ "80", "433"  ]
+  destination_port_ranges     = [ "80", "443"  ]
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   priority                    = "180"
   description                 = "Allow specific NHS staff access"
 
