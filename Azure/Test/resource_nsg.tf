@@ -63,7 +63,7 @@ resource "azurerm_network_security_rule" "DevOps" {
   access                      = "Allow"
   protocol                    = "*"
   priority                    = "200"
-  description                 = "Allow AzureDevops Access to Kubernetes Cluster"
+  description                 = "Allow AzureDevOps access to this environment"
 }
 
 resource "azurerm_network_security_rule" "Azure" {
