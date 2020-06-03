@@ -161,7 +161,11 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
       rules           = [
         942130,
-        942430      
+        942430,     
+        942210,
+        942380,
+        942440,
+        942450
       ]
     }
     disabled_rule_group {
@@ -187,7 +191,8 @@ resource "azurerm_application_gateway" "pri-AppGate" {
       url_path_map,
       redirect_configuration,
       tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
-      ssl_certificate # see issue above
+      ssl_certificate, # see issue above
+      waf_configuration.0 # see issue above
     ]
   }
 }
@@ -299,7 +304,8 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       url_path_map,
       redirect_configuration,
       tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
-      ssl_certificate # see issue above
+      ssl_certificate, # see issue above
+      waf_configuration.0 # see issue above
     ]
   }
 }
