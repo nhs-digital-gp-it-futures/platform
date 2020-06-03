@@ -318,6 +318,6 @@ variable "bjss_ip_add" {
 }
 
 variable "gov_wfh_ip_add" {
-  type        = string
+  type        = list(string)
   description = "IPs for wfh staff access"
 }
