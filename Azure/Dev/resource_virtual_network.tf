@@ -11,6 +11,16 @@ locals {
   gateway_certificate_key_vault_secret_id = "https://${var.project}-${var.environment}-kv.vault.azure.net/secrets/buyingcatalogue${var.environment}"
 }
 
+####### Start of AB#6605 ######
+    locals {
+    frontend_port_https_name             = "${var.project}-${var.environment}-appgw-wwwfeport"
+    listener_https_name                  = "${var.project}-${var.environment}-appgw-httpslstn"
+    redirect_url                         = "www.buyingcatalogue.digital.nhs.uk"
+    target_url                           = "https://buyingcatalogue.digital.nhs.uk"
+    request_routing_https_rule_name      = "${var.project}-${var.environment}-appgw-httpsrqrt"
+  }
+####### End of AB#6605 ######
+
 resource "azurerm_resource_group" "vnet" {
   name     = "${var.project}-${var.environment}-rg-vnet"
   location = var.region
@@ -134,6 +144,37 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+
+  ####### Start of AB#6605 ######
+  frontend_port {
+    name = local.frontend_port_https_name
+    port = 443
+  }
+
+  http_listener {
+    name                           = local.listener_https_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_https_name
+    protocol                       = "HTTPS"
+    host_name                      = local.redirect_url
+    #ssl_certificate_name           = "certificate"
+  }
+
+  redirect_configuration {
+    name                  = local.redirect_configuration_name
+    redirect_type         = "Permanent"
+    target_url            = local.target_url
+    include_path          = true
+    include_query_string  = true
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_https_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_https_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+  ####### End of AB#6605 ######
   
   # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
   # ssl_certificate {
@@ -185,7 +226,6 @@ resource "azurerm_application_gateway" "AppGate" {
       url_path_map,     
       tags, # AGIC adds tags which need to be ignored. Can't seem to ignore the individual tags
       ssl_certificate # see issue above
-      #waf_configuration.0 # see issue above
     ]
   }
 }
