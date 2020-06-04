@@ -21,7 +21,7 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-dapi
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/document-dapi:1.24.1+4
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/document-dapi:1.24.1
         ports:
         - containerPort: 80
         resources:
