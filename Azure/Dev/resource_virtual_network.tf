@@ -135,7 +135,8 @@ resource "azurerm_application_gateway" "AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
   
-  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
+  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - fixed but not resolved
+  # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/6188 - can't set unversioned secret id
   # ssl_certificate {
   #   name = local.gateway_certificate_name
   #   key_vault_secret_id = local.gateway_certificate_key_vault_secret_id   
