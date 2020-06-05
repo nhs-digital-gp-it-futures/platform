@@ -21,12 +21,12 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-marketingpage
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/marketingpage:20200323.2
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/marketingpage:1.25.0-alpha.2+7
         ports:
         - containerPort: 3002
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 500m
         env:

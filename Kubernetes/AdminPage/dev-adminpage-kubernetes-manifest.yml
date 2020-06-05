@@ -17,8 +17,6 @@ spec:
       labels:
         app: gpitfutures-bc-app-adminpage
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
       - name: gpitfutures-bc-app-adminpage
         image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/admin
@@ -26,7 +24,7 @@ spec:
         - containerPort: 3005
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 500m
         livenessProbe:
@@ -38,38 +36,80 @@ spec:
             path: /admin/health/live
             port: 3005
         env:
+          ## Base URL
+        - name: BASE_URL
+          value: "/admin"
+
+          ## The secret needed for encoding and decoding the cookie
         - name: COOKIE_SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: COOKIE_SECRET
+
+          ## logger_level options are info, warn, error, off
         - name: LOGGER_LEVEL
-          valueFrom:
-            secretKeyRef:
-              name: devpipelinevariables
-              key: LOGGER_LEVEL
+          value: info
+
+          ## The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
-        - name: BASE_URL
-          value: "/admin"
+
+          ## The base uri of identity service
         - name: OIDC_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+
+          ## The client id to be sent to identity service
         - name: OIDC_CLIENT_ID
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: OIDC_CLIENT_ID
+
+          ## The secret need to decode JWT tokens
         - name: OIDC_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: OIDC_CLIENT_SECRET
+
+          ## identity server
         - name: IDENTITY_SERVER
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+
+          ## organization api url
         - name: ORGANISATION_API_URL
           value: "http://oapi:5103"
+
+          ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+
+          ## The Host in which redis is running
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
+
+          ## The port redis is running
+        - name: REDIS_PORT
+          value: "6380"
+
+          ## Boolean to indicate whether to connect to redis via TLS
+        - name: REDIS_TLS
+          value: "true"
+
+          ## The password to connect to redis
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
+
+          ## public browse base url"
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
 ---
 apiVersion: v1
 kind: Service

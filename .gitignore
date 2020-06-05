@@ -6,6 +6,7 @@
 *.tfvars
 
 .vs
+.vscode
 backup_deploy/prod-kubernetes-manifest.yml
 backup_deploy/dev-kubernetes-manifest.yml
 backup_deploy/test-kubernetes-manifest.yml
@@ -44,3 +45,10 @@ utility-services/nginx.conf.backup
 
 #Local overrides git ignored, so people can change them without risk of committing
 local-helm/local-overrides.yaml
+#ignore downloaded charts
+local-helm/buyingcatalogue/charts/*.tgz 
+#inore chart lock file
+local-helm/buyingcatalogue/Chart.lock 
+
+temp*
+

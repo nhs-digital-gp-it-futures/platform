@@ -2,10 +2,6 @@
 
 This repository contains the different files needed to maintain the platform for the buying catalogue.
 
-Instructions for running the system locally using [Helm](https://helm.sh/) can be found in [local-helm](local-helm/README.md).
+It now contains the legacy static deployment files, and the terraform files.
 
-Old instructions for running the system locally can be found in [local-kubernetes](local-kubernetes/README.md).
-
-# Dev Setup
-
-To set k8s locally, have a look [here](Docs/DevSetup/local-k8s-setup.md).
+Helm charts, including the local cluster, can now be found at [platform-helm](https://github.com/nhs-digital-gp-it-futures/platform-helm).

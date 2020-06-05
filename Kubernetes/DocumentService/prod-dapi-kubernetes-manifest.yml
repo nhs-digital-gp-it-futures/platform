@@ -21,12 +21,12 @@ spec:
       - name: prodpipelinevariables
       containers:
       - name: gpitfutures-bc-app-dapi
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/document-dapi:20200323.2
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/document-dapi:1.24.1
         ports:
-        - containerPort: 5000
+        - containerPort: 80
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 1
         env:
@@ -47,7 +47,7 @@ metadata:
  name: dapi
 spec:
   ports:
-  - port: 5000
+  - port: 5101
     targetPort: 80
     protocol: TCP
   selector:

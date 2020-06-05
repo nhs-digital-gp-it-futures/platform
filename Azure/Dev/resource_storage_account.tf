@@ -14,6 +14,9 @@ resource "azurerm_storage_account" "data" {
   account_replication_type  = var.sa_rep_type
   account_kind              = var.sa_kind
   enable_https_traffic_only = "true"
+  tags                      = {
+    "ms-resource-usage" = "azure-cloud-shell"
+  }
 }
 
 resource "azurerm_advanced_threat_protection" "data" {

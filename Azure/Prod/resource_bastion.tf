@@ -51,6 +51,7 @@ resource "azurerm_subnet" "bastion_jump" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.sub_bastion_jump
+
 }
 
 # Network Security Group for jump box
@@ -73,8 +74,7 @@ resource "azurerm_subnet_network_security_group_association" "bastion_jump_subne
 resource "azurerm_network_interface" "bastion_jump_nic" {
   name                      = "${var.project}-${var.environment}-bstn-nic"
   location                  = var.region
-  resource_group_name       = azurerm_resource_group.bastion.name
-  network_security_group_id = azurerm_network_security_group.bastion_jump.id
+  resource_group_name       = azurerm_resource_group.bastion.name  
 
 ip_configuration {
     name                          = "${var.project}-${var.environment}-bstn-nic-ip"

@@ -26,14 +26,17 @@ spec:
         - containerPort: 3000
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 500m
         env:
         - name: LOGGER_LEVEL
           value: "info"
         - name: LOGIN_ENABLED
-          value: "true"
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: LOGIN_ENABLED
         - name: USE_CAPABILITIES_SELECTOR
           value: "true"
         - name: SHOW_COVID19
@@ -73,6 +76,27 @@ spec:
             secretKeyRef:
               name: testpipelinevariables
               key: DOCUMENT_HOST
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          value: "6380"
+        - name: REDIS_TLS
+          value: "true"
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_PASS
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: COOKIE_SECRET
+        - name: ORDER_FORM_HOST
+          value: "/order/"
 ---
 apiVersion: v1
 kind: Service

@@ -26,7 +26,7 @@ spec:
         - containerPort: 3005
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 500m
         livenessProbe:
@@ -65,11 +65,27 @@ spec:
               name: testpipelinevariables
               key: OIDC_CLIENT_SECRET
         - name: IDENTITY_SERVER
-          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com/identity"
+          value: "http://isapi:5102/identity"
         - name: ORGANISATION_API_URL
           value: "http://oapi:5103"
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          value: "6380"
+        - name: REDIS_TLS
+          value: "true"
+        - name: REDIS_PASS             
+          valueFrom:
+            secretKeyRef:
+              name: testpipelinevariables
+              key: REDIS_PASS
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcataloguetestpublic.uksouth.cloudapp.azure.com"
 ---
 apiVersion: v1
 kind: Service

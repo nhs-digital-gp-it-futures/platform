@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-orapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-orapi
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-orapi
+    spec:
+      imagePullSecrets:
+      - name: prodpipelinevariables
+      containers:
+      - name: gpitfutures-bc-app-orapi
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/ordering-api:1.24.1
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 1
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: CONNECTIONSTRINGS__ORDERINGDB
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: CONNECTIONSTRINGS__ORDERINGDB
+        - name: AUTHORITY
+          value: "https://buyingcatalogue.digital.nhs.uk/identity/"
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: orapi
+spec:
+  ports:
+  - port: 5104
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: gpitfutures-bc-app-orapi

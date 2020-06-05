@@ -1,0 +1,140 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpitfutures-bc-app-orderform
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: gpitfutures-bc-app-orderform
+  template:
+    metadata:
+      labels:
+        app: gpitfutures-bc-app-orderform
+    spec:
+      containers:
+      - name: gpitfutures-bc-app-orderform
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/order-form
+        ports:
+        - containerPort: 3006
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 500m
+        env:
+          ##Base URL
+        - name: BASE_URL
+          value: "/order"
+
+          ##Public browse base URL
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+
+          #Organisations API base URL
+        - name: ORGANISATION_API_URL  
+          value: "http://oapi:5103"
+
+          #Ordering API base URL
+        - name: ORDER_API_URL 
+          value: "http://orapi:5104"
+
+          #BuyingCatalogue API base URL
+        - name: SOLUTIONS_API_URL
+          valueFrom:
+                secretKeyRef:
+                  name: devpipelinevariables
+                  key: API_HOST
+
+          ## URL for Azure Storage Account
+        - name: BLOBSTORE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: BLOBSTORE_HOST
+          
+          ##Environment
+        - name: NODE_ENV
+          value: "development"
+
+          ##The base uri the app is running on to pass to identity service for redirection
+        - name: APP_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+
+          ##LOGGER_LEVEL options are info, warn, error, off
+        - name: LOGGER_LEVEL
+          value: "info"
+
+          ## The base uri of identity service
+        - name: OIDC_BASE_URI
+          value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+
+          ## The client id to be sent to identity service
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_ID
+
+          ## The secret need to decode JWT tokens
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: OIDC_CLIENT_SECRET
+
+          ##How long before the cookies stored in the session expire in ms
+        - name: MAX_COOKIE_AGE
+          value: "3600000"
+
+          ##The secret needed for encoding and decoding the cookie
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
+
+          ## The Host in which redis is running
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
+
+          ## The port redis is running
+        - name: REDIS_PORT
+          value: "6380"
+
+          ## Boolean to indicate whether to connect to redis via TLS
+        - name: REDIS_TLS
+          value: "true"
+
+          ## The password to connect to redis
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
+
+          ## Allow invalid self-signed ssl certificate
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
+              
+          ## Identity Server
+        - name: IDENTITY_SERVER
+          value: "http://isapi:5102/identity" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderform
+spec:
+  ports:
+  - port: 3006
+  selector:
+    app: gpitfutures-bc-app-orderform

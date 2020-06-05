@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-app-oapi
+  name: gpitfutures-bc-app-orapi
 spec:
   replicas: 1
   strategy:
@@ -11,34 +11,38 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-oapi
+      app: gpitfutures-bc-app-orapi
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-oapi
+        app: gpitfutures-bc-app-orapi
     spec:
-      imagePullSecrets:
-      - name: devpipelinevariables
       containers:
-      - name: gpitfutures-bc-app-oapi
-        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/organisations-api
+      - name: gpitfutures-bc-app-orapi
+        image: gpitfuturesdevacr.azurecr.io/nhsd/buying-catalogue/ordering-api
         ports:
         - containerPort: 80
         resources:
           requests:
             cpu: 100m
-            memory: 50Mi
           limits:
-            cpu: 1000m
-            memory: 1000Mi
+            cpu: 1
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 80
         env:
-        - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
-          value: "true"
-        - name: CONNECTIONSTRINGS__CATALOGUEUSERS
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: CONNECTIONSTRINGS__ORDERINGDB
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
-              key: ConnectionStrings__CatalogueUsers
+              key: CONNECTIONSTRINGS__ORDERINGDB
         - name: AUTHORITY
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity/
         - name: ALLOWINVALIDCERTIFICATE
@@ -47,11 +51,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
- name: oapi
+ name: orapi
 spec:
   ports:
-  - port: 5103
+  - port: 5104
     targetPort: 80
     protocol: TCP
   selector:
-    app: gpitfutures-bc-app-oapi
+    app: gpitfutures-bc-app-orapi

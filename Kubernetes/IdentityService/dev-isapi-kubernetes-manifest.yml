@@ -26,14 +26,18 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
             memory: 50Mi
           limits:
             cpu: 1000m
             memory: 1000Mi
+        livenessProbe:
+          httpGet:
+            path: /identity/health/live
+            port: 80
         readinessProbe:
           httpGet:
-            path: /identity/.well-known/openid-configuration
+            path: /identity/health/ready
             port: 80
         env:
         - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
@@ -49,30 +53,66 @@ spec:
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
-              key: CLIENTS__0__CLIENTID
+              key: OIDC_CLIENT_ID
         - name: CLIENTS__0__SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
-              key: CLIENTS__0__SECRET
+              key: OIDC_CLIENT_SECRET
         - name: CLIENTS__0__CLIENTNAME
-          value: "Node Client"
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: CLIENTS__0__CLIENTNAME
         - name: CLIENTS__0__REQUIRECLIENTSECRET
           value: "true"
+        - name: CLIENTS__0__REQUIREPKCE
+          value: "true"
+        - name: CLIENTS__0__ALLOWEDGRANTTYPES
+          value: "Code"
+        - name: CLIENTS__0__REQUIRECONSENT
+          value: "true"          
         - name: CLIENTS__0__REDIRECTURLS__0
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/oauth/callback
         - name: CLIENTS__0__REDIRECTURLS__1
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/oauth/callback
+        - name: CLIENTS__0__REDIRECTURLS__2
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/order/oauth/callback
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__0
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/signout-callback-oidc
         - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__1
           value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/admin/signout-callback-oidc
-        - name: RESOURCES__0__RESOURCENAME
+        - name: CLIENTS__0__POSTLOGOUTREDIRECTURLS__2
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com/order/signout-callback-oidc
+        - name: CLIENTS__0__ALLOWEDSCOPES__0
+          value: openid
+        - name: CLIENTS__0__ALLOWEDSCOPES__1
+          value: email
+        - name: CLIENTS__0__ALLOWEDSCOPES__2
+          value: profile
+        - name: CLIENTS__0__ALLOWEDSCOPES__3
           value: Organisation
-        - name: RESOURCES__0__DISPLAYNAME
-          value: Organisation
-        - name: RESOURCES__0__CLAIMTYPES__0
-          value: organisation
+        - name: CLIENTS__0__ALLOWEDSCOPES__4
+          value: Ordering
+        - name: SMTPSERVER__HOST
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: SMTPSERVER__HOST
+        - name: SMTPSERVER__PORT
+          value: "587"
+        - name: SMTPSERVER__EMAILSUBJECTPREFIX
+          value: "dev"
+        - name: ALLOWINVALIDCERTIFICATE
+          value: "true"
+        - name: DATAPROTECTION__APPLICATIONNAME
+          value: "ISAPI Development"
+        - name: PUBLICBROWSE__BASEADDRESS
+          value: https://buyingcataloguedev.uksouth.cloudapp.azure.com
+        - name: PUBLICBROWSE__LOGINPATH
+          value: "/re-login"
+        - name: PUBLICBROWSE__LOGOUTPATH
+          value: "/logout-callback"
 ---
 apiVersion: v1
 kind: Service
@@ -80,7 +120,7 @@ metadata:
  name: isapi
 spec:
   ports:
-  - port: 8070
+  - port: 5102
     targetPort: 80
     protocol: TCP
   selector:

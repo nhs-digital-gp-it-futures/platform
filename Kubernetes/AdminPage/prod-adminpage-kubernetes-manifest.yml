@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-app-publicbrowse
+  name: gpitfutures-bc-app-adminpage
 spec:
   replicas: 1
   strategy:
@@ -11,57 +11,46 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-publicbrowse
+      app: gpitfutures-bc-app-adminpage
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-publicbrowse
+        app: gpitfutures-bc-app-adminpage
     spec:
       imagePullSecrets:
       - name: prodpipelinevariables
       containers:
-      - name: gpitfutures-bc-app-publicbrowse
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/publicbrowse:1.24.1
+      - name: gpitfutures-bc-app-adminpage
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/admin:1.24.1
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
         resources:
           requests:
             cpu: 100m
           limits:
             cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
+        readinessProbe:
+          httpGet:
+            path: /admin/health/live
+            port: 3005
         env:
-        - name: NODE_ENV
-          value: "production"
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: COOKIE_SECRET
         - name: LOGGER_LEVEL
-          value: "info"
-        - name: API_HOST
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
-              key: API_HOST
-        - name: BLOBSTORE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: BLOBSTORE_HOST
-        - name: DOCUMENT_HOST
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: DOCUMENT_HOST
-        - name: LOGIN_ENABLED
-          value: "false"
-        - name: USE_CAPABILITIES_SELECTOR
-          value: "true"
-        - name: SHOW_COVID19
-          value: "true"
-        - name: SHOW_ORDER_FORM
-          value: "false"
-        - name: BASE_URL
-          value: ""
+              key: LOGGER_LEVEL
         - name: APP_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk"
-        - name: BUYING_CATALOGUE_ADMIN_HOST
+        - name: BASE_URL
           value: "/admin"
         - name: OIDC_BASE_URI
           value: "https://buyingcatalogue.digital.nhs.uk/identity"
@@ -75,11 +64,16 @@ spec:
             secretKeyRef:
               name: prodpipelinevariables
               key: OIDC_CLIENT_SECRET
-        - name: COOKIE_SECRET
+        - name: IDENTITY_SERVER
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
-              key: COOKIE_SECRET
+              key: IDENTITY_SERVER
+        - name: ORGANISATION_API_URL
+          valueFrom:
+            secretKeyRef:
+              name: prodpipelinevariables
+              key: ORGANISATION_API_URL
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
@@ -89,18 +83,20 @@ spec:
           value: "6380"
         - name: REDIS_TLS
           value: "true"
-        - name: REDIS_PASS
+        - name: REDIS_PASS             
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
               key: REDIS_PASS
+        - name: PUBLIC_BROWSE_BASE_URL
+          value: "https://buyingcatalogue.digital.nhs.uk"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: publicbrowse
+  name: admin
 spec:
   ports:
-  - port: 3000
+  - port: 3005
   selector:
-    app: gpitfutures-bc-app-publicbrowse
+    app: gpitfutures-bc-app-adminpage

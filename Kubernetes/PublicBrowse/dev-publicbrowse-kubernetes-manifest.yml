@@ -26,53 +26,117 @@ spec:
         - containerPort: 3000
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
           limits:
             cpu: 500m
         env:
+          ## LOGGER_LEVEL options are info, warn, error, off
         - name: LOGGER_LEVEL
           value: "info"
+
+          ## Boolean to indicate if we show the login/logout component
         - name: LOGIN_ENABLED
           value: "true"
+
+          ## Boolean to indicate if we show the capabilities selector page
         - name: USE_CAPABILITIES_SELECTOR
           value: "true"
+
+          ## Boolean to indicate if we show the COVID-19 feature
         - name: SHOW_COVID19
           value: "true"
+
+          ## Boolean to indicate if we show the order form tile
+        - name: SHOW_ORDER_FORM
+          value: "true"
+
+          ## Node Environment
         - name: NODE_ENV
-          value: "production"
+          value: "development"
+
+          ## The base uri the app is running on to pass to identity service for redirection
         - name: APP_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com"
+
+          ## The base uri of identity service
         - name: OIDC_BASE_URI
           value: "https://buyingcataloguedev.uksouth.cloudapp.azure.com/identity"
+
+          ## The client id to be sent to identity service
         - name: OIDC_CLIENT_ID
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: OIDC_CLIENT_ID
+
+          ## The secret need to decode JWT tokens
         - name: OIDC_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: OIDC_CLIENT_SECRET
+
+          ##The secret needed for encoding and decoding the cookie
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: COOKIE_SECRET
+
+          ## Allow invalid self-signed ssl certificate
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
+
+          ## BUYING_CATALOGUE_ADMIN_HOST
         - name: BUYING_CATALOGUE_ADMIN_HOST
           value: "/admin"
+
+          ## ORDER_FORM_HOST
+        - name: ORDER_FORM_HOST
+          value: "/order/"
+
+          ## Environment variable to allow front end services talk to bapi
         - name: API_HOST
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: API_HOST
+
+          ## URL for Azure Storage Account
         - name: BLOBSTORE_HOST
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: BLOBSTORE_HOST
+
+          ## Environment variable to allow front end services talk to dapi
         - name: DOCUMENT_HOST
           valueFrom:
             secretKeyRef:
               name: devpipelinevariables
               key: DOCUMENT_HOST
+
+          ## The Host in which redis is running
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_HOST
+
+          ## The port redis is running
+        - name: REDIS_PORT
+          value: "6380"
+
+          ## Boolean to indicate whether to connect to redis via TLS
+        - name: REDIS_TLS
+          value: "true"
+
+          ## The password to connect to redis
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: devpipelinevariables
+              key: REDIS_PASS
 ---
 apiVersion: v1
 kind: Service

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpitfutures-bc-app-bapi
+  name: gpitfutures-bc-app-oapi
 spec:
   replicas: 1
   strategy:
@@ -11,44 +11,45 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app: gpitfutures-bc-app-bapi
+      app: gpitfutures-bc-app-oapi
   template:
     metadata:
       labels:
-        app: gpitfutures-bc-app-bapi
+        app: gpitfutures-bc-app-oapi
     spec:
       imagePullSecrets:
       - name: prodpipelinevariables
       containers:
-      - name: gpitfutures-bc-app-bapi
-        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/bapi:1.24.1
+      - name: gpitfutures-bc-app-oapi
+        image: gpitfuturesprodacr.azurecr.io/nhsd/buying-catalogue/organisations-api:1.24.1
         ports:
         - containerPort: 80
         resources:
           requests:
             cpu: 100m
+            memory: 50Mi
           limits:
-            cpu: 1
+            cpu: 1000m
+            memory: 1000Mi
         env:
-        - name: ConnectionStrings__BuyingCatalogue
+        - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+          value: "true"
+        - name: CONNECTIONSTRINGS__CATALOGUEUSERS
           valueFrom:
             secretKeyRef:
               name: prodpipelinevariables
-              key: ConnectionStrings__BuyingCatalogue
-        - name: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
-          valueFrom:
-            secretKeyRef:
-              name: prodpipelinevariables
-              key: APICLIENTSETTINGS__DOCUMENTAPI__BASEURL
+              key: ConnectionStrings__CatalogueUsers
+        - name: AUTHORITY
+          value: https://buyingcatalogue.digital.nhs.uk/identity/
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: api
+ name: oapi
 spec:
   ports:
-  - port: 5100
+  - port: 5103
     targetPort: 80
     protocol: TCP
   selector:
-    app: gpitfutures-bc-app-bapi
+    app: gpitfutures-bc-app-oapi
