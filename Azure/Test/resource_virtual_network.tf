@@ -33,35 +33,35 @@ resource "azurerm_subnet" "aks" {
   name                 = "${var.project}-${var.environment}-${var.sub}-aks"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_aks
+  address_prefixes     = [var.sub_aks]
 }
 
 resource "azurerm_subnet" "ehub" {
   name                 = "${var.project}-${var.environment}-${var.sub}-ehub"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_ehub
+  address_prefixes     = [var.sub_ehub]
 }
 
 resource "azurerm_subnet" "gateway" {
   name                 = "${var.project}-${var.environment}-${var.sub}-gateway"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_gateway
+  address_prefixes     = [var.sub_gateway]
 }
 
 resource "azurerm_subnet" "splunk" {
   name                 = "${var.project}-${var.environment}-${var.sub}-splunk"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_splunk
+  address_prefixes     = [var.sub_splunk]
 }
 
 resource "azurerm_subnet" "vm" {
   name                 = "${var.project}-${var.environment}-${var.sub}-vm"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_vm
+  address_prefixes     = [var.sub_vm]
 }
 
 resource "azurerm_public_ip" "pri-Pip" {
