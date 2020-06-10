@@ -88,7 +88,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "akspool2" {
   name                  = "devpool2"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
   vm_size               = "Standard_B4ms"
-  node_count            = 3
+  node_count            = 1
   enable_auto_scaling   = "false"
   #os_disk_size_gb      = 30
 
