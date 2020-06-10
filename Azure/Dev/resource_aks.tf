@@ -36,13 +36,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   default_node_pool {
     name                          = "devpool1"
     vm_size                       = var.vm_size
-    os_disk_size_gb               = 30
+    #os_disk_size_gb               = 30
     vnet_subnet_id                = azurerm_subnet.aks.id
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "false"
     #max_count                     = 6
     #min_count                     = 4 
-    node_count                    = 8
+    node_count                    = 3
    #enable_node_public_ip         = "true"
   }
 
