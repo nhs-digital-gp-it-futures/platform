@@ -35,14 +35,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   default_node_pool {
     name                          = "devpool1"
-    vm_size                       = var.vm_size
+    vm_size                       = "Standard_B4ms" # var.vm_size
     #os_disk_size_gb               = 30
     vnet_subnet_id                = azurerm_subnet.aks.id
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "false"
+    max_pods                       = 50
     #max_count                     = 6
     #min_count                     = 4 
-    node_count                    = 1
+    node_count                    = 6
    #enable_node_public_ip         = "true"
   }
 
@@ -84,7 +85,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "akspool2" {
+/*resource "azurerm_kubernetes_cluster_node_pool" "akspool2" {
   name                  = "devpool2"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
   vm_size               = "Standard_B4ms"
@@ -97,3 +98,4 @@ resource "azurerm_kubernetes_cluster_node_pool" "akspool2" {
     environment         = var.environment
   }
 }
+*/
