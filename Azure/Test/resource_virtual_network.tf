@@ -11,6 +11,17 @@ locals {
   gateway_certificate_key_vault_secret_id = "https://${var.project}-${var.environment}-kv.vault.azure.net/secrets/buyingcatalogue${var.environment}"
 }
 
+####### Start of AB#6605 ######
+locals {
+    listener_http_name                  = "${var.project}-${var.environment}-appgw-pub-httplstn"
+    listener_https_name                  = "${var.project}-${var.environment}-appgw-pub-httpslstn"
+    redirect_url                         = "www.buyingcatalogue.digital.nhs.uk"
+    target_url                           = "https://buyingcatalogue.digital.nhs.uk"
+    request_routing_https_rule_name      = "${var.project}-${var.environment}-appgw-pub-httpsrqrt"
+    request_routing_http_rule_name      = "${var.project}-${var.environment}-appgw-pub-httprqrt"
+  }
+####### End of AB#6605 ######
+
 resource "azurerm_resource_group" "vnet" {
   name     = "${var.project}-${var.environment}-rg-vnet"
   location = var.region
@@ -253,6 +264,49 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_type = "Predefined"
     policy_name = "AppGwSslPolicy20170401S"
   }
+
+  ####### Start of AB#6605 ######
+
+  http_listener {
+    name                           = local.listener_https_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
+    protocol                       = "HTTPS"
+    host_name                      = local.redirect_url
+    #ssl_certificate_name           = "certificate"
+  }
+
+  http_listener {
+    name                           = local.listener_http_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
+    protocol                       = "HTTP"
+    host_name                      = local.redirect_url
+  }
+
+  redirect_configuration {
+    name                  = local.redirect_configuration_name
+    redirect_type         = "Permanent"
+    target_url            = local.target_url
+    include_path          = true
+    include_query_string  = true
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_https_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_https_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_http_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_http_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+  ####### End of AB#6605 ######
+
   # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
   # ssl_certificate {
   #   name = local.gateway_certificate_name

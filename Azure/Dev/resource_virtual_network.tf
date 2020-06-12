@@ -13,7 +13,6 @@ locals {
 
 ####### Start of AB#6605 ######
     locals {
-    frontend_port_https_name             = "${var.project}-${var.environment}-appgw-wwwfeport"
     listener_http_name                  = "${var.project}-${var.environment}-appgw-httplstn"
     listener_https_name                  = "${var.project}-${var.environment}-appgw-httpslstn"
     redirect_url                         = "www.buyingcatalogue.digital.nhs.uk"
@@ -148,18 +147,22 @@ resource "azurerm_application_gateway" "AppGate" {
   }
 
   ####### Start of AB#6605 ######
-  frontend_port {
-    name = local.frontend_port_https_name
-    port = 443
-  }
 
   http_listener {
     name                           = local.listener_https_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
-    frontend_port_name             = local.frontend_port_https_name
+    frontend_port_name             = local.frontend_port_name
     protocol                       = "HTTPS"
     host_name                      = local.redirect_url
     #ssl_certificate_name           = "certificate"
+  }
+
+  http_listener {
+    name                           = local.listener_http_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
+    protocol                       = "HTTP"
+    host_name                      = local.redirect_url
   }
 
   redirect_configuration {
@@ -174,6 +177,13 @@ resource "azurerm_application_gateway" "AppGate" {
     name                        = local.request_routing_https_rule_name
     rule_type                   = "Basic"
     http_listener_name          = local.listener_https_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_http_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_http_name
     redirect_configuration_name = local.redirect_configuration_name
   }
   ####### End of AB#6605 ######
