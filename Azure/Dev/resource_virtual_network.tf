@@ -14,10 +14,12 @@ locals {
 ####### Start of AB#6605 ######
     locals {
     frontend_port_https_name             = "${var.project}-${var.environment}-appgw-wwwfeport"
+    listener_http_name                  = "${var.project}-${var.environment}-appgw-httplstn"
     listener_https_name                  = "${var.project}-${var.environment}-appgw-httpslstn"
     redirect_url                         = "www.buyingcatalogue.digital.nhs.uk"
     target_url                           = "https://buyingcatalogue.digital.nhs.uk"
     request_routing_https_rule_name      = "${var.project}-${var.environment}-appgw-httpsrqrt"
+    request_routing_http_rule_name      = "${var.project}-${var.environment}-appgw-httprqrt"
   }
 ####### End of AB#6605 ######
 
