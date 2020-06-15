@@ -43,7 +43,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     max_pods                       = 30
     #max_count                     = 6
     #min_count                     = 4 
-    node_count                    = 5
+    node_count                    = 4
    #enable_node_public_ip         = "true"
   }
 
