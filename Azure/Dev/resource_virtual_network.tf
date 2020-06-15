@@ -228,6 +228,7 @@ resource "azurerm_application_gateway" "AppGate" {
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
     ignore_changes = [
+      gateway_ip_configuration,
       request_routing_rule, 
       http_listener, 
       backend_http_settings, 
