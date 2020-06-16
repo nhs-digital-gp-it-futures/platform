@@ -54,6 +54,55 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
   end_ip_address      = "0.0.0.0"
 }
 
+# New SQL Database using for the BuyingCatalogueService Private
+resource "azurerm_sql_database" "sql-bc-bapi-pri" {
+  name                             = "bc-buyingcatalogue-private-helm-bapi"
+  resource_group_name              = azurerm_resource_group.bc-sql-pri.name
+  location                         = var.region
+  server_name                      = azurerm_sql_server.bc-sql-pri.name
+  collation                        = var.sql_collation
+  create_mode                      = "Default"
+  edition                          = var.sql_edition
+  requested_service_objective_name = "S0" #var.sql_size
+}
+
+# New SQL Database using for the BuyingCatalogueService Public
+resource "azurerm_sql_database" "sql-bc-bapi-pub" {
+  name                             = "bc-buyingcatalogue-public-helm-bapi"
+  resource_group_name              = azurerm_resource_group.bc-sql-pri.name
+  location                         = var.region
+  server_name                      = azurerm_sql_server.bc-sql-pri.name
+  collation                        = var.sql_collation
+  create_mode                      = "Default"
+  edition                          = var.sql_edition
+  requested_service_objective_name = "S0" #var.sql_size
+}
+
+# New SQL Database using for the BuyingCatalogueIdentityService
+resource "azurerm_sql_database" "sql-bc-isapi-pub" {
+  name                             = "bc-buyingcatalogue-public-helm-isapi"
+  resource_group_name              = azurerm_resource_group.bc-sql-pri.name
+  location                         = var.region
+  server_name                      = azurerm_sql_server.bc-sql-pri.name
+  collation                        = var.sql_collation
+  create_mode                      = "Default"
+  edition                          = var.sql_edition
+  requested_service_objective_name = "S0" #var.sql_size
+}
+
+#New SQL Database using for the BuyingCatalogueOrderingService
+resource "azurerm_sql_database" "sql-bc-orapi-pub" {
+  name                             = "bc-buyingcatalogue-public-helm-ordapi"
+  resource_group_name              = azurerm_resource_group.bc-sql-pri.name
+  location                         = var.region
+  server_name                      = azurerm_sql_server.bc-sql-pri.name
+  collation                        = var.sql_collation
+  create_mode                      = "Default"
+  edition                          = var.sql_edition
+  requested_service_objective_name = "S0" #var.sql_size
+}
+
+
 #SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bapi-pri" {
   name                             = "${var.project}-${var.environment}-${var.sql_pri}"
