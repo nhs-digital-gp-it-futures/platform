@@ -37,6 +37,14 @@ resource "azurerm_sql_firewall_rule" "bc-sql-pri" {
   end_ip_address      = "0.0.0.0"
 }
 
+# SQL Firewall rule to allow subnet access from aks network
+resource "azurerm_sql_virtual_network_rule" "bc-sql-pri-net" {
+  name                = "${var.project}-${var.environment}-sql-subnet-rule"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  subnet_id           = azurerm_subnet.aks.id
+}
+
 #SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bapi-pri" {
   name                             = "${var.project}-${var.environment}-${var.sql_pri}"
@@ -84,7 +92,6 @@ resource "azurerm_sql_active_directory_administrator" "bc-sql-pri" {
   tenant_id           = data.azurerm_key_vault_secret.kv-tenant.value
   object_id           = data.azurerm_key_vault_secret.kv-sqladmins.value
 }
-
 
 //Code from https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
 //must use arm until TF implements these natively see https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
