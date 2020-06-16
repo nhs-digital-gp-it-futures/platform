@@ -11,6 +11,17 @@ locals {
   gateway_certificate_key_vault_secret_id = "buying-catalogue-digital-nhs-uk"
 }
 
+####### Start of AB#6605 ######
+locals {
+    listener_http_name                  = "${var.project}-${var.environment}-appgw-pub-httplstn"
+    listener_https_name                  = "${var.project}-${var.environment}-appgw-pub-httpslstn"
+    redirect_url                         = "www.buyingcatalogue.digital.nhs.uk"
+    target_url                           = "https://buyingcatalogue.digital.nhs.uk"
+    request_routing_https_rule_name      = "${var.project}-${var.environment}-appgw-pub-httpsrqrt"
+    request_routing_http_rule_name      = "${var.project}-${var.environment}-appgw-pub-httprqrt"
+  }
+####### End of AB#6605 ######
+
 resource "azurerm_resource_group" "vnet" {
   name     = "${var.project}-${var.environment}-rg-vnet"
   location = var.region
@@ -33,21 +44,21 @@ resource "azurerm_subnet" "aks" {
   name                 = "${var.project}-${var.environment}-${var.sub}-aks"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_aks
+  address_prefixes     = [var.sub_aks]
 }
 
 resource "azurerm_subnet" "ehub" {
   name                 = "${var.project}-${var.environment}-${var.sub}-ehub"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_ehub
+  address_prefixes     = [var.sub_ehub]
 }
 
 resource "azurerm_subnet" "gateway" {
   name                 = "${var.project}-${var.environment}-${var.sub}-gateway"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_gateway
+  address_prefixes     = [var.sub_gateway]
   #network_security_group_id = azurerm_network_security_group.gateway.id
 }
 
@@ -55,7 +66,7 @@ resource "azurerm_subnet" "gateway_pri" {
   name                 = "${var.project}-${var.environment}-${var.sub}-gateway-pri"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_gateway_pri
+  address_prefixes     = [var.sub_gateway_pri]
   #network_security_group_id = azurerm_network_security_group.gateway_pri.id
 }
 
@@ -63,14 +74,14 @@ resource "azurerm_subnet" "splunk" {
   name                 = "${var.project}-${var.environment}-${var.sub}-splunk"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_splunk
+  address_prefixes     = [var.sub_splunk]
 }
 
 resource "azurerm_subnet" "vm" {
   name                 = "${var.project}-${var.environment}-${var.sub}-vm"
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = var.sub_vm
+  address_prefixes     = [var.sub_vm]
 }
 
 resource "azurerm_public_ip" "pri-Pip" {
@@ -266,6 +277,47 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     policy_name = "AppGwSslPolicy20170401S"
   }
   
+  ####### Start of AB#6605 ######
+
+  http_listener {
+    name                           = local.listener_https_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
+    protocol                       = "HTTPS"
+    host_name                      = local.redirect_url
+    #ssl_certificate_name           = "certificate"
+  }
+
+  http_listener {
+    name                           = local.listener_http_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
+    protocol                       = "HTTP"
+    host_name                      = local.redirect_url
+  }
+
+  redirect_configuration {
+    name                  = local.redirect_configuration_name
+    redirect_type         = "Permanent"
+    target_url            = local.target_url
+    include_path          = true
+    include_query_string  = true
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_https_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_https_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+
+  request_routing_rule {
+    name                        = local.request_routing_http_rule_name
+    rule_type                   = "Basic"
+    http_listener_name          = local.listener_http_name
+    redirect_configuration_name = local.redirect_configuration_name
+  }
+  ####### End of AB#6605 ######
 
   waf_configuration {
     enabled                  = true
@@ -297,8 +349,6 @@ resource "azurerm_application_gateway" "pub-AppGate" {
         942380
       ]
     }
-    
-    
   }
 
   # Issue https://github.com/terraform-providers/terraform-provider-azurerm/issues/4408 - can't set unversioned secret id
