@@ -45,6 +45,9 @@ resource "azurerm_subnet" "aks" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.sub_aks]
+
+  service_endpoints    = ["Microsoft.Sql"
+                          ]
 }
 
 resource "azurerm_subnet" "ehub" {
@@ -228,6 +231,7 @@ resource "azurerm_application_gateway" "AppGate" {
   lifecycle {
     # AGIC owns most app gateway settings, so we should ignore differences
     ignore_changes = [
+      gateway_ip_configuration,
       request_routing_rule, 
       http_listener, 
       backend_http_settings, 

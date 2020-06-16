@@ -56,8 +56,7 @@ resource "azurerm_network_security_rule" "GovWfh_pri" {
   access                      = "Allow"
   protocol                    = "*"
   priority                    = "180"
-  description                 = "Allow specific NHS staff access"
-
+  description                 = var.gov_wfh_ip_desc
 }
 
 resource "azurerm_network_security_rule" "DevOps_pri" {

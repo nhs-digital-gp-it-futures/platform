@@ -40,11 +40,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id                = azurerm_subnet.aks.id
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "false"
-    max_pods                       = 50
-    #max_pods                       = 30
+    max_pods                       = 30
     #max_count                     = 6
     #min_count                     = 4 
-    node_count                    = 6
+    node_count                    = 4
    #enable_node_public_ip         = "true"
   }
 

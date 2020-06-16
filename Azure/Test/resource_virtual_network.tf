@@ -45,6 +45,9 @@ resource "azurerm_subnet" "aks" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.sub_aks]
+
+  service_endpoints    = ["Microsoft.Sql"
+                          ]
 }
 
 resource "azurerm_subnet" "ehub" {
