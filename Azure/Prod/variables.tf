@@ -321,3 +321,8 @@ variable "gov_wfh_ip_add" {
   type        = list(string)
   description = "IPs for wfh staff access"
 }
+
+variable "gov_wfh_ip_desc" {
+  type        = string
+  description = "IP allocations for wfh staff access"
+}
