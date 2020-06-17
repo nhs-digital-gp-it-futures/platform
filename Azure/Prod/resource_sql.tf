@@ -68,7 +68,7 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
 
 # New SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bc-bapi-pri" {
-  name                             = "bc-buyingcatalogue-private-helm-bapi"
+  name                             = "bc-buyingcatalogue-private-bapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name
@@ -79,7 +79,7 @@ resource "azurerm_sql_database" "sql-bc-bapi-pri" {
 
 # New SQL Database using for the BuyingCatalogueService Public
 resource "azurerm_sql_database" "sql-bc-bapi-pub" {
-  name                             = "bc-buyingcatalogue-public-helm-bapi"
+  name                             = "bc-buyingcatalogue-public-bapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name
@@ -90,7 +90,7 @@ resource "azurerm_sql_database" "sql-bc-bapi-pub" {
 
 # New SQL Database using for the BuyingCatalogueIdentityService
 resource "azurerm_sql_database" "sql-bc-isapi-pub" {
-  name                             = "bc-buyingcatalogue-public-helm-isapi"
+  name                             = "bc-buyingcatalogue-public-isapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name
@@ -101,7 +101,7 @@ resource "azurerm_sql_database" "sql-bc-isapi-pub" {
 
 #New SQL Database using for the BuyingCatalogueOrderingService
 resource "azurerm_sql_database" "sql-bc-orapi-pub" {
-  name                             = "bc-buyingcatalogue-public-helm-ordapi"
+  name                             = "bc-buyingcatalogue-public-ordapi"
   resource_group_name              = azurerm_resource_group.bc-sql-pri.name
   location                         = var.region
   server_name                      = azurerm_sql_server.bc-sql-pri.name
