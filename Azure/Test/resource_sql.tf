@@ -54,6 +54,14 @@ resource "azurerm_sql_firewall_rule" "bc-sql-sec" {
   end_ip_address      = "0.0.0.0"
 }
 
+# SQL Firewall rule to allow subnet access from aks network
+resource "azurerm_sql_virtual_network_rule" "bc-sql-pri-net" {
+  name                = "${var.project}-${var.environment}-sql-subnet-rule"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  subnet_id           = azurerm_subnet.aks.id
+}
+
 # New SQL Database using for the BuyingCatalogueService Private
 resource "azurerm_sql_database" "sql-bc-bapi-pri" {
   name                             = "bc-buyingcatalogue-private-helm-bapi"
