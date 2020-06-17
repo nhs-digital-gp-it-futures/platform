@@ -158,9 +158,9 @@ resource "azurerm_advanced_threat_protection" "bc-sql-sec" {
   enabled            = true
 }
 
-#New Failover config for BuyingCatalogueService Public
+#New Failover config for BuyingCatalogueService Private
 resource "azurerm_sql_failover_group" "sql-bc-bapi-pri" {
-  name                = "bc-buyingcatalogue-bapi-private-fog"
+  name                = "bc-buyingcatalogue-sql-fog"
   resource_group_name = azurerm_resource_group.bc-sql-pri.name
   server_name         = azurerm_sql_server.bc-sql-pri.name
   databases           = [azurerm_sql_database.sql-bc-bapi-pri.id]
@@ -173,18 +173,50 @@ resource "azurerm_sql_failover_group" "sql-bc-bapi-pri" {
   }
 }
 
-/*
-# New SQL Database using for the BuyingCatalogueService Private
-resource "azurerm_sql_database" "sql-bc-bapi-pri" {
-  name                             = "bc-buyingcatalogue-private-helm-bapi"
-  resource_group_name              = azurerm_resource_group.bc-sql-pri.name
-  location                         = var.region
-  server_name                      = azurerm_sql_server.bc-sql-pri.name
-  collation                        = var.sql_collation
-  create_mode                      = "Default"
-  edition                          = var.sql_edition
-  requested_service_objective_name = "S0" #var.sql_size
-}*/
+#New Failover config for BuyingCatalogueService Public
+resource "azurerm_sql_failover_group" "sql-bc-bapi-pub" {
+  name                = "bc-buyingcatalogue-sql-fog1"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  databases           = [azurerm_sql_database.sql-bc-bapi-pub.id]
+  partner_servers {
+    id = azurerm_sql_server.bc-sql-sec.id
+  }
+  read_write_endpoint_failover_policy {
+    mode          = "Automatic"
+    grace_minutes = 30
+  }
+}
+
+#New Failover config for BuyingCatalogueIdentityService
+resource "azurerm_sql_failover_group" "sql-bc-isapi" {
+  name                = "bc-buyingcatalogue-sql-fog2"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  databases           = [azurerm_sql_database.sql-bc-isapi-pub.id]
+  partner_servers {
+    id = azurerm_sql_server.bc-sql-sec.id
+  }
+  read_write_endpoint_failover_policy {
+    mode          = "Automatic"
+    grace_minutes = 30
+  }
+}
+
+#New Failover config for BuyingCatalogueOrderingService
+resource "azurerm_sql_failover_group" "sql-bc-orapi" {
+  name                = "bc-buyingcatalogue-sql-fog3"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  server_name         = azurerm_sql_server.bc-sql-pri.name
+  databases           = [azurerm_sql_database.sql-bc-orapi-pub.id]
+  partner_servers {
+    id = azurerm_sql_server.bc-sql-sec.id
+  }
+  read_write_endpoint_failover_policy {
+    mode          = "Automatic"
+    grace_minutes = 30
+  }
+}
 
 #Failover config for BuyingCatalogueService Public
 resource "azurerm_sql_failover_group" "sql-bapi-pri" {
