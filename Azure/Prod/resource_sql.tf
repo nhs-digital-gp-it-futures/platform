@@ -210,6 +210,7 @@ resource "azurerm_sql_active_directory_administrator" "bc-sql-sec" {
 
 //Code from https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
 //must use arm until TF implements these natively see https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
+// Pull Request waiting for implementation: https://github.com/terraform-providers/terraform-provider-azurerm/pull/6194
 // backupLongTermRetentionPolicies -> https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/backuplongtermretentionpolicies
 // backupShortTermRetentionPolicies -> https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-10-01-preview/servers/databases/backupshorttermretentionpolicies
 //note since we are defining these child resources in an ARM based on parent resources defined
@@ -369,4 +370,64 @@ resource "azurerm_sql_failover_group" "sql-bc-orapi" {
     mode          = "Automatic"
     grace_minutes = 30
   }
+}
+
+//Code from https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
+//must use arm until TF implements these natively see https://github.com/terraform-providers/terraform-provider-azurerm/issues/1802
+// Pull Request waiting for implementation: https://github.com/terraform-providers/terraform-provider-azurerm/pull/6194
+// backupLongTermRetentionPolicies -> https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/backuplongtermretentionpolicies
+// backupShortTermRetentionPolicies -> https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-10-01-preview/servers/databases/backupshorttermretentionpolicies
+//note since we are defining these child resources in an ARM based on parent resources defined
+//with TF we have to use their full names see https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/child-resource-name-type#outside-parent-resource
+resource "azurerm_template_deployment" "bc-sql-pri-retention-helm" {
+  name                = "bc-sql-pri-retention-helm"
+  resource_group_name = azurerm_resource_group.bc-sql-pri.name
+  template_body       = <<DEPLOY
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "apiVersion" : "2017-03-01-preview",
+      "type" : "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies",
+      "name" : "${azurerm_sql_server.bc-sql-pri.name}/${azurerm_sql_database.sql-bc-bapi-pri.name}/default",
+      "properties" : {
+        "weeklyRetention": "P6W",
+        "monthlyRetention": "P12W",
+        "yearlyRetention": "P7Y",
+        "weekOfYear": "17"
+      }
+    },
+    {
+      "apiVersion": "2017-10-01-preview",
+      "type": "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies",
+      "name": "${azurerm_sql_server.bc-sql-pri.name}/${azurerm_sql_database.sql-bc-bapi-pri.name}/default",
+      "properties": {
+        "retentionDays": 14
+      }
+    },
+    {
+      "apiVersion" : "2017-03-01-preview",
+      "type" : "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies",
+      "name" : "${azurerm_sql_server.bc-sql-pri.name}/${azurerm_sql_database.sql-bc-bapi-pub.name}/default",
+      "properties" : {
+        "weeklyRetention": "P6W",
+        "monthlyRetention": "P12W",
+        "yearlyRetention": "P7Y",
+        "weekOfYear": "17"
+      }
+    },
+    {
+      "apiVersion": "2017-10-01-preview",
+      "type": "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies",
+      "name": "${azurerm_sql_server.bc-sql-pri.name}/${azurerm_sql_database.sql-bc-bapi-pub.name}/default",
+      "properties": {
+        "retentionDays": 14
+      }
+    }
+  ]
+}
+DEPLOY
+
+  deployment_mode = "Incremental"
 }
