@@ -275,7 +275,7 @@ resource "azurerm_sql_database" "sql-bc-bapi-pri" {
   server_name                      = azurerm_sql_server.bc-sql-pri.name
   collation                        = var.sql_collation
   edition                          = var.sql_edition
-  requested_service_objective_name = "S0" #var.sql_size
+  requested_service_objective_name = var.sql_size
 }
 
 # New SQL Database using for the BuyingCatalogueService Public
@@ -286,7 +286,7 @@ resource "azurerm_sql_database" "sql-bc-bapi-pub" {
   server_name                      = azurerm_sql_server.bc-sql-pri.name
   collation                        = var.sql_collation
   edition                          = var.sql_edition
-  requested_service_objective_name = "S0" #var.sql_size
+  requested_service_objective_name = var.sql_size
 }
 
 # New SQL Database using for the BuyingCatalogueIdentityService
@@ -297,7 +297,7 @@ resource "azurerm_sql_database" "sql-bc-isapi-pub" {
   server_name                      = azurerm_sql_server.bc-sql-pri.name
   collation                        = var.sql_collation
   edition                          = var.sql_edition
-  requested_service_objective_name = "S0" #var.sql_size
+  requested_service_objective_name = var.sql_size
 }
 
 #New SQL Database using for the BuyingCatalogueOrderingService
@@ -308,7 +308,7 @@ resource "azurerm_sql_database" "sql-bc-orapi-pub" {
   server_name                      = azurerm_sql_server.bc-sql-pri.name
   collation                        = var.sql_collation
   edition                          = var.sql_edition
-  requested_service_objective_name = "S0" #var.sql_size
+  requested_service_objective_name = var.sql_size
 }
 
 #New Failover config for BuyingCatalogueService Private
