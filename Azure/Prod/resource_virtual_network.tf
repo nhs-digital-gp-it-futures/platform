@@ -346,6 +346,7 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       rules           = [
         942130,
         942430,
+        942200,        
         942210,        
         942440,
         942450,

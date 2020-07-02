@@ -28,6 +28,11 @@ variable "ip_addsp" {
   description = "IP address space for the Azure VNET"
 }
 
+variable "ip_addsp_ext" {
+  type        = string
+  description = "Extended IP address space for the Azure VNET"
+}
+
 variable "nsg" {
   type        = string
   description = "Subnets for the address space"
@@ -39,6 +44,11 @@ variable "sub" {
 }
 
 variable "sub_aks" {
+  type        = string
+  description = "Subnet for Kubernetes"
+}
+
+variable "sub_aks_nodes" {
   type        = string
   description = "Subnet for Kubernetes"
 }

@@ -33,7 +33,7 @@ resource "azurerm_resource_group" "vnet" {
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.project}-${var.environment}-vnet"
   location            = var.region
-  address_space       = [var.ip_addsp]
+  address_space       = [var.ip_addsp,var.ip_addsp_ext]
   resource_group_name = azurerm_resource_group.vnet.name
   tags = {
     environment = var.environment
@@ -45,6 +45,16 @@ resource "azurerm_subnet" "aks" {
   resource_group_name  = azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.sub_aks]
+
+  service_endpoints    = ["Microsoft.Sql"
+                          ]
+}
+
+resource "azurerm_subnet" "aks_nodes" {
+  name                 = "${var.project}-${var.environment}-${var.sub}-aks-nodes"
+  resource_group_name  = azurerm_resource_group.vnet.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [var.sub_aks_nodes]
 
   service_endpoints    = ["Microsoft.Sql"
                           ]
