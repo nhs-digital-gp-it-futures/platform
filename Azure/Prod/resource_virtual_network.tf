@@ -345,12 +345,12 @@ resource "azurerm_application_gateway" "pub-AppGate" {
       rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
       rules           = [
         942130,
-        942430,
-        942200,        
+        942430,        
         942210,        
         942440,
         942450,
-        942380
+        942380,
+        942200
       ]
     }
   }
