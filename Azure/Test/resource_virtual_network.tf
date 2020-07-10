@@ -180,7 +180,8 @@ resource "azurerm_application_gateway" "pri-AppGate" {
         942440,
         942450,
         942210,
-        942200
+        942200,
+        942220
       ]
     }
     disabled_rule_group {
@@ -335,7 +336,8 @@ resource "azurerm_application_gateway" "pub-AppGate" {
         942440,
         942210,
         942380,
-        942200
+        942200,
+        942220
       ]
     }
 
