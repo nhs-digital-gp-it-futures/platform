@@ -85,7 +85,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
 lifecycle {
     # re-imported cluster means client secret is trying to regenerate mistakenly
     ignore_changes = [
-      service_principal[0].client_secret
+      service_principal[0].client_secret,
+      default_node_pool[0].node_count
     ]
   }
 }
@@ -98,7 +99,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "akssysnode" {
   enable_auto_scaling   = "false"
   vnet_subnet_id        = azurerm_subnet.aks.id
   max_pods              = 30
-  node_taints           = ["default=disabled:NoSchedule"]
+  node_taints           = ["taint=disabled:NoSchedule"]
 
   tags = {
     environment         = var.environment

@@ -192,7 +192,9 @@ resource "azurerm_application_gateway" "pri-AppGate" {
         942210,        
         942440,
         942450,
-        942380
+        942380,
+        942200,
+        942220
       ]
     }
   }
@@ -350,6 +352,8 @@ resource "azurerm_application_gateway" "pub-AppGate" {
         942440,
         942450,
         942380,
+        942200,
+        942220
       ]
     }
   }
