@@ -28,23 +28,21 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_kubernetes_cluster" "aks" {
   name                            = "${var.project}-${var.environment}-aks"
   resource_group_name             = azurerm_resource_group.aks.name
-  kubernetes_version              = var.aksversion
+  kubernetes_version              = "1.16.10" #var.aksversion
   location                        = var.region
   dns_prefix                      = "${var.project}${var.environment}aksdns"
   node_resource_group             = "${var.project}-${var.environment}-rg-aks-pool"
 
   default_node_pool {
-    name                          = "devpool1"
-    vm_size                       = var.vm_size #"Standard_B4ms"
-    #os_disk_size_gb               = 30
-    vnet_subnet_id                = azurerm_subnet.aks.id
+    name                          = "devpool"
+    vm_size                       = var.vm_size
+    vnet_subnet_id                = azurerm_subnet.aks_nodes.id
     type                          = "VirtualMachineScaleSets"
     enable_auto_scaling           = "false"
-    max_pods                       = 30
-    #max_count                     = 6
-    #min_count                     = 4 
-    node_count                    = 5
-   #enable_node_public_ip          = "true"
+    max_pods                      = 110
+    #max_count                     = 4
+    #min_count                     = 2 
+    node_count                    = 4 
     #node_taints                   = ["default=disabled:NoSchedule"]
   }
 
@@ -69,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     oms_agent {
       enabled                     = true
-      log_analytics_workspace_id  = azurerm_log_analytics_workspace.workspace.id
+      #log_analytics_workspace_id  = azurerm_log_analytics_workspace.workspace.id
     }
   }
 
@@ -84,19 +82,25 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = {
     environment                   = var.environment
   }
+
+lifecycle {
+    # re-imported cluster means client secret is trying to regenerate mistakenly
+    ignore_changes = [
+      service_principal[0].client_secret
+    ]
+  }
 }
 
-/*resource "azurerm_kubernetes_cluster_node_pool" "akspool2" {
-  name                  = "devpool"
+resource "azurerm_kubernetes_cluster_node_pool" "akssysnode" {
+  name                  = "devsyspool"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
-  vm_size               = "Standard_B4ms"
-  node_count            = 2
+  vm_size               = "Standard_B2s"
+  node_count            = 1
   enable_auto_scaling   = "false"
-  vnet_subnet_id        = azurerm_subnet.aks_nodes.id
-  max_pods              = 110
+  vnet_subnet_id        = azurerm_subnet.aks.id
+  max_pods              = 30
 
   tags = {
     environment         = var.environment
   }
 }
-*/
