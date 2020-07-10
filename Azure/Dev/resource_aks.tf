@@ -38,12 +38,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size                       = var.vm_size
     vnet_subnet_id                = azurerm_subnet.aks_nodes.id
     type                          = "VirtualMachineScaleSets"
-    enable_auto_scaling           = "false"
+    enable_auto_scaling           = "true"
     max_pods                      = 110
-    #max_count                     = 4
-    #min_count                     = 2 
+    max_count                     = 4
+    min_count                     = 2 
     node_count                    = 4 
-    #node_taints                   = ["default=disabled:NoSchedule"]
   }
 
   service_principal {
@@ -99,6 +98,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "akssysnode" {
   enable_auto_scaling   = "false"
   vnet_subnet_id        = azurerm_subnet.aks.id
   max_pods              = 30
+  node_taints           = ["default=disabled:NoSchedule"]
 
   tags = {
     environment         = var.environment
