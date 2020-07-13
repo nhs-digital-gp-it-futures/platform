@@ -208,6 +208,13 @@ resource "azurerm_sql_database" "sql-bc-bapi-pri" {
   collation                        = var.sql_collation
   edition                          = var.sql_edition
   requested_service_objective_name = "S0" #var.sql_size
+
+  lifecycle {
+    # Database should not be wiped
+    ignore_changes = [
+      create_mode
+    ] 
+  }
 }
 
 # New SQL Database using for the BuyingCatalogueService Public
@@ -219,6 +226,13 @@ resource "azurerm_sql_database" "sql-bc-bapi-pub" {
   collation                        = var.sql_collation
   edition                          = var.sql_edition
   requested_service_objective_name = "S0" #var.sql_size
+
+  lifecycle {
+    # Database should not be wiped
+    ignore_changes = [
+      create_mode
+    ] 
+  }
 }
 
 # New SQL Database using for the BuyingCatalogueIdentityService
@@ -230,6 +244,13 @@ resource "azurerm_sql_database" "sql-bc-isapi-pub" {
   collation                        = var.sql_collation
   edition                          = var.sql_edition
   requested_service_objective_name = "S0" #var.sql_size
+
+  lifecycle {
+    # Database should not be wiped
+    ignore_changes = [
+      create_mode
+    ] 
+  }
 }
 
 #New SQL Database using for the BuyingCatalogueOrderingService
@@ -241,8 +262,15 @@ resource "azurerm_sql_database" "sql-bc-orapi-pub" {
   collation                        = var.sql_collation
   edition                          = var.sql_edition
   requested_service_objective_name = "S0" #var.sql_size
-}
 
+  lifecycle {
+    # Database should not be wiped
+    ignore_changes = [
+      create_mode
+    ] 
+  }
+}
+/*
 #New Failover config for BuyingCatalogueService Private
 resource "azurerm_sql_failover_group" "sql-bc-bapi-pri" {
   name                = "bc-buyingcatalogue-sql-fog"
@@ -301,4 +329,4 @@ resource "azurerm_sql_failover_group" "sql-bc-orapi" {
     mode          = "Automatic"
     grace_minutes = 30
   }
-}
+}*/
