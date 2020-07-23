@@ -227,7 +227,8 @@ resource "azurerm_application_gateway" "AppGate" {
         942210,
         942380,
         942200,
-        942220
+        942220,
+        942400
       ]
     }
     disabled_rule_group {
@@ -237,6 +238,10 @@ resource "azurerm_application_gateway" "AppGate" {
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
       rules           = [ 931130 ]
+    }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-932-APPLICATION-ATTACK-RCE"
+      rules           = [ 932115 ]
     }
   }
 
