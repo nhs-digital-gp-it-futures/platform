@@ -77,3 +77,28 @@ resource "azurerm_storage_container" "sqlukw" {
   storage_account_name  = azurerm_storage_account.sqlukw.name
   container_access_type = "private"
 }
+
+
+resource "azurerm_storage_account" "helm" {
+  name                      = "${var.project}${var.environment}helm"
+  location                  = var.region
+  resource_group_name       = azurerm_resource_group.storage.name
+  account_tier              = var.sa_tier
+  account_replication_type  = var.sa_rep_type
+  account_kind              = var.sa_kind
+  enable_https_traffic_only = "true"
+  tags                      = {
+    "ms-resource-usage" = "azure-cloud-shell"
+  }
+}
+
+resource "azurerm_advanced_threat_protection" "helm" {
+  target_resource_id = azurerm_storage_account.helm.id
+  enabled            = true
+}
+
+resource "azurerm_storage_container" "helm" {
+  name                  = "helm"
+  storage_account_name  = azurerm_storage_account.helm.name
+  container_access_type = "container"
+}
