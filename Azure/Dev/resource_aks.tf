@@ -19,7 +19,7 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name             = azurerm_resource_group.acr.name
   location                        = var.region
   admin_enabled                   = "true"
-  sku                             = "standard"
+  sku                             = "Premium"
   tags = {
     environment                   = var.environment
   }
@@ -28,7 +28,7 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_kubernetes_cluster" "aks" {
   name                            = "${var.project}-${var.environment}-aks"
   resource_group_name             = azurerm_resource_group.aks.name
-  kubernetes_version              = "1.16.10" #var.aksversion
+  kubernetes_version              = var.aksversion
   location                        = var.region
   dns_prefix                      = "${var.project}${var.environment}aksdns"
   node_resource_group             = "${var.project}-${var.environment}-rg-aks-pool"
