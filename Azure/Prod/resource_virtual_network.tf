@@ -350,11 +350,6 @@ resource "azurerm_application_gateway" "pub-AppGate" {
     }
 
     disabled_rule_group {
-      rule_group_name = "REQUEST-932-APPLICATION-ATTACK-RCE"
-      rules           = [ 932115 ]
-    }
-
-    disabled_rule_group {
       rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
       rules           = [
         942130,
@@ -364,8 +359,7 @@ resource "azurerm_application_gateway" "pub-AppGate" {
         942450,
         942380,
         942200,
-        942220,
-        942400
+        942220
       ]
     }
   }
