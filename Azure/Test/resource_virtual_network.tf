@@ -181,6 +181,7 @@ resource "azurerm_application_gateway" "pri-AppGate" {
         942450,
         942210,
         942200,
+        942400,
         942220
       ]
     }
@@ -191,6 +192,10 @@ resource "azurerm_application_gateway" "pri-AppGate" {
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
       rules           = [ 931130 ]
+    }
+    disabled_rule_group {
+      rule_group_name = "REQUEST-932-APPLICATION-ATTACK-RCE"
+      rules           = [ 932115 ]
     }
   }
 
