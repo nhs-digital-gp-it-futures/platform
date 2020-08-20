@@ -168,7 +168,7 @@ resource "azurerm_application_gateway" "pri-AppGate" {
   waf_configuration {
     enabled                  = true
     file_upload_limit_mb     = 100
-    firewall_mode            = "Prevention"
+    firewall_mode            = "Detection"
     max_request_body_size_kb = 128
     request_body_check       = true
     rule_set_type            = "OWASP"
@@ -195,7 +195,8 @@ resource "azurerm_application_gateway" "pri-AppGate" {
         942380,
         942220,
         942200,
-        942400
+        942400,
+        942260
       ]
     }
 

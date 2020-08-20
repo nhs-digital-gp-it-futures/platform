@@ -211,7 +211,7 @@ resource "azurerm_application_gateway" "AppGate" {
   waf_configuration {
     enabled                  = true
     file_upload_limit_mb     = 100
-    firewall_mode            = "Prevention"
+    firewall_mode            = "Detection"
     max_request_body_size_kb = 128
     request_body_check       = true
     rule_set_type            = "OWASP"
